@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dg7mst77ht2r5" path="res://Scenes/Player/Player.cs" id="1_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://bh67iyxoteo06" path="res://Assets/Sprites/Player/Player.png" id="1_uvnfx"]
+[ext_resource type="Texture2D" uid="uid://b6asoc4qgc0co" path="res://Assets/Sprites/Player/2 Punk/Punk_idle.png" id="3_xpcdj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a3d8c"]
 atlas = ExtResource("1_uvnfx")
@@ -18,6 +19,22 @@ region = Rect2(64, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_htcer"]
 atlas = ExtResource("1_uvnfx")
 region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd0ac"]
+atlas = ExtResource("3_xpcdj")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u5uq"]
+atlas = ExtResource("3_xpcdj")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlvik"]
+atlas = ExtResource("3_xpcdj")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk6dx"]
+atlas = ExtResource("3_xpcdj")
+region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tugb3"]
 animations = [{
@@ -37,18 +54,39 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd0ac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u5uq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlvik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk6dx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dd0ac"]
-radius = 6.0827627
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpcdj"]
+size = Vector2(17, 34)
 
 [node name="Player" type="CharacterBody2D" unique_id=699596196]
 script = ExtResource("1_a3d8c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=831599076]
 sprite_frames = SubResource("SpriteFrames_tugb3")
-frame_progress = 0.6817417
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=437517005]
-position = Vector2(0, 6)
-shape = SubResource("CircleShape2D_dd0ac")
+position = Vector2(-10.5, 7)
+shape = SubResource("RectangleShape2D_xpcdj")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=886884360]
+position = Vector2(0, -16)
