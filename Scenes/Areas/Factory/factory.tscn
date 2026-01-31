@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cxace30jmjvg" path="res://Assets/Sprites/Factory/3 Objects/Ladder1.png" id="12_nph3d"]
 [ext_resource type="Texture2D" uid="uid://bgj5jadcm3h5r" path="res://Assets/Sprites/Factory/3 Objects/Locker4.png" id="14_6aldg"]
 [ext_resource type="Texture2D" uid="uid://ctta8u2c3top2" path="res://Assets/Sprites/Factory/3 Objects/Ladder3.png" id="14_nph3d"]
+[ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/Street/ZebraCross1.cs" id="15_aqoxs"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d3k77"]
 load_path = "res://.godot/imported/1.png-6430d43a129be1762434ffafc401b5bc.ctex"
@@ -476,6 +477,9 @@ sources/4 = SubResource("TileSetAtlasSource_anp8n")
 sources/5 = SubResource("TileSetAtlasSource_6sbvd")
 sources/6 = SubResource("TileSetAtlasSource_7w1vb")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lpwe"]
+size = Vector2(28, 344)
+
 [node name="Factory" type="Node2D" unique_id=1798911909]
 
 [node name="Background" type="Parallax2D" parent="." unique_id=2020673226]
@@ -504,6 +508,14 @@ tile_set = SubResource("TileSet_6aldg")
 [node name="Decoration" type="TileMapLayer" parent="." unique_id=568785359]
 tile_map_data = PackedByteArray("AAD7/xMAAwAAAAAAAAD7/xQAAgAAAAAAAAD7/xUAAgAAAAAAAAD7/xYAAgAAAAAAAAD7/xcAAgAAAAAAAAD7/xgAAgAAAAAAAADt/xoAAgAAAAAAAADt/xsAAgAAAAAAAADt/xwAAgAAAAAAAADt/x0AAgAAAAAAAAD7/xkAAgAAAAAAAAD7/xoAAgAAAAAAAAD7/xsAAgAAAAAAAAD7/xwAAgAAAAAAAAD7/x0AAgAAAAAAAAD7/x4AAgAAAAAAAADt/x4AAgAAAAAAAADt/xgAAwAAAAAAAADt/xkAAgAAAAAAAAACAA4ABAAAAAAAAAADAA4ABQAAAAAAAAAEAA4ABQAAAAAAAAAFAA4ABQAAAAAAAAAGAA4ABQAAAAAAAAAHAA4ABgAAAAAAAAAIAA8AAwAAAAAAAAAIABAAAgAAAAAAAAAIABEAAgAAAAAAAAAIABIAAgAAAAAAAAAIABMAAgAAAAAAAAAIABQAAgAAAAAAAAAIABUAAgAAAAAAAAAIABYAAgAAAAAAAAAIABcAAgAAAAAAAAAIABgAAgAAAAAAAAAIABkAAgAAAAAAAAAIABoAAgAAAAAAAAAIABsAAgAAAAAAAAAIABwAAgAAAAAAAAAIAB0AAgAAAAAAAAAIAB4AAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_kwvjs")
+collision_enabled = false
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1509999809]
+script = ExtResource("15_aqoxs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1291551829]
+position = Vector2(-147, 759)
+shape = SubResource("RectangleShape2D_0lpwe")
 
 [node name="Player" parent="." unique_id=699596196 instance=ExtResource("6_g35x7")]
 position = Vector2(-121, 578)

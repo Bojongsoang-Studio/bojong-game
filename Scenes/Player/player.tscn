@@ -5,20 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://b6asoc4qgc0co" path="res://Assets/Sprites/Player/2 Punk/Punk_idle.png" id="3_xpcdj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a3d8c"]
-atlas = ExtResource("2_a3d8c")
-region = Rect2(0, 0, 48, 48)
+atlas = ExtResource("1_uvnfx")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xpcdj"]
-atlas = ExtResource("2_a3d8c")
-region = Rect2(48, 0, 48, 48)
+atlas = ExtResource("1_uvnfx")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mtuoh"]
-atlas = ExtResource("2_a3d8c")
-region = Rect2(96, 0, 48, 48)
+atlas = ExtResource("1_uvnfx")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_htcer"]
-atlas = ExtResource("2_a3d8c")
-region = Rect2(144, 0, 48, 48)
+atlas = ExtResource("1_uvnfx")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dd0ac"]
 atlas = ExtResource("3_xpcdj")
@@ -80,7 +80,6 @@ size = Vector2(17, 34)
 script = ExtResource("1_a3d8c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=831599076]
-position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_tugb3")
 animation = &"idle"
 autoplay = "idle"
@@ -91,3 +90,4 @@ shape = SubResource("RectangleShape2D_xpcdj")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=886884360]
 position = Vector2(0, -16)
+zoom = Vector2(3, 3)
