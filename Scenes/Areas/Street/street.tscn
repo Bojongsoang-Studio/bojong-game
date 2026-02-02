@@ -40,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://cpgq1w5urwhqc" path="res://Scenes/Areas/Street/Buildings/building_6.tscn" id="31_3u7tk"]
 [ext_resource type="Script" uid="uid://y3lqfb6m8yjs" path="res://Scenes/Areas/Street/Subarea1In.cs" id="34_375y2"]
 [ext_resource type="Script" uid="uid://ddgqhlqyanalr" path="res://Scenes/Areas/Street/Subarea2In.cs" id="38_v31r7"]
+[ext_resource type="PackedScene" uid="uid://wypdr2uyp70n" path="res://Scenes/Areas/Street/Animals/cat.tscn" id="41_76brt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_actlm"]
 texture = ExtResource("1_jw87k")
@@ -240,6 +241,9 @@ sources/11 = SubResource("TileSetAtlasSource_gtlpl")
 size = Vector2(16, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v31r7"]
+size = Vector2(32, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omlqb"]
 size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hw208"]
@@ -369,7 +373,7 @@ position = Vector2(8, -16)
 shape = SubResource("RectangleShape2D_76brt")
 
 [node name="ZebraCross" type="CollisionShape2D" parent="Subarea1/Subarea1In" unique_id=1196263748]
-position = Vector2(144, -24)
+position = Vector2(144, -80)
 shape = SubResource("RectangleShape2D_v31r7")
 
 [node name="Subarea2" type="Node2D" parent="." unique_id=1957897893]
@@ -414,9 +418,9 @@ CameraLimitLeft = 160
 CameraLimitRight = 928
 CameraLimitBottom = 160
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Subarea2/Subarea2In" unique_id=1766715951]
+[node name="ZebraCross" type="CollisionShape2D" parent="Subarea2/Subarea2In" unique_id=2018232652]
 position = Vector2(176, 104)
-shape = SubResource("RectangleShape2D_v31r7")
+shape = SubResource("RectangleShape2D_omlqb")
 
 [node name="ZebraCross" type="Area2D" parent="." unique_id=515845588]
 position = Vector2(4, 0)
@@ -427,8 +431,8 @@ position = Vector2(172, 48)
 shape = SubResource("RectangleShape2D_hw208")
 
 [node name="Border" type="StaticBody2D" parent="." unique_id=874555447]
-collision_layer = 2147483648
-collision_mask = 2147483648
+collision_layer = 3221225472
+collision_mask = 3221225472
 
 [node name="Left1" type="CollisionShape2D" parent="Border" unique_id=1020467062]
 shape = SubResource("SegmentShape2D_v31r7")
@@ -449,3 +453,6 @@ shape = SubResource("SegmentShape2D_tc6nq")
 
 [node name="Player" parent="." unique_id=699596196 instance=ExtResource("13_c46h2")]
 position = Vector2(32, -48)
+
+[node name="Cat" parent="." unique_id=52111981 instance=ExtResource("41_76brt")]
+position = Vector2(24, -24)
