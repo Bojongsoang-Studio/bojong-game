@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://ubcchmcyuf2v"]
+[gd_scene format=3 uid="uid://dnr6ai2l4ma8d"]
 
 [ext_resource type="PackedScene" uid="uid://c3xxaqfhgc5n2" path="res://Scenes/Areas/Street/street.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://b8e8jdcpsfafi" path="res://Scenes/Areas/Factory/factory.tscn" id="2_qxrlw"]
-[ext_resource type="Script" uid="uid://b4awawykq1gl2" path="res://Scenes/FactoryInFromStreet.cs" id="2_wrm1d"]
+[ext_resource type="Script" path="res://Scenes/FactoryInFromStreet.cs" id="2_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="4_3dryh"]
-[ext_resource type="Script" uid="uid://dfqnxifxe80dv" path="res://Scenes/StreetInFromFactory.cs" id="4_wowpa"]
+[ext_resource type="Script" path="res://Scenes/StreetInFromFactory.cs" id="4_wowpa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
 size = Vector2(48, 32)

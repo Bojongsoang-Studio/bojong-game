@@ -68,6 +68,8 @@
 [ext_resource type="Texture2D" uid="uid://bhjv6x6b0l5b8" path="res://Assets/Sprites/Areas/Factory/3 Objects/Elevator_Button.png" id="60_jbfwt"]
 [ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="67_mf5pw"]
 [ext_resource type="Script" uid="uid://bgotpl1spe6hw" path="res://Scenes/Areas/Factory/FactoryIn.cs" id="68_q3no2"]
+[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="69_jbfwt"]
+[ext_resource type="PackedScene" uid="uid://c1nfkdbdnlq1o" path="res://Scenes/Enemy/purpleGuy.tscn" id="70_weijl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0lpwe"]
 texture = ExtResource("6_nph3d")
@@ -1540,3 +1542,9 @@ CameraLimitBottom = 1344
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryIn" unique_id=1726551899]
 position = Vector2(-1000, 944)
 shape = SubResource("RectangleShape2D_jbfwt")
+
+[node name="Player" parent="." unique_id=699596196 instance=ExtResource("69_jbfwt")]
+position = Vector2(217, 733)
+
+[node name="PurpleGuy" parent="." unique_id=785066863 instance=ExtResource("70_weijl")]
+position = Vector2(497, 720)
