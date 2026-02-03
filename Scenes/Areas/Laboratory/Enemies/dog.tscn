@@ -204,10 +204,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ymh6h"]
-radius = 52.009613
+radius = 102.0049
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgmev"]
-radius = 8.062258
+radius = 25.019993
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nevo0"]
 size = Vector2(39, 11)
@@ -223,13 +223,15 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=658191151]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1700579024]
 position = Vector2(0, -13)
 shape = SubResource("CircleShape2D_ymh6h")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1818903728]
-position = Vector2(0, -2)
+position = Vector2(-1, -2)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=497201080]
 position = Vector2(13, -8)
@@ -244,5 +246,5 @@ position = Vector2(13, -10)
 target_position = Vector2(15, 30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=721671001]
-position = Vector2(-1.5, -6.5)
+position = Vector2(-1.5, -0.5)
 shape = SubResource("RectangleShape2D_nevo0")

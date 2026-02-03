@@ -1050,8 +1050,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_6aldg"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-physics_layer_1/collision_layer = 2
-physics_layer_1/collision_mask = 2
+physics_layer_1/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_qx3db")
 sources/1 = SubResource("TileSetAtlasSource_aqoxs")
 sources/2 = SubResource("TileSetAtlasSource_e2ujh")
@@ -1428,8 +1427,7 @@ texture_region_size = Vector2i(32, 36)
 [sub_resource type="TileSet" id="TileSet_kwvjs"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-physics_layer_1/collision_layer = 2
-physics_layer_1/collision_mask = 2
+physics_layer_1/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_kwvjs")
 sources/3 = SubResource("TileSetAtlasSource_jq46u")
 sources/4 = SubResource("TileSetAtlasSource_anp8n")
@@ -1519,6 +1517,7 @@ tile_map_data = PackedByteArray("AAD7/xMAAwAAAAAAAAD7/xQAAgAAAAAAAAD7/xUAAgAAAAA
 tile_set = SubResource("TileSet_kwvjs")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1509999809]
+collision_mask = 2
 script = ExtResource("67_mf5pw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1291551829]
@@ -1534,6 +1533,7 @@ position = Vector2(276, 702.5)
 shape = SubResource("RectangleShape2D_onyeo")
 
 [node name="FactoryIn" type="Area2D" parent="." unique_id=766431079]
+collision_mask = 2
 script = ExtResource("68_q3no2")
 CameraLimitLeft = -1120
 CameraLimitRight = 1120

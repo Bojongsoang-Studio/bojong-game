@@ -367,6 +367,7 @@ tile_map_data = PackedByteArray("AAADAP//CwAAAAAAAAAEAP//CAAAAAAAAAAGAP//BQAAAAA
 tile_set = SubResource("TileSet_375y2")
 
 [node name="StreetSubarea1In" type="Area2D" parent="Subarea1" unique_id=826512825]
+collision_mask = 2
 script = ExtResource("34_cftkh")
 CameraLimitLeft = 0
 CameraLimitRight = 960
@@ -421,6 +422,7 @@ tile_set = SubResource("TileSet_375y2")
 
 [node name="StreetSubarea2In" type="Area2D" parent="Subarea2" unique_id=1198738226]
 position = Vector2(320, 0)
+collision_mask = 2
 script = ExtResource("38_tc6nq")
 CameraLimitLeft = 160
 CameraLimitRight = 928
@@ -432,6 +434,7 @@ shape = SubResource("RectangleShape2D_omlqb")
 
 [node name="ZebraCross" type="Area2D" parent="." unique_id=515845588]
 position = Vector2(4, 0)
+collision_mask = 2
 script = ExtResource("39_cftkh")
 
 [node name="ZebraCross1" type="CollisionShape2D" parent="ZebraCross" unique_id=1537373823]

@@ -1,10 +1,14 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace BojongGame.Scenes.Player;
 
 public partial class Player : CharacterBody2D
 {
-	[Export] public int PlatformLayer = 2;
+	[Export] public int Health = 5;
+	[Export] public float AnimationCooldown = 1f;
+	[Export] public int Damage = 1;
+	
 	[Export] public float WalkSpeed = 220.0f;
 	[Export] public float SprintSpeed = 360.0f;
 	[Export] public float JumpVelocity = -480.0f;
@@ -17,6 +21,8 @@ public partial class Player : CharacterBody2D
 	[Export] public float DashDuration = 0.15f;
 	[Export] public float DashCooldown = 1f;
 
+	private int _health;
+
 	private float _gravity;
 
 	private bool _isDashing;
@@ -27,17 +33,36 @@ public partial class Player : CharacterBody2D
 	private bool _isOnVerticalMovementArea;
 	private uint _originalCollisionMask;
 
+	private float _animationCooldown;
+
+	private List<Enemy> _enemies = [];
+
 	private AnimatedSprite2D _sprite;
 	private CollisionShape2D _collision;
+	private Area2D _attackArea;
 
 	public override void _Ready()
 	{
+		_health = Health;
 		_sprite = GetNode<AnimatedSprite2D>("Sprite");
 		_collision = GetNode<CollisionShape2D>("Collision");
+		_attackArea = GetNode<Area2D>("AttackArea");
+		_attackArea.BodyEntered += OnEnemyEntered;
+		_attackArea.BodyExited += OnEnemyExited;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		_animationCooldown -= (float)delta;
+
+		if (Input.IsActionJustPressed("attack"))
+		{
+			foreach (var enemy in _enemies)
+			{
+				Attack(enemy);
+			}
+		}
+		
 		var velocity = Velocity;
 		_gravity = Gravity;
 
@@ -86,23 +111,23 @@ public partial class Player : CharacterBody2D
 			velocity.Y += _gravity * (float)delta;
 		}
 
-		var dir = 0;
+		var direction = 0;
 
 		if (Input.IsActionPressed("move_left"))
 		{
-			dir -= 1;
+			direction -= 1;
 			_sprite.FlipH = true;
 		}
 
 		if (Input.IsActionPressed("move_right"))
 		{
-			dir += 1;
+			direction += 1;
 			_sprite.FlipH = false;
 		}
 
-		if (dir != 0)
+		if (direction != 0)
 		{
-			_dashDirection = dir;
+			_dashDirection = direction;
 		}
 
 		var targetSpeed = WalkSpeed;
@@ -112,9 +137,9 @@ public partial class Player : CharacterBody2D
 			targetSpeed = SprintSpeed;
 		}
 
-		var targetVx = dir * targetSpeed;
+		var targetVx = direction * targetSpeed;
 
-		velocity.X = dir != 0
+		velocity.X = direction != 0
 			? Mathf.MoveToward(velocity.X, targetVx, Acceleration * targetSpeed * (float)delta)
 			: Mathf.MoveToward(velocity.X, 0.0f, Deceleration * targetSpeed * (float)delta);
 
@@ -128,8 +153,11 @@ public partial class Player : CharacterBody2D
 			StartDash();
 		}
 
-		_sprite.Animation = dir == 0 ? "idle" : "run";
+		if (_animationCooldown <= 0.0f)
+			_sprite.Animation = direction == 0 ? "idle" : "run";
 
+		GD.Print(Velocity);
+		GD.Print(velocity);
 		Velocity = velocity;
 		MoveAndSlide();
 	}
@@ -167,5 +195,40 @@ public partial class Player : CharacterBody2D
 	{
 		var guide = GetNode<Label>("Guide");
 		guide.Visible = false;
+	}
+
+	public void TakeDamage(int damage, Vector2 knockback)
+	{
+		_animationCooldown = AnimationCooldown;
+		_sprite.Animation = "hurt";
+		_health -= damage;
+		var label = GetNode<Label>("Health");
+		label.Text = "Health: " + _health;
+		Velocity = knockback;
+		MoveAndSlide();
+	}
+
+	private void OnEnemyEntered(Node body)
+	{
+		GD.Print(body);
+		if (body is Enemy enemy)
+		{
+			_enemies.Add(enemy);
+		}
+	}
+
+	private void OnEnemyExited(Node body)
+	{
+		if (body is Enemy enemy)
+		{
+			_enemies.Remove(enemy);
+		}
+	}
+
+	private void Attack(Enemy enemy)
+	{
+		_animationCooldown = AnimationCooldown;
+		_sprite.Animation = "attack";
+		enemy.TakeHit(1, GlobalPosition);
 	}
 }

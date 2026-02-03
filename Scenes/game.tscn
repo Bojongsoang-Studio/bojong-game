@@ -27,6 +27,7 @@ size = Vector2(64, 32)
 position = Vector2(576, 388)
 
 [node name="FactoryInFromStreet" type="Area2D" parent="." unique_id=1494961415]
+collision_mask = 2
 script = ExtResource("2_wrm1d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryInFromStreet" unique_id=1511825908]
@@ -37,6 +38,7 @@ shape = SubResource("RectangleShape2D_3dryh")
 position = Vector2(1839, 1530)
 
 [node name="StreetInFromFactory" type="Area2D" parent="." unique_id=1056837412]
+collision_mask = 2
 script = ExtResource("4_wowpa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StreetInFromFactory" unique_id=1008217939]
@@ -44,6 +46,7 @@ position = Vector2(847, 2474)
 shape = SubResource("RectangleShape2D_wrm1d")
 
 [node name="LaboratoryInFromFactory" type="Area2D" parent="." unique_id=417742033]
+collision_mask = 2
 script = ExtResource("7_1l0tm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaboratoryInFromFactory" unique_id=1138068610]
@@ -54,6 +57,7 @@ shape = SubResource("RectangleShape2D_i6g32")
 position = Vector2(1856, 3738)
 
 [node name="FactoryInFromLaboratory" type="Area2D" parent="." unique_id=756906567]
+collision_mask = 2
 script = ExtResource("7_v158k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryInFromLaboratory" unique_id=1376996311]
