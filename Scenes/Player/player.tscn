@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://dp1rwc1vivpvy"]
 
 [ext_resource type="Script" uid="uid://dg7mst77ht2r5" path="res://Scenes/Player/Player.cs" id="1_a3d8c"]
+[ext_resource type="Texture2D" uid="uid://gie8abx5omo6" path="res://Assets/Sprites/Player/Hurt.png" id="2_htcer"]
 [ext_resource type="Texture2D" uid="uid://b0wif1a6lmeqw" path="res://Assets/Sprites/Player/Idle.png" id="2_xpcdj"]
 [ext_resource type="Texture2D" uid="uid://vqbcjahowhdh" path="res://Assets/Sprites/Player/Run.png" id="3_mtuoh"]
 [ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="4_mtuoh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dey5f"]
+atlas = ExtResource("2_htcer")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5xpd"]
+atlas = ExtResource("2_htcer")
+region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_htcer"]
 atlas = ExtResource("2_xpcdj")
@@ -49,6 +58,17 @@ region = Rect2(240, 0, 48, 48)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dey5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5xpd")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_htcer")
 }, {
 "duration": 1.0,
@@ -91,19 +111,29 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpcdj"]
 size = Vector2(16, 32)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_htcer"]
+radius = 15.0
+
 [node name="Player" type="CharacterBody2D" unique_id=699596196]
 collision_layer = 2147483650
-collision_mask = 2147483653
+collision_mask = 2147483649
 script = ExtResource("1_a3d8c")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=831599076]
 sprite_frames = SubResource("SpriteFrames_tugb3")
-animation = &"run"
+animation = &"hurt"
 autoplay = "idle"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=437517005]
 position = Vector2(-8, 8)
 shape = SubResource("RectangleShape2D_xpcdj")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=297912747]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=430442333]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_htcer")
 
 [node name="Guide" type="Label" parent="." unique_id=114348333]
 visible = false
@@ -116,6 +146,19 @@ theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("4_mtuoh")
 theme_override_font_sizes/font_size = 8
 text = "Press Enter"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Health" type="Label" parent="." unique_id=998977881]
+offset_left = -24.0
+offset_top = -35.0
+offset_right = 24.0
+offset_bottom = -16.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("4_mtuoh")
+theme_override_font_sizes/font_size = 8
+text = "Health: 5"
 horizontal_alignment = 1
 autowrap_mode = 3
 

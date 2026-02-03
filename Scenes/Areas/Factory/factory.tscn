@@ -1,75 +1,73 @@
 [gd_scene format=4 uid="uid://b8e8jdcpsfafi"]
 
-[ext_resource type="Texture2D" uid="uid://wwrajsuq34a0" path="res://Assets/Sprites/Areas/Factory/2 Background/1.png" id="1_6aldg"]
-[ext_resource type="Texture2D" uid="uid://bw01dy0jgqc1" path="res://Assets/Sprites/Areas/Factory/2 Background/2.png" id="2_nph3d"]
-[ext_resource type="Texture2D" uid="uid://bnmfnvxif1h7k" path="res://Assets/Sprites/Areas/Factory/2 Background/3.png" id="3_nph3d"]
-[ext_resource type="Texture2D" uid="uid://4jq3aud0cok1" path="res://Assets/Sprites/Areas/Factory/2 Background/4.png" id="4_aqoxs"]
-[ext_resource type="Texture2D" uid="uid://bw40agtx2um1e" path="res://Assets/Sprites/Areas/Factory/2 Background/5.png" id="5_aqoxs"]
-[ext_resource type="Texture2D" uid="uid://byy58635qoboi" path="res://Assets/Sprites/Areas/Factory/1 Tiles/factory_spreadsheet.png" id="5_nph3d"]
-[ext_resource type="Texture2D" uid="uid://ctbi344kp7ehw" path="res://Assets/Sprites/Areas/Lab/1 Tiles/Tileset.png" id="6_nph3d"]
-[ext_resource type="Texture2D" uid="uid://cxace30jmjvg" path="res://Assets/Sprites/Areas/Factory/3 Objects/Ladder1.png" id="8_0lpwe"]
-[ext_resource type="Texture2D" uid="uid://cuiw7vfwo0ba6" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tiles.png" id="8_7gp23"]
-[ext_resource type="Texture2D" uid="uid://dbex5icvwwvfn" path="res://Assets/Sprites/Areas/Factory/3 Objects/Ladder2.png" id="8_wtwyv"]
-[ext_resource type="Texture2D" uid="uid://c06f34klxn0t0" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/BackTiles.png" id="9_311a3"]
-[ext_resource type="Texture2D" uid="uid://dvq46dvv8xyen" path="res://Assets/Sprites/Areas/Factory/3 Objects/Flag.png" id="9_un1w5"]
-[ext_resource type="Texture2D" uid="uid://ctta8u2c3top2" path="res://Assets/Sprites/Areas/Factory/3 Objects/Ladder3.png" id="9_wtwyv"]
-[ext_resource type="Texture2D" uid="uid://b450mcsdlsq17" path="res://Assets/Sprites/Areas/Factory/3 Objects/Box8.png" id="10_o3j63"]
-[ext_resource type="Texture2D" uid="uid://sxi70u80o314" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_27.png" id="10_tq77f"]
-[ext_resource type="Texture2D" uid="uid://bog420jer4rx4" path="res://Assets/Sprites/Areas/Factory/3 Objects/Fence1.png" id="10_un1w5"]
-[ext_resource type="Texture2D" uid="uid://btfya055ql626" path="res://Assets/Sprites/Areas/Factory/3 Objects/Fence2.png" id="11_o3j63"]
-[ext_resource type="Texture2D" uid="uid://btgiw367idqj" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_25.png" id="11_r3g8r"]
-[ext_resource type="Texture2D" uid="uid://c64w0ijdn2d5i" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_22.png" id="12_3s8j3"]
-[ext_resource type="Texture2D" uid="uid://v3ce7j4xegyt" path="res://Assets/Sprites/Areas/Factory/3 Objects/Fence3.png" id="12_7gp23"]
-[ext_resource type="Texture2D" uid="uid://djh6yww1kepd8" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_21.png" id="13_friui"]
-[ext_resource type="Texture2D" uid="uid://5lp0fhomt5ix" path="res://Assets/Sprites/Areas/Lab/3 Objects/2 Decoration/17.png" id="14_7w1vb"]
-[ext_resource type="Texture2D" uid="uid://cvv8jngv10a28" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_29.png" id="14_f28a8"]
-[ext_resource type="Texture2D" uid="uid://ds2w7pwjjyd13" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_09.png" id="14_iqbug"]
-[ext_resource type="Texture2D" uid="uid://12fefleh2noq" path="res://Assets/Sprites/Areas/Factory/3 Objects/3.png" id="15_0lpwe"]
-[ext_resource type="Texture2D" uid="uid://d06fmqhp1n1tb" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_32.png" id="15_arg67"]
-[ext_resource type="Texture2D" uid="uid://bbfv0nbvltoru" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_10.png" id="15_sshw1"]
-[ext_resource type="Texture2D" uid="uid://ne8wkqhirb26" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_11.png" id="16_f28a8"]
-[ext_resource type="Texture2D" uid="uid://dl6sd3ywec776" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_30.png" id="16_wxfbj"]
-[ext_resource type="Texture2D" uid="uid://w8vkcjs235ix" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_12.png" id="17_arg67"]
-[ext_resource type="Texture2D" uid="uid://b7ii28hnukirp" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_23.png" id="17_ws3tl"]
-[ext_resource type="Texture2D" uid="uid://cjilxeoman5qy" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_18.png" id="18_1b6y5"]
-[ext_resource type="Texture2D" uid="uid://3ei23guaq7ah" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_13.png" id="18_wxfbj"]
-[ext_resource type="Texture2D" uid="uid://bl6r6cxg7qvaa" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_14.png" id="19_ws3tl"]
-[ext_resource type="Texture2D" uid="uid://c7x5ygc736ox7" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_15.png" id="20_1b6y5"]
-[ext_resource type="Texture2D" uid="uid://cghfkt85o5bm3" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_16.png" id="20_3fv3y"]
-[ext_resource type="Texture2D" uid="uid://vxm7kkhavrua" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_28.png" id="21_3fv3y"]
-[ext_resource type="Texture2D" uid="uid://cie2gw5tdyxcm" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_31.png" id="21_arg67"]
-[ext_resource type="Texture2D" uid="uid://b06jm1gur5vy8" path="res://Assets/Sprites/Areas/Factory/4 Animated objects/Transporter1.png" id="22_n5wkc"]
-[ext_resource type="Texture2D" uid="uid://bs2widh88ewwi" path="res://Assets/Sprites/Areas/Factory/3 Objects/Board3.png" id="30_vvngf"]
-[ext_resource type="Texture2D" uid="uid://bqjoa4jopnt5j" path="res://Assets/Sprites/Areas/BossRoom/3 Objects/Barrel/1.png" id="32_3fv3y"]
-[ext_resource type="Texture2D" uid="uid://bu6q46imqtnmx" path="res://Assets/Sprites/Areas/BossRoom/3 Objects/Barrel/2.png" id="33_bh3qw"]
-[ext_resource type="Texture2D" uid="uid://co7bsa588sj3g" path="res://Assets/Sprites/Areas/BossRoom/3 Objects/Barrel/3.png" id="34_ys7qc"]
-[ext_resource type="Texture2D" uid="uid://d322pv70bfbd2" path="res://Assets/Sprites/Areas/BossRoom/3 Objects/Icons/1.png" id="35_grrls"]
-[ext_resource type="Texture2D" uid="uid://w8nrrmh50ycq" path="res://Assets/Sprites/Areas/Factory/3 Objects/Bench.png" id="37_cixvo"]
-[ext_resource type="Texture2D" uid="uid://bi520esp6ktly" path="res://Assets/Sprites/Areas/Factory/3 Objects/Board1.png" id="38_r8i56"]
-[ext_resource type="Texture2D" uid="uid://b8h2dg8lx4ujy" path="res://Assets/Sprites/Areas/Factory/3 Objects/Board2.png" id="40_qmjgs"]
-[ext_resource type="Texture2D" uid="uid://dtafyjb4m41ac" path="res://Assets/Sprites/Areas/Factory/3 Objects/Box3.png" id="41_pfdi5"]
-[ext_resource type="Texture2D" uid="uid://bi1fbyvbpe7kx" path="res://Assets/Sprites/Areas/Factory/3 Objects/Box5.png" id="42_bv8tm"]
-[ext_resource type="Texture2D" uid="uid://ciodfk646xy4a" path="res://Assets/Sprites/Areas/Factory/3 Objects/Fire-extinguisher1.png" id="43_elsno"]
-[ext_resource type="Texture2D" uid="uid://btib3bbwstat3" path="res://Assets/Sprites/Areas/Factory/3 Objects/Mop.png" id="44_onyeo"]
-[ext_resource type="Texture2D" uid="uid://cligft8qudi7c" path="res://Assets/Sprites/Areas/Factory/3 Objects/Bucket.png" id="45_jp8r1"]
-[ext_resource type="Texture2D" uid="uid://bjtll4pm0f0xf" path="res://Assets/Sprites/Areas/Factory/3 Objects/1.png" id="46_onyeo"]
-[ext_resource type="Texture2D" uid="uid://y0r47ei4fwk5" path="res://Assets/Sprites/Areas/Factory/3 Objects/2.png" id="47_jp8r1"]
-[ext_resource type="Texture2D" uid="uid://bgj5jadcm3h5r" path="res://Assets/Sprites/Areas/Factory/3 Objects/Locker4.png" id="48_q0jou"]
-[ext_resource type="Texture2D" uid="uid://bfi8nwve33osx" path="res://Assets/Sprites/Areas/Lab/3 Objects/2 Decoration/13.png" id="49_10sby"]
-[ext_resource type="Texture2D" uid="uid://b5bvn0cq1oew4" path="res://Assets/Sprites/Areas/Lab/3 Objects/2 Decoration/14.png" id="51_pd534"]
-[ext_resource type="Texture2D" uid="uid://q6abbbsvgwt7" path="res://Assets/Sprites/Areas/Factory/3 Objects/Locker3.png" id="51_q0jou"]
-[ext_resource type="Texture2D" uid="uid://dxrwojhy0vfgm" path="res://Assets/Sprites/Areas/Lab/3 Objects/2 Decoration/15.png" id="52_n5wkc"]
-[ext_resource type="Texture2D" uid="uid://b11lbgpu8yaj2" path="res://Assets/Sprites/Areas/Lab/3 Objects/2 Decoration/16.png" id="53_nhdx5"]
-[ext_resource type="Texture2D" uid="uid://1ribpq5ouq5w" path="res://Assets/Sprites/Areas/BossRoom/3 Objects/Boxes/4.png" id="54_pd534"]
-[ext_resource type="Texture2D" uid="uid://dvuwroeaonsyj" path="res://Assets/Sprites/Areas/BossRoom/3 Objects/Boxes/3.png" id="55_n5wkc"]
-[ext_resource type="Texture2D" uid="uid://ccbnh7dyv1a82" path="res://Assets/Sprites/Areas/BossRoom/3 Objects/Boxes/5.png" id="56_nhdx5"]
-[ext_resource type="Texture2D" uid="uid://cj1lotgmfncx6" path="res://Assets/Sprites/Areas/BossRoom/3 Objects/Monitors/3.png" id="57_mf5pw"]
-[ext_resource type="Texture2D" uid="uid://b2p7cyv4xqt5o" path="res://Assets/Sprites/Areas/Factory/3 Objects/Elevator.png" id="57_q3no2"]
-[ext_resource type="Texture2D" uid="uid://bhjv6x6b0l5b8" path="res://Assets/Sprites/Areas/Factory/3 Objects/Elevator_Button.png" id="60_jbfwt"]
+[ext_resource type="Texture2D" uid="uid://wwrajsuq34a0" path="res://Assets/Sprites/Areas/Factory/Backgrounds/1.png" id="1_6aldg"]
+[ext_resource type="Texture2D" uid="uid://bw01dy0jgqc1" path="res://Assets/Sprites/Areas/Factory/Backgrounds/2.png" id="2_nph3d"]
+[ext_resource type="Texture2D" uid="uid://bnmfnvxif1h7k" path="res://Assets/Sprites/Areas/Factory/Backgrounds/3.png" id="3_nph3d"]
+[ext_resource type="Texture2D" uid="uid://4jq3aud0cok1" path="res://Assets/Sprites/Areas/Factory/Backgrounds/4.png" id="4_aqoxs"]
+[ext_resource type="Texture2D" uid="uid://bw40agtx2um1e" path="res://Assets/Sprites/Areas/Factory/Backgrounds/5.png" id="5_aqoxs"]
+[ext_resource type="Texture2D" uid="uid://byy58635qoboi" path="res://Assets/Sprites/Areas/Factory/Tiles/FactorySpreadsheet.png" id="5_nph3d"]
+[ext_resource type="Texture2D" uid="uid://ctbi344kp7ehw" path="res://Assets/Sprites/Areas/Laboratory/Tiles/Tileset.png" id="6_nph3d"]
+[ext_resource type="Texture2D" uid="uid://cxace30jmjvg" path="res://Assets/Sprites/Areas/Factory/Objects/Ladder1.png" id="8_0lpwe"]
+[ext_resource type="Texture2D" uid="uid://cuiw7vfwo0ba6" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Tiles.png" id="8_7gp23"]
+[ext_resource type="Texture2D" uid="uid://dbex5icvwwvfn" path="res://Assets/Sprites/Areas/Factory/Objects/Ladder2.png" id="8_wtwyv"]
+[ext_resource type="Texture2D" uid="uid://c06f34klxn0t0" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/BackTiles.png" id="9_311a3"]
+[ext_resource type="Texture2D" uid="uid://dvq46dvv8xyen" path="res://Assets/Sprites/Areas/Factory/Objects/Flag.png" id="9_un1w5"]
+[ext_resource type="Texture2D" uid="uid://ctta8u2c3top2" path="res://Assets/Sprites/Areas/Factory/Objects/Ladder3.png" id="9_wtwyv"]
+[ext_resource type="Texture2D" uid="uid://b450mcsdlsq17" path="res://Assets/Sprites/Areas/Factory/Objects/Box8.png" id="10_o3j63"]
+[ext_resource type="Texture2D" uid="uid://sxi70u80o314" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe19.png" id="10_tq77f"]
+[ext_resource type="Texture2D" uid="uid://bog420jer4rx4" path="res://Assets/Sprites/Areas/Factory/Objects/Fence1.png" id="10_un1w5"]
+[ext_resource type="Texture2D" uid="uid://btfya055ql626" path="res://Assets/Sprites/Areas/Factory/Objects/Fence2.png" id="11_o3j63"]
+[ext_resource type="Texture2D" uid="uid://btgiw367idqj" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe17.png" id="11_r3g8r"]
+[ext_resource type="Texture2D" uid="uid://c64w0ijdn2d5i" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe14.png" id="12_3s8j3"]
+[ext_resource type="Texture2D" uid="uid://v3ce7j4xegyt" path="res://Assets/Sprites/Areas/Factory/Objects/Fence3.png" id="12_7gp23"]
+[ext_resource type="Texture2D" uid="uid://djh6yww1kepd8" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe13.png" id="13_friui"]
+[ext_resource type="Texture2D" uid="uid://5lp0fhomt5ix" path="res://Assets/Sprites/Areas/Laboratory/Objects/Decoration/17.png" id="14_7w1vb"]
+[ext_resource type="Texture2D" uid="uid://cvv8jngv10a28" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe21.png" id="14_f28a8"]
+[ext_resource type="Texture2D" uid="uid://ds2w7pwjjyd13" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe1.png" id="14_iqbug"]
+[ext_resource type="Texture2D" uid="uid://12fefleh2noq" path="res://Assets/Sprites/Areas/Factory/Objects/3.png" id="15_0lpwe"]
+[ext_resource type="Texture2D" uid="uid://d06fmqhp1n1tb" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe24.png" id="15_arg67"]
+[ext_resource type="Texture2D" uid="uid://bbfv0nbvltoru" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe2.png" id="15_sshw1"]
+[ext_resource type="Texture2D" uid="uid://ne8wkqhirb26" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe3.png" id="16_f28a8"]
+[ext_resource type="Texture2D" uid="uid://dl6sd3ywec776" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe22.png" id="16_wxfbj"]
+[ext_resource type="Texture2D" uid="uid://w8vkcjs235ix" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe4.png" id="17_arg67"]
+[ext_resource type="Texture2D" uid="uid://b7ii28hnukirp" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe15.png" id="17_ws3tl"]
+[ext_resource type="Texture2D" uid="uid://cjilxeoman5qy" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe10.png" id="18_1b6y5"]
+[ext_resource type="Texture2D" uid="uid://3ei23guaq7ah" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe5.png" id="18_wxfbj"]
+[ext_resource type="Texture2D" uid="uid://bl6r6cxg7qvaa" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe6.png" id="19_ws3tl"]
+[ext_resource type="Texture2D" uid="uid://c7x5ygc736ox7" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe7.png" id="20_1b6y5"]
+[ext_resource type="Texture2D" uid="uid://cghfkt85o5bm3" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe8.png" id="20_3fv3y"]
+[ext_resource type="Texture2D" uid="uid://vxm7kkhavrua" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe20.png" id="21_3fv3y"]
+[ext_resource type="Texture2D" uid="uid://cie2gw5tdyxcm" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe23.png" id="21_arg67"]
+[ext_resource type="Texture2D" uid="uid://b06jm1gur5vy8" path="res://Assets/Sprites/Areas/Factory/AnimatedObjects/Transporter1.png" id="22_n5wkc"]
+[ext_resource type="Texture2D" uid="uid://bs2widh88ewwi" path="res://Assets/Sprites/Areas/Factory/Objects/Board3.png" id="30_vvngf"]
+[ext_resource type="Texture2D" uid="uid://bqjoa4jopnt5j" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Barrel/1.png" id="32_3fv3y"]
+[ext_resource type="Texture2D" uid="uid://bu6q46imqtnmx" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Barrel/2.png" id="33_bh3qw"]
+[ext_resource type="Texture2D" uid="uid://co7bsa588sj3g" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Barrel/3.png" id="34_ys7qc"]
+[ext_resource type="Texture2D" uid="uid://d322pv70bfbd2" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Icons/1.png" id="35_grrls"]
+[ext_resource type="Texture2D" uid="uid://w8nrrmh50ycq" path="res://Assets/Sprites/Areas/Factory/Objects/Bench.png" id="37_cixvo"]
+[ext_resource type="Texture2D" uid="uid://bi520esp6ktly" path="res://Assets/Sprites/Areas/Factory/Objects/Board1.png" id="38_r8i56"]
+[ext_resource type="Texture2D" uid="uid://b8h2dg8lx4ujy" path="res://Assets/Sprites/Areas/Factory/Objects/Board2.png" id="40_qmjgs"]
+[ext_resource type="Texture2D" uid="uid://dtafyjb4m41ac" path="res://Assets/Sprites/Areas/Factory/Objects/Box3.png" id="41_pfdi5"]
+[ext_resource type="Texture2D" uid="uid://bi1fbyvbpe7kx" path="res://Assets/Sprites/Areas/Factory/Objects/Box5.png" id="42_bv8tm"]
+[ext_resource type="Texture2D" uid="uid://ciodfk646xy4a" path="res://Assets/Sprites/Areas/Factory/Objects/Fire-extinguisher1.png" id="43_elsno"]
+[ext_resource type="Texture2D" uid="uid://btib3bbwstat3" path="res://Assets/Sprites/Areas/Factory/Objects/Mop.png" id="44_onyeo"]
+[ext_resource type="Texture2D" uid="uid://cligft8qudi7c" path="res://Assets/Sprites/Areas/Factory/Objects/Bucket.png" id="45_jp8r1"]
+[ext_resource type="Texture2D" uid="uid://bjtll4pm0f0xf" path="res://Assets/Sprites/Areas/Factory/Objects/1.png" id="46_onyeo"]
+[ext_resource type="Texture2D" uid="uid://y0r47ei4fwk5" path="res://Assets/Sprites/Areas/Factory/Objects/2.png" id="47_jp8r1"]
+[ext_resource type="Texture2D" uid="uid://bgj5jadcm3h5r" path="res://Assets/Sprites/Areas/Factory/Objects/Locker4.png" id="48_q0jou"]
+[ext_resource type="Texture2D" uid="uid://bfi8nwve33osx" path="res://Assets/Sprites/Areas/Laboratory/Objects/Decoration/13.png" id="49_10sby"]
+[ext_resource type="Texture2D" uid="uid://b5bvn0cq1oew4" path="res://Assets/Sprites/Areas/Laboratory/Objects/Decoration/14.png" id="51_pd534"]
+[ext_resource type="Texture2D" uid="uid://q6abbbsvgwt7" path="res://Assets/Sprites/Areas/Factory/Objects/Locker3.png" id="51_q0jou"]
+[ext_resource type="Texture2D" uid="uid://dxrwojhy0vfgm" path="res://Assets/Sprites/Areas/Laboratory/Objects/Decoration/15.png" id="52_n5wkc"]
+[ext_resource type="Texture2D" uid="uid://b11lbgpu8yaj2" path="res://Assets/Sprites/Areas/Laboratory/Objects/Decoration/16.png" id="53_nhdx5"]
+[ext_resource type="Texture2D" uid="uid://1ribpq5ouq5w" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Boxes/4.png" id="54_pd534"]
+[ext_resource type="Texture2D" uid="uid://dvuwroeaonsyj" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Boxes/3.png" id="55_n5wkc"]
+[ext_resource type="Texture2D" uid="uid://ccbnh7dyv1a82" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Boxes/5.png" id="56_nhdx5"]
+[ext_resource type="Texture2D" uid="uid://cj1lotgmfncx6" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Monitors/3.png" id="57_mf5pw"]
+[ext_resource type="Texture2D" uid="uid://b2p7cyv4xqt5o" path="res://Assets/Sprites/Areas/Factory/Objects/Elevator.png" id="57_q3no2"]
+[ext_resource type="Texture2D" uid="uid://bhjv6x6b0l5b8" path="res://Assets/Sprites/Areas/Factory/Objects/Elevator_Button.png" id="60_jbfwt"]
 [ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="67_mf5pw"]
 [ext_resource type="Script" uid="uid://bgotpl1spe6hw" path="res://Scenes/Areas/Factory/FactoryIn.cs" id="68_q3no2"]
-[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="69_jbfwt"]
-[ext_resource type="PackedScene" uid="uid://c1nfkdbdnlq1o" path="res://Scenes/Enemy/purpleGuy.tscn" id="70_weijl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0lpwe"]
 texture = ExtResource("6_nph3d")
@@ -1052,8 +1050,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_6aldg"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-physics_layer_1/collision_layer = 2
-physics_layer_1/collision_mask = 2
+physics_layer_1/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_qx3db")
 sources/1 = SubResource("TileSetAtlasSource_aqoxs")
 sources/2 = SubResource("TileSetAtlasSource_e2ujh")
@@ -1430,8 +1427,7 @@ texture_region_size = Vector2i(32, 36)
 [sub_resource type="TileSet" id="TileSet_kwvjs"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-physics_layer_1/collision_layer = 2
-physics_layer_1/collision_mask = 2
+physics_layer_1/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_kwvjs")
 sources/3 = SubResource("TileSetAtlasSource_jq46u")
 sources/4 = SubResource("TileSetAtlasSource_anp8n")
@@ -1482,7 +1478,10 @@ size = Vector2(4, 167)
 size = Vector2(7, 453)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbfwt"]
-size = Vector2(48, 32)
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mf5pw"]
+size = Vector2(64, 32)
 
 [node name="Factory" type="Node2D" unique_id=1798911909]
 
@@ -1518,6 +1517,7 @@ tile_map_data = PackedByteArray("AAD7/xMAAwAAAAAAAAD7/xQAAgAAAAAAAAD7/xUAAgAAAAA
 tile_set = SubResource("TileSet_kwvjs")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1509999809]
+collision_mask = 2
 script = ExtResource("67_mf5pw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1291551829]
@@ -1533,18 +1533,17 @@ position = Vector2(276, 702.5)
 shape = SubResource("RectangleShape2D_onyeo")
 
 [node name="FactoryIn" type="Area2D" parent="." unique_id=766431079]
+collision_mask = 2
 script = ExtResource("68_q3no2")
 CameraLimitLeft = -1120
 CameraLimitRight = 1120
 CameraLimitTop = -352
 CameraLimitBottom = 1344
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryIn" unique_id=1726551899]
-position = Vector2(-1000, 944)
+[node name="Street" type="CollisionShape2D" parent="FactoryIn" unique_id=1726551899]
+position = Vector2(-992, 944)
 shape = SubResource("RectangleShape2D_jbfwt")
 
-[node name="Player" parent="." unique_id=699596196 instance=ExtResource("69_jbfwt")]
-position = Vector2(217, 733)
-
-[node name="PurpleGuy" parent="." unique_id=785066863 instance=ExtResource("70_weijl")]
-position = Vector2(497, 720)
+[node name="Laboratory" type="CollisionShape2D" parent="FactoryIn" unique_id=1264954336]
+position = Vector2(976, -144)
+shape = SubResource("RectangleShape2D_mf5pw")

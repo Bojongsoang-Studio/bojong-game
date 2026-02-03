@@ -52,6 +52,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="Area" type="Area2D" parent="." unique_id=1790110908]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=73011436]
 shape = SubResource("RectangleShape2D_ewuao")
