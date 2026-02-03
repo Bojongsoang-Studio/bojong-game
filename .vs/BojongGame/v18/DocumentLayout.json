@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\areas\\forest\\button.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\areas\\forest\\button.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\areas\\forest\\vinesladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\areas\\forest\\vinesladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\areas\\forest\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\areas\\forest\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -19,6 +31,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Button.cs",
+              "DocumentMoniker": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Areas\\Forest\\Button.cs",
+              "RelativeDocumentMoniker": "Scenes\\Areas\\Forest\\Button.cs",
+              "ToolTip": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Areas\\Forest\\Button.cs",
+              "RelativeToolTip": "Scenes\\Areas\\Forest\\Button.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-03T08:15:22.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VinesLadder.cs",
+              "DocumentMoniker": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Areas\\Forest\\VinesLadder.cs",
+              "RelativeDocumentMoniker": "Scenes\\Areas\\Forest\\VinesLadder.cs",
+              "ToolTip": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Areas\\Forest\\VinesLadder.cs",
+              "RelativeToolTip": "Scenes\\Areas\\Forest\\VinesLadder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-03T08:06:33.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Door.cs",
+              "DocumentMoniker": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Areas\\Forest\\Door.cs",
+              "RelativeDocumentMoniker": "Scenes\\Areas\\Forest\\Door.cs",
+              "ToolTip": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Areas\\Forest\\Door.cs",
+              "RelativeToolTip": "Scenes\\Areas\\Forest\\Door.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAEAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-03T08:06:21.032Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Player\\Player.cs",
               "RelativeDocumentMoniker": "Scenes\\Player\\Player.cs",
