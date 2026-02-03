@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba38h4jfyojtj"
-path="res://.godot/imported/Punk_jump.png-47fcb3637451e74dd70cabe2476b25b0.ctex"
+uid="uid://dqumildgv30uf"
+path="res://.godot/imported/Idle.png-f360fa67e0f2211834bf8e1fad554b99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Player/2 Punk/Punk_jump.png"
-dest_files=["res://.godot/imported/Punk_jump.png-47fcb3637451e74dd70cabe2476b25b0.ctex"]
+source_file="res://Assets/Sprites/Areas/Street/Citizens/Punk/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-f360fa67e0f2211834bf8e1fad554b99.ctex"]
 
 [params]
 

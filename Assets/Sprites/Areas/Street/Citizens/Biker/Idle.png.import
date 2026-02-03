@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blkpusd7nj37d"
-path="res://.godot/imported/Punk_run_attack.png-2cd81ac6097727339f6ab66f00726d46.ctex"
+uid="uid://ykfst1gjh1q0"
+path="res://.godot/imported/Idle.png-49628f59e8629ccf9f5f0645d28624f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Player/2 Punk/Punk_run_attack.png"
-dest_files=["res://.godot/imported/Punk_run_attack.png-2cd81ac6097727339f6ab66f00726d46.ctex"]
+source_file="res://Assets/Sprites/Areas/Street/Citizens/Biker/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-49628f59e8629ccf9f5f0645d28624f8.ctex"]
 
 [params]
 

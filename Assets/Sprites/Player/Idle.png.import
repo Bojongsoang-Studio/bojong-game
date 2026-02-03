@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clnwnpw6fb2t5"
-path="res://.godot/imported/Punk_run.png-ddefb631c80d349f744161f44e43e79e.ctex"
+uid="uid://b0wif1a6lmeqw"
+path="res://.godot/imported/Idle.png-ca306b7d696363073193b2ee22d001c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Player/2 Punk/Punk_run.png"
-dest_files=["res://.godot/imported/Punk_run.png-ddefb631c80d349f744161f44e43e79e.ctex"]
+source_file="res://Assets/Sprites/Player/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-ca306b7d696363073193b2ee22d001c7.ctex"]
 
 [params]
 

@@ -27,6 +27,15 @@ public partial class Player : CharacterBody2D
 	private bool _isOnZebraCross;
 	private uint _originalCollisionMask;
 
+	private AnimatedSprite2D _sprite;
+	private CollisionShape2D _collision;
+
+	public override void _Ready()
+	{
+		_sprite = GetNode<AnimatedSprite2D>("Sprite");
+		_collision = GetNode<CollisionShape2D>("Collision");
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
 		var velocity = Velocity;
@@ -64,6 +73,8 @@ public partial class Player : CharacterBody2D
 			velocity.X = Mathf.MoveToward(velocity.X, horizontalInput * WalkSpeed,
 				Acceleration * WalkSpeed * (float)delta);
 
+			_sprite.Animation = "idle";
+			
 			Velocity = velocity;
 			MoveAndSlide();
 
@@ -80,11 +91,13 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionPressed("move_left"))
 		{
 			dir -= 1;
+			_sprite.FlipH = true;
 		}
 
 		if (Input.IsActionPressed("move_right"))
 		{
 			dir += 1;
+			_sprite.FlipH = false;
 		}
 
 		if (dir != 0)
@@ -114,6 +127,8 @@ public partial class Player : CharacterBody2D
 		{
 			StartDash();
 		}
+
+		_sprite.Animation = dir == 0 ? "idle" : "run";
 
 		Velocity = velocity;
 		MoveAndSlide();
