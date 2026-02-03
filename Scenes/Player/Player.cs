@@ -24,7 +24,7 @@ public partial class Player : CharacterBody2D
 	private float _dashCooldownLeft;
 	private int _dashDirection = 1;
 
-	private bool _isOnZebraCross;
+	private bool _isOnVerticalMovementArea;
 	private uint _originalCollisionMask;
 
 	private AnimatedSprite2D _sprite;
@@ -63,7 +63,7 @@ public partial class Player : CharacterBody2D
 			return;
 		}
 
-		if (_isOnZebraCross)
+		if (_isOnVerticalMovementArea)
 		{
 			var verticalInput = Input.GetAxis("move_up", "move_down");
 			var horizontalInput = Input.GetAxis("move_left", "move_right");
@@ -141,19 +141,31 @@ public partial class Player : CharacterBody2D
 		_dashCooldownLeft = DashCooldown;
 	}
 
-	public void EnterZebraCross()
+	public void EnterVerticalMovementArea()
 	{
-		_isOnZebraCross = true;
+		_isOnVerticalMovementArea = true;
 		_originalCollisionMask = CollisionMask;
 		SetCollisionMaskValue(1, false);
 		SetCollisionMaskValue(2, false);
 		_gravity = 0;
 	}
 
-	public void ExitZebraCross()
+	public void ExitVerticalMovementArea()
 	{
-		_isOnZebraCross = false;
+		_isOnVerticalMovementArea = false;
 		CollisionMask = _originalCollisionMask;
 		_gravity = Gravity;
+	}
+
+	public void ShowGuide()
+	{
+		var guide = GetNode<Label>("Guide");
+		guide.Visible = true;
+	}
+	
+	public void HideGuide()
+	{
+		var guide = GetNode<Label>("Guide");
+		guide.Visible = false;
 	}
 }

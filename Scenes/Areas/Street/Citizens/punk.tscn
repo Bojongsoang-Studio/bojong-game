@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dqumildgv30uf" path="res://Assets/Sprites/Areas/Street/Citizens/Punk/Idle.png" id="1_ewuao"]
 [ext_resource type="Script" uid="uid://b13s7psiujind" path="res://Scenes/Areas/Street/Citizens/Punk.cs" id="1_hpr37"]
+[ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="3_o2d6h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hpr37"]
 atlas = ExtResource("1_ewuao")
@@ -56,13 +57,14 @@ autoplay = "idle"
 shape = SubResource("RectangleShape2D_ewuao")
 
 [node name="Dialog" type="Label" parent="." unique_id=816159127]
-visible = false
-offset_left = -36.0
-offset_top = -31.0
-offset_right = 36.0
-offset_bottom = -14.0
+offset_left = -96.0
+offset_top = -59.0
+offset_right = 96.0
+offset_bottom = -18.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 4
-text = "I heard that there are so many killing machines in that forest"
+theme_override_fonts/font = ExtResource("3_o2d6h")
+theme_override_font_sizes/font_size = 8
+text = "I heard the forest is full of killing machines—definitely not somewhere you want to wander."
+horizontal_alignment = 1
 autowrap_mode = 3

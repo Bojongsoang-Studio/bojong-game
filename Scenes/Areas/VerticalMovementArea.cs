@@ -1,8 +1,8 @@
 using Godot;
 
-namespace BojongGame.Scenes.Areas.Street;
+namespace BojongGame.Scenes.Areas;
 
-public partial class ZebraCross1 : Area2D
+public partial class VerticalMovementArea : Area2D
 {
 	public override void _Ready()
 	{
@@ -14,7 +14,7 @@ public partial class ZebraCross1 : Area2D
 	{
 		if (body is Player.Player player)
 		{
-			player.EnterZebraCross();
+			player.EnterVerticalMovementArea();
 		}
 	}
 
@@ -22,7 +22,7 @@ public partial class ZebraCross1 : Area2D
 	{
 		if (body is Player.Player player)
 		{
-			player.ExitZebraCross();
+			player.ExitVerticalMovementArea();
 		}
 	}
 }

@@ -11,6 +11,7 @@ public partial class Punk : Node2D
 	{
 		_area = GetNode<Area2D>("Area");
 		_dialog = GetNode<Label>("Dialog");
+		_dialog.Visible = false;
 		
 		_area.BodyEntered += OnBodyEntered;
 		_area.BodyExited += OnBodyExited;

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ubcchmcyuf2v"]
+
+[ext_resource type="PackedScene" uid="uid://c3xxaqfhgc5n2" path="res://Scenes/Areas/Street/street.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://b8e8jdcpsfafi" path="res://Scenes/Areas/Factory/factory.tscn" id="2_qxrlw"]
+[ext_resource type="Script" uid="uid://b4awawykq1gl2" path="res://Scenes/FactoryInFromStreet.cs" id="2_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="4_3dryh"]
+[ext_resource type="Script" uid="uid://dfqnxifxe80dv" path="res://Scenes/StreetInFromFactory.cs" id="4_wowpa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
+size = Vector2(48, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrm1d"]
+size = Vector2(64, 32)
+
+[node name="Game" type="Node2D" unique_id=188869460]
+
+[node name="Street" parent="." unique_id=398176415 instance=ExtResource("1_ebmjs")]
+position = Vector2(576, 388)
+
+[node name="FactoryInFromStreet" type="Area2D" parent="." unique_id=1494961415]
+script = ExtResource("2_wrm1d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryInFromStreet" unique_id=1511825908]
+position = Vector2(1512, 372)
+shape = SubResource("RectangleShape2D_3dryh")
+
+[node name="Factory" parent="." unique_id=1798911909 instance=ExtResource("2_qxrlw")]
+position = Vector2(1839, 1530)
+
+[node name="StreetInFromFactory" type="Area2D" parent="." unique_id=1056837412]
+script = ExtResource("4_wowpa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StreetInFromFactory" unique_id=1008217939]
+position = Vector2(847, 2474)
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="Player" parent="." unique_id=699596196 instance=ExtResource("4_3dryh")]
+position = Vector2(595, 348)

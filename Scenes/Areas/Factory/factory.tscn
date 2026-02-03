@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://4jq3aud0cok1" path="res://Assets/Sprites/Areas/Factory/2 Background/4.png" id="4_aqoxs"]
 [ext_resource type="Texture2D" uid="uid://bw40agtx2um1e" path="res://Assets/Sprites/Areas/Factory/2 Background/5.png" id="5_aqoxs"]
 [ext_resource type="Texture2D" uid="uid://byy58635qoboi" path="res://Assets/Sprites/Areas/Factory/1 Tiles/factory_spreadsheet.png" id="5_nph3d"]
-[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="6_g35x7"]
 [ext_resource type="Texture2D" uid="uid://ctbi344kp7ehw" path="res://Assets/Sprites/Areas/Lab/1 Tiles/Tileset.png" id="6_nph3d"]
 [ext_resource type="Texture2D" uid="uid://cxace30jmjvg" path="res://Assets/Sprites/Areas/Factory/3 Objects/Ladder1.png" id="8_0lpwe"]
 [ext_resource type="Texture2D" uid="uid://cuiw7vfwo0ba6" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tiles.png" id="8_7gp23"]
@@ -26,7 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://cvv8jngv10a28" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_29.png" id="14_f28a8"]
 [ext_resource type="Texture2D" uid="uid://ds2w7pwjjyd13" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_09.png" id="14_iqbug"]
 [ext_resource type="Texture2D" uid="uid://12fefleh2noq" path="res://Assets/Sprites/Areas/Factory/3 Objects/3.png" id="15_0lpwe"]
-[ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/Street/ZebraCross1.cs" id="15_aqoxs"]
 [ext_resource type="Texture2D" uid="uid://d06fmqhp1n1tb" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_32.png" id="15_arg67"]
 [ext_resource type="Texture2D" uid="uid://bbfv0nbvltoru" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_10.png" id="15_sshw1"]
 [ext_resource type="Texture2D" uid="uid://ne8wkqhirb26" path="res://Assets/Sprites/Areas/BossRoom/1 Tiles/Tile_11.png" id="16_f28a8"]
@@ -68,6 +66,8 @@
 [ext_resource type="Texture2D" uid="uid://cj1lotgmfncx6" path="res://Assets/Sprites/Areas/BossRoom/3 Objects/Monitors/3.png" id="57_mf5pw"]
 [ext_resource type="Texture2D" uid="uid://b2p7cyv4xqt5o" path="res://Assets/Sprites/Areas/Factory/3 Objects/Elevator.png" id="57_q3no2"]
 [ext_resource type="Texture2D" uid="uid://bhjv6x6b0l5b8" path="res://Assets/Sprites/Areas/Factory/3 Objects/Elevator_Button.png" id="60_jbfwt"]
+[ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="67_mf5pw"]
+[ext_resource type="Script" uid="uid://bgotpl1spe6hw" path="res://Scenes/Areas/Factory/FactoryIn.cs" id="68_q3no2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0lpwe"]
 texture = ExtResource("6_nph3d")
@@ -1479,6 +1479,9 @@ size = Vector2(4, 167)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onyeo"]
 size = Vector2(7, 453)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbfwt"]
+size = Vector2(48, 32)
+
 [node name="Factory" type="Node2D" unique_id=1798911909]
 
 [node name="Background" type="Parallax2D" parent="." unique_id=2020673226]
@@ -1513,7 +1516,7 @@ tile_map_data = PackedByteArray("AAD7/xMAAwAAAAAAAAD7/xQAAgAAAAAAAAD7/xUAAgAAAAA
 tile_set = SubResource("TileSet_kwvjs")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1509999809]
-script = ExtResource("15_aqoxs")
+script = ExtResource("67_mf5pw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1291551829]
 position = Vector2(-148, 765)
@@ -1527,7 +1530,13 @@ shape = SubResource("RectangleShape2D_aqoxs")
 position = Vector2(276, 702.5)
 shape = SubResource("RectangleShape2D_onyeo")
 
-[node name="Player" parent="." unique_id=699596196 instance=ExtResource("6_g35x7")]
-position = Vector2(950, -147)
-collision_layer = 3
-collision_mask = 3
+[node name="FactoryIn" type="Area2D" parent="." unique_id=766431079]
+script = ExtResource("68_q3no2")
+CameraLimitLeft = -1120
+CameraLimitRight = 1120
+CameraLimitTop = -352
+CameraLimitBottom = 1344
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryIn" unique_id=1726551899]
+position = Vector2(-1000, 944)
+shape = SubResource("RectangleShape2D_jbfwt")
