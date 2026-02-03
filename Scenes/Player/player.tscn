@@ -106,6 +106,23 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd0ac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u5uq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlvik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk6dx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpcdj"]
@@ -163,5 +180,9 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Camera" type="Camera2D" parent="." unique_id=886884360]
+position = Vector2(0, -16)
+zoom = Vector2(3, 3)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=886884360]
 position = Vector2(0, -16)
 zoom = Vector2(3, 3)
