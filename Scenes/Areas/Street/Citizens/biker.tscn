@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://ycxm4dkjpuvd"]
+
+[ext_resource type="Script" uid="uid://bg03jomsq4ohl" path="res://Scenes/Areas/Street/Citizens/Biker.cs" id="1_6prho"]
+[ext_resource type="Texture2D" uid="uid://ykfst1gjh1q0" path="res://Assets/Sprites/Areas/Street/Citizens/Biker/Idle.png" id="1_iph4s"]
+[ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="3_8rudx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6prho"]
+atlas = ExtResource("1_iph4s")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rudx"]
+atlas = ExtResource("1_iph4s")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqwap"]
+atlas = ExtResource("1_iph4s")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfc4y"]
+atlas = ExtResource("1_iph4s")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_846bx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6prho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rudx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqwap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfc4y")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rudx"]
+size = Vector2(48, 48)
+
+[node name="Biker" type="Node2D" unique_id=719174037]
+script = ExtResource("1_6prho")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1360755958]
+sprite_frames = SubResource("SpriteFrames_846bx")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Area" type="Area2D" parent="." unique_id=1234695154]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=577354720]
+shape = SubResource("RectangleShape2D_8rudx")
+
+[node name="Dialog" type="Label" parent="." unique_id=1461174655]
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = -18.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_8rudx")
+theme_override_font_sizes/font_size = 8
+text = "I heard they’re making killing machines in that factory way down at the end of the road."
+horizontal_alignment = 1
+autowrap_mode = 3

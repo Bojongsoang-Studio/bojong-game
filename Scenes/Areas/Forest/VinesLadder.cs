@@ -14,7 +14,7 @@ namespace BojongGame.Scenes.Areas.Forest
 		{
 			if (body is Player.Player player)
 			{
-				player.EnterZebraCross();
+				player.EnterVerticalMovementArea();
 			}
 		}
 
@@ -22,7 +22,7 @@ namespace BojongGame.Scenes.Areas.Forest
 		{
 			if (body is Player.Player player)
 			{
-				player.ExitZebraCross();
+				player.ExitVerticalMovementArea();
 			}
 		}
 	}

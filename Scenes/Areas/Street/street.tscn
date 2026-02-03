@@ -1,13 +1,18 @@
 [gd_scene format=4 uid="uid://c3xxaqfhgc5n2"]
 
 [ext_resource type="Texture2D" uid="uid://cya7ad4erbski" path="res://Assets/Sprites/Areas/Street/SidewalkTilesheet.png" id="1_jw87k"]
+[ext_resource type="Texture2D" uid="uid://cdowy4214aict" path="res://Assets/Sprites/Areas/Street/Backgrounds/1.png" id="1_q7013"]
+[ext_resource type="Texture2D" uid="uid://bcqao0gb8otrf" path="res://Assets/Sprites/Areas/Street/Backgrounds/2.png" id="2_5qjbh"]
 [ext_resource type="PackedScene" uid="uid://bu0cfmwi8li52" path="res://Scenes/Areas/Street/Buildings/building_1.tscn" id="2_bt0sg"]
 [ext_resource type="Texture2D" uid="uid://chign2x6e2gku" path="res://Assets/Sprites/Areas/Street/RoadTilesheet.png" id="2_hw208"]
 [ext_resource type="Texture2D" uid="uid://rkthqv2eivth" path="res://Assets/Sprites/Areas/Street/Plantations/Bush1.png" id="3_0ei8v"]
+[ext_resource type="Texture2D" uid="uid://kqolvddwl8p1" path="res://Assets/Sprites/Areas/Street/Backgrounds/3.png" id="3_375y2"]
 [ext_resource type="PackedScene" uid="uid://bgptkjn475na1" path="res://Scenes/Areas/Street/Buildings/building_4.tscn" id="3_lfqcs"]
 [ext_resource type="Texture2D" uid="uid://bb57kp68xqg1o" path="res://Assets/Sprites/Areas/Street/Objects/BeigeVendingMachine.png" id="3_t4ocj"]
 [ext_resource type="Texture2D" uid="uid://b3fjo22rlgntg" path="res://Assets/Sprites/Areas/Street/Plantations/Bush2.png" id="4_c46h2"]
+[ext_resource type="Texture2D" uid="uid://dqyggvmw8h03w" path="res://Assets/Sprites/Areas/Street/Backgrounds/4.png" id="4_v31r7"]
 [ext_resource type="Texture2D" uid="uid://ctvam6iakekn2" path="res://Assets/Sprites/Areas/Street/Objects/ClosedTrashBin.png" id="4_xk5qd"]
+[ext_resource type="Texture2D" uid="uid://c67b31cu2dlp" path="res://Assets/Sprites/Areas/Street/Backgrounds/5.png" id="5_76brt"]
 [ext_resource type="PackedScene" uid="uid://d4h3lsuw47mx3" path="res://Scenes/Areas/Street/Buildings/building_2.tscn" id="5_gtlpl"]
 [ext_resource type="Texture2D" uid="uid://c40jmuf52nvll" path="res://Assets/Sprites/Areas/Street/Plantations/Plant1.png" id="5_jntfo"]
 [ext_resource type="Texture2D" uid="uid://ba2upg5hwvur3" path="res://Assets/Sprites/Areas/Street/Objects/VerticalCardboardBox.png" id="5_m42rj"]
@@ -26,13 +31,17 @@
 [ext_resource type="Texture2D" uid="uid://dq45ejd5pusoi" path="res://Assets/Sprites/Areas/Street/Objects/OpenedCardboardBox.png" id="11_d7irb"]
 [ext_resource type="Texture2D" uid="uid://dlmf7vs786d8o" path="res://Assets/Sprites/Areas/Street/Plantations/Tree3.png" id="12_l1xni"]
 [ext_resource type="Texture2D" uid="uid://cj0s14rxd83hf" path="res://Assets/Sprites/Areas/Street/Objects/OpenedTrashBin.png" id="12_mh5l6"]
-[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="13_c46h2"]
 [ext_resource type="Texture2D" uid="uid://c7xpuh3iw71d" path="res://Assets/Sprites/Areas/Street/Objects/RedVendingMachine.png" id="13_t7igy"]
 [ext_resource type="Texture2D" uid="uid://cu6b17x3bln66" path="res://Assets/Sprites/Areas/Street/Objects/TrashBag.png" id="14_lfqcs"]
-[ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/Street/ZebraCross1.cs" id="27_pmres"]
 [ext_resource type="PackedScene" uid="uid://deq8wg1jgvcea" path="res://Scenes/Areas/Street/Buildings/building_3.tscn" id="29_4y3gc"]
 [ext_resource type="PackedScene" uid="uid://c16ckf40ht6bu" path="res://Scenes/Areas/Street/Buildings/building_5.tscn" id="30_8tdn0"]
 [ext_resource type="PackedScene" uid="uid://cpgq1w5urwhqc" path="res://Scenes/Areas/Street/Buildings/building_6.tscn" id="31_3u7tk"]
+[ext_resource type="Script" uid="uid://y3lqfb6m8yjs" path="res://Scenes/Areas/Street/StreetSubarea1In.cs" id="34_cftkh"]
+[ext_resource type="Script" uid="uid://ddgqhlqyanalr" path="res://Scenes/Areas/Street/StreetSubarea2In.cs" id="38_tc6nq"]
+[ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="39_cftkh"]
+[ext_resource type="PackedScene" uid="uid://ycxm4dkjpuvd" path="res://Scenes/Areas/Street/Citizens/biker.tscn" id="40_omlqb"]
+[ext_resource type="PackedScene" uid="uid://wypdr2uyp70n" path="res://Scenes/Areas/Street/Animals/cat.tscn" id="41_76brt"]
+[ext_resource type="PackedScene" uid="uid://c2jfqrfub1huu" path="res://Scenes/Areas/Street/Citizens/punk.tscn" id="43_cftkh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_actlm"]
 texture = ExtResource("1_jw87k")
@@ -229,10 +238,94 @@ sources/9 = SubResource("TileSetAtlasSource_5qjbh")
 sources/10 = SubResource("TileSetAtlasSource_spjcq")
 sources/11 = SubResource("TileSetAtlasSource_gtlpl")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76brt"]
+size = Vector2(16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v31r7"]
+size = Vector2(32, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cftkh"]
+size = Vector2(48, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omlqb"]
+size = Vector2(32, 16)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hw208"]
-size = Vector2(32, 160)
+size = Vector2(32, 136)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v31r7"]
+a = Vector2(0, -388)
+b = Vector2(0, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_76brt"]
+a = Vector2(0, -5)
+b = Vector2(0, 155)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_omlqb"]
+a = Vector2(192, 0)
+b = Vector2(192, 96)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_cftkh"]
+a = Vector2(837, 160)
+b = Vector2(837, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_tc6nq"]
+a = Vector2(960, -388)
+b = Vector2(960, 0)
 
 [node name="Street" type="Node2D" unique_id=398176415]
+
+[node name="Background" type="Node2D" parent="." unique_id=1340158385]
+
+[node name="1" type="Parallax2D" parent="Background" unique_id=2080190200]
+scroll_scale = Vector2(0.2, 0)
+repeat_size = Vector2(576, 0)
+repeat_times = 3
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/1" unique_id=663431855]
+position = Vector2(288, -226)
+texture = ExtResource("1_q7013")
+
+[node name="2" type="Parallax2D" parent="Background" unique_id=121023676]
+scroll_scale = Vector2(0.3, 0)
+repeat_size = Vector2(576, 0)
+repeat_times = 3
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/2" unique_id=1728396190]
+position = Vector2(288, -226)
+texture = ExtResource("2_5qjbh")
+
+[node name="3" type="Parallax2D" parent="Background" unique_id=415428496]
+scroll_scale = Vector2(0.4, 0)
+repeat_size = Vector2(576, 0)
+repeat_times = 3
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/3" unique_id=1916054860]
+position = Vector2(288, -226)
+texture = ExtResource("3_375y2")
+
+[node name="4" type="Parallax2D" parent="Background" unique_id=1147827780]
+scroll_scale = Vector2(0.5, 0)
+repeat_size = Vector2(576, 0)
+repeat_times = 3
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/4" unique_id=1853385256]
+position = Vector2(288, -226)
+texture = ExtResource("4_v31r7")
+
+[node name="5" type="Parallax2D" parent="Background" unique_id=1416971676]
+scroll_scale = Vector2(0.6, 0)
+repeat_size = Vector2(576, 0)
+repeat_times = 3
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/5" unique_id=1629502876]
+position = Vector2(288, -226)
+texture = ExtResource("5_76brt")
 
 [node name="Subarea1" type="Node2D" parent="." unique_id=1503385018]
 
@@ -273,6 +366,24 @@ position = Vector2(0, -32)
 tile_map_data = PackedByteArray("AAADAP//CwAAAAAAAAAEAP//CAAAAAAAAAAGAP//BQAAAAAAAAAOAP//BQAAAAAAAAAWAP//BQAAAAAAAAA=")
 tile_set = SubResource("TileSet_375y2")
 
+[node name="StreetSubarea1In" type="Area2D" parent="Subarea1" unique_id=826512825]
+script = ExtResource("34_cftkh")
+CameraLimitLeft = 0
+CameraLimitRight = 960
+CameraLimitBottom = 96
+
+[node name="Start" type="CollisionShape2D" parent="Subarea1/StreetSubarea1In" unique_id=2043579639]
+position = Vector2(8, -16)
+shape = SubResource("RectangleShape2D_76brt")
+
+[node name="ZebraCross" type="CollisionShape2D" parent="Subarea1/StreetSubarea1In" unique_id=1196263748]
+position = Vector2(144, -80)
+shape = SubResource("RectangleShape2D_v31r7")
+
+[node name="Factory" type="CollisionShape2D" parent="Subarea1/StreetSubarea1In" unique_id=2039955620]
+position = Vector2(936, -16)
+shape = SubResource("RectangleShape2D_cftkh")
+
 [node name="Subarea2" type="Node2D" parent="." unique_id=1957897893]
 position = Vector2(-320, 0)
 
@@ -308,13 +419,51 @@ position = Vector2(0, -43)
 tile_map_data = PackedByteArray("AAAVAAIABQAAAAAAAAAWAAIABwAAAAAAAAAgAAIABQAAAAAAAAA=")
 tile_set = SubResource("TileSet_375y2")
 
-[node name="ZebraCross1" type="Area2D" parent="." unique_id=515845588]
-position = Vector2(4, 0)
-script = ExtResource("27_pmres")
+[node name="StreetSubarea2In" type="Area2D" parent="Subarea2" unique_id=1198738226]
+position = Vector2(320, 0)
+script = ExtResource("38_tc6nq")
+CameraLimitLeft = 160
+CameraLimitRight = 928
+CameraLimitBottom = 160
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZebraCross1" unique_id=1537373823]
-position = Vector2(172, 56)
+[node name="ZebraCross" type="CollisionShape2D" parent="Subarea2/StreetSubarea2In" unique_id=2018232652]
+position = Vector2(176, 104)
+shape = SubResource("RectangleShape2D_omlqb")
+
+[node name="ZebraCross" type="Area2D" parent="." unique_id=515845588]
+position = Vector2(4, 0)
+script = ExtResource("39_cftkh")
+
+[node name="ZebraCross1" type="CollisionShape2D" parent="ZebraCross" unique_id=1537373823]
+position = Vector2(172, 48)
 shape = SubResource("RectangleShape2D_hw208")
 
-[node name="Player" parent="." unique_id=699596196 instance=ExtResource("13_c46h2")]
-position = Vector2(32, -16)
+[node name="Border" type="StaticBody2D" parent="." unique_id=874555447]
+collision_layer = 3221225472
+collision_mask = 3221225472
+
+[node name="Left1" type="CollisionShape2D" parent="Border" unique_id=1020467062]
+shape = SubResource("SegmentShape2D_v31r7")
+
+[node name="Left2" type="CollisionShape2D" parent="Border" unique_id=766765377]
+position = Vector2(160, 5)
+shape = SubResource("SegmentShape2D_76brt")
+
+[node name="Right1" type="CollisionShape2D" parent="Border" unique_id=1795892991]
+shape = SubResource("SegmentShape2D_omlqb")
+
+[node name="Right2" type="CollisionShape2D" parent="Border" unique_id=1328926738]
+position = Vector2(91, 0)
+shape = SubResource("SegmentShape2D_cftkh")
+
+[node name="Right3" type="CollisionShape2D" parent="Border" unique_id=77819503]
+shape = SubResource("SegmentShape2D_tc6nq")
+
+[node name="Biker" parent="." unique_id=719174037 instance=ExtResource("40_omlqb")]
+position = Vector2(440, -56)
+
+[node name="Punk" parent="." unique_id=1880373177 instance=ExtResource("43_cftkh")]
+position = Vector2(344, 104)
+
+[node name="Cat" parent="." unique_id=52111981 instance=ExtResource("41_76brt")]
+position = Vector2(24, -24)
