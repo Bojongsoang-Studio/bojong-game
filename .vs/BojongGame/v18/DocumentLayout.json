@@ -7,20 +7,20 @@
       "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\enemies\\greenrobot\\greenrobot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\enemies\\greenrobot\\greenrobot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\enemies\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\enemies\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\enemies\\dog\\dog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\enemies\\dog\\dog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\enemies\\greenrobot\\greenrobot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\enemies\\greenrobot\\greenrobot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\enemies\\greenflyingrobot\\greenflyingrobot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\enemies\\greenflyingrobot\\greenflyingrobot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\areas\\forest\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\areas\\forest\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\areas\\forest\\button.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\areas\\forest\\vinesladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\areas\\forest\\vinesladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|c:\\data\\lomba\\gamevidia\\bojong-game\\scenes\\areas\\forest\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BAA29925-724D-43CE-B7CC-BC526D5FFD31}|BojongGame.csproj|solutionrelative:scenes\\areas\\forest\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,58 +38,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Enemy.cs",
               "DocumentMoniker": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Enemies\\Enemy.cs",
               "RelativeDocumentMoniker": "Scenes\\Enemies\\Enemy.cs",
               "ToolTip": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Enemies\\Enemy.cs",
               "RelativeToolTip": "Scenes\\Enemies\\Enemy.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-04T10:44:42.858Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "GreenFlyingRobot.cs",
               "DocumentMoniker": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Enemies\\GreenFlyingRobot\\GreenFlyingRobot.cs",
               "RelativeDocumentMoniker": "Scenes\\Enemies\\GreenFlyingRobot\\GreenFlyingRobot.cs",
               "ToolTip": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Enemies\\GreenFlyingRobot\\GreenFlyingRobot.cs",
               "RelativeToolTip": "Scenes\\Enemies\\GreenFlyingRobot\\GreenFlyingRobot.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAAAIQAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-04T10:00:16.05Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "GreenRobot.cs",
               "DocumentMoniker": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Enemies\\GreenRobot\\GreenRobot.cs",
               "RelativeDocumentMoniker": "Scenes\\Enemies\\GreenRobot\\GreenRobot.cs",
               "ToolTip": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Enemies\\GreenRobot\\GreenRobot.cs",
               "RelativeToolTip": "Scenes\\Enemies\\GreenRobot\\GreenRobot.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAmwCEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAgwD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-04T09:21:18.88Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Dog.cs",
-              "DocumentMoniker": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Enemies\\Dog\\Dog.cs",
-              "RelativeDocumentMoniker": "Scenes\\Enemies\\Dog\\Dog.cs",
-              "ToolTip": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Enemies\\Dog\\Dog.cs",
-              "RelativeToolTip": "Scenes\\Enemies\\Dog\\Dog.cs",
-              "ViewState": "AgIAAK0AAAAAAAAAAAAjwLkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T09:45:22.669Z",
               "EditorCaption": ""
             },
             {
@@ -106,8 +89,7 @@
               "RelativeToolTip": "Scenes\\Areas\\Forest\\Button.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T08:15:22.676Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-03T08:15:22.676Z"
             },
             {
               "$type": "Document",
@@ -119,18 +101,17 @@
               "RelativeToolTip": "Scenes\\Areas\\Forest\\VinesLadder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T08:06:33.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-03T08:06:33.861Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "Door.cs",
               "DocumentMoniker": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Areas\\Forest\\Door.cs",
               "RelativeDocumentMoniker": "Scenes\\Areas\\Forest\\Door.cs",
               "ToolTip": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Areas\\Forest\\Door.cs",
               "RelativeToolTip": "Scenes\\Areas\\Forest\\Door.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAEAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-03T08:06:21.032Z",
               "EditorCaption": ""
@@ -143,7 +124,7 @@
               "RelativeDocumentMoniker": "Scenes\\Player\\Player.cs",
               "ToolTip": "C:\\DATA\\lomba\\gamevidia\\bojong-game\\Scenes\\Player\\Player.cs",
               "RelativeToolTip": "Scenes\\Player\\Player.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAAADYAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAADsAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-30T10:32:21.948Z",
               "EditorCaption": ""

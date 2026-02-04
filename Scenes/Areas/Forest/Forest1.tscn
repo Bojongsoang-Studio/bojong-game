@@ -2503,10 +2503,10 @@ sources/28 = SubResource("TileSetAtlasSource_hvstt")
 sources/16 = SubResource("TileSetAtlasSource_5yjhy")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgflv"]
-size = Vector2(1.9999624, 250)
+size = Vector2(11.000002, 250)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2q6qt"]
-size = Vector2(1.625, 167.5)
+size = Vector2(7, 167.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0sd1x"]
 size = Vector2(1.5, 62)
@@ -2515,7 +2515,7 @@ size = Vector2(1.5, 62)
 size = Vector2(2.75, 63)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_86h33"]
-size = Vector2(1, 130)
+size = Vector2(3, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcnft"]
 size = Vector2(2.25, 316)
@@ -2527,28 +2527,28 @@ size = Vector2(1.78125, 57)
 size = Vector2(2.625, 154)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s77a6"]
-size = Vector2(1.625, 248)
+size = Vector2(4.625, 248)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cuhhl"]
-size = Vector2(2.25, 303)
+size = Vector2(4.25, 303)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8u7t"]
-size = Vector2(1.625, 186.5)
+size = Vector2(5.625, 186.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pdq1"]
-size = Vector2(1, 126)
+size = Vector2(5, 126)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2t55t"]
-size = Vector2(1.25, 30.25)
+size = Vector2(5.25, 30.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eagab"]
-size = Vector2(2, 94)
+size = Vector2(6, 94)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bfjw"]
-size = Vector2(2, 204)
+size = Vector2(5, 204)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qkuu3"]
-size = Vector2(1.75, 126.25)
+size = Vector2(3.25, 126.25)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0h0es"]
 atlas = ExtResource("105_r3wsj")
@@ -2637,24 +2637,28 @@ tile_map_data = PackedByteArray("AAAFAOf/AgABAAIAAAAGAOj/AgABAAIAAAAHAOn/AgABAAI
 tile_set = SubResource("TileSet_gsin5")
 
 [node name="Ladder" parent="." unique_id=1987676744 instance=ExtResource("96_axmpi")]
+collision_layer = 1
+collision_mask = 2
 
 [node name="Ladder2" type="Area2D" parent="." unique_id=1796397650]
-collision_layer = 8
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder2" unique_id=1228546083]
-position = Vector2(494.00003, -610)
+position = Vector2(499.5, -610)
 rotation = -3.1415925
 shape = SubResource("RectangleShape2D_qgflv")
 
 [node name="Ladder3" type="Area2D" parent="." unique_id=844535450]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder3" unique_id=65456470]
-position = Vector2(1649.1875, -1189)
+position = Vector2(1650, -1188)
 shape = SubResource("RectangleShape2D_2q6qt")
 
 [node name="Ladder4" type="Area2D" parent="." unique_id=296622697]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder4" unique_id=1311991216]
@@ -2662,6 +2666,7 @@ position = Vector2(1653.25, -1505)
 shape = SubResource("RectangleShape2D_0sd1x")
 
 [node name="Ladder5" type="Area2D" parent="." unique_id=55423599]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder5" unique_id=1184721110]
@@ -2669,13 +2674,15 @@ position = Vector2(1584, -928)
 shape = SubResource("RectangleShape2D_wqbl6")
 
 [node name="Ladder6" type="Area2D" parent="." unique_id=1240210454]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder6" unique_id=997905251]
-position = Vector2(1585.5, -254)
+position = Vector2(1586.5, -254)
 shape = SubResource("RectangleShape2D_86h33")
 
 [node name="Ladder7" type="Area2D" parent="." unique_id=1998695473]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder7" unique_id=1062535193]
@@ -2683,6 +2690,7 @@ position = Vector2(2094.875, -1344)
 shape = SubResource("RectangleShape2D_xcnft")
 
 [node name="Ladder8" type="Area2D" parent="." unique_id=1648294706]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder8" unique_id=1341305224]
@@ -2690,6 +2698,7 @@ position = Vector2(2479.8906, -1024.5)
 shape = SubResource("RectangleShape2D_wcj7b")
 
 [node name="Ladder9" type="Area2D" parent="." unique_id=765119094]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder9" unique_id=427911674]
@@ -2697,41 +2706,47 @@ position = Vector2(2450.3125, -753)
 shape = SubResource("RectangleShape2D_ctnb7")
 
 [node name="Ladder10" type="Area2D" parent="." unique_id=1576019637]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder10" unique_id=1542708070]
-position = Vector2(2480.1875, -289)
+position = Vector2(2481.6875, -289)
 shape = SubResource("RectangleShape2D_s77a6")
 
 [node name="Ladder11" type="Area2D" parent="." unique_id=313799691]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder11" unique_id=1738775093]
-position = Vector2(2127.875, -261.5)
+position = Vector2(2128.875, -261.5)
 shape = SubResource("RectangleShape2D_cuhhl")
 
 [node name="Ladder12" type="Area2D" parent="." unique_id=2045604222]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder12" unique_id=360972725]
-position = Vector2(1485.1875, 321.75)
+position = Vector2(1487.1875, 321.75)
 shape = SubResource("RectangleShape2D_a8u7t")
 
 [node name="Ladder13" type="Area2D" parent="." unique_id=293681583]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder13" unique_id=24983532]
-position = Vector2(1708.5, 352)
+position = Vector2(1710.5, 352)
 shape = SubResource("RectangleShape2D_4pdq1")
 
 [node name="Ladder14" type="Area2D" parent="." unique_id=425762309]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder14" unique_id=1782732188]
-position = Vector2(1805.375, 400.875)
+position = Vector2(1807.375, 400.875)
 shape = SubResource("RectangleShape2D_2t55t")
 
 [node name="Ladder15" type="Area2D" parent="." unique_id=539212557]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder15" unique_id=784863211]
@@ -2739,68 +2754,84 @@ position = Vector2(1936, 337)
 shape = SubResource("RectangleShape2D_eagab")
 
 [node name="Ladder16" type="Area2D" parent="." unique_id=890021399]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder16" unique_id=475293414]
-position = Vector2(2096, 137)
+position = Vector2(2097.5, 137)
 shape = SubResource("RectangleShape2D_1bfjw")
 
 [node name="Ladder17" type="Area2D" parent="." unique_id=1013414081]
+collision_mask = 2
 script = ExtResource("77_7pv47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder17" unique_id=1853319974]
-position = Vector2(2225.125, 128.875)
+position = Vector2(2222.625, 128.875)
 shape = SubResource("RectangleShape2D_qkuu3")
 
 [node name="door1" parent="." unique_id=1112887365 instance=ExtResource("98_hep68")]
 position = Vector2(2193, -768)
+collision_mask = 2
 
 [node name="Button1" parent="." unique_id=1809518734 node_paths=PackedStringArray("TargetDoor") instance=ExtResource("99_nbybw")]
 position = Vector2(2259, -835)
+collision_mask = 2
 TargetDoor = NodePath("../door1")
 
 [node name="door" parent="." unique_id=1173016420 instance=ExtResource("98_hep68")]
 position = Vector2(1970, -959)
+collision_mask = 2
 
 [node name="Button" parent="." unique_id=559189368 node_paths=PackedStringArray("TargetDoor") instance=ExtResource("99_nbybw")]
-position = Vector2(2192, -1028)
+position = Vector2(2158, -1028)
+collision_mask = 2
 TargetDoor = NodePath("../door")
 
 [node name="door2" parent="." unique_id=2091160160 instance=ExtResource("98_hep68")]
 position = Vector2(2446, -1055)
+collision_mask = 2
 
 [node name="Button2" parent="." unique_id=585536971 node_paths=PackedStringArray("TargetDoor") instance=ExtResource("99_nbybw")]
 position = Vector2(2419, -1124)
+collision_mask = 2
 TargetDoor = NodePath("../door2")
 
 [node name="door3" parent="." unique_id=2066191429 instance=ExtResource("98_hep68")]
 position = Vector2(1615, -128)
+collision_mask = 2
 
 [node name="Button3" parent="." unique_id=1505143589 node_paths=PackedStringArray("TargetDoor") instance=ExtResource("99_nbybw")]
 position = Vector2(2253, -356)
+collision_mask = 2
 TargetDoor = NodePath("../door3")
 
 [node name="passage" parent="." unique_id=326735066 instance=ExtResource("100_hep68")]
 position = Vector2(1072, 80)
+collision_mask = 2
 OpenTexture = ExtResource("43_hvstt")
 
 [node name="ButtonPassage" parent="." unique_id=1171690669 node_paths=PackedStringArray("TargetDoor") instance=ExtResource("99_nbybw")]
 position = Vector2(557, 60)
+collision_mask = 2
 TargetDoor = NodePath("../passage")
 
 [node name="Button4" parent="." unique_id=44158801 node_paths=PackedStringArray("TargetDoor") instance=ExtResource("99_nbybw")]
 position = Vector2(2515, 27)
+collision_mask = 2
 TargetDoor = NodePath("../door4")
 
 [node name="door4" parent="." unique_id=1649261123 instance=ExtResource("98_hep68")]
 position = Vector2(2192, 225)
+collision_mask = 2
 
 [node name="Button5" parent="." unique_id=1931979898 node_paths=PackedStringArray("TargetDoor") instance=ExtResource("99_nbybw")]
 position = Vector2(2099, 542)
+collision_mask = 2
 TargetDoor = NodePath("../door5")
 
 [node name="door5" parent="." unique_id=1792996512 instance=ExtResource("98_hep68")]
 position = Vector2(2672, 451)
+collision_mask = 2
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=403076342]
 position = Vector2(1018, 29)
@@ -2815,7 +2846,7 @@ autoplay = "default"
 frame_progress = 0.9030044
 
 [node name="GreenFlyingRobot" parent="." unique_id=210313969 instance=ExtResource("103_68mnl")]
-position = Vector2(123, 53)
+position = Vector2(142, 32)
 
 [node name="GreenRobot" parent="." unique_id=2099126175 instance=ExtResource("102_se4ag")]
 position = Vector2(-282, -42)
