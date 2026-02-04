@@ -4,290 +4,312 @@ namespace BojongGame.Scenes.Enemies;
 
 public partial class PurpleGuy : Enemy
 {
-	private enum State
-	{
-		Patrol,
-		Chase,
-		Attack,
-		Hurt,
-		Dead
-	}
+    private enum State
+    {
+        Patrol,
+        Chase,
+        Attack,
+        Hurt,
+        Dead
+    }
 
-	[ExportCategory("Movement")] [Export] public float PatrolSpeed = 65f;
-	[Export] public float ChaseSpeed = 120f;
-	[Export] public float Accel = 900f;
-	[Export] public float Gravity = 1200f;
+    [ExportCategory("Movement")] [Export] public float PatrolSpeed = 65f;
+    [Export] public float ChaseSpeed = 120f;
+    [Export] public float Accel = 900f;
+    [Export] public float Gravity = 1200f;
 
-	[ExportCategory("Combat")] [Export] public int MaxHp = 5;
-	[Export] public int Damage = 1;
-	[Export] public float AttackCooldown = 0.9f;
-	[Export] public float AttackActiveTime = 0.12f;
-	[Export] public float AttackLockTime = 0.35f;
-	[Export] public float HurtTime = 0.22f;
-	[Export] public float KnockbackStrength = 300f;
-	
-	[Export] public PackedScene BulletScene;
+    [ExportCategory("Combat")] [Export] public int MaxHp = 5;
+    [Export] public int Damage = 1;
+    [Export] public float BulletSpeed = 200f;
+    [Export] public float AttackCooldown = 0.9f;
+    [Export] public float AttackActiveTime = 0.12f;
+    [Export] public float AttackLockTime = 1f;
+    [Export] public float HurtTime = 0.22f;
+    [Export] public float KnockbackStrength = 300f;
 
-	private int _hp;
-	private int _direction = 1;
+    [Export] public PackedScene BulletScene;
 
-	private State _state = State.Patrol;
-	private float _stateTimer;
-	private float _attackCd;
+    private int _hp;
+    private int _direction = 1;
 
-	private AnimatedSprite2D _animation;
-	private Area2D _detectArea;
-	private Area2D _attackArea;
-	private RayCast2D _wallRay;
-	private RayCast2D _edgeRay;
+    private State _state = State.Patrol;
+    private float _stateTimer;
+    private float _attackCd;
 
-	private Player.Player _target;
+    private AnimatedSprite2D _animation;
+    private Area2D _detectArea;
+    private Area2D _attackArea;
+    private RayCast2D _wallRay;
+    private RayCast2D _edgeRay;
+    private Area2D _bullet;
 
-	public override void _Ready()
-	{
-		_hp = MaxHp;
-		Health = _hp;
+    private Player.Player _target;
 
-		_animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		_detectArea = GetNode<Area2D>("DetectionArea");
-		_attackArea = GetNode<Area2D>("AttackArea");
-		_wallRay = GetNode<RayCast2D>("WallRay");
-		_edgeRay = GetNodeOrNull<RayCast2D>("EdgeRay");
+    public override void _Ready()
+    {
+        _hp = MaxHp;
+        Health = _hp;
 
-		_detectArea.BodyEntered += OnDetectEntered;
-		_detectArea.BodyExited += OnDetectExited;
+        _animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        _detectArea = GetNode<Area2D>("DetectionArea");
+        _attackArea = GetNode<Area2D>("AttackArea");
+        _wallRay = GetNode<RayCast2D>("WallRay");
+        _edgeRay = GetNode<RayCast2D>("EdgeRay");
+        _bullet = GetNode<Area2D>("Bullet");
 
-		_attackArea.BodyEntered += OnAttackAreaBodyEntered;
+        _detectArea.BodyEntered += OnDetectEntered;
+        _detectArea.BodyExited += OnDetectExited;
 
-		_attackArea.Monitoring = false;
+        _attackArea.BodyEntered += OnAttackAreaBodyEntered;
 
-		PlayAnimation("run");
-	}
+        _attackArea.Monitoring = false;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		var dt = (float)delta;
+        _bullet.BodyEntered += OnBulletEntered;
 
-		if (_state == State.Dead)
-		{
-			Velocity = new Vector2(0, Velocity.Y + Gravity * dt);
-			MoveAndSlide();
-			return;
-		}
+        PlayAnimation("run");
+    }
 
-		_attackCd = Mathf.Max(0f, _attackCd - dt);
+    public override void _PhysicsProcess(double delta)
+    {
+        var dt = (float)delta;
 
-		Velocity = new Vector2(Velocity.X, Velocity.Y + Gravity * dt);
+        if (_state == State.Dead)
+        {
+            Velocity = new Vector2(0, Velocity.Y + Gravity * dt);
+            MoveAndSlide();
+            return;
+        }
 
-		switch (_state)
-		{
-			case State.Patrol:
-				TickPatrol(dt);
-				break;
-			case State.Chase:
-				TickChase(dt);
-				break;
-			case State.Attack:
-				TickAttack(dt);
-				break;
-			case State.Hurt:
-				TickHurt(dt);
-				break;
-		}
+        _attackCd = Mathf.Max(0f, _attackCd - dt);
 
-		MoveAndSlide();
-	}
+        Velocity = new Vector2(Velocity.X, Velocity.Y + Gravity * dt);
 
-	private void TickPatrol(float dt)
-	{
-		if (_wallRay.IsColliding())
-			FlipDirection();
+        switch (_state)
+        {
+            case State.Patrol:
+                TickPatrol(dt);
+                break;
+            case State.Chase:
+                TickChase(dt);
+                break;
+            case State.Attack:
+                TickAttack(dt);
+                break;
+            case State.Hurt:
+                TickHurt(dt);
+                break;
+        }
 
-		if (_edgeRay != null && !_edgeRay.IsColliding())
-			FlipDirection();
+        MoveAndSlide();
+    }
 
-		var vx = Mathf.MoveToward(Velocity.X, PatrolSpeed * _direction, Accel * dt);
-		Velocity = new Vector2(vx, Velocity.Y);
+    private void TickPatrol(float dt)
+    {
+        if (_wallRay.IsColliding())
+            FlipDirection();
 
-		PlayAnimation("run");
+        if (_edgeRay != null && !_edgeRay.IsColliding())
+            FlipDirection();
 
-		if (IsTargetValid())
-			SetState(State.Chase);
-	}
+        var vx = Mathf.MoveToward(Velocity.X, PatrolSpeed * _direction, Accel * dt);
+        Velocity = new Vector2(vx, Velocity.Y);
 
-	private void TickChase(float dt)
-	{
-		if (!IsTargetValid())
-		{
-			SetState(State.Patrol);
-			return;
-		}
+        PlayAnimation("run");
 
-		var dx = _target.GlobalPosition.X - GlobalPosition.X;
-		_direction = dx >= 0 ? 1 : -1;
-		UpdateFacing();
+        if (IsTargetValid())
+            SetState(State.Chase);
+    }
 
-		var vx = Mathf.MoveToward(Velocity.X, ChaseSpeed * _direction, Accel * dt);
-		Velocity = new Vector2(vx, Velocity.Y);
+    private void TickChase(float dt)
+    {
+        if (!IsTargetValid())
+        {
+            SetState(State.Patrol);
+            return;
+        }
 
-		PlayAnimation("run");
+        var dx = _target.GlobalPosition.X - GlobalPosition.X;
+        _direction = dx >= 0 ? 1 : -1;
+        UpdateFacing();
 
-		if (_attackCd <= 0f && IsTargetInAttackArea())
-			StartAttack();
-	}
+        var vx = Mathf.MoveToward(Velocity.X, ChaseSpeed * _direction, Accel * dt);
+        Velocity = new Vector2(vx, Velocity.Y);
 
-	private void TickAttack(float dt)
-	{
-		_stateTimer -= dt;
+        PlayAnimation("run");
 
-		//Velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0f, Accel * dt), Velocity.Y);
+        if (_attackCd <= 0f && IsTargetInAttackArea())
+            StartAttack();
+    }
 
-		if (_stateTimer <= AttackLockTime - AttackActiveTime)
-			_attackArea.Monitoring = false;
+    private void TickAttack(float dt)
+    {
+        _stateTimer -= dt;
 
-		if (_stateTimer > 0f) return;
-		_attackCd = AttackCooldown;
-		_attackArea.Monitoring = false;
-		SetState(IsTargetValid() ? State.Chase : State.Patrol);
-	}
+        //Velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0f, Accel * dt), Velocity.Y);
 
-	private void TickHurt(float dt)
-	{
-		_stateTimer -= dt;
-		if (_stateTimer <= 0f)
-			SetState(IsTargetValid() ? State.Chase : State.Patrol);
-	}
+        if (_stateTimer <= AttackLockTime - AttackActiveTime)
+            _attackArea.Monitoring = false;
 
-	private void StartAttack()
-	{
-		_state = State.Attack;
-		_stateTimer = AttackLockTime;
+        if (_stateTimer > 0f)
+        {
+            _bullet.GlobalPosition = new Vector2(_bullet.GlobalPosition.X + BulletSpeed * dt * _direction,
+                _bullet.GlobalPosition.Y);
+            return;
+        }
 
-		PlayAnimation("attack");
-		
-		var bullet = BulletScene.Instantiate<BojongGame.Scenes.Enemies.Bullet>();
+        _attackCd = AttackCooldown;
+        _bullet.Visible = false;
+        _bullet.GlobalPosition = GlobalPosition;
+        _attackArea.Monitoring = false;
+        SetState(IsTargetValid() ? State.Chase : State.Patrol);
+    }
 
-	// 2. Set the position to where the enemy is right now
-	bullet.GlobalPosition = GlobalPosition + new Vector2(30 * _direction, -10);
-	
-	// 3. Pass the direction to the bullet script
-	bullet.Direction = _direction;
+    private void TickHurt(float dt)
+    {
+        _stateTimer -= dt;
+        if (_stateTimer <= 0f)
+            SetState(IsTargetValid() ? State.Chase : State.Patrol);
+    }
 
-	// 4. THE KEY: Add it to the root of the current scene (the level)
-	// This allows the bullet to keep moving even if the enemy dies or moves away
-	GetTree().Root.AddChild(bullet);
+    private void StartAttack()
+    {
+        _state = State.Attack;
+        _stateTimer = AttackLockTime;
 
-		_attackArea.Monitoring = true;
-	}
+        PlayAnimation("attack");
+        _bullet.Visible = true;
+        _bullet.GlobalPosition = GlobalPosition;
+        if (_direction != 0) _bullet.Scale = new Vector2(_direction, 1f);
 
-	private void SetState(State s)
-	{
-		_state = s;
+        _attackArea.Monitoring = true;
+    }
 
-		if (_state == State.Patrol) PlayAnimation("run");
-		if (_state == State.Chase) PlayAnimation("run");
-		if (_state == State.Hurt) PlayAnimation("hurt");
-	}
+    private void SetState(State s)
+    {
+        _state = s;
 
-	private void OnDetectEntered(Node body)
-	{
-		if (body is not Player.Player player) return;
-		_target = player;
-		if (_state != State.Attack && _state != State.Hurt)
-			SetState(State.Chase);
-	}
+        if (_state == State.Patrol) PlayAnimation("run");
+        if (_state == State.Chase) PlayAnimation("run");
+        if (_state == State.Hurt) PlayAnimation("hurt");
+    }
 
-	private void OnDetectExited(Node body)
-	{
-		if (body == _target)
-			_target = null;
-		
-	}
+    private void OnDetectEntered(Node body)
+    {
+        if (body is not Player.Player player) return;
+        _target = player;
+        if (_state != State.Attack && _state != State.Hurt)
+            SetState(State.Chase);
+    }
 
-	private bool IsTargetValid()
-	{
-		return _target != null && IsInstanceValid(_target);
-	}
+    private void OnDetectExited(Node body)
+    {
+        if (body == _target)
+            _target = null;
+    }
 
-	private bool IsTargetInAttackArea()
-	{
-		return _target != null;
-	}
+    private bool IsTargetValid()
+    {
+        return _target != null && IsInstanceValid(_target);
+    }
 
-	private void OnAttackAreaBodyEntered(Node body)
-	{
-		if (_state != State.Attack) return;
-		if (body is not Player.Player player) return;
-		var knockback = new Vector2(_direction * KnockbackStrength, -KnockbackStrength * 0.35f);
-		player.TakeDamage(Damage, knockback);
-	}
+    private bool IsTargetInAttackArea()
+    {
+        return _target != null;
+    }
 
-	public override void TakeHit(int dmg, Vector2 attackerWorldPos)
-	{
-		if (_state == State.Dead) return;
+    private void OnAttackAreaBodyEntered(Node body)
+    {
+        // if (_state != State.Attack) return;
+        // if (_attackCd > 0)
+        // {
+        //     if (!_bullet.Visible)
+        //     {
+        //         
+        //     }
+        // }
+    }
 
-		_hp -= dmg;
-		Health = _hp;
-		
-		GD.Print(Health);
+    private void OnBulletEntered(Node body)
+    {
+        if (_state != State.Attack) return;
+        if (body is not Player.Player player) return;
+        if (_stateTimer > 0f && _bullet.Visible)
+        {
+            var knockback = new Vector2(_direction * KnockbackStrength, -KnockbackStrength * 0.35f);
+            player.TakeDamage(Damage, knockback);
+        }
 
-		if (_hp <= 0)
-		{
-			Die();
-			return;
-		}
+        _bullet.GlobalPosition = GlobalPosition;
+        _bullet.Visible = false;
+        _attackArea.Monitoring = false;
+    }
 
-		_state = State.Hurt;
-		_stateTimer = HurtTime;
+    public override void TakeHit(int dmg, Vector2 attackerWorldPos)
+    {
+        if (_state == State.Dead) return;
 
-		PlayAnimation("hurt");
-		
-		var knockbackDirection = (GlobalPosition.X - attackerWorldPos.X) >= 0 ? 1f : -1f;
-		Velocity = new Vector2(knockbackDirection * KnockbackStrength, -KnockbackStrength * 0.3f);
-	}
+        _hp -= dmg;
+        Health = _hp;
 
-	private void Die()
-	{
-		_state = State.Dead;
-		Velocity = Vector2.Zero;
+        GD.Print(Health);
 
-		PlayAnimation("death");
+        if (_hp <= 0)
+        {
+            Die();
+            return;
+        }
 
-		_detectArea.Monitoring = false;
-		_attackArea.Monitoring = false;
-	}
+        _state = State.Hurt;
+        _stateTimer = HurtTime;
 
-	private void FlipDirection()
-	{
-		_direction *= -1;
-		UpdateFacing();
-	}
+        PlayAnimation("hurt");
 
-	private void UpdateFacing()
-	{
-		_animation.FlipH = _direction < 0;
+        var knockbackDirection = (GlobalPosition.X - attackerWorldPos.X) >= 0 ? 1f : -1f;
+        Velocity = new Vector2(knockbackDirection * KnockbackStrength, -KnockbackStrength * 0.3f);
+    }
 
-		var attackAreaPosition = _attackArea.Position;
-		attackAreaPosition.X = Mathf.Abs(attackAreaPosition.X) * _direction;
-		_attackArea.Position = attackAreaPosition;
+    private void Die()
+    {
+        _state = State.Dead;
+        Velocity = Vector2.Zero;
 
-		var wallRayPosition = _wallRay.Position;
-		wallRayPosition.X = Mathf.Abs(wallRayPosition.X) * _direction;
-		_wallRay.Position = wallRayPosition;
+        PlayAnimation("death");
 
-		if (_edgeRay == null) return;
-		var edgeRayPosition = _edgeRay.Position;
-		edgeRayPosition.X = Mathf.Abs(edgeRayPosition.X) * _direction;
-		_edgeRay.Position = edgeRayPosition;
-	}
+        _detectArea.Monitoring = false;
+        _attackArea.Monitoring = false;
+    }
 
-	private void PlayAnimation(string name)
-	{
-		if (_state == State.Dead && name != "death") return;
+    private void FlipDirection()
+    {
+        _direction *= -1;
+        UpdateFacing();
+    }
 
-		if (_animation.Animation == name && _animation.IsPlaying())
-			return;
+    private void UpdateFacing()
+    {
+        _animation.FlipH = _direction < 0;
 
-		_animation.Play(name);
-	}
+        var attackAreaPosition = _attackArea.Position;
+        attackAreaPosition.X = Mathf.Abs(attackAreaPosition.X) * _direction;
+        _attackArea.Position = attackAreaPosition;
+
+        var wallRayPosition = _wallRay.Position;
+        wallRayPosition.X = Mathf.Abs(wallRayPosition.X) * _direction;
+        _wallRay.Position = wallRayPosition;
+
+        if (_edgeRay == null) return;
+        var edgeRayPosition = _edgeRay.Position;
+        edgeRayPosition.X = Mathf.Abs(edgeRayPosition.X) * _direction;
+        _edgeRay.Position = edgeRayPosition;
+    }
+
+    private void PlayAnimation(string name)
+    {
+        if (_state == State.Dead && name != "death") return;
+
+        if (_animation.Animation == name && _animation.IsPlaying())
+            return;
+
+        _animation.Play(name);
+    }
 }

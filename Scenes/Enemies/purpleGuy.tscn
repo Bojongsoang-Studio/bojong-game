@@ -193,11 +193,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60dhk"]
 size = Vector2(21, 40)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ve22x"]
-size = Vector2(20, 4.4000006)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ve22x"]
+radius = 27.4
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ktior"]
-radius = 21.213203
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ve22x"]
+size = Vector2(127, 20)
 
 [node name="PurpleGuy" type="CharacterBody2D" unique_id=785066863]
 collision_layer = 4
@@ -228,17 +228,18 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1028492325]
 position = Vector2(-9.000002, -5.999996)
 scale = Vector2(5, 5)
-shape = SubResource("RectangleShape2D_ve22x")
+shape = SubResource("CircleShape2D_ve22x")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=2099606062]
 collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1469662673]
-position = Vector2(9, 4)
-shape = SubResource("CircleShape2D_ktior")
+position = Vector2(0.5, 4)
+shape = SubResource("RectangleShape2D_ve22x")
 
 [node name="Bullet" parent="." unique_id=1657795960 instance=ExtResource("7_ve22x")]
+visible = false
 
 [connection signal="body_entered" from="DetectionArea" to="." method="OnDetectionAreaBodyEntered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="OnDetectionAreaBodyExited"]
