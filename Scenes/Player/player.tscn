@@ -137,9 +137,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gk6dx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk6dx")
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
 "speed": 5.0
 }, {
 "frames": [{
@@ -184,6 +188,7 @@ autoplay = "idle"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=437517005]
 position = Vector2(0, 8)
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_xpcdj")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=297912747]
@@ -221,7 +226,6 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Camera" type="Camera2D" parent="." unique_id=886884360]
-position = Vector2(0, -16)
 zoom = Vector2(3, 3)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1537218724]

@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dmiyb3u6ltpun"]
+
+[ext_resource type="Script" uid="uid://locya2lt87ks" path="res://Scenes/Areas/Forest/GreenRobot.cs" id="1_2hscb"]
+[ext_resource type="Texture2D" uid="uid://dt5htwatrj71r" path="res://Assets/Sprites/Forest/enemy/Free City Enemies Pixel Art/4/Walk.png" id="2_lwk2q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yjhy"]
+size = Vector2(25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68mnl"]
+atlas = ExtResource("2_lwk2q")
+region = Rect2(0, 24, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3wsj"]
+atlas = ExtResource("2_lwk2q")
+region = Rect2(48, 24, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h0es"]
+atlas = ExtResource("2_lwk2q")
+region = Rect2(96, 24, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_328ju"]
+atlas = ExtResource("2_lwk2q")
+region = Rect2(144, 24, 48, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3wnuf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68mnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3wsj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h0es")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_328ju")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hscb"]
+size = Vector2(31, 24)
+
+[node name="GreenRobot" type="CharacterBody2D" unique_id=2099126175]
+collision_layer = 4
+script = ExtResource("1_2hscb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=481618539]
+shape = SubResource("RectangleShape2D_5yjhy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=760953707]
+sprite_frames = SubResource("SpriteFrames_3wnuf")
+autoplay = "default"
+frame_progress = 0.023523292
+
+[node name="LedgeDetector" type="RayCast2D" parent="." unique_id=1140438471]
+position = Vector2(10, -7)
+target_position = Vector2(0, 24)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1458132380]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=841829363]
+shape = SubResource("RectangleShape2D_2hscb")

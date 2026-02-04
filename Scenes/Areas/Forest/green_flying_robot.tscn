@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://djpu2l00hs1kw"]
+
+[ext_resource type="Texture2D" uid="uid://dumphsn1bm1wf" path="res://Assets/Sprites/Forest/enemy/Free City Enemies Pixel Art/5/Walk.png" id="1_378n1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68mnl"]
+size = Vector2(25, 21.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3wsj"]
+atlas = ExtResource("1_378n1")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h0es"]
+atlas = ExtResource("1_378n1")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_328ju"]
+atlas = ExtResource("1_378n1")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wnuf"]
+atlas = ExtResource("1_378n1")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ydof2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3wsj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h0es")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_328ju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wnuf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="GreenFlyingRobot" type="CharacterBody2D" unique_id=210313969]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=651087080]
+position = Vector2(4, -0.75)
+shape = SubResource("RectangleShape2D_68mnl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1123621680]
+sprite_frames = SubResource("SpriteFrames_ydof2")
+autoplay = "default"
+frame_progress = 0.35952407
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=2135114777]
+position = Vector2(7, -6)
+target_position = Vector2(0, 20)
