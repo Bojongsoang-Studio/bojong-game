@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://cyc037up23j1v" path="res://Scenes/Areas/Forest/VinesLadder.cs" id="1_a2igr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7j75b"]
-size = Vector2(4.000022, 261)
+size = Vector2(13.000005, 261)
 
 [node name="Ladder" type="Area2D" unique_id=1987676744]
 collision_layer = 8
 script = ExtResource("1_a2igr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=550821075]
-position = Vector2(312.00003, -356.5)
+position = Vector2(309.5, -356.5)
 rotation = -3.1415925
 shape = SubResource("RectangleShape2D_7j75b")

@@ -51,6 +51,7 @@ public partial class Player : CharacterBody2D
 		_attackArea.BodyEntered += OnAttackBodyEntered;
 		_attackArea.BodyExited += OnAttackBodyExited;
 		SetCollisionLayerValue(2, true);
+		SetCollisionLayerValue(1, false);
 		SetCollisionMaskValue(1, true);  
 		SetCollisionMaskValue(3, false);
 	}
