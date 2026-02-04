@@ -148,7 +148,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5wgi5")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -208,19 +208,19 @@ animations = [{
 size = Vector2(16, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kcd4d"]
-radius = 128.0
+radius = 96.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4sost"]
 radius = 16.0
 
 [node name="Gangstar" type="CharacterBody2D" unique_id=2049000164 groups=["enemy"]]
 collision_layer = 4
-collision_mask = 2147483649
+collision_mask = 3221225473
 script = ExtResource("1_kcd4d")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2045525410]
 sprite_frames = SubResource("SpriteFrames_4r4x4")
-animation = &"attack"
+animation = &"death"
 autoplay = "idle"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2009198810]
@@ -246,7 +246,7 @@ shape = SubResource("CircleShape2D_4sost")
 [node name="WallRayCast" type="RayCast2D" parent="Facing" unique_id=1265290721]
 position = Vector2(0, 8)
 target_position = Vector2(16, 0)
-collision_mask = 2147483649
+collision_mask = 3758096385
 
 [node name="EdgeRayCast" type="RayCast2D" parent="Facing" unique_id=1678862276]
 position = Vector2(0, 8)
