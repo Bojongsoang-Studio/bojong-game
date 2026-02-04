@@ -13,30 +13,30 @@ public partial class Cat : Node2D
 	private double _idleTime;
 
 	private AnimatedSprite2D _sprite;
-	private RayCast2D _rayCastRight;
-	private RayCast2D _rayCastLeft;
+	private RayCast2D _rightRayCast;
+	private RayCast2D _leftRayCast;
 
 	private static readonly Random Random = new();
 
 	public override void _Ready()
 	{
 		_sprite = GetNode<AnimatedSprite2D>("Sprite");
-		_rayCastRight = GetNode<RayCast2D>("RayCastRight");
-		_rayCastLeft = GetNode<RayCast2D>("RayCastLeft");
+		_rightRayCast = GetNode<RayCast2D>("RightRayCast");
+		_leftRayCast = GetNode<RayCast2D>("LeftRayCast");
 	}
 
 	public override void _Process(double delta)
 	{
 		var position = Position;
 
-		if (_rayCastRight.IsColliding() && _direction > 0)
+		if (_rightRayCast.IsColliding() && _direction > 0)
 		{
 			_direction = -1;
 			_lastDirection = _direction;
 			_sprite.FlipH = true;
 		}
 
-		if (_rayCastLeft.IsColliding() && _direction < 0)
+		if (_leftRayCast.IsColliding() && _direction < 0)
 		{
 			_direction = 1;
 			_lastDirection = _direction;

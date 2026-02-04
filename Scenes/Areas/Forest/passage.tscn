@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://eyxf3ow3h06r"]
+
+[ext_resource type="Script" uid="uid://1vcom06074uw" path="res://Scenes/Areas/Forest/Door.cs" id="1_xe40f"]
+[ext_resource type="Texture2D" uid="uid://dixmeq0ug6upp" path="res://Assets/Sprites/Forest/1 Tiles/Tile_05.png" id="2_wxv2r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_osg8b"]
+size = Vector2(32.25, 32)
+
+[node name="passage" type="StaticBody2D" unique_id=326735066]
+script = ExtResource("1_xe40f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=662687943]
+texture = ExtResource("2_wxv2r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1787509637]
+shape = SubResource("RectangleShape2D_osg8b")

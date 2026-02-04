@@ -14,7 +14,7 @@ public partial class VerticalMovementArea : Area2D
 	{
 		if (body is Player.Player player)
 		{
-			player.EnterVerticalMovementArea();
+			player.EnterVerticalMovement();
 		}
 	}
 
@@ -22,7 +22,7 @@ public partial class VerticalMovementArea : Area2D
 	{
 		if (body is Player.Player player)
 		{
-			player.ExitVerticalMovementArea();
+			player.ExitVerticalMovement();
 		}
 	}
 }

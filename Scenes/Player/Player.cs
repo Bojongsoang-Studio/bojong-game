@@ -5,10 +5,10 @@ namespace BojongGame.Scenes.Player;
 
 public partial class Player : CharacterBody2D
 {
-	[Export] public int Health = 5;
+	[Export] public int Health = 10;
 	[Export] public float AnimationCooldown = 1f;
 	[Export] public int Damage = 1;
-	
+
 	[Export] public float WalkSpeed = 220.0f;
 	[Export] public float SprintSpeed = 360.0f;
 	[Export] public float JumpVelocity = -480.0f;
@@ -26,16 +26,17 @@ public partial class Player : CharacterBody2D
 	private float _gravity;
 
 	private bool _isDashing;
-	private float _dashTimeLeft;
-	private float _dashCooldownLeft;
+	private float _dashDuration;
+	private float _dashCooldown;
 	private int _dashDirection = 1;
 
-	private bool _isOnVerticalMovementArea;
+	private bool _isInVerticalMovement;
 	private uint _originalCollisionMask;
 
 	private float _animationCooldown;
+	private Vector2 _knockbackVelocity = Vector2.Zero;
 
-	private List<Enemy> _enemies = [];
+	private readonly List<Enemy> _enemies = [];
 
 	private AnimatedSprite2D _sprite;
 	private CollisionShape2D _collision;
@@ -47,188 +48,175 @@ public partial class Player : CharacterBody2D
 		_sprite = GetNode<AnimatedSprite2D>("Sprite");
 		_collision = GetNode<CollisionShape2D>("Collision");
 		_attackArea = GetNode<Area2D>("AttackArea");
-		_attackArea.BodyEntered += OnEnemyEntered;
-		_attackArea.BodyExited += OnEnemyExited;
+		_attackArea.BodyEntered += OnAttackBodyEntered;
+		_attackArea.BodyExited += OnAttackBodyExited;
+		SetCollisionLayerValue(2, true);
+		SetCollisionMaskValue(1, true);  
+		SetCollisionMaskValue(3, false);
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		_animationCooldown -= (float)delta;
-
-		if (Input.IsActionJustPressed("attack"))
-		{
-			foreach (var enemy in _enemies)
-			{
-				Attack(enemy);
-			}
-		}
-		
 		var velocity = Velocity;
 		_gravity = Gravity;
+		_animationCooldown -= (float)delta;
 
-		if (_dashCooldownLeft > 0.0f)
+		if (_knockbackVelocity.Length() > 10.0f)
 		{
-			_dashCooldownLeft -= (float)delta;
+			_knockbackVelocity = _knockbackVelocity.MoveToward(Vector2.Zero, 800.0f * (float)delta);
+			velocity = _knockbackVelocity;
 		}
-
-		if (_isDashing)
+		else
 		{
-			_dashTimeLeft -= (float)delta;
-			velocity.Y = 0;
-			velocity.X = _dashDirection * DashSpeed;
+			if (Input.IsActionJustPressed("attack")) Attack();
 
-			Velocity = velocity;
-			MoveAndSlide();
+			if (_dashCooldown > 0.0f) _dashCooldown -= (float)delta;
 
-			if (_dashTimeLeft <= 0)
+			if (_isDashing)
 			{
-				_isDashing = false;
+				_dashDuration -= (float)delta;
+				velocity.Y = 0;
+				velocity.X = _dashDirection * DashSpeed;
+
+				Velocity = velocity;
+				MoveAndSlide();
+
+				if (_dashDuration <= 0)
+				{
+					_isDashing = false;
+				}
+
+				return;
 			}
 
-			return;
+			if (_isInVerticalMovement)
+			{
+				var verticalInput = Input.GetAxis("move_up", "move_down");
+				var horizontalInput = Input.GetAxis("move_left", "move_right");
+
+				velocity.Y = Mathf.MoveToward(velocity.Y, verticalInput * WalkSpeed,
+					Acceleration * WalkSpeed * (float)delta);
+				velocity.X = Mathf.MoveToward(velocity.X, horizontalInput * WalkSpeed,
+					Acceleration * WalkSpeed * (float)delta);
+
+				PlayAnimation("idle");
+
+				Velocity = velocity;
+				MoveAndSlide();
+
+				return;
+			}
+
+			if (!IsOnFloor()) velocity.Y += _gravity * (float)delta;
+
+			var direction = 0;
+
+			if (Input.IsActionPressed("move_left"))
+			{
+				direction -= 1;
+				_sprite.FlipH = true;
+			}
+
+			if (Input.IsActionPressed("move_right"))
+			{
+				direction += 1;
+				_sprite.FlipH = false;
+			}
+
+			if (direction != 0) _dashDirection = direction;
+
+			var targetSpeed = WalkSpeed;
+
+			if (Input.IsActionPressed("sprint")) targetSpeed = SprintSpeed;
+
+			var targetVx = direction * targetSpeed;
+
+			velocity.X = direction != 0
+				? Mathf.MoveToward(velocity.X, targetVx, Acceleration * targetSpeed * (float)delta)
+				: Mathf.MoveToward(velocity.X, 0.0f, Deceleration * targetSpeed * (float)delta);
+
+			if (Input.IsActionJustPressed("jump") && IsOnFloor()) velocity.Y = JumpVelocity;
+
+			if (Input.IsActionJustPressed("sprint") && _dashCooldown <= 0.0f) Dash();
+
+			if (_animationCooldown <= 0.0f) PlayAnimation(direction == 0 ? "idle" : "run");
 		}
 
-		if (_isOnVerticalMovementArea)
-		{
-			var verticalInput = Input.GetAxis("move_up", "move_down");
-			var horizontalInput = Input.GetAxis("move_left", "move_right");
-				
-			velocity.Y = Mathf.MoveToward(velocity.Y, verticalInput * WalkSpeed,
-				Acceleration * WalkSpeed * (float)delta);
-			velocity.X = Mathf.MoveToward(velocity.X, horizontalInput * WalkSpeed,
-				Acceleration * WalkSpeed * (float)delta);
-
-			_sprite.Animation = "idle";
-			
-			Velocity = velocity;
-			MoveAndSlide();
-
-			return;
-		}
-
-		if (!IsOnFloor())
-		{
-			velocity.Y += _gravity * (float)delta;
-		}
-
-		var direction = 0;
-
-		if (Input.IsActionPressed("move_left"))
-		{
-			direction -= 1;
-			_sprite.FlipH = true;
-		}
-
-		if (Input.IsActionPressed("move_right"))
-		{
-			direction += 1;
-			_sprite.FlipH = false;
-		}
-
-		if (direction != 0)
-		{
-			_dashDirection = direction;
-		}
-
-		var targetSpeed = WalkSpeed;
-
-		if (Input.IsActionPressed("sprint"))
-		{
-			targetSpeed = SprintSpeed;
-		}
-
-		var targetVx = direction * targetSpeed;
-
-		velocity.X = direction != 0
-			? Mathf.MoveToward(velocity.X, targetVx, Acceleration * targetSpeed * (float)delta)
-			: Mathf.MoveToward(velocity.X, 0.0f, Deceleration * targetSpeed * (float)delta);
-
-		if (Input.IsActionJustPressed("jump") && IsOnFloor())
-		{
-			velocity.Y = JumpVelocity;
-		}
-
-		if (Input.IsActionJustPressed("sprint") && _dashCooldownLeft <= 0.0f)
-		{
-			StartDash();
-		}
-
-		if (_animationCooldown <= 0.0f)
-			_sprite.Animation = direction == 0 ? "idle" : "run";
-
-		GD.Print(Velocity);
-		GD.Print(velocity);
 		Velocity = velocity;
 		MoveAndSlide();
 	}
 
-	private void StartDash()
+	private void Dash()
 	{
 		_isDashing = true;
-		_dashTimeLeft = DashDuration;
-		_dashCooldownLeft = DashCooldown;
+		_dashDuration = DashDuration;
+		_dashCooldown = DashCooldown;
 	}
 
-	public void EnterVerticalMovementArea()
+	public void EnterVerticalMovement()
 	{
-		_isOnVerticalMovementArea = true;
+		_isInVerticalMovement = true;
 		_originalCollisionMask = CollisionMask;
 		SetCollisionMaskValue(1, false);
-		SetCollisionMaskValue(2, false);
 		_gravity = 0;
 	}
 
-	public void ExitVerticalMovementArea()
+	public void ExitVerticalMovement()
 	{
-		_isOnVerticalMovementArea = false;
+		_isInVerticalMovement = false;
 		CollisionMask = _originalCollisionMask;
 		_gravity = Gravity;
 	}
 
-	public void ShowGuide()
+	public void DisplayTransitionGuide(bool show)
 	{
-		var guide = GetNode<Label>("Guide");
-		guide.Visible = true;
-	}
-	
-	public void HideGuide()
-	{
-		var guide = GetNode<Label>("Guide");
-		guide.Visible = false;
+		var guide = GetNode<Label>("TransitionGuide");
+		guide.Visible = show;
 	}
 
-	public void TakeDamage(int damage, Vector2 knockback)
+	public void TakeHit(int damage, Vector2 knockback)
 	{
 		_animationCooldown = AnimationCooldown;
-		_sprite.Animation = "hurt";
+		PlayAnimation("hurt");
 		_health -= damage;
 		var label = GetNode<Label>("Health");
 		label.Text = "Health: " + _health;
-		Velocity = knockback;
+		_knockbackVelocity = knockback;
+		if (IsOnFloor()) _knockbackVelocity.Y = -200; //coba dulu, kalau ga bagus hapus
+		Velocity = _knockbackVelocity;
 		MoveAndSlide();
 	}
 
-	private void OnEnemyEntered(Node body)
+	private void OnAttackBodyEntered(Node2D body)
 	{
-		GD.Print(body);
-		if (body is Enemy enemy)
-		{
-			_enemies.Add(enemy);
-		}
+		if (body is Enemy enemy) _enemies.Add(enemy);
 	}
 
-	private void OnEnemyExited(Node body)
+	private void OnAttackBodyExited(Node2D body)
 	{
-		if (body is Enemy enemy)
-		{
-			_enemies.Remove(enemy);
-		}
+		if (body is Enemy enemy) _enemies.Remove(enemy);
 	}
 
-	private void Attack(Enemy enemy)
+	private void Attack()
 	{
 		_animationCooldown = AnimationCooldown;
-		_sprite.Animation = "attack";
-		enemy.TakeHit(1, GlobalPosition);
+		PlayAnimation("attack");
+		for (int i = _enemies.Count - 1; i >= 0; i--)
+		{
+			if (IsInstanceValid(_enemies[i]))
+			{
+				_enemies[i].TakeHit(Damage, GlobalPosition);
+			}
+			else
+			{
+				_enemies.RemoveAt(i);
+			}
+		}
+	}
+	
+	private void PlayAnimation(string name)
+	{
+		if (_sprite.Animation == name && _sprite.IsPlaying()) return;
+		_sprite.Play(name);
 	}
 }
