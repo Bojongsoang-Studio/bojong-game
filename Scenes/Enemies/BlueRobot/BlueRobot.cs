@@ -1,7 +1,7 @@
-using Godot;
 using BojongGame.Scenes.UI;
+using Godot;
 
-namespace BojongGame.Scenes.Areas.Laboratory.Enemies;
+namespace BojongGame.Scenes.Enemies.BlueRobot;
 
 public partial class BlueRobot : Enemy
 {
@@ -366,7 +366,7 @@ public partial class BlueRobot : Enemy
 		var spawnPos = _projectileSpawn != null ? _projectileSpawn.GlobalPosition : GlobalPosition;
 		proj.GlobalPosition = spawnPos;
 
-		if (proj is RobotProjectile rp)
+		if (proj is BlueRobotProjectile rp)
 			rp.Setup(_direction, ProjectileSpeed, DamageProjectile);
 	}
 

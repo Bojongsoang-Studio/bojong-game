@@ -39,7 +39,7 @@ public partial class Player : CharacterBody2D
     private float _animationCooldown;
 	private Vector2 _knockbackVelocity = Vector2.Zero;
 
-	private readonly List<Enemy> _enemies = [];
+	private readonly List<Enemies.Enemy> _enemies = [];
 
 	private AnimatedSprite2D _sprite;
 	private CollisionShape2D _collision;
@@ -207,12 +207,12 @@ public partial class Player : CharacterBody2D
 
 	private void OnAttackBodyEntered(Node2D body)
 	{
-		if (body is Enemy enemy) _enemies.Add(enemy);
+		if (body is Enemies.Enemy enemy) _enemies.Add(enemy);
 	}
 
 	private void OnAttackBodyExited(Node2D body)
 	{
-		if (body is Enemy enemy) _enemies.Remove(enemy);
+		if (body is Enemies.Enemy enemy) _enemies.Remove(enemy);
 	}
 
 	private void Attack()

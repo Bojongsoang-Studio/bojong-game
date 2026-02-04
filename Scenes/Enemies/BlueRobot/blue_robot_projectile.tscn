@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c0idlkjpqe55j"]
 
-[ext_resource type="Script" uid="uid://dm621fs6samyq" path="res://Scenes/Enemies/LabMobs/RobotProjectile.cs" id="1_ugljr"]
+[ext_resource type="Script" uid="uid://dm621fs6samyq" path="res://Scenes/Enemies/BlueRobot/BlueRobotProjectile.cs" id="1_ugljr"]
 [ext_resource type="Texture2D" uid="uid://42uo82yy2jn0" path="res://Assets/Sprites/Enemies/BlueRobot/Projectile.png" id="2_8gw1f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4eu1e"]
@@ -21,7 +21,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Area2D" type="Area2D" unique_id=1885662616]
+[node name="BlueRobotProjectile" type="Area2D" unique_id=1885662616]
 collision_mask = 2
 script = ExtResource("1_ugljr")
 

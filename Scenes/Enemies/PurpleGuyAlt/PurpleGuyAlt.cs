@@ -1,9 +1,9 @@
-using Godot;
 using BojongGame.Scenes.UI;
+using Godot;
 
-namespace BojongGame.Scenes.Areas.Laboratory.Enemies;
+namespace BojongGame.Scenes.Enemies.PurpleGuyAlt;
 
-public partial class PurpleGuy2 : Enemy
+public partial class PurpleGuyAlt : Enemy
 {
 	private enum State
 	{
@@ -222,7 +222,7 @@ public partial class PurpleGuy2 : Enemy
 
 		proj.GlobalPosition = spawnPos;
 
-		if (proj is PurpleProjectile pp)
+		if (proj is PurpleGuyProjectile pp)
 			pp.Setup(_direction, ProjectileSpeed, DamageProjectile);
 	}
 

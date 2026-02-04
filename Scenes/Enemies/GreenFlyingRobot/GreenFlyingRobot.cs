@@ -2,7 +2,7 @@ using Godot;
 // Alias for your Player class
 using PlayerClass = BojongGame.Scenes.Player.Player;
 
-namespace BojongGame.Scenes.Areas.Forest;
+namespace BojongGame.Scenes.Enemies.GreenFlyingRobot;
 
 public partial class GreenFlyingRobot : CharacterBody2D
 {

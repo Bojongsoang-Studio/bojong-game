@@ -1,6 +1,6 @@
 using Godot;
 
-namespace BojongGame.Scenes;
+namespace BojongGame.Scenes.Enemies;
 
 public abstract partial class Enemy : CharacterBody2D
 {

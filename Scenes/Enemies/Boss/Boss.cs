@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using BojongGame.Scenes.UI;
 using Godot;
 
-namespace BojongGame.Scenes;
+namespace BojongGame.Scenes.Enemies.Boss;
 
 public partial class Boss : Enemy
 {

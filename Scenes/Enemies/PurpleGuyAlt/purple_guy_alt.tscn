@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dowt6oy022cpr"]
 
-[ext_resource type="Script" uid="uid://6ka4a1ncwuey" path="res://Scenes/Enemies/LabMobs/PurpleGuy2.cs" id="1_tvo6w"]
-[ext_resource type="PackedScene" uid="uid://lus1a4j084lt" path="res://Scenes/Enemies/LabMobs/ProjectilePurple.tscn" id="2_tvo6w"]
+[ext_resource type="Script" uid="uid://6ka4a1ncwuey" path="res://Scenes/Enemies/PurpleGuyAlt/PurpleGuyAlt.cs" id="1_tvo6w"]
+[ext_resource type="PackedScene" uid="uid://lus1a4j084lt" path="res://Scenes/Enemies/PurpleGuyAlt/purple_guy_projectile.tscn" id="2_tvo6w"]
 [ext_resource type="Texture2D" uid="uid://divb13katbb6t" path="res://Assets/Sprites/Enemies/PurpleGuy/Attack.png" id="3_xfdaa"]
 [ext_resource type="Texture2D" uid="uid://dcspaod3hln3f" path="res://Assets/Sprites/Enemies/PurpleGuy/Death.png" id="4_pdah0"]
 [ext_resource type="Texture2D" uid="uid://m88fmrm46viv" path="res://Assets/Sprites/Enemies/PurpleGuy/Hurt.png" id="5_c5k21"]
@@ -235,7 +235,7 @@ radius = 128.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgmev"]
 radius = 12.165525
 
-[node name="PurpleGuy2" type="CharacterBody2D" unique_id=2050803497 groups=["enemy"]]
+[node name="PurpleGuyAlt" type="CharacterBody2D" unique_id=2050803497 groups=["enemy"]]
 collision_layer = 4
 script = ExtResource("1_tvo6w")
 PatrolSpeed = 65.0

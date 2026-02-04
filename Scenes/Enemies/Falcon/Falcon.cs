@@ -1,7 +1,7 @@
-using Godot;
 using BojongGame.Scenes.UI;
+using Godot;
 
-namespace BojongGame.Scenes.Areas.Laboratory.Enemies;
+namespace BojongGame.Scenes.Enemies.Falcon;
 
 public partial class Falcon : Enemy
 {

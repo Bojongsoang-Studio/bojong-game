@@ -1,69 +1,71 @@
 using Godot;
 
 namespace BojongGame.Scenes.Enemies.GreenRobot;
+
 public partial class GreenRobot : CharacterBody2D
 {
-	[Export] public float Speed = 50.0f;
-	[Export] public float Gravity = 980.0f;
-	[Export] public int DamageAmount = 1;
-	
+    [Export] public float Speed = 50.0f;
+    [Export] public float Gravity = 980.0f;
+    [Export] public int DamageAmount = 1;
 
-	private AnimatedSprite2D _sprite;
-	private RayCast2D _ledgeDetector;
-	private Area2D _hitbox;
-	
-	// Direction: 1 is Right, -1 is Left
-	private int _direction = 1; 
 
-	public override void _Ready()
-	{
-		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		_ledgeDetector = GetNode<RayCast2D>("LedgeDetector");
-		_hitbox = GetNode<Area2D>("Hitbox");
-		_hitbox.BodyEntered += OnHitboxBodyEntered;
-	}
+    private AnimatedSprite2D _sprite;
+    private RayCast2D _ledgeDetector;
+    private Area2D _hitbox;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Vector2 velocity = Velocity;
+    // Direction: 1 is Right, -1 is Left
+    private int _direction = 1;
 
-		if (!IsOnFloor())
-		{
-			velocity.Y += Gravity * (float)delta;
-		}
-		if (IsOnWall() || (IsOnFloor() && !_ledgeDetector.IsColliding()))
-		{
-			FlipDirection();
-		}
+    public override void _Ready()
+    {
+        _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        _ledgeDetector = GetNode<RayCast2D>("LedgeDetector");
+        _hitbox = GetNode<Area2D>("Hitbox");
+        _hitbox.BodyEntered += OnHitboxBodyEntered;
+    }
 
-		velocity.X = Speed * _direction;
+    public override void _PhysicsProcess(double delta)
+    {
+        Vector2 velocity = Velocity;
 
-		Velocity = velocity;
-		MoveAndSlide();
-	}
+        if (!IsOnFloor())
+        {
+            velocity.Y += Gravity * (float)delta;
+        }
 
-	private void FlipDirection()
-	{
-		_direction *= -1; //-1 kiri, dan sebaliknya
-		
-		_sprite.FlipH = _direction == -1;
+        if (IsOnWall() || (IsOnFloor() && !_ledgeDetector.IsColliding()))
+        {
+            FlipDirection();
+        }
 
-		Vector2 rayPos = _ledgeDetector.Position;
-		rayPos.X = Mathf.Abs(rayPos.X) * _direction;
-		_ledgeDetector.Position = rayPos;
-	}
+        velocity.X = Speed * _direction;
 
-	private void OnHitboxBodyEntered(Node2D body)
-	{
-		if (body is Player.Player player)
-		{
-			GD.Print("HIT PLAYER!"); 
+        Velocity = velocity;
+        MoveAndSlide();
+    }
 
-			Vector2 directionToPlayer = (player.GlobalPosition - GlobalPosition).Normalized();
+    private void FlipDirection()
+    {
+        _direction *= -1; //-1 kiri, dan sebaliknya
 
-			Vector2 knockbackForce = directionToPlayer * 300f;
+        _sprite.FlipH = _direction == -1;
 
-			player.TakeHit(DamageAmount,knockbackForce);
-		}
-	}
+        Vector2 rayPos = _ledgeDetector.Position;
+        rayPos.X = Mathf.Abs(rayPos.X) * _direction;
+        _ledgeDetector.Position = rayPos;
+    }
+
+    private void OnHitboxBodyEntered(Node2D body)
+    {
+        if (body is Player.Player player)
+        {
+            GD.Print("HIT PLAYER!");
+
+            Vector2 directionToPlayer = (player.GlobalPosition - GlobalPosition).Normalized();
+
+            Vector2 knockbackForce = directionToPlayer * 300f;
+
+            player.TakeHit(DamageAmount, knockbackForce);
+        }
+    }
 }
