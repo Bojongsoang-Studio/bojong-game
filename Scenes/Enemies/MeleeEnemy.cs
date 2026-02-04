@@ -189,13 +189,13 @@ public partial class MeleeEnemy : Enemy
 
 	private void OnAttackBodyEntered(Node2D body)
 	{
-        if (_state != State.Attack) return;
-        if (body is not Player.Player player) return;
-        float pushDir = Mathf.Sign(player.GlobalPosition.X - GlobalPosition.X);
-        var knockback = new Vector2(pushDir * KnockbackStrength, -KnockbackStrength * 0.35f);
+		if (_state != State.Attack) return;
+		if (body is not Player.Player player) return;
+		float pushDir = Mathf.Sign(player.GlobalPosition.X - GlobalPosition.X);
+		var knockback = new Vector2(pushDir * KnockbackStrength, -KnockbackStrength * 0.35f);
 
-        player.TakeHit(Damage, knockback);
-    }
+		player.TakeHit(Damage, knockback);
+	}
 
 	public override void TakeHit(int damage, Vector2 attackerPosition)
 	{
