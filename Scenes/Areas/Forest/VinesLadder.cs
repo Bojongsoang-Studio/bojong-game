@@ -14,7 +14,7 @@ namespace BojongGame.Scenes.Areas.Forest
 		{
 			if (body is Player.Player player)
 			{
-				player.EnterVerticalMovementArea();
+				player.EnterVerticalMovement();
 			}
 		}
 
@@ -22,7 +22,7 @@ namespace BojongGame.Scenes.Areas.Forest
 		{
 			if (body is Player.Player player)
 			{
-				player.ExitVerticalMovementArea();
+				player.ExitVerticalMovement();
 			}
 		}
 	}

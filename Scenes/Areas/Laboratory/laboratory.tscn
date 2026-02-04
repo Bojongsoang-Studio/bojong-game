@@ -9,9 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cb2roulehro60" path="res://Assets/Sprites/Areas/Laboratory/Backgrounds/Day/3.png" id="7_p0lp8"]
 [ext_resource type="Texture2D" uid="uid://b1a0wm2t3ybye" path="res://Assets/Sprites/Areas/Laboratory/Backgrounds/Day/4.png" id="8_iu3lp"]
 [ext_resource type="Texture2D" uid="uid://bt75qb2xh7x7u" path="res://Assets/Sprites/Areas/Laboratory/Backgrounds/Day/5.png" id="9_u8gpa"]
-[ext_resource type="PackedScene" uid="uid://ckacpfi6lrvhb" path="res://Scenes/Areas/Laboratory/Enemies/dog.tscn" id="11_riy2v"]
-[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="12_ppqie"]
-[ext_resource type="Script" uid="uid://by0mvn6g5cmhv" path="res://Scenes/Areas/Laboratory/LaboratoryIn.cs" id="12_qddiu"]
+[ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="11_qddiu"]
+[ext_resource type="PackedScene" uid="uid://ckacpfi6lrvhb" path="res://Scenes/Enemies/Dog/dog.tscn" id="11_riy2v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu8hl"]
 texture = ExtResource("1_m776p")
@@ -880,17 +879,15 @@ tile_set = SubResource("TileSet_a6s81")
 [node name="Dog" parent="." unique_id=2050803497 instance=ExtResource("11_riy2v")]
 position = Vector2(-1031, -101)
 
-[node name="LaboratoryIn" type="Area2D" parent="." unique_id=1478923463]
+[node name="CameraAdjustmentArea" type="Area2D" parent="." unique_id=1478923463 node_paths=PackedStringArray("Parent")]
 collision_mask = 2
-script = ExtResource("12_qddiu")
+script = ExtResource("11_qddiu")
 CameraLimitLeft = -1856
 CameraLimitRight = 1952
 CameraLimitTop = -810
 CameraLimitBottom = 810
+Parent = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LaboratoryIn" unique_id=47184570]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=47184570]
 position = Vector2(-1312, -112)
 shape = SubResource("RectangleShape2D_21mj6")
-
-[node name="Player" parent="." unique_id=699596196 instance=ExtResource("12_ppqie")]
-position = Vector2(-1153, -120)

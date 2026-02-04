@@ -96,10 +96,10 @@ sprite_frames = SubResource("SpriteFrames_tqnsu")
 animation = &"walk"
 autoplay = "idle"
 
-[node name="RayCastRight" type="RayCast2D" parent="." unique_id=546534707]
+[node name="RightRayCast" type="RayCast2D" parent="." unique_id=546534707]
 target_position = Vector2(24, 0)
 collision_mask = 1073741824
 
-[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1973222958]
+[node name="LeftRayCast" type="RayCast2D" parent="." unique_id=1973222958]
 target_position = Vector2(-24, 0)
 collision_mask = 1073741824
