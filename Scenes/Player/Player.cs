@@ -34,8 +34,9 @@ public partial class Player : CharacterBody2D
 
 	private bool _isInVerticalMovement;
 	private uint _originalCollisionMask;
+    private bool _isInvincible = false;
 
-	private float _animationCooldown;
+    private float _animationCooldown;
 	private Vector2 _knockbackVelocity = Vector2.Zero;
 
 	private readonly List<Enemy> _enemies = [];
@@ -183,15 +184,26 @@ public partial class Player : CharacterBody2D
 
 	public void TakeHit(int damage, Vector2 knockback)
 	{
-		_animationCooldown = AnimationCooldown;
-		PlayAnimation("hurt");
+        if (_isInvincible || _health <= 0) return;
+
 		_health -= damage;
 		_healthBar.UpdateHealth(_health, MaxHealth);
 		_knockbackVelocity = knockback;
-		if (IsOnFloor()) _knockbackVelocity.Y = -200;
+        
+        if (IsOnFloor()) _knockbackVelocity.Y = -200;
 		Velocity = _knockbackVelocity;
-		MoveAndSlide();
-	}
+
+        _animationCooldown = AnimationCooldown;
+        PlayAnimation("hurt");
+
+        StartInvincibility(1.5f);
+        MoveAndSlide();
+        if (_health <= 0)
+        {
+            //Die();
+            return;
+        }
+    }
 
 	private void OnAttackBodyEntered(Node2D body)
 	{
@@ -215,4 +227,21 @@ public partial class Player : CharacterBody2D
 		if (_sprite.Animation == name && _sprite.IsPlaying()) return;
 		_sprite.Play(name);
 	}
+
+    private void StartInvincibility(float duration)
+    {
+        _isInvincible = true;
+
+        Tween tween = CreateTween();
+        tween.SetLoops();
+        tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f); 
+        tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f); 
+        GetTree().CreateTimer(duration).Timeout += () =>
+        {
+            _isInvincible = false;
+
+            if (tween.IsValid()) tween.Kill();
+            _sprite.Modulate = Colors.White;
+        };
+    }
 }
