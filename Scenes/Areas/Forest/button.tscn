@@ -6,15 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbybw"]
 size = Vector2(25, 7)
 
-[node name="Button" type="Area2D" unique_id=1809518734 node_paths=PackedStringArray("TargetDoor")]
+[node name="Button" type="Area2D" unique_id=1809518734]
 script = ExtResource("1_bwnnn")
-TargetDoor = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2013498889]
-position = Vector2(2258.5, -835.5)
 shape = SubResource("RectangleShape2D_nbybw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=542776120]
-position = Vector2(2257.25, -836.0625)
 scale = Vector2(2.6500108, 1.125014)
 texture = ExtResource("2_vuwkk")
