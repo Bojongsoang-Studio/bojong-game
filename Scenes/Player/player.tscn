@@ -164,4 +164,3 @@ autowrap_mode = 3
 
 [node name="Camera" type="Camera2D" parent="." unique_id=886884360]
 position = Vector2(0, -16)
-zoom = Vector2(3, 3)
