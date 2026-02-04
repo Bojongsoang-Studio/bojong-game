@@ -1,7 +1,8 @@
-using Godot;
 using System.Threading.Tasks;
-using BojongGame.Scenes;
-using BojongGame.Scenes.Player;
+using BojongGame.Scenes.UI;
+using Godot;
+
+namespace BojongGame.Scenes;
 
 public partial class Boss : Enemy
 {
@@ -92,12 +93,13 @@ public partial class Boss : Enemy
 	private bool _invincible;
 	private bool _transitioning;
 
-	private Player _player;
+	private Player.Player _player;
 
 	private AnimatedSprite2D _sprite;
 	private Area2D _detector;
 	private Area2D _attackRange;
 	private Area2D _hitbox;
+	private Node2D _healthBar;
 	private ProgressBar _hpBar;
 	private Node2D _projectileSpawn;
 
@@ -114,6 +116,7 @@ public partial class Boss : Enemy
 		_detector = GetNode<Area2D>("PlayerDetector");
 		_attackRange = GetNode<Area2D>("AttackRange");
 		_hitbox = GetNode<Area2D>("Hitbox");
+		_healthBar = GetNode<Node2D>("HealthBar");
 		_hpBar = GetNodeOrNull<ProgressBar>("HpBar");
 
 		_projectileSpawn = null;
@@ -208,6 +211,7 @@ public partial class Boss : Enemy
 		float dx = _player.GlobalPosition.X - GlobalPosition.X;
 		_direction = dx >= 0 ? 1 : -1;
 		_sprite.FlipH = _direction < 0;
+		if (_direction != 0) _hitbox.Scale = new Vector2(_direction, 1f);
 
 		float speed = GetSpeed();
 		float vx = Mathf.MoveToward(Velocity.X, speed * _direction, Accel * dt);
@@ -353,9 +357,9 @@ public partial class Boss : Enemy
 	private void OnHitboxEntered(Node body)
 	{
 		if (!_canHit) return;
-		if (body is not Player player) return;
+		if (body is not Player.Player player) return;
 
-		player.TakeDamage(GetDamage(), new Vector2(_direction * KnockbackStrength, -200));
+		player.TakeHit(GetDamage(), new Vector2(_direction * KnockbackStrength, -200));
 		DisableHitbox();
 	}
 
@@ -367,6 +371,22 @@ public partial class Boss : Enemy
 
 		_hp -= dmg;
 		Health = _hp;
+		
+		GD.Print("Take Hit");
+		GD.Print(Health);
+
+		if (Health >= 20)
+		{
+			_healthBar.GetNode<HealthBar>("HealthBar").UpdateHealth(Health - 20, 10);
+		}
+		else if (Health >= 10)
+		{
+			_healthBar.GetNode<HealthBar>("HealthBar2").UpdateHealth(Health - 10, 10);
+		}
+		else if (Health >= 0)
+		{
+			_healthBar.GetNode<HealthBar>("HealthBar3").UpdateHealth(Health, 10);
+		}
 
 		if (_hp <= 0)
 		{
@@ -520,13 +540,13 @@ public partial class Boss : Enemy
 
 	private void OnPlayerDetected(Node body)
 	{
-		if (body is Player p)
+		if (body is Player.Player p)
 			_player = p;
 	}
 
 	private void OnPlayerLost(Node body)
 	{
-		if (body is Player)
+		if (body is Player.Player)
 		{
 			_player = null;
 			_inAttackRange = false;
@@ -535,13 +555,13 @@ public partial class Boss : Enemy
 
 	private void OnRangeEntered(Node body)
 	{
-		if (body is Player)
+		if (body is Player.Player)
 			_inAttackRange = true;
 	}
 
 	private void OnRangeExited(Node body)
 	{
-		if (body is Player)
+		if (body is Player.Player)
 			_inAttackRange = false;
 	}
 }

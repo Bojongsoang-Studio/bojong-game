@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
+using BojongGame.Scenes.UI;
 using Godot;
 
 namespace BojongGame.Scenes.Player;
 
 public partial class Player : CharacterBody2D
 {
-	[Export] public int Health = 10;
+	[Export] public int MaxHealth = 10;
 	[Export] public float AnimationCooldown = 1f;
 	[Export] public int Damage = 1;
 
@@ -41,15 +43,19 @@ public partial class Player : CharacterBody2D
 	private AnimatedSprite2D _sprite;
 	private CollisionShape2D _collision;
 	private Area2D _attackArea;
+	private HealthBar _healthBar;
 
 	public override void _Ready()
 	{
-		_health = Health;
+		_health = MaxHealth;
 		_sprite = GetNode<AnimatedSprite2D>("Sprite");
 		_collision = GetNode<CollisionShape2D>("Collision");
 		_attackArea = GetNode<Area2D>("AttackArea");
+		_healthBar = GetNode<HealthBar>("HealthBar");
+		
 		_attackArea.BodyEntered += OnAttackBodyEntered;
 		_attackArea.BodyExited += OnAttackBodyExited;
+		
 		SetCollisionLayerValue(2, true);
 		SetCollisionMaskValue(1, true);  
 		SetCollisionMaskValue(3, false);
@@ -179,10 +185,9 @@ public partial class Player : CharacterBody2D
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("hurt");
 		_health -= damage;
-		var label = GetNode<Label>("Health");
-		label.Text = "Health: " + _health;
+		_healthBar.UpdateHealth(_health, MaxHealth);
 		_knockbackVelocity = knockback;
-		if (IsOnFloor()) _knockbackVelocity.Y = -200; //coba dulu, kalau ga bagus hapus
+		if (IsOnFloor()) _knockbackVelocity.Y = -200;
 		Velocity = _knockbackVelocity;
 		MoveAndSlide();
 	}
@@ -201,17 +206,7 @@ public partial class Player : CharacterBody2D
 	{
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("attack");
-		for (int i = _enemies.Count - 1; i >= 0; i--)
-		{
-			if (IsInstanceValid(_enemies[i]))
-			{
-				_enemies[i].TakeHit(Damage, GlobalPosition);
-			}
-			else
-			{
-				_enemies.RemoveAt(i);
-			}
-		}
+		foreach (var enemy in _enemies.Where(IsInstanceValid)) enemy.TakeHit(Damage, GlobalPosition);
 	}
 	
 	private void PlayAnimation(string name)

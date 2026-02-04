@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bn64ptyx5p3f4" path="res://Assets/Sprites/Boss/Swordsman/Idle.png" id="8_ursto"]
 [ext_resource type="Texture2D" uid="uid://bnnud4aosabc" path="res://Assets/Sprites/Boss/Swordsman/Pick_Up.png" id="9_lo233"]
 [ext_resource type="Texture2D" uid="uid://bcgthvkodsr25" path="res://Assets/Sprites/Boss/Swordsman/Shutdown.png" id="10_c3eom"]
+[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/health_bar.tscn" id="12_lel8w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7xxu5"]
 atlas = ExtResource("1_q76ad")
@@ -407,6 +408,17 @@ shape = SubResource("CircleShape2D_6xjeg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=128473945]
 position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_q76ad")
+
+[node name="HealthBar" type="Node2D" parent="." unique_id=160381971]
+
+[node name="HealthBar" parent="HealthBar" unique_id=1141052545 instance=ExtResource("12_lel8w")]
+position = Vector2(0, -63)
+
+[node name="HealthBar2" parent="HealthBar" unique_id=1335307069 instance=ExtResource("12_lel8w")]
+position = Vector2(0, -54)
+
+[node name="HealthBar3" parent="HealthBar" unique_id=1142996446 instance=ExtResource("12_lel8w")]
+position = Vector2(0, -45)
 
 [node name="HpBar" type="CanvasLayer" parent="." unique_id=1553911360]
 
