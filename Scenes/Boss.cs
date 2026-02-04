@@ -355,7 +355,7 @@ public partial class Boss : Enemy
 		if (!_canHit) return;
 		if (body is not Player player) return;
 
-		player.TakeDamage(GetDamage(), new Vector2(_direction * KnockbackStrength, -200));
+		player.TakeHit(GetDamage(), new Vector2(_direction * KnockbackStrength, -200));
 		DisableHitbox();
 	}
 

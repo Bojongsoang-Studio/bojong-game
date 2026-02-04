@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c0idlkjpqe55j"]
+
+[ext_resource type="Script" uid="uid://dm621fs6samyq" path="res://Scenes/Enemies/LabMobs/RobotProjectile.cs" id="1_ugljr"]
+[ext_resource type="Texture2D" uid="uid://42uo82yy2jn0" path="res://Assets/Sprites/Enemies/BlueRobot/Projectile.png" id="2_8gw1f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4eu1e"]
+radius = 8.062258
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbndc"]
+atlas = ExtResource("2_8gw1f")
+region = Rect2(0, 0, 13, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bcu6l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbndc")
+}],
+"loop": true,
+"name": &"RobotProjectile",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D" unique_id=1885662616]
+collision_mask = 2
+script = ExtResource("1_ugljr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1056450247]
+shape = SubResource("CircleShape2D_4eu1e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=594653376]
+sprite_frames = SubResource("SpriteFrames_bcu6l")
+animation = &"RobotProjectile"
