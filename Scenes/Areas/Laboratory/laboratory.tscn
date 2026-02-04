@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ckacpfi6lrvhb" path="res://Scenes/Areas/Laboratory/Enemies/dog.tscn" id="11_riy2v"]
 [ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="12_ppqie"]
 [ext_resource type="Script" uid="uid://by0mvn6g5cmhv" path="res://Scenes/Areas/Laboratory/LaboratoryIn.cs" id="12_qddiu"]
+[ext_resource type="PackedScene" uid="uid://c1nfkdbdnlq1o" path="res://Scenes/Enemies/purpleGuy.tscn" id="13_ppqie"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu8hl"]
 texture = ExtResource("1_m776p")
@@ -878,7 +879,7 @@ tile_map_data = PackedByteArray("AAAGAPD/AgAGAAAAAAAGAPH/AgAGAAEAAAAGAPL/AgAGAAI
 tile_set = SubResource("TileSet_a6s81")
 
 [node name="Dog" parent="." unique_id=2050803497 instance=ExtResource("11_riy2v")]
-position = Vector2(-1031, -101)
+position = Vector2(219, 138)
 
 [node name="LaboratoryIn" type="Area2D" parent="." unique_id=1478923463]
 collision_mask = 2
@@ -893,4 +894,7 @@ position = Vector2(-1312, -112)
 shape = SubResource("RectangleShape2D_21mj6")
 
 [node name="Player" parent="." unique_id=699596196 instance=ExtResource("12_ppqie")]
-position = Vector2(-1153, -120)
+position = Vector2(82, 187)
+
+[node name="PurpleGuy" parent="." unique_id=785066863 instance=ExtResource("13_ppqie")]
+position = Vector2(-91, 201)
