@@ -19,9 +19,6 @@ public partial class GreenRobot : CharacterBody2D
 		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_ledgeDetector = GetNode<RayCast2D>("LedgeDetector");
 		_hitbox = GetNode<Area2D>("Hitbox");
-
-		// 2. Connect the "BodyEntered" signal via code
-		// This means: "When something enters the hitbox, run OnHitboxBodyEntered"
 		_hitbox.BodyEntered += OnHitboxBodyEntered;
 	}
 
@@ -29,21 +26,15 @@ public partial class GreenRobot : CharacterBody2D
 	{
 		Vector2 velocity = Velocity;
 
-		// 1. Apply Gravity
 		if (!IsOnFloor())
 		{
 			velocity.Y += Gravity * (float)delta;
 		}
-
-		// 2. Check for Obstacles (Walls) or Cliffs
-		// IsOnWall() checks if the body hit a wall.
-		// !_ledgeDetector.IsColliding() means the raycast sees NO floor (Cliff).
 		if (IsOnWall() || (IsOnFloor() && !_ledgeDetector.IsColliding()))
 		{
 			FlipDirection();
 		}
 
-		// 3. Move
 		velocity.X = Speed * _direction;
 
 		Velocity = velocity;
@@ -52,13 +43,10 @@ public partial class GreenRobot : CharacterBody2D
 
 	private void FlipDirection()
 	{
-		_direction *= -1; // Swap 1 to -1, or -1 to 1
+		_direction *= -1; //-1 kiri, dan sebaliknya
 		
-		// Flip the visual sprite
 		_sprite.FlipH = _direction == -1;
 
-		// Crucial: Flip the "Ledge Detector" so it points in front of the new direction
-		// If moving Right (1), Raycast should be at +10. If Left (-1), at -10.
 		Vector2 rayPos = _ledgeDetector.Position;
 		rayPos.X = Mathf.Abs(rayPos.X) * _direction;
 		_ledgeDetector.Position = rayPos;
@@ -66,15 +54,15 @@ public partial class GreenRobot : CharacterBody2D
 
 	private void OnHitboxBodyEntered(Node2D body)
 	{
-		// Check if the body is actually the Player
 		if (body is Player.Player player)
 		{
-			// Call a "TakeDamage" function on your Player script
-			// You need to make sure your Player.cs has this function!
-			// player.TakeDamage(DamageAmount);
-			
-			// Optional: Knockback?
-			// player.Knockback(GlobalPosition);
+			GD.Print("HIT PLAYER!"); 
+
+			Vector2 directionToPlayer = (player.GlobalPosition - GlobalPosition).Normalized();
+
+			Vector2 knockbackForce = directionToPlayer * 300f;
+
+			player.TakeHit(DamageAmount,knockbackForce);
 		}
 	}
 }

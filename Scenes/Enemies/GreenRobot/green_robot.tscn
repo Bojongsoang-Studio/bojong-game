@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dmiyb3u6ltpun"]
 
-[ext_resource type="Script" uid="uid://locya2lt87ks" path="res://Scenes/Areas/Forest/GreenRobot.cs" id="1_2hscb"]
+[ext_resource type="Script" uid="uid://locya2lt87ks" path="res://Scenes/Enemies/GreenRobot/GreenRobot.cs" id="1_2hscb"]
 [ext_resource type="Texture2D" uid="uid://dt5htwatrj71r" path="res://Assets/Sprites/Forest/enemy/Free City Enemies Pixel Art/4/Walk.png" id="2_lwk2q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5yjhy"]

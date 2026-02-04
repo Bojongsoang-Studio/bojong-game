@@ -101,9 +101,8 @@
 [ext_resource type="PackedScene" uid="uid://b3bn714tq5cvc" path="res://Scenes/Areas/Forest/door.tscn" id="98_hep68"]
 [ext_resource type="PackedScene" uid="uid://b71jfsh2umj4o" path="res://Scenes/Areas/Forest/button.tscn" id="99_nbybw"]
 [ext_resource type="PackedScene" uid="uid://eyxf3ow3h06r" path="res://Scenes/Areas/Forest/passage.tscn" id="100_hep68"]
-[ext_resource type="Script" uid="uid://locya2lt87ks" path="res://Scenes/Areas/Forest/GreenRobot.cs" id="102_5yjhy"]
-[ext_resource type="PackedScene" uid="uid://dmiyb3u6ltpun" path="res://Scenes/Areas/Forest/green_robot.tscn" id="102_se4ag"]
-[ext_resource type="PackedScene" uid="uid://djpu2l00hs1kw" path="res://Scenes/Areas/Forest/green_flying_robot.tscn" id="103_68mnl"]
+[ext_resource type="PackedScene" uid="uid://dmiyb3u6ltpun" path="res://Scenes/Enemies/GreenRobot/green_robot.tscn" id="102_se4ag"]
+[ext_resource type="PackedScene" uid="uid://djpu2l00hs1kw" path="res://Scenes/Enemies/GreenFlyingRobot/green_flying_robot.tscn" id="103_68mnl"]
 [ext_resource type="Texture2D" uid="uid://ch2b7dqb7rchk" path="res://Assets/Sprites/Forest/4 Animated objects/Fountain.png" id="105_r3wsj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lkpk5"]
@@ -2551,12 +2550,6 @@ size = Vector2(2, 204)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qkuu3"]
 size = Vector2(1.75, 126.25)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wf1m"]
-size = Vector2(13, 1649.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbvvh"]
-size = Vector2(11.25, 116)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_0h0es"]
 atlas = ExtResource("105_r3wsj")
 region = Rect2(0, 0, 72, 72)
@@ -2759,16 +2752,6 @@ script = ExtResource("77_7pv47")
 position = Vector2(2225.125, 128.875)
 shape = SubResource("RectangleShape2D_qkuu3")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1361619000]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=2009303673]
-position = Vector2(-302, -752)
-shape = SubResource("RectangleShape2D_5wf1m")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D" unique_id=159076471]
-position = Vector2(2772.375, -1666)
-shape = SubResource("RectangleShape2D_lbvvh")
-
 [node name="door1" parent="." unique_id=1112887365 instance=ExtResource("98_hep68")]
 position = Vector2(2193, -768)
 
@@ -2819,13 +2802,6 @@ TargetDoor = NodePath("../door5")
 [node name="door5" parent="." unique_id=1792996512 instance=ExtResource("98_hep68")]
 position = Vector2(2672, 451)
 
-[node name="GreenRobot" parent="." unique_id=2099126175 instance=ExtResource("102_se4ag")]
-position = Vector2(80, 53)
-
-[node name="GreenFlyingRobot" parent="." unique_id=210313969 instance=ExtResource("103_68mnl")]
-position = Vector2(331, -41)
-script = ExtResource("102_5yjhy")
-
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=403076342]
 position = Vector2(1018, 29)
 sprite_frames = SubResource("SpriteFrames_vxwos")
@@ -2837,3 +2813,9 @@ position = Vector2(1124, 28)
 sprite_frames = SubResource("SpriteFrames_vxwos")
 autoplay = "default"
 frame_progress = 0.9030044
+
+[node name="GreenFlyingRobot" parent="." unique_id=210313969 instance=ExtResource("103_68mnl")]
+position = Vector2(123, 53)
+
+[node name="GreenRobot" parent="." unique_id=2099126175 instance=ExtResource("102_se4ag")]
+position = Vector2(-282, -42)

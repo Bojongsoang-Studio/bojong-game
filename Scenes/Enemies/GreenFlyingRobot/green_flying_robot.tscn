@@ -42,6 +42,7 @@ animations = [{
 }]
 
 [node name="GreenFlyingRobot" type="CharacterBody2D" unique_id=210313969]
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=651087080]
 position = Vector2(4, -0.75)
