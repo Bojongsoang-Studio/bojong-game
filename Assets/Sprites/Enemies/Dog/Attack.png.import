@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djs1gupl00dka"
-path="res://.godot/imported/Death.png-400e4545f0fc2efee0ff9a3a7b3a0456.ctex"
+uid="uid://t7leu5oo7b4"
+path="res://.godot/imported/Attack.png-f66189225f6473561f3c367b43b52a5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Areas/Laboratory/Enemies/Dog/Death.png"
-dest_files=["res://.godot/imported/Death.png-400e4545f0fc2efee0ff9a3a7b3a0456.ctex"]
+source_file="res://Assets/Sprites/Enemies/Dog/Attack.png"
+dest_files=["res://.godot/imported/Attack.png-f66189225f6473561f3c367b43b52a5d.ctex"]
 
 [params]
 

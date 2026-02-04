@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://c16ckf40ht6bu" path="res://Scenes/Areas/Street/Buildings/building_5.tscn" id="30_8tdn0"]
 [ext_resource type="PackedScene" uid="uid://cpgq1w5urwhqc" path="res://Scenes/Areas/Street/Buildings/building_6.tscn" id="31_3u7tk"]
 [ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="34_omlqb"]
+[ext_resource type="PackedScene" uid="uid://d0wpnrbyykev1" path="res://Scenes/Enemies/gangstar.tscn" id="38_omlqb"]
 [ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="39_cftkh"]
 [ext_resource type="PackedScene" uid="uid://ycxm4dkjpuvd" path="res://Scenes/Areas/Street/Citizens/biker.tscn" id="40_omlqb"]
 [ext_resource type="PackedScene" uid="uid://wypdr2uyp70n" path="res://Scenes/Areas/Street/Animals/cat.tscn" id="41_76brt"]
@@ -434,6 +435,9 @@ Parent = NodePath("../..")
 [node name="ZebraCross" type="CollisionShape2D" parent="Subarea2/CameraAdjustmentArea" unique_id=2018232652]
 position = Vector2(176, 104)
 shape = SubResource("RectangleShape2D_omlqb")
+
+[node name="Gangstar" parent="Subarea2" unique_id=2049000164 instance=ExtResource("38_omlqb")]
+position = Vector2(1196, -40)
 
 [node name="ZebraCross" type="Area2D" parent="." unique_id=515845588]
 position = Vector2(4, 0)

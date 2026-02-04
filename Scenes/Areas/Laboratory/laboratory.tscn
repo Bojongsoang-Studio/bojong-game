@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b1a0wm2t3ybye" path="res://Assets/Sprites/Areas/Laboratory/Backgrounds/Day/4.png" id="8_iu3lp"]
 [ext_resource type="Texture2D" uid="uid://bt75qb2xh7x7u" path="res://Assets/Sprites/Areas/Laboratory/Backgrounds/Day/5.png" id="9_u8gpa"]
 [ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="11_qddiu"]
-[ext_resource type="PackedScene" uid="uid://ckacpfi6lrvhb" path="res://Scenes/Enemies/Dog/dog.tscn" id="11_riy2v"]
+[ext_resource type="PackedScene" uid="uid://ckacpfi6lrvhb" path="res://Scenes/Enemies/dog.tscn" id="11_riy2v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu8hl"]
 texture = ExtResource("1_m776p")
