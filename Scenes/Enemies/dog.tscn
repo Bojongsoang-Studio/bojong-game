@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://ckacpfi6lrvhb"]
 
-[ext_resource type="Script" uid="uid://gajl6wtxuwba" path="res://Scenes/Enemies/Dog/Dog.cs" id="1_4kv5n"]
-[ext_resource type="Texture2D" uid="uid://t7leu5oo7b4" path="res://Assets/Sprites/Areas/Laboratory/Enemies/Dog/Attack.png" id="2_4jb7o"]
-[ext_resource type="Texture2D" uid="uid://djs1gupl00dka" path="res://Assets/Sprites/Areas/Laboratory/Enemies/Dog/Death.png" id="3_tscnd"]
-[ext_resource type="Texture2D" uid="uid://cpjrnvp6b4754" path="res://Assets/Sprites/Areas/Laboratory/Enemies/Dog/Hurt.png" id="4_g5vce"]
-[ext_resource type="Texture2D" uid="uid://ch6jn0tu62y8w" path="res://Assets/Sprites/Areas/Laboratory/Enemies/Dog/Idle.png" id="5_by43q"]
-[ext_resource type="Texture2D" uid="uid://cn5v8dp6c8g1l" path="res://Assets/Sprites/Areas/Laboratory/Enemies/Dog/Run.png" id="6_5egfr"]
+[ext_resource type="Script" uid="uid://gajl6wtxuwba" path="res://Scenes/Enemies/MeleeEnemy.cs" id="1_4kv5n"]
+[ext_resource type="Texture2D" uid="uid://t7leu5oo7b4" path="res://Assets/Sprites/Enemies/Dog/Attack.png" id="2_4jb7o"]
+[ext_resource type="Texture2D" uid="uid://djs1gupl00dka" path="res://Assets/Sprites/Enemies/Dog/Death.png" id="3_tscnd"]
+[ext_resource type="Texture2D" uid="uid://cpjrnvp6b4754" path="res://Assets/Sprites/Enemies/Dog/Hurt.png" id="4_g5vce"]
+[ext_resource type="Texture2D" uid="uid://ch6jn0tu62y8w" path="res://Assets/Sprites/Enemies/Dog/Idle.png" id="5_by43q"]
+[ext_resource type="Texture2D" uid="uid://cn5v8dp6c8g1l" path="res://Assets/Sprites/Enemies/Dog/Run.png" id="6_5egfr"]
+[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/health_bar.tscn" id="7_o2f6r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4xe0a"]
 atlas = ExtResource("2_4jb7o")
@@ -126,7 +127,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -149,7 +150,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -160,7 +161,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -177,7 +178,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -200,11 +201,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nevo0"]
-size = Vector2(39, 11)
+size = Vector2(32, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ymh6h"]
 radius = 128.0
@@ -217,36 +218,37 @@ collision_layer = 4
 script = ExtResource("1_4kv5n")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1555158296]
-position = Vector2(0, -19)
 sprite_frames = SubResource("SpriteFrames_6wm2a")
-animation = &"attack"
+animation = &"run"
 autoplay = "idle"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=721671001]
-position = Vector2(-1.5, -0.5)
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_nevo0")
 
 [node name="Facing" type="Node2D" parent="." unique_id=1093182744]
-position = Vector2(11, -10)
 
 [node name="DetectionArea" type="Area2D" parent="Facing" unique_id=658191151]
-position = Vector2(-11, 10)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/DetectionArea" unique_id=1700579024]
-position = Vector2(0, -13)
+position = Vector2(0, 16)
 shape = SubResource("CircleShape2D_ymh6h")
 
 [node name="AttackArea" type="Area2D" parent="Facing" unique_id=1818903728]
-position = Vector2(-13, 8)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/AttackArea" unique_id=497201080]
-position = Vector2(13, -8)
+position = Vector2(11, 9)
 shape = SubResource("CircleShape2D_cgmev")
 
 [node name="WallRayCast" type="RayCast2D" parent="Facing" unique_id=1169664029]
+position = Vector2(11, 9)
 target_position = Vector2(16, 0)
 
 [node name="EdgeRayCast" type="RayCast2D" parent="Facing" unique_id=2070791661]
+position = Vector2(11, 9)
 target_position = Vector2(16, 32)
+
+[node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("7_o2f6r")]
+position = Vector2(0, -9)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t7leu5oo7b4"
-path="res://.godot/imported/Attack.png-724045a91ed947d7f8092b724b49888b.ctex"
+uid="uid://cpjrnvp6b4754"
+path="res://.godot/imported/Hurt.png-3618c835f26658e78fcadb7231e6a426.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Areas/Laboratory/Enemies/Dog/Attack.png"
-dest_files=["res://.godot/imported/Attack.png-724045a91ed947d7f8092b724b49888b.ctex"]
+source_file="res://Assets/Sprites/Enemies/Dog/Hurt.png"
+dest_files=["res://.godot/imported/Hurt.png-3618c835f26658e78fcadb7231e6a426.ctex"]
 
 [params]
 

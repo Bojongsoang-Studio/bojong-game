@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch6jn0tu62y8w"
-path="res://.godot/imported/Idle.png-f44798585de5c01f0234ab1fa54be9d4.ctex"
+uid="uid://do6jhfi83i3n0"
+path="res://.godot/imported/Full.png-0a39a160a2d9f9c7230863f3dfa85a27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Areas/Laboratory/Enemies/Dog/Idle.png"
-dest_files=["res://.godot/imported/Idle.png-f44798585de5c01f0234ab1fa54be9d4.ctex"]
+source_file="res://Assets/Sprites/UI/Heart/Full.png"
+dest_files=["res://.godot/imported/Full.png-0a39a160a2d9f9c7230863f3dfa85a27.ctex"]
 
 [params]
 

@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using BojongGame.Scenes.UI;
 using Godot;
 
 namespace BojongGame.Scenes.Player;
 
 public partial class Player : CharacterBody2D
 {
-    [Export] public int Health = 10;
+    [Export] public int MaxHealth = 10;
     [Export] public float AnimationCooldown = 1f;
     [Export] public int Damage = 1;
 
@@ -40,13 +41,16 @@ public partial class Player : CharacterBody2D
     private AnimatedSprite2D _sprite;
     private CollisionShape2D _collision;
     private Area2D _attackArea;
+    private HealthBar _healthBar;
 
     public override void _Ready()
     {
-        _health = Health;
+        _health = MaxHealth;
         _sprite = GetNode<AnimatedSprite2D>("Sprite");
         _collision = GetNode<CollisionShape2D>("Collision");
         _attackArea = GetNode<Area2D>("AttackArea");
+        _healthBar = GetNode<HealthBar>("HealthBar");
+
         _attackArea.BodyEntered += OnAttackBodyEntered;
         _attackArea.BodyExited += OnAttackBodyExited;
     }
@@ -167,8 +171,7 @@ public partial class Player : CharacterBody2D
         _animationCooldown = AnimationCooldown;
         PlayAnimation("hurt");
         _health -= damage;
-        var label = GetNode<Label>("Health");
-        label.Text = "Health: " + _health;
+        _healthBar.UpdateHealth(_health, MaxHealth);
         Velocity = knockback;
         MoveAndSlide();
     }

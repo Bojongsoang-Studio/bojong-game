@@ -1,8 +1,9 @@
+using BojongGame.Scenes.UI;
 using Godot;
 
-namespace BojongGame.Scenes.Enemies.Dog;
+namespace BojongGame.Scenes.Enemies;
 
-public partial class Dog : Enemy
+public partial class MeleeEnemy : Enemy
 {
 	private enum State
 	{
@@ -24,7 +25,7 @@ public partial class Dog : Enemy
 	[Export] public float AttackActiveTime = 0.12f;
 	[Export] public float AttackLockTime = 0.35f;
 	[Export] public float HurtDuration = 0.5f;
-	[Export] public float KnockbackStrength = 300f;
+	[Export] public float KnockbackStrength = 200f;
 
 	private int _direction = 1;
 
@@ -38,6 +39,7 @@ public partial class Dog : Enemy
 	private Area2D _attackArea;
 	private RayCast2D _wallRayCast;
 	private RayCast2D _edgeRayCast;
+	private HealthBar _healthBar;
 
 	private Player.Player _target;
 
@@ -51,6 +53,7 @@ public partial class Dog : Enemy
 		_attackArea = GetNode<Area2D>("Facing/AttackArea");
 		_wallRayCast = GetNode<RayCast2D>("Facing/WallRayCast");
 		_edgeRayCast = GetNode<RayCast2D>("Facing/EdgeRayCast");
+		_healthBar = GetNode<HealthBar>("HealthBar");
 
 		_detectionArea.BodyEntered += OnDetectionBodyEntered;
 		_detectionArea.BodyExited += OnDetectionBodyExited;
@@ -197,6 +200,7 @@ public partial class Dog : Enemy
 		if (_state == State.Dead) return;
 
 		Health -= damage;
+		_healthBar.UpdateHealth(Health, MaxHealth);
 		
 		if (Health <= 0)
 		{
@@ -209,7 +213,7 @@ public partial class Dog : Enemy
 
 		PlayAnimation("hurt");
 		
-		var knockbackDirection = (GlobalPosition.X - attackerPosition.X) >= 0 ? 1f : -1f;
+		var knockbackDirection = GlobalPosition.X - attackerPosition.X >= 0 ? 1f : -1f;
 		Velocity = new Vector2(knockbackDirection * KnockbackStrength, -KnockbackStrength * 0.3f);
 	}
 
