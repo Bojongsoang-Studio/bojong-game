@@ -1,5 +1,6 @@
 using Godot;
-namespace BojongGame.Scenes.Areas.Forest;
+
+namespace BojongGame.Scenes.Enemies.GreenRobot;
 public partial class GreenRobot : CharacterBody2D
 {
 	[Export] public float Speed = 50.0f;

@@ -63,7 +63,6 @@ public partial class GreenFlyingRobot : CharacterBody2D
 
 		if (_playerTarget != null)
 		{
-			// --- BOMBER AI LOGIC ---
 
 			// 1. Calculate the "Hover Spot" (Directly above player)
 			Vector2 targetPos = _playerTarget.GlobalPosition;
@@ -136,3 +135,4 @@ public partial class GreenFlyingRobot : CharacterBody2D
 		}
 	}
 }
+ 
