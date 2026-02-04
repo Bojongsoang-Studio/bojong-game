@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbmeqkraw02r3"]
 
-[ext_resource type="Script" uid="uid://dhiq66ehqoed4" path="res://Scenes/Boss.cs" id="1_nuv35"]
+[ext_resource type="Script" uid="uid://dhiq66ehqoed4" path="res://Scenes/Enemies/Boss/Boss.cs" id="1_nuv35"]
 [ext_resource type="Texture2D" uid="uid://b7njhuslxtwm2" path="res://Assets/Sprites/Boss/Swordsman/Attack_1.png" id="1_q76ad"]
 [ext_resource type="Texture2D" uid="uid://cajtuag4spq5b" path="res://Assets/Sprites/Boss/Swordsman/Attack_2.png" id="2_nuv35"]
 [ext_resource type="Texture2D" uid="uid://c5st2sollom62" path="res://Assets/Sprites/Boss/Swordsman/Attack_3.png" id="3_lel8w"]
