@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://ddgsiffcciuer" path="res://Assets/Sprites/Areas/Laboratory/Objects/Decoration/12.png" id="24_gendw"]
 [ext_resource type="Texture2D" uid="uid://cyxwgts6yujlv" path="res://Assets/Sprites/Areas/Laboratory/Objects/Decoration/18.png" id="25_2ly8o"]
 [ext_resource type="Texture2D" uid="uid://cqpem6i5cxdy6" path="res://Assets/Sprites/Areas/Laboratory/Objects/Decoration/21.png" id="26_055vg"]
+[ext_resource type="AudioStream" uid="uid://c7slvlgk8ltpa" path="res://Assets/Audio/Music/Laboratory.mp3" id="31_pdb8n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu8hl"]
 texture = ExtResource("1_m776p")
@@ -1186,3 +1187,7 @@ position = Vector2(714, 576)
 
 [node name="PurpleGuy2" parent="Enemy" unique_id=1951356972 instance=ExtResource("15_eaup3")]
 position = Vector2(-1094, -124)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2049391234]
+stream = ExtResource("31_pdb8n")
+autoplay = true

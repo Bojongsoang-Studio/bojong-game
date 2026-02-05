@@ -106,12 +106,11 @@ public partial class GreenRobot : Enemy
 		var knockbackDirection = GlobalPosition.X - attackerWorldPos.X >= 0 ? 1f : -1f;
 		Velocity = new Vector2(knockbackDirection * 300f, -300f * 0.3f);
 		MoveAndSlide();
-		if (Health <= 0)
-		{
-			_sfxDeath?.Stop();
-			_sfxDeath?.Play();
-			PlayAnimation("death");
-		}
+		
+		if (Health > 0) return;
+		_sfxDeath?.Stop();
+		_sfxDeath?.Play();
+		PlayAnimation("death");
 	}
 
     private void PlayAnimation(string name)

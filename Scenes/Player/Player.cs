@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using BojongGame.Scenes.Areas.Objects.BreakableBox;
 using BojongGame.Scenes.UI;
 using Godot;
 
@@ -49,7 +51,7 @@ public partial class Player : CharacterBody2D
 	private CollisionShape2D _collision;
 	private Area2D _attackArea;
 	private HealthBar _healthBar;
-	
+
 	private AudioStreamPlayer _sfxHit;
 	private AudioStreamPlayer _sfxHurt;
 
@@ -60,16 +62,16 @@ public partial class Player : CharacterBody2D
 		_collision = GetNode<CollisionShape2D>("Collision");
 		_attackArea = GetNode<Area2D>("AttackArea");
 		_healthBar = GetNode<HealthBar>("HealthBar");
-		
+
 		_sfxHit = GetNode<AudioStreamPlayer>("SfxHit");
 		_sfxHurt = GetNode<AudioStreamPlayer>("SfxHurt");
 
 		_attackArea.BodyEntered += OnAttackBodyEntered;
 		_attackArea.BodyExited += OnAttackBodyExited;
-		
+
 		SetCollisionLayerValue(2, true);
 		SetCollisionLayerValue(1, false);
-		SetCollisionMaskValue(1, true);  
+		SetCollisionMaskValue(1, true);
 		SetCollisionMaskValue(3, false);
 	}
 
@@ -140,7 +142,7 @@ public partial class Player : CharacterBody2D
 				direction += 1;
 				_sprite.FlipH = false;
 			}
-			
+
 			if (Input.IsActionPressed("move_down"))
 			{
 				DropThrough();
@@ -210,7 +212,7 @@ public partial class Player : CharacterBody2D
 		_sfxHurt?.Play();
 		_healthBar.UpdateHealth(_health, MaxHealth);
 		_knockbackVelocity = knockback;
-		
+
 		if (IsOnFloor()) _knockbackVelocity.Y = -200;
 		Velocity = _knockbackVelocity;
 
@@ -237,53 +239,53 @@ public partial class Player : CharacterBody2D
 	{
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("attack");
-		
+
 		var hitSomeone = false;
 		foreach (var enemy in _enemies.Where(IsInstanceValid))
 		{
 			enemy.TakeHit(Damage, GlobalPosition);
 			hitSomeone = true;
 		}
-		
+
 		if (hitSomeone)
 		{
 			_sfxHit?.Stop();
 			_sfxHit?.Play();
 		}
-        
+
 		foreach (var body in _attackArea.GetOverlappingBodies())
-        {
-            if (body is BreakableBox box)
-            {
-                box.Smash();
-            }
-        }
-    }
+		{
+			if (body is BreakableBox box)
+			{
+				box.Smash();
+			}
+		}
+	}
 
-    public void Heal(int amount)
-    {
-        if (_health <= 0 || _health >= MaxHealth) return;
+	public void Heal(int amount)
+	{
+		if (_health <= 0 || _health >= MaxHealth) return;
 
-        _health += amount;
+		_health += amount;
 
-        if (_health > MaxHealth)
-        {
-            _health = MaxHealth;
-        }
+		if (_health > MaxHealth)
+		{
+			_health = MaxHealth;
+		}
 
-        _healthBar.UpdateHealth(_health, MaxHealth);
+		_healthBar.UpdateHealth(_health, MaxHealth);
 
-        PlayHealEffect();
-    }
+		PlayHealEffect();
+	}
 
-    private void PlayHealEffect()
-    {
-        Tween tween = CreateTween();
-        tween.TweenProperty(_sprite, "modulate", Colors.Green, 0.1f);
-        tween.TweenProperty(_sprite, "modulate", Colors.White, 0.1f);
-    }
+	private void PlayHealEffect()
+	{
+		Tween tween = CreateTween();
+		tween.TweenProperty(_sprite, "modulate", Colors.Green, 0.1f);
+		tween.TweenProperty(_sprite, "modulate", Colors.White, 0.1f);
+	}
 
-    private void PlayAnimation(string name)
+	private void PlayAnimation(string name)
 	{
 		if (_sprite.Animation == name && _sprite.IsPlaying()) return;
 		_sprite.Play(name);
@@ -295,8 +297,8 @@ public partial class Player : CharacterBody2D
 
 		var tween = CreateTween();
 		tween.SetLoops();
-		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f); 
-		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f); 
+		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f);
+		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f);
 		GetTree().CreateTimer(duration).Timeout += () =>
 		{
 			_isInvincible = false;
@@ -305,13 +307,20 @@ public partial class Player : CharacterBody2D
 			_sprite.Modulate = Colors.White;
 		};
 	}
-	
+
 	private async void DropThrough()
 	{
-		SetCollisionMaskValue(5, false);
-		await ToSignal(GetTree().CreateTimer(0.2f), SceneTreeTimer.SignalName.Timeout);
-		SetCollisionMaskValue(5, true);
-  }
+		try
+		{
+			SetCollisionMaskValue(5, false);
+			await ToSignal(GetTree().CreateTimer(0.2f), SceneTreeTimer.SignalName.Timeout);
+			SetCollisionMaskValue(5, true);
+		}
+		catch (Exception e)
+		{
+			GD.Print(e.Message);
+		}
+	}
 
 	public void SetSpawnPoint(Vector2 spawnPoint)
 	{

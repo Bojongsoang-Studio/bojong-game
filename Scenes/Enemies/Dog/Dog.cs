@@ -1,4 +1,4 @@
-using BojongGame.Scenes.UI;
+﻿using BojongGame.Scenes.UI;
 using Godot;
 
 namespace BojongGame.Scenes.Enemies.Dog;
@@ -43,7 +43,6 @@ public partial class Dog : Enemy
 
 	private Player.Player _target;
 
-	// SFX
 	private AudioStreamPlayer _sfxHit;
 	private AudioStreamPlayer _sfxHurt;
 	private AudioStreamPlayer _sfxDeath;
@@ -60,10 +59,9 @@ public partial class Dog : Enemy
 		_edgeRayCast = GetNode<RayCast2D>("Facing/EdgeRayCast");
 		_healthBar = GetNode<HealthBar>("HealthBar");
 
-		// SFX nodes (must exist in the scene)
-		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
-		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
-		_sfxDeath = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
+		_sfxHit = GetNode<AudioStreamPlayer>("SfxHit");
+		_sfxHurt = GetNode<AudioStreamPlayer>("SfxHurt");
+		_sfxDeath = GetNode<AudioStreamPlayer>("SfxDeath");
 
 		_detectionArea.BodyEntered += OnDetectionBodyEntered;
 		_detectionArea.BodyExited += OnDetectionBodyExited;
