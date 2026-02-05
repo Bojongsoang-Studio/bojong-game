@@ -9,12 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://cb2roulehro60" path="res://Assets/Sprites/Areas/Laboratory/Backgrounds/Day/3.png" id="7_p0lp8"]
 [ext_resource type="Texture2D" uid="uid://b1a0wm2t3ybye" path="res://Assets/Sprites/Areas/Laboratory/Backgrounds/Day/4.png" id="8_iu3lp"]
 [ext_resource type="Texture2D" uid="uid://bt75qb2xh7x7u" path="res://Assets/Sprites/Areas/Laboratory/Backgrounds/Day/5.png" id="9_u8gpa"]
-[ext_resource type="PackedScene" uid="uid://c21fmhrmb6mvr" path="res://Scenes/Enemies/LabMobs/BlueRobot.tscn" id="10_ppqie"]
+[ext_resource type="PackedScene" uid="uid://c21fmhrmb6mvr" path="res://Scenes/Enemies/BlueRobot/blue_robot.tscn" id="10_ppqie"]
 [ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="11_qddiu"]
-[ext_resource type="PackedScene" uid="uid://ckacpfi6lrvhb" path="res://Scenes/Enemies/LabMobs/dog.tscn" id="11_riy2v"]
-[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="12_ppqie"]
-[ext_resource type="PackedScene" uid="uid://dh8hyx8y88nab" path="res://Scenes/Enemies/LabMobs/Falcon.tscn" id="14_vb73s"]
-[ext_resource type="PackedScene" uid="uid://dowt6oy022cpr" path="res://Scenes/Enemies/LabMobs/PurpleGuy2.tscn" id="15_eaup3"]
+[ext_resource type="PackedScene" uid="uid://ckacpfi6lrvhb" path="res://Scenes/Enemies/Dog/dog.tscn" id="11_riy2v"]
+[ext_resource type="PackedScene" uid="uid://bwr3v4d0ifsnh" path="res://Scenes/Enemies/Falcon/Falcon.tscn" id="14_vb73s"]
+[ext_resource type="PackedScene" uid="uid://dowt6oy022cpr" path="res://Scenes/Enemies/PurpleGuy/purple_guy.tscn" id="15_eaup3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu8hl"]
 texture = ExtResource("1_m776p")
@@ -893,50 +892,49 @@ Parent = NodePath("..")
 position = Vector2(-1312, -112)
 shape = SubResource("RectangleShape2D_21mj6")
 
-[node name="Player" parent="." unique_id=699596196 instance=ExtResource("12_ppqie")]
-position = Vector2(-1194, -126)
+[node name="Enemy" type="Node2D" parent="." unique_id=1744095661]
 
-[node name="BlueRobot" parent="." unique_id=2050803497 instance=ExtResource("10_ppqie")]
+[node name="BlueRobot" parent="Enemy" unique_id=2050803497 instance=ExtResource("10_ppqie")]
 position = Vector2(-1034, -479)
 
-[node name="BlueRobot2" parent="." unique_id=218915639 instance=ExtResource("10_ppqie")]
+[node name="BlueRobot2" parent="Enemy" unique_id=218915639 instance=ExtResource("10_ppqie")]
 position = Vector2(-734, -478)
 
-[node name="BlueRobot3" parent="." unique_id=805208804 instance=ExtResource("10_ppqie")]
+[node name="BlueRobot3" parent="Enemy" unique_id=805208804 instance=ExtResource("10_ppqie")]
 position = Vector2(-397, -477)
 
-[node name="BlueRobot4" parent="." unique_id=1734479479 instance=ExtResource("10_ppqie")]
+[node name="BlueRobot4" parent="Enemy" unique_id=1734479479 instance=ExtResource("10_ppqie")]
 position = Vector2(591, 568)
 
-[node name="Dog" parent="." unique_id=1572005963 instance=ExtResource("11_riy2v")]
+[node name="Dog" parent="Enemy" unique_id=1572005963 instance=ExtResource("11_riy2v")]
 position = Vector2(-474, 200)
 
-[node name="Dog5" parent="." unique_id=1042263192 instance=ExtResource("11_riy2v")]
+[node name="Dog5" parent="Enemy" unique_id=1042263192 instance=ExtResource("11_riy2v")]
 position = Vector2(-718, 739)
 
-[node name="Dog6" parent="." unique_id=1742935801 instance=ExtResource("11_riy2v")]
+[node name="Dog6" parent="Enemy" unique_id=1742935801 instance=ExtResource("11_riy2v")]
 position = Vector2(-972, 751)
 
-[node name="Dog3" parent="." unique_id=1290562559 instance=ExtResource("11_riy2v")]
+[node name="Dog3" parent="Enemy" unique_id=1290562559 instance=ExtResource("11_riy2v")]
 position = Vector2(-195, 599)
 
-[node name="Dog2" parent="." unique_id=1921666895 instance=ExtResource("11_riy2v")]
+[node name="Dog2" parent="Enemy" unique_id=1921666895 instance=ExtResource("11_riy2v")]
 position = Vector2(732, -220)
 
-[node name="Dog4" parent="." unique_id=1976371845 instance=ExtResource("11_riy2v")]
+[node name="Dog4" parent="Enemy" unique_id=1976371845 instance=ExtResource("11_riy2v")]
 position = Vector2(1120, 264)
 
-[node name="Falcon" parent="." unique_id=2092495520 instance=ExtResource("14_vb73s")]
+[node name="Falcon" parent="Enemy" unique_id=2092495520 instance=ExtResource("14_vb73s")]
 position = Vector2(-438, 73)
 
-[node name="Falcon2" parent="." unique_id=1190737712 instance=ExtResource("14_vb73s")]
+[node name="Falcon2" parent="Enemy" unique_id=1190737712 instance=ExtResource("14_vb73s")]
 position = Vector2(-293, 73)
 
-[node name="Falcon3" parent="." unique_id=714385325 instance=ExtResource("14_vb73s")]
+[node name="Falcon3" parent="Enemy" unique_id=714385325 instance=ExtResource("14_vb73s")]
 position = Vector2(481, 575)
 
-[node name="Falcon4" parent="." unique_id=228092663 instance=ExtResource("14_vb73s")]
+[node name="Falcon4" parent="Enemy" unique_id=228092663 instance=ExtResource("14_vb73s")]
 position = Vector2(714, 576)
 
-[node name="PurpleGuy2" parent="." unique_id=1951356972 instance=ExtResource("15_eaup3")]
+[node name="PurpleGuy2" parent="Enemy" unique_id=1951356972 instance=ExtResource("15_eaup3")]
 position = Vector2(-1094, -124)
