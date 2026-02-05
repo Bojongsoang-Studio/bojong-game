@@ -1315,7 +1315,8 @@ position = Vector2(976, -144)
 shape = SubResource("RectangleShape2D_mf5pw")
 
 [node name="Border" type="StaticBody2D" parent="." unique_id=429156905]
-collision_mask = 2147483648
+collision_layer = 2147483649
+collision_mask = 2147483649
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border" unique_id=1921141182]
 shape = SubResource("SegmentShape2D_mf5pw")

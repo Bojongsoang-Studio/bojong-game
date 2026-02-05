@@ -28,6 +28,7 @@ public partial class TransitionArea : Area2D
         if (body is not Player.Player player) return;
         _player = player;
         player.DisplayTransitionGuide(true);
+        player.SetSpawnPoint(GetNode<CollisionShape2D>("CollisionShape2D").GlobalPosition);
     }
 
     private void OnBodyExited(Node2D body)

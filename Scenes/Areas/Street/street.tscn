@@ -41,6 +41,8 @@
 [ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="39_cftkh"]
 [ext_resource type="PackedScene" uid="uid://ycxm4dkjpuvd" path="res://Scenes/Areas/Street/Citizens/biker.tscn" id="40_omlqb"]
 [ext_resource type="PackedScene" uid="uid://wypdr2uyp70n" path="res://Scenes/Areas/Street/Animals/cat.tscn" id="41_76brt"]
+[ext_resource type="PackedScene" uid="uid://bioofsscxe7ff" path="res://Scenes/UI/PopupDialog/popup_dialog_area.tscn" id="41_tc6nq"]
+[ext_resource type="PackedScene" uid="uid://dsqe6k0k1lu5w" path="res://Scenes/UI/PopupDialog/popup_dialog_label.tscn" id="42_yth67"]
 [ext_resource type="PackedScene" uid="uid://c2jfqrfub1huu" path="res://Scenes/Areas/Street/Citizens/punk.tscn" id="43_cftkh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_actlm"]
@@ -239,7 +241,7 @@ sources/10 = SubResource("TileSetAtlasSource_spjcq")
 sources/11 = SubResource("TileSetAtlasSource_gtlpl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76brt"]
-size = Vector2(16, 32)
+size = Vector2(64, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v31r7"]
 size = Vector2(32, 128)
@@ -247,11 +249,17 @@ size = Vector2(32, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cftkh"]
 size = Vector2(64, 32)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_atwt7"]
+radius = 64.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omlqb"]
 size = Vector2(32, 16)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tc6nq"]
+radius = 64.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hw208"]
-size = Vector2(32, 136)
+size = Vector2(8, 136)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_yth67"]
 a = Vector2(672, -388)
@@ -380,7 +388,7 @@ CameraLimitBottom = 96
 Parent = NodePath("../..")
 
 [node name="Start" type="CollisionShape2D" parent="Subarea1/CameraAdjustmentArea" unique_id=2043579639]
-position = Vector2(8, -16)
+position = Vector2(32, -16)
 shape = SubResource("RectangleShape2D_76brt")
 
 [node name="ZebraCross" type="CollisionShape2D" parent="Subarea1/CameraAdjustmentArea" unique_id=1196263748]
@@ -396,6 +404,20 @@ position = Vector2(440, -56)
 
 [node name="Gangstar" parent="Subarea1" unique_id=2049000164 instance=ExtResource("38_omlqb")]
 position = Vector2(876, -40)
+
+[node name="PopupDialogArea2" parent="Subarea1/Gangstar" unique_id=1495214934 instance=ExtResource("41_tc6nq")]
+position = Vector2(-532, 144)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subarea1/Gangstar/PopupDialogArea2" unique_id=192782722]
+position = Vector2(532, -144)
+shape = SubResource("CircleShape2D_atwt7")
+
+[node name="PopupDialogLabel" parent="Subarea1/Gangstar/PopupDialogArea2" unique_id=440913319 instance=ExtResource("42_yth67")]
+offset_left = 436.0
+offset_top = -195.0
+offset_right = 628.0
+offset_bottom = -176.0
+text = "The factory is off-limits. Leave."
 
 [node name="Subarea2" type="Node2D" parent="." unique_id=1957897893]
 position = Vector2(-320, 0)
@@ -448,6 +470,21 @@ shape = SubResource("RectangleShape2D_omlqb")
 
 [node name="Punk" parent="Subarea2" unique_id=1880373177 instance=ExtResource("43_cftkh")]
 position = Vector2(664, 104)
+
+[node name="Gangstar" parent="Subarea2" unique_id=1277302610 instance=ExtResource("38_omlqb")]
+position = Vector2(1160, 120)
+
+[node name="PopupDialogArea" parent="Subarea2/Gangstar" unique_id=868608017 instance=ExtResource("41_tc6nq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subarea2/Gangstar/PopupDialogArea" unique_id=1142511148]
+shape = SubResource("CircleShape2D_tc6nq")
+
+[node name="PopupDialogLabel" parent="Subarea2/Gangstar/PopupDialogArea" unique_id=1507551550 instance=ExtResource("42_yth67")]
+offset_left = -96.0
+offset_top = -51.0
+offset_right = 96.0
+offset_bottom = -32.0
+text = "The forest will kill you. Leave."
 
 [node name="ZebraCross" type="Area2D" parent="." unique_id=515845588]
 position = Vector2(4, 0)
