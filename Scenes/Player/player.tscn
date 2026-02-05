@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dj8p05f25oqbc" path="res://Assets/Sprites/Player/Attack.png" id="2_dd0ac"]
 [ext_resource type="Texture2D" uid="uid://gie8abx5omo6" path="res://Assets/Sprites/Player/Hurt.png" id="2_htcer"]
 [ext_resource type="Texture2D" uid="uid://b0wif1a6lmeqw" path="res://Assets/Sprites/Player/Idle.png" id="2_xpcdj"]
+[ext_resource type="Texture2D" uid="uid://chc0lmsvgl5hq" path="res://Assets/Sprites/Player/Death.png" id="3_gk6dx"]
 [ext_resource type="Texture2D" uid="uid://vqbcjahowhdh" path="res://Assets/Sprites/Player/Run.png" id="3_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="6_0u5uq"]
 [ext_resource type="Texture2D" uid="uid://dnjdd0yhgpxm5" path="res://Assets/Sprites/UI/Keys/KeyboardLettersSymbols.png" id="7_gk6dx"]
@@ -40,6 +41,30 @@ region = Rect2(288, 0, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqdc0"]
 atlas = ExtResource("2_dd0ac")
 region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4no11"]
+atlas = ExtResource("3_gk6dx")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcwna"]
+atlas = ExtResource("3_gk6dx")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1agin"]
+atlas = ExtResource("3_gk6dx")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jnj1"]
+atlas = ExtResource("3_gk6dx")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enij7"]
+atlas = ExtResource("3_gk6dx")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwii3"]
+atlas = ExtResource("3_gk6dx")
+region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dey5f"]
 atlas = ExtResource("2_htcer")
@@ -114,6 +139,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4no11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcwna")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1agin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jnj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enij7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwii3")
+}],
+"loop": false,
+"name": &"death",
 "speed": 10.0
 }, {
 "frames": [{
@@ -244,10 +292,11 @@ animations = [{
 collision_layer = 2
 collision_mask = 2147483649
 script = ExtResource("1_a3d8c")
+SpawnPoint = Vector2(608, 372)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=831599076]
 sprite_frames = SubResource("SpriteFrames_tugb3")
-animation = &"attack"
+animation = &"death"
 autoplay = "idle"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=437517005]

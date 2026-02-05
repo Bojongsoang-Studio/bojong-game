@@ -11,6 +11,8 @@ public partial class Player : CharacterBody2D
 	[Export] public float AnimationCooldown = 1f;
 	[Export] public int Damage = 1;
 
+	[Export] public Vector2 SpawnPoint;
+
 	[Export] public float WalkSpeed = 220.0f;
 	[Export] public float SprintSpeed = 360.0f;
 	[Export] public float JumpVelocity = -480.0f;
@@ -22,6 +24,8 @@ public partial class Player : CharacterBody2D
 	[Export] public float DashSpeed = 650.0f;
 	[Export] public float DashDuration = 0.15f;
 	[Export] public float DashCooldown = 1f;
+
+	[Export] public float InvincibilityDuration = 1.5f;
 
 	private int _health;
 
@@ -53,13 +57,13 @@ public partial class Player : CharacterBody2D
 		_collision = GetNode<CollisionShape2D>("Collision");
 		_attackArea = GetNode<Area2D>("AttackArea");
 		_healthBar = GetNode<HealthBar>("HealthBar");
-		
+
 		_attackArea.BodyEntered += OnAttackBodyEntered;
 		_attackArea.BodyExited += OnAttackBodyExited;
-		
+
 		SetCollisionLayerValue(2, true);
 		SetCollisionLayerValue(1, false);
-		SetCollisionMaskValue(1, true);  
+		SetCollisionMaskValue(1, true);
 		SetCollisionMaskValue(3, false);
 	}
 
@@ -193,19 +197,17 @@ public partial class Player : CharacterBody2D
 		_health -= damage;
 		_healthBar.UpdateHealth(_health, MaxHealth);
 		_knockbackVelocity = knockback;
-		
+
 		if (IsOnFloor()) _knockbackVelocity.Y = -200;
 		Velocity = _knockbackVelocity;
 
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("hurt");
 
-		StartInvincibility(1.5f);
+		TriggerInvincibility(InvincibilityDuration);
 		MoveAndSlide();
-		if (_health <= 0)
-		{
-			//Die();
-		}
+
+		if (_health <= 0) Die();
 	}
 
 	private void OnAttackBodyEntered(Node2D body)
@@ -224,21 +226,21 @@ public partial class Player : CharacterBody2D
 		PlayAnimation("attack");
 		foreach (var enemy in _enemies.Where(IsInstanceValid)) enemy.TakeHit(Damage, GlobalPosition);
 	}
-	
+
 	private void PlayAnimation(string name)
 	{
 		if (_sprite.Animation == name && _sprite.IsPlaying()) return;
 		_sprite.Play(name);
 	}
 
-	private void StartInvincibility(float duration)
+	private void TriggerInvincibility(float duration)
 	{
 		_isInvincible = true;
 
-		Tween tween = CreateTween();
+		var tween = CreateTween();
 		tween.SetLoops();
-		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f); 
-		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f); 
+		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f);
+		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f);
 		GetTree().CreateTimer(duration).Timeout += () =>
 		{
 			_isInvincible = false;
@@ -246,5 +248,20 @@ public partial class Player : CharacterBody2D
 			if (tween.IsValid()) tween.Kill();
 			_sprite.Modulate = Colors.White;
 		};
+	}
+
+	public void SetSpawnPoint(Vector2 spawnPoint)
+	{
+		SpawnPoint = spawnPoint;
+	}
+
+	private void Die()
+	{
+		PlayAnimation("death");
+		_animationCooldown = AnimationCooldown;
+		_health = MaxHealth;
+		_healthBar.UpdateHealth(_health, MaxHealth);
+		GlobalPosition = SpawnPoint;
+		TriggerInvincibility(InvincibilityDuration);
 	}
 }
