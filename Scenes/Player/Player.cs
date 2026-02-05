@@ -130,6 +130,11 @@ public partial class Player : CharacterBody2D
 				direction += 1;
 				_sprite.FlipH = false;
 			}
+			
+			if (Input.IsActionPressed("move_down"))
+			{
+				DropThrough();
+			}
 
 			if (direction != 0) _dashDirection = direction;
 
@@ -243,5 +248,13 @@ public partial class Player : CharacterBody2D
 			if (tween.IsValid()) tween.Kill();
 			_sprite.Modulate = Colors.White;
 		};
+	}
+	
+	private async void DropThrough()
+	{
+		// 2 is the bit for your platform layer
+		SetCollisionMaskValue(5, false);
+		await ToSignal(GetTree().CreateTimer(0.2f), SceneTreeTimer.SignalName.Timeout);
+		SetCollisionMaskValue(5, true);
 	}
 }

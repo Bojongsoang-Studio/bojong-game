@@ -175,7 +175,7 @@ radius = 15.0
 
 [node name="Player" type="CharacterBody2D" unique_id=699596196]
 collision_layer = 2
-collision_mask = 2147483649
+collision_mask = 2147483665
 script = ExtResource("1_a3d8c")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=831599076]
