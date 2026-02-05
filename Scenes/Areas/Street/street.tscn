@@ -241,7 +241,7 @@ sources/10 = SubResource("TileSetAtlasSource_spjcq")
 sources/11 = SubResource("TileSetAtlasSource_gtlpl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76brt"]
-size = Vector2(16, 32)
+size = Vector2(64, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v31r7"]
 size = Vector2(32, 128)
@@ -388,7 +388,7 @@ CameraLimitBottom = 96
 Parent = NodePath("../..")
 
 [node name="Start" type="CollisionShape2D" parent="Subarea1/CameraAdjustmentArea" unique_id=2043579639]
-position = Vector2(8, -16)
+position = Vector2(32, -16)
 shape = SubResource("RectangleShape2D_76brt")
 
 [node name="ZebraCross" type="CollisionShape2D" parent="Subarea1/CameraAdjustmentArea" unique_id=1196263748]
