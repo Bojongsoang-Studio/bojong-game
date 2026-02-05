@@ -68,6 +68,7 @@
 [ext_resource type="Texture2D" uid="uid://bhjv6x6b0l5b8" path="res://Assets/Sprites/Areas/Factory/Objects/Elevator_Button.png" id="60_jbfwt"]
 [ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="67_mf5pw"]
 [ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="68_mf5pw"]
+[ext_resource type="AudioStream" uid="uid://dsj033l85xt6s" path="res://Assets/Audio/Music/Factory.mp3" id="69_q3no2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0lpwe"]
 texture = ExtResource("6_nph3d")
@@ -1320,3 +1321,8 @@ collision_mask = 2147483649
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border" unique_id=1921141182]
 shape = SubResource("SegmentShape2D_mf5pw")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1308057609]
+stream = ExtResource("69_q3no2")
+volume_db = -17.333
+autoplay = true

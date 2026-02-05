@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace BojongGame.Scenes.Areas.Objects.BreakableBox;
 
 public partial class BreakableBox : StaticBody2D
 {
@@ -20,7 +21,7 @@ public partial class BreakableBox : StaticBody2D
 			return;
 		}
 
-		Node2D pickup = (Node2D)PickupScene.Instantiate();
+		var pickup = (Node2D)PickupScene.Instantiate();
 
 		pickup.GlobalPosition = GlobalPosition;
 

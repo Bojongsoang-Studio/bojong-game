@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using BojongGame.Scenes.Areas.Objects.BreakableBox;
 using BojongGame.Scenes.UI;
 using Godot;
 
@@ -50,6 +52,9 @@ public partial class Player : CharacterBody2D
 	private Area2D _attackArea;
 	private HealthBar _healthBar;
 
+	private AudioStreamPlayer _sfxHit;
+	private AudioStreamPlayer _sfxHurt;
+
 	public override void _Ready()
 	{
 		_health = MaxHealth;
@@ -57,6 +62,9 @@ public partial class Player : CharacterBody2D
 		_collision = GetNode<CollisionShape2D>("Collision");
 		_attackArea = GetNode<Area2D>("AttackArea");
 		_healthBar = GetNode<HealthBar>("HealthBar");
+
+		_sfxHit = GetNode<AudioStreamPlayer>("SfxHit");
+		_sfxHurt = GetNode<AudioStreamPlayer>("SfxHurt");
 
 		_attackArea.BodyEntered += OnAttackBodyEntered;
 		_attackArea.BodyExited += OnAttackBodyExited;
@@ -134,7 +142,7 @@ public partial class Player : CharacterBody2D
 				direction += 1;
 				_sprite.FlipH = false;
 			}
-			
+
 			if (Input.IsActionPressed("move_down"))
 			{
 				DropThrough();
@@ -200,6 +208,8 @@ public partial class Player : CharacterBody2D
 		if (_isInvincible || _health <= 0) return;
 
 		_health -= damage;
+		_sfxHurt?.Stop();
+		_sfxHurt?.Play();
 		_healthBar.UpdateHealth(_health, MaxHealth);
 		_knockbackVelocity = knockback;
 
@@ -229,40 +239,53 @@ public partial class Player : CharacterBody2D
 	{
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("attack");
-		foreach (var enemy in _enemies.Where(IsInstanceValid)) enemy.TakeHit(Damage, GlobalPosition);
-        foreach (var body in _attackArea.GetOverlappingBodies())
-        {
-            if (body is BreakableBox box)
-            {
-                box.Smash();
-            }
-        }
-    }
 
-    public void Heal(int amount)
-    {
-        if (_health <= 0 || _health >= MaxHealth) return;
+		var hitSomeone = false;
+		foreach (var enemy in _enemies.Where(IsInstanceValid))
+		{
+			enemy.TakeHit(Damage, GlobalPosition);
+			hitSomeone = true;
+		}
 
-        _health += amount;
+		if (hitSomeone)
+		{
+			_sfxHit?.Stop();
+			_sfxHit?.Play();
+		}
 
-        if (_health > MaxHealth)
-        {
-            _health = MaxHealth;
-        }
+		foreach (var body in _attackArea.GetOverlappingBodies())
+		{
+			if (body is BreakableBox box)
+			{
+				box.Smash();
+			}
+		}
+	}
 
-        _healthBar.UpdateHealth(_health, MaxHealth);
+	public void Heal(int amount)
+	{
+		if (_health <= 0 || _health >= MaxHealth) return;
 
-        PlayHealEffect();
-    }
+		_health += amount;
 
-    private void PlayHealEffect()
-    {
-        Tween tween = CreateTween();
-        tween.TweenProperty(_sprite, "modulate", Colors.Green, 0.1f);
-        tween.TweenProperty(_sprite, "modulate", Colors.White, 0.1f);
-    }
+		if (_health > MaxHealth)
+		{
+			_health = MaxHealth;
+		}
 
-    private void PlayAnimation(string name)
+		_healthBar.UpdateHealth(_health, MaxHealth);
+
+		PlayHealEffect();
+	}
+
+	private void PlayHealEffect()
+	{
+		Tween tween = CreateTween();
+		tween.TweenProperty(_sprite, "modulate", Colors.Green, 0.1f);
+		tween.TweenProperty(_sprite, "modulate", Colors.White, 0.1f);
+	}
+
+	private void PlayAnimation(string name)
 	{
 		if (_sprite.Animation == name && _sprite.IsPlaying()) return;
 		_sprite.Play(name);
@@ -284,13 +307,20 @@ public partial class Player : CharacterBody2D
 			_sprite.Modulate = Colors.White;
 		};
 	}
-	
+
 	private async void DropThrough()
 	{
-		SetCollisionMaskValue(5, false);
-		await ToSignal(GetTree().CreateTimer(0.2f), SceneTreeTimer.SignalName.Timeout);
-		SetCollisionMaskValue(5, true);
-  }
+		try
+		{
+			SetCollisionMaskValue(5, false);
+			await ToSignal(GetTree().CreateTimer(0.2f), SceneTreeTimer.SignalName.Timeout);
+			SetCollisionMaskValue(5, true);
+		}
+		catch (Exception e)
+		{
+			GD.Print(e.Message);
+		}
+	}
 
 	public void SetSpawnPoint(Vector2 spawnPoint)
 	{

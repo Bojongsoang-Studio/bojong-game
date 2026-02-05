@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dmg8fwjn67ang" path="res://Scenes/Game/TransitionArea.cs" id="2_ciybh"]
 [ext_resource type="PackedScene" uid="uid://b8e8jdcpsfafi" path="res://Scenes/Areas/Factory/factory.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="4_3dryh"]
-[ext_resource type="PackedScene" uid="uid://64dpkwcpblia" path="res://Scenes/UI/Phone/hud.tscn" id="5_flgk0"]
+[ext_resource type="PackedScene" uid="uid://64dpkwcpblia" path="res://Scenes/UI/HUD/hud.tscn" id="5_flgk0"]
 [ext_resource type="PackedScene" uid="uid://co34vpymbn1lw" path="res://Scenes/Areas/Laboratory/laboratory.tscn" id="5_i6g32"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]

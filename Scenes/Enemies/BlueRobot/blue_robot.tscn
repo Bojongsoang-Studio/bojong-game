@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://dyeo2h727ex5q" path="res://Assets/Sprites/Enemies/BlueRobot/Special.png" id="8_l315b"]
 [ext_resource type="Texture2D" uid="uid://b8aflhu5oeo41" path="res://Assets/Sprites/Enemies/BlueRobot/Walk.png" id="9_qmcj0"]
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="10_qeqqy"]
+[ext_resource type="AudioStream" uid="uid://ckhpelcdjrfhp" path="res://Assets/Audio/SFX/Enemies/BlueRobot/Hit.wav" id="11_shlic"]
+[ext_resource type="AudioStream" uid="uid://ca0d10ulnqfrt" path="res://Assets/Audio/SFX/Enemies/Hurt.wav" id="12_4fosk"]
+[ext_resource type="AudioStream" uid="uid://531gdui3l6gx" path="res://Assets/Audio/SFX/Enemies/Death.wav" id="13_vq5to"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2pq58"]
 atlas = ExtResource("3_4fosk")
@@ -319,6 +322,7 @@ KnockbackStrength = 200.0
 ProjectileScene = ExtResource("2_shlic")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1555158296]
+position = Vector2(19, 0)
 sprite_frames = SubResource("SpriteFrames_6wm2a")
 animation = &"attack1"
 autoplay = "idle"
@@ -334,6 +338,7 @@ shape = SubResource("RectangleShape2D_nevo0")
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/DetectionArea" unique_id=1700579024]
+position = Vector2(0, 24)
 shape = SubResource("CircleShape2D_ymh6h")
 
 [node name="AttackArea" type="Area2D" parent="Facing" unique_id=1818903728]
@@ -345,7 +350,7 @@ shape = SubResource("CircleShape2D_cgmev")
 
 [node name="WallRay" type="RayCast2D" parent="Facing" unique_id=1169664029]
 position = Vector2(0, 24)
-target_position = Vector2(16, 0)
+target_position = Vector2(43, 0)
 
 [node name="EdgeRay" type="RayCast2D" parent="Facing" unique_id=2070791661]
 position = Vector2(0, 24)
@@ -356,3 +361,12 @@ position = Vector2(0, 11)
 
 [node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("10_qeqqy")]
 position = Vector2(0, -13)
+
+[node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=39584324]
+stream = ExtResource("11_shlic")
+
+[node name="SfxHurt" type="AudioStreamPlayer" parent="." unique_id=1567994064]
+stream = ExtResource("12_4fosk")
+
+[node name="SfxDeath" type="AudioStreamPlayer" parent="." unique_id=721199404]
+stream = ExtResource("13_vq5to")

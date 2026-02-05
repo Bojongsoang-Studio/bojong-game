@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="3_1sdpy"]
 [ext_resource type="Texture2D" uid="uid://bp5ttfl6235vo" path="res://Assets/Sprites/Enemies/GreenRobot/Hurt.png" id="3_iug70"]
 [ext_resource type="Texture2D" uid="uid://dt5htwatrj71r" path="res://Assets/Sprites/Enemies/GreenRobot/Walk.png" id="5_iug70"]
+[ext_resource type="AudioStream" uid="uid://bbdq0lnk67ke" path="res://Assets/Audio/SFX/Enemies/GreenRobot/Hit.wav" id="7_nwql3"]
+[ext_resource type="AudioStream" uid="uid://ca0d10ulnqfrt" path="res://Assets/Audio/SFX/Enemies/Hurt.wav" id="8_ialme"]
+[ext_resource type="AudioStream" uid="uid://531gdui3l6gx" path="res://Assets/Audio/SFX/Enemies/Death.wav" id="9_low8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5yjhy"]
 size = Vector2(24, 24)
@@ -161,3 +164,12 @@ shape = SubResource("RectangleShape2D_2hscb")
 
 [node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("3_1sdpy")]
 position = Vector2(0, -12)
+
+[node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=1134105233]
+stream = ExtResource("7_nwql3")
+
+[node name="SfxHurt" type="AudioStreamPlayer" parent="." unique_id=1024734660]
+stream = ExtResource("8_ialme")
+
+[node name="SfxDeath" type="AudioStreamPlayer" parent="." unique_id=501213072]
+stream = ExtResource("9_low8v")

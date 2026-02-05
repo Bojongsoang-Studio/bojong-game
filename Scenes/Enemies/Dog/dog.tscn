@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://ch6jn0tu62y8w" path="res://Assets/Sprites/Enemies/Dog/Idle.png" id="5_by43q"]
 [ext_resource type="Texture2D" uid="uid://cn5v8dp6c8g1l" path="res://Assets/Sprites/Enemies/Dog/Run.png" id="6_5egfr"]
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="7_o2f6r"]
+[ext_resource type="AudioStream" uid="uid://bbkpa7ss1oien" path="res://Assets/Audio/SFX/Enemies/Dog/Hit.wav" id="8_ncpdr"]
+[ext_resource type="AudioStream" uid="uid://ca0d10ulnqfrt" path="res://Assets/Audio/SFX/Enemies/Hurt.wav" id="9_teinh"]
+[ext_resource type="AudioStream" uid="uid://531gdui3l6gx" path="res://Assets/Audio/SFX/Enemies/Death.wav" id="10_3opwm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4xe0a"]
 atlas = ExtResource("2_4jb7o")
@@ -252,3 +255,12 @@ target_position = Vector2(16, 32)
 
 [node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("7_o2f6r")]
 position = Vector2(0, -12)
+
+[node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=476302430]
+stream = ExtResource("8_ncpdr")
+
+[node name="SfxHurt" type="AudioStreamPlayer" parent="." unique_id=75560147]
+stream = ExtResource("9_teinh")
+
+[node name="SfxDeath" type="AudioStreamPlayer" parent="." unique_id=1680109251]
+stream = ExtResource("10_3opwm")

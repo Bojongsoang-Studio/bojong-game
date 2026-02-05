@@ -44,6 +44,7 @@
 [ext_resource type="PackedScene" uid="uid://bioofsscxe7ff" path="res://Scenes/UI/PopupDialog/popup_dialog_area.tscn" id="41_tc6nq"]
 [ext_resource type="PackedScene" uid="uid://dsqe6k0k1lu5w" path="res://Scenes/UI/PopupDialog/popup_dialog_label.tscn" id="42_yth67"]
 [ext_resource type="PackedScene" uid="uid://c2jfqrfub1huu" path="res://Scenes/Areas/Street/Citizens/punk.tscn" id="43_cftkh"]
+[ext_resource type="AudioStream" uid="uid://dx0ppw84hcls6" path="res://Assets/Audio/Music/Street.mp3" id="45_yth67"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_actlm"]
 texture = ExtResource("1_jw87k")
@@ -525,3 +526,8 @@ shape = SubResource("SegmentShape2D_tc6nq")
 
 [node name="Cat" parent="." unique_id=52111981 instance=ExtResource("41_76brt")]
 position = Vector2(24, -24)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=240105733]
+stream = ExtResource("45_yth67")
+volume_db = -17.333
+autoplay = true

@@ -1,6 +1,5 @@
 using BojongGame.Scenes.UI;
 using Godot;
-using PlayerClass = BojongGame.Scenes.Player.Player;
 
 namespace BojongGame.Scenes.Enemies.GreenFlyingRobot;
 
@@ -17,6 +16,10 @@ public partial class GreenFlyingRobot : Enemy
     private Node2D _playerTarget;
     private HealthBar _healthBar;
 
+    private AudioStreamPlayer _sfxHit;
+    private AudioStreamPlayer _sfxHurt;
+    private AudioStreamPlayer _sfxDeath;
+
     private bool _isAttacking;
     private float _bobOffset;
 
@@ -28,13 +31,17 @@ public partial class GreenFlyingRobot : Enemy
         _laserRay = GetNode<RayCast2D>("LaserRay");
         _healthBar = GetNode<HealthBar>("HealthBar");
 
+        _sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
+        _sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
+        _sfxDeath = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
+
         var hitbox = GetNode<Area2D>("Hitbox");
         hitbox.BodyEntered += OnHitboxBodyEntered;
 
         var detection = GetNode<Area2D>("DetectionArea");
         detection.BodyEntered += body =>
         {
-            if (body is not PlayerClass p) return;
+            if (body is not Player.Player p) return;
             _playerTarget = p;
         };
         detection.BodyExited += body =>
@@ -53,7 +60,7 @@ public partial class GreenFlyingRobot : Enemy
     public override void _PhysicsProcess(double delta)
     {
         var velocity = Velocity;
-        
+
         if (_isAttacking && Health > 0)
         {
             Velocity = Velocity.MoveToward(Vector2.Zero, 100 * (float)delta);
@@ -79,7 +86,7 @@ public partial class GreenFlyingRobot : Enemy
             if (_laserRay.IsColliding())
             {
                 var hitObject = _laserRay.GetCollider();
-                if (hitObject is PlayerClass playerToZap)
+                if (hitObject is Player.Player playerToZap)
                 {
                     FireLaser(playerToZap);
                 }
@@ -96,7 +103,7 @@ public partial class GreenFlyingRobot : Enemy
         MoveAndSlide();
     }
 
-    private void FireLaser(PlayerClass player)
+    private void FireLaser(Player.Player player)
     {
         if (Health <= 0) return;
         _isAttacking = true;
@@ -104,6 +111,9 @@ public partial class GreenFlyingRobot : Enemy
 
         var laserKnockback = Vector2.Down * KnockbackForce;
         player.TakeHit(DamageAmount, laserKnockback);
+
+        _sfxHit?.Stop();
+        _sfxHit?.Play();
     }
 
     private void OnHitboxBodyEntered(Node2D body)
@@ -111,9 +121,12 @@ public partial class GreenFlyingRobot : Enemy
         if (Health <= 0) return;
         if (_isAttacking) return;
 
-        if (body is not PlayerClass player) return;
+        if (body is not Player.Player player) return;
         var pushDir = (player.GlobalPosition - GlobalPosition).Normalized();
         player.TakeHit(DamageAmount, pushDir * KnockbackForce);
+
+        _sfxHit?.Stop();
+        _sfxHit?.Play();
     }
 
     private void OnAnimationFinished()
@@ -127,11 +140,22 @@ public partial class GreenFlyingRobot : Enemy
     {
         Health -= dmg;
         _healthBar.UpdateHealth(Health, MaxHealth);
+
+        if (Health > 0)
+        {
+            _sfxHurt?.Stop();
+            _sfxHurt?.Play();
+        }
+
         PlayAnimation("hurt");
         var knockbackDirection = GlobalPosition.X - attackerWorldPos.X >= 0 ? 1f : -1f;
         Velocity = new Vector2(knockbackDirection * 300f, -300f * 0.3f);
         MoveAndSlide();
-        if (Health <= 0) PlayAnimation("death");
+        
+        if (Health > 0) return;
+        _sfxDeath?.Stop();
+        _sfxDeath?.Play();
+        PlayAnimation("death");
     }
 
     private void PlayAnimation(string name)
