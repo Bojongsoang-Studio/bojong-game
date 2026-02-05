@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b3bn714tq5cvc"]
+
+[ext_resource type="Script" uid="uid://1vcom06074uw" path="res://Scenes/Areas/Forest/Door.cs" id="1_ta5m5"]
+[ext_resource type="Texture2D" uid="uid://cwj0muyf3hk1d" path="res://Assets/Sprites/Forest/3 Objects/Fence/3.png" id="2_ta5m5"]
+[ext_resource type="Texture2D" uid="uid://dfluwwfbj5l3s" path="res://Assets/Sprites/Forest/3 Objects/Fence/1.png" id="3_mwsr4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hep68"]
+size = Vector2(33, 66)
+
+[node name="door" type="StaticBody2D" unique_id=1112887365]
+script = ExtResource("1_ta5m5")
+OpenTexture = ExtResource("2_ta5m5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=463292962]
+position = Vector2(1.5, 0)
+texture = ExtResource("3_mwsr4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1299568671]
+shape = SubResource("RectangleShape2D_hep68")

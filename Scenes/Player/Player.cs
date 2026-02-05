@@ -1,14 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
+using BojongGame.Scenes.UI;
 using Godot;
 
 namespace BojongGame.Scenes.Player;
 
 public partial class Player : CharacterBody2D
 {
-	[Export] public int Health = 5;
+	[Export] public int MaxHealth = 10;
 	[Export] public float AnimationCooldown = 1f;
 	[Export] public int Damage = 1;
-	
+
 	[Export] public float WalkSpeed = 220.0f;
 	[Export] public float SprintSpeed = 360.0f;
 	[Export] public float JumpVelocity = -480.0f;
@@ -26,209 +28,220 @@ public partial class Player : CharacterBody2D
 	private float _gravity;
 
 	private bool _isDashing;
-	private float _dashTimeLeft;
-	private float _dashCooldownLeft;
+	private float _dashDuration;
+	private float _dashCooldown;
 	private int _dashDirection = 1;
 
-	private bool _isOnVerticalMovementArea;
+	private bool _isInVerticalMovement;
 	private uint _originalCollisionMask;
+	private bool _isInvincible = false;
 
 	private float _animationCooldown;
+	private Vector2 _knockbackVelocity = Vector2.Zero;
 
-	private List<Enemy> _enemies = [];
+	private readonly List<Enemies.Enemy> _enemies = [];
 
 	private AnimatedSprite2D _sprite;
 	private CollisionShape2D _collision;
 	private Area2D _attackArea;
+	private HealthBar _healthBar;
 
 	public override void _Ready()
 	{
-		_health = Health;
+		_health = MaxHealth;
 		_sprite = GetNode<AnimatedSprite2D>("Sprite");
 		_collision = GetNode<CollisionShape2D>("Collision");
 		_attackArea = GetNode<Area2D>("AttackArea");
-		_attackArea.BodyEntered += OnEnemyEntered;
-		_attackArea.BodyExited += OnEnemyExited;
+		_healthBar = GetNode<HealthBar>("HealthBar");
+		
+		_attackArea.BodyEntered += OnAttackBodyEntered;
+		_attackArea.BodyExited += OnAttackBodyExited;
+		
+		SetCollisionLayerValue(2, true);
+		SetCollisionLayerValue(1, false);
+		SetCollisionMaskValue(1, true);  
+		SetCollisionMaskValue(3, false);
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		_animationCooldown -= (float)delta;
-
-		if (Input.IsActionJustPressed("attack"))
-		{
-			foreach (var enemy in _enemies)
-			{
-				Attack(enemy);
-			}
-		}
-		
 		var velocity = Velocity;
 		_gravity = Gravity;
+		_animationCooldown -= (float)delta;
 
-		if (_dashCooldownLeft > 0.0f)
+		if (_knockbackVelocity.Length() > 10.0f)
 		{
-			_dashCooldownLeft -= (float)delta;
+			_knockbackVelocity = _knockbackVelocity.MoveToward(Vector2.Zero, 800.0f * (float)delta);
+			velocity = _knockbackVelocity;
 		}
-
-		if (_isDashing)
+		else
 		{
-			_dashTimeLeft -= (float)delta;
-			velocity.Y = 0;
-			velocity.X = _dashDirection * DashSpeed;
+			if (Input.IsActionJustPressed("attack")) Attack();
 
-			Velocity = velocity;
-			MoveAndSlide();
+			if (_dashCooldown > 0.0f) _dashCooldown -= (float)delta;
 
-			if (_dashTimeLeft <= 0)
+			if (_isDashing)
 			{
-				_isDashing = false;
+				_dashDuration -= (float)delta;
+				velocity.Y = 0;
+				velocity.X = _dashDirection * DashSpeed;
+
+				Velocity = velocity;
+				MoveAndSlide();
+
+				if (_dashDuration <= 0)
+				{
+					_isDashing = false;
+				}
+
+				return;
 			}
 
-			return;
+			if (_isInVerticalMovement)
+			{
+				var verticalInput = Input.GetAxis("move_up", "move_down");
+				var horizontalInput = Input.GetAxis("move_left", "move_right");
+
+				velocity.Y = Mathf.MoveToward(velocity.Y, verticalInput * WalkSpeed,
+					Acceleration * WalkSpeed * (float)delta);
+				velocity.X = Mathf.MoveToward(velocity.X, horizontalInput * WalkSpeed,
+					Acceleration * WalkSpeed * (float)delta);
+
+				PlayAnimation("idle");
+
+				Velocity = velocity;
+				MoveAndSlide();
+
+				return;
+			}
+
+			if (!IsOnFloor()) velocity.Y += _gravity * (float)delta;
+
+			var direction = 0;
+
+			if (Input.IsActionPressed("move_left"))
+			{
+				direction -= 1;
+				_sprite.FlipH = true;
+			}
+
+			if (Input.IsActionPressed("move_right"))
+			{
+				direction += 1;
+				_sprite.FlipH = false;
+			}
+
+			if (direction != 0) _dashDirection = direction;
+
+			var targetSpeed = WalkSpeed;
+
+			if (Input.IsActionPressed("sprint")) targetSpeed = SprintSpeed;
+
+			var targetVx = direction * targetSpeed;
+
+			velocity.X = direction != 0
+				? Mathf.MoveToward(velocity.X, targetVx, Acceleration * targetSpeed * (float)delta)
+				: Mathf.MoveToward(velocity.X, 0.0f, Deceleration * targetSpeed * (float)delta);
+
+			if (Input.IsActionJustPressed("jump") && IsOnFloor()) velocity.Y = JumpVelocity;
+
+			if (Input.IsActionJustPressed("sprint") && _dashCooldown <= 0.0f) Dash();
+
+			if (_animationCooldown <= 0.0f) PlayAnimation(direction == 0 ? "idle" : "run");
 		}
 
-		if (_isOnVerticalMovementArea)
-		{
-			var verticalInput = Input.GetAxis("move_up", "move_down");
-			var horizontalInput = Input.GetAxis("move_left", "move_right");
-				
-			velocity.Y = Mathf.MoveToward(velocity.Y, verticalInput * WalkSpeed,
-				Acceleration * WalkSpeed * (float)delta);
-			velocity.X = Mathf.MoveToward(velocity.X, horizontalInput * WalkSpeed,
-				Acceleration * WalkSpeed * (float)delta);
-
-			_sprite.Animation = "idle";
-			
-			Velocity = velocity;
-			MoveAndSlide();
-
-			return;
-		}
-
-		if (!IsOnFloor())
-		{
-			velocity.Y += _gravity * (float)delta;
-		}
-
-		var direction = 0;
-
-		if (Input.IsActionPressed("move_left"))
-		{
-			direction -= 1;
-			_sprite.FlipH = true;
-		}
-
-		if (Input.IsActionPressed("move_right"))
-		{
-			direction += 1;
-			_sprite.FlipH = false;
-		}
-
-		if (direction != 0)
-		{
-			_dashDirection = direction;
-		}
-
-		var targetSpeed = WalkSpeed;
-
-		if (Input.IsActionPressed("sprint"))
-		{
-			targetSpeed = SprintSpeed;
-		}
-
-		var targetVx = direction * targetSpeed;
-
-		velocity.X = direction != 0
-			? Mathf.MoveToward(velocity.X, targetVx, Acceleration * targetSpeed * (float)delta)
-			: Mathf.MoveToward(velocity.X, 0.0f, Deceleration * targetSpeed * (float)delta);
-
-		if (Input.IsActionJustPressed("jump") && IsOnFloor())
-		{
-			velocity.Y = JumpVelocity;
-		}
-
-		if (Input.IsActionJustPressed("sprint") && _dashCooldownLeft <= 0.0f)
-		{
-			StartDash();
-		}
-
-		if (_animationCooldown <= 0.0f)
-			_sprite.Animation = direction == 0 ? "idle" : "run";
-
-		GD.Print(Velocity);
-		GD.Print(velocity);
 		Velocity = velocity;
 		MoveAndSlide();
 	}
 
-	private void StartDash()
+	private void Dash()
 	{
 		_isDashing = true;
-		_dashTimeLeft = DashDuration;
-		_dashCooldownLeft = DashCooldown;
+		_dashDuration = DashDuration;
+		_dashCooldown = DashCooldown;
 	}
 
-	public void EnterVerticalMovementArea()
+	public void EnterVerticalMovement()
 	{
-		_isOnVerticalMovementArea = true;
+		_isInVerticalMovement = true;
 		_originalCollisionMask = CollisionMask;
 		SetCollisionMaskValue(1, false);
-		SetCollisionMaskValue(2, false);
 		_gravity = 0;
 	}
 
-	public void ExitVerticalMovementArea()
+	public void ExitVerticalMovement()
 	{
-		_isOnVerticalMovementArea = false;
+		_isInVerticalMovement = false;
 		CollisionMask = _originalCollisionMask;
 		_gravity = Gravity;
 	}
 
-	public void ShowGuide()
+	public void DisplayTransitionGuide(bool show)
 	{
-		var guide = GetNode<Label>("Guide");
-		guide.Visible = true;
+		var guide = GetNode<Label>("TransitionGuide");
+		guide.Visible = show;
+	}
+
+	public void TakeHit(int damage, Vector2 knockback)
+	{
+		if (_isInvincible || _health <= 0) return;
+
+		_health -= damage;
+		_healthBar.UpdateHealth(_health, MaxHealth);
+		_knockbackVelocity = knockback;
+		
+		if (IsOnFloor()) _knockbackVelocity.Y = -200;
+		Velocity = _knockbackVelocity;
+
+		_animationCooldown = AnimationCooldown;
+		PlayAnimation("hurt");
+
+		StartInvincibility(1.5f);
+		MoveAndSlide();
+		if (_health <= 0)
+		{
+			//Die();
+			return;
+		}
+	}
+
+	private void OnAttackBodyEntered(Node2D body)
+	{
+		if (body is Enemies.Enemy enemy) _enemies.Add(enemy);
+	}
+
+	private void OnAttackBodyExited(Node2D body)
+	{
+		if (body is Enemies.Enemy enemy) _enemies.Remove(enemy);
+	}
+
+	private void Attack()
+	{
+		_animationCooldown = AnimationCooldown;
+		PlayAnimation("attack");
+		foreach (var enemy in _enemies.Where(IsInstanceValid)) enemy.TakeHit(Damage, GlobalPosition);
 	}
 	
-	public void HideGuide()
+	private void PlayAnimation(string name)
 	{
-		var guide = GetNode<Label>("Guide");
-		guide.Visible = false;
+		if (_sprite.Animation == name && _sprite.IsPlaying()) return;
+		_sprite.Play(name);
 	}
 
-	public void TakeDamage(int damage, Vector2 knockback)
+	private void StartInvincibility(float duration)
 	{
-		_animationCooldown = AnimationCooldown;
-		_sprite.Animation = "hurt";
-		_health -= damage;
-		var label = GetNode<Label>("Health");
-		label.Text = "Health: " + _health;
-		Velocity = knockback;
-		MoveAndSlide();
-	}
+		_isInvincible = true;
 
-	private void OnEnemyEntered(Node body)
-	{
-		GD.Print(body);
-		if (body is Enemy enemy)
+		Tween tween = CreateTween();
+		tween.SetLoops();
+		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f); 
+		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f); 
+		GetTree().CreateTimer(duration).Timeout += () =>
 		{
-			_enemies.Add(enemy);
-		}
-	}
+			_isInvincible = false;
 
-	private void OnEnemyExited(Node body)
-	{
-		if (body is Enemy enemy)
-		{
-			_enemies.Remove(enemy);
-		}
-	}
-
-	private void Attack(Enemy enemy)
-	{
-		_animationCooldown = AnimationCooldown;
-		_sprite.Animation = "attack";
-		enemy.TakeHit(1, GlobalPosition);
+			if (tween.IsValid()) tween.Kill();
+			_sprite.Modulate = Colors.White;
+		};
 	}
 }

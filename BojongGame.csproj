@@ -4,4 +4,11 @@
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Scenes\Enemies\BlueRobot\BlueRobot.tscn" />
+    <Content Include="Scenes\Enemies\BlueRobot\ProjectileScene.tscn" />
+    <Content Include="Scenes\Enemies\Falcon\Falcon.tscn" />
+    <Content Include="Scenes\Enemies\PurpleGuyAlt\ProjectilePurple.tscn" />
+    <Content Include="Scenes\Enemies\PurpleGuyAlt\PurpleGuy2.tscn" />
+  </ItemGroup>
 </Project>

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b71jfsh2umj4o"]
+
+[ext_resource type="Script" uid="uid://cfmh1ctasojcd" path="res://Scenes/Areas/Forest/Button.cs" id="1_bwnnn"]
+[ext_resource type="Texture2D" uid="uid://cg4xchkphk0ag" path="res://Assets/Sprites/Forest/3 Objects/Stones/1.png" id="2_vuwkk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbybw"]
+size = Vector2(25, 7)
+
+[node name="Button" type="Area2D" unique_id=1809518734]
+script = ExtResource("1_bwnnn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2013498889]
+shape = SubResource("RectangleShape2D_nbybw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=542776120]
+scale = Vector2(2.6500108, 1.125014)
+texture = ExtResource("2_vuwkk")
