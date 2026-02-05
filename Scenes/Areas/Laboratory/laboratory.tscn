@@ -13,8 +13,8 @@
 [ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="11_qddiu"]
 [ext_resource type="PackedScene" uid="uid://ckacpfi6lrvhb" path="res://Scenes/Enemies/Dog/dog.tscn" id="11_riy2v"]
 [ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="12_ppqie"]
-[ext_resource type="PackedScene" uid="uid://dh8hyx8y88nab" path="res://Scenes/Enemies/Falcon/falcon.tscn" id="14_vb73s"]
-[ext_resource type="PackedScene" uid="uid://dowt6oy022cpr" path="res://Scenes/Enemies/PurpleGuyAlt/purple_guy_alt.tscn" id="15_eaup3"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/Falcon/falcon.tscn" id="14_vb73s"]
+[ext_resource type="PackedScene" uid="uid://dowt6oy022cpr" path="res://Scenes/Enemies/PurpleGuy/purple_guy.tscn" id="15_eaup3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu8hl"]
 texture = ExtResource("1_m776p")

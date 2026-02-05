@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dh8hyx8y88nab"]
+[gd_scene format=3 uid="uid://bwr3v4d0ifsnh"]
 
 [ext_resource type="Script" uid="uid://crxo18npbx8ju" path="res://Scenes/Enemies/Falcon/Falcon.cs" id="1_7o1jy"]
 [ext_resource type="Texture2D" uid="uid://c8v2v3b1qmupm" path="res://Assets/Sprites/Enemies/Falcon/Attack2.png" id="2_t8ahp"]

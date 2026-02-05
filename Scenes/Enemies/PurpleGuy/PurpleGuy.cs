@@ -1,9 +1,9 @@
 using BojongGame.Scenes.UI;
 using Godot;
 
-namespace BojongGame.Scenes.Enemies.PurpleGuyAlt;
+namespace BojongGame.Scenes.Enemies.PurpleGuy;
 
-public partial class PurpleGuyAlt : Enemy
+public partial class PurpleGuy : Enemy
 {
     private enum State
     {

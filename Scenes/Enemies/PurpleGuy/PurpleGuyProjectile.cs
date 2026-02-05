@@ -1,6 +1,6 @@
 using Godot;
 
-namespace BojongGame.Scenes.Enemies.PurpleGuyAlt;
+namespace BojongGame.Scenes.Enemies.PurpleGuy;
 
 public partial class PurpleGuyProjectile : Area2D
 {

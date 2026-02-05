@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://lus1a4j084lt"]
 
-[ext_resource type="Script" uid="uid://bodhuxu2wykjl" path="res://Scenes/Enemies/PurpleGuyAlt/PurpleGuyProjectile.cs" id="1_ubaqk"]
+[ext_resource type="Script" uid="uid://bodhuxu2wykjl" path="res://Scenes/Enemies/PurpleGuy/PurpleGuyProjectile.cs" id="1_ubaqk"]
 [ext_resource type="Texture2D" uid="uid://domo2wlvyp443" path="res://Assets/Sprites/Enemies/PurpleGuy/Bullet.png" id="2_o80pt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4eu1e"]
