@@ -49,6 +49,9 @@ public partial class Player : CharacterBody2D
 	private CollisionShape2D _collision;
 	private Area2D _attackArea;
 	private HealthBar _healthBar;
+	
+	private AudioStreamPlayer _sfxHit;
+	private AudioStreamPlayer _sfxHurt;
 
 	public override void _Ready()
 	{
@@ -57,13 +60,16 @@ public partial class Player : CharacterBody2D
 		_collision = GetNode<CollisionShape2D>("Collision");
 		_attackArea = GetNode<Area2D>("AttackArea");
 		_healthBar = GetNode<HealthBar>("HealthBar");
+		
+		_sfxHit = GetNode<AudioStreamPlayer>("SfxHit");
+		_sfxHurt = GetNode<AudioStreamPlayer>("SfxHurt");
 
 		_attackArea.BodyEntered += OnAttackBodyEntered;
 		_attackArea.BodyExited += OnAttackBodyExited;
-
+		
 		SetCollisionLayerValue(2, true);
 		SetCollisionLayerValue(1, false);
-		SetCollisionMaskValue(1, true);
+		SetCollisionMaskValue(1, true);  
 		SetCollisionMaskValue(3, false);
 	}
 
@@ -200,9 +206,11 @@ public partial class Player : CharacterBody2D
 		if (_isInvincible || _health <= 0) return;
 
 		_health -= damage;
+		_sfxHurt?.Stop();
+		_sfxHurt?.Play();
 		_healthBar.UpdateHealth(_health, MaxHealth);
 		_knockbackVelocity = knockback;
-
+		
 		if (IsOnFloor()) _knockbackVelocity.Y = -200;
 		Velocity = _knockbackVelocity;
 
@@ -229,8 +237,21 @@ public partial class Player : CharacterBody2D
 	{
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("attack");
-		foreach (var enemy in _enemies.Where(IsInstanceValid)) enemy.TakeHit(Damage, GlobalPosition);
-        foreach (var body in _attackArea.GetOverlappingBodies())
+		
+		var hitSomeone = false;
+		foreach (var enemy in _enemies.Where(IsInstanceValid))
+		{
+			enemy.TakeHit(Damage, GlobalPosition);
+			hitSomeone = true;
+		}
+		
+		if (hitSomeone)
+		{
+			_sfxHit?.Stop();
+			_sfxHit?.Play();
+		}
+        
+		foreach (var body in _attackArea.GetOverlappingBodies())
         {
             if (body is BreakableBox box)
             {
@@ -274,8 +295,8 @@ public partial class Player : CharacterBody2D
 
 		var tween = CreateTween();
 		tween.SetLoops();
-		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f);
-		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f);
+		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f); 
+		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f); 
 		GetTree().CreateTimer(duration).Timeout += () =>
 		{
 			_isInvincible = false;

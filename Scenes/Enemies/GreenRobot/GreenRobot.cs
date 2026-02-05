@@ -11,10 +11,13 @@ public partial class GreenRobot : Enemy
     [Export] public int DamageAmount = 1;
     [Export] public float AnimationCooldown = 0.2f;
 
-    private AnimatedSprite2D _sprite;
-    private RayCast2D _ledgeDetector;
-    private Area2D _hitbox;
-    private HealthBar _healthBar;
+	private AnimatedSprite2D _sprite;
+	private RayCast2D _ledgeDetector;
+	private Area2D _hitbox;
+	private HealthBar _healthBar;
+	private AudioStreamPlayer _sfxHit;
+	private AudioStreamPlayer _sfxHurt;
+	private AudioStreamPlayer _sfxDeath;
 
     private int _direction = 1;
     private float _animationCooldown;
@@ -28,8 +31,12 @@ public partial class GreenRobot : Enemy
         _hitbox = GetNode<Area2D>("Hitbox");
         _healthBar = GetNode<HealthBar>("HealthBar");
 
-        _hitbox.BodyEntered += OnHitboxBodyEntered;
-    }
+		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
+		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
+		_sfxDeath = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
+		
+		_hitbox.BodyEntered += OnHitboxBodyEntered;
+	}
 
     public override void _PhysicsProcess(double delta)
     {
@@ -78,20 +85,34 @@ public partial class GreenRobot : Enemy
 
         var knockbackForce = directionToPlayer * 300f;
 
-        player.TakeHit(DamageAmount, knockbackForce);
-    }
+		player.TakeHit(DamageAmount, knockbackForce);
+		
+		_sfxHit?.Stop();
+		_sfxHit?.Play();
+	}
 
-    public override void TakeHit(int dmg, Vector2 attackerWorldPos)
-    {
-        Health -= dmg;
-        _healthBar.UpdateHealth(Health, MaxHealth);
-        _animationCooldown = AnimationCooldown;
-        PlayAnimation("hurt");
-        var knockbackDirection = GlobalPosition.X - attackerWorldPos.X >= 0 ? 1f : -1f;
-        Velocity = new Vector2(knockbackDirection * 300f, -300f * 0.3f);
-        MoveAndSlide();
-        if (Health <= 0) PlayAnimation("death");
-    }
+	public override void TakeHit(int dmg, Vector2 attackerWorldPos)
+	{
+		Health -= dmg;
+		_healthBar.UpdateHealth(Health, MaxHealth);
+		if (Health > 0)
+		{
+			_sfxHurt?.Stop();
+			_sfxHurt?.Play();
+		}
+
+		_animationCooldown = AnimationCooldown;
+		PlayAnimation("hurt");
+		var knockbackDirection = GlobalPosition.X - attackerWorldPos.X >= 0 ? 1f : -1f;
+		Velocity = new Vector2(knockbackDirection * 300f, -300f * 0.3f);
+		MoveAndSlide();
+		if (Health <= 0)
+		{
+			_sfxDeath?.Stop();
+			_sfxDeath?.Play();
+			PlayAnimation("death");
+		}
+	}
 
     private void PlayAnimation(string name)
     {
