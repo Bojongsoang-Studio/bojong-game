@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
+using BojongGame.Scenes.UI;
 using Godot;
 
 namespace BojongGame.Scenes.Player;
 
 public partial class Player : CharacterBody2D
 {
-	[Export] public int Health = 10;
+	[Export] public int MaxHealth = 10;
 	[Export] public float AnimationCooldown = 1f;
 	[Export] public int Damage = 1;
 
@@ -32,25 +34,31 @@ public partial class Player : CharacterBody2D
 
 	private bool _isInVerticalMovement;
 	private uint _originalCollisionMask;
+	private bool _isInvincible = false;
 
 	private float _animationCooldown;
 	private Vector2 _knockbackVelocity = Vector2.Zero;
 
-	private readonly List<Enemy> _enemies = [];
+	private readonly List<Enemies.Enemy> _enemies = [];
 
 	private AnimatedSprite2D _sprite;
 	private CollisionShape2D _collision;
 	private Area2D _attackArea;
+	private HealthBar _healthBar;
 
 	public override void _Ready()
 	{
-		_health = Health;
+		_health = MaxHealth;
 		_sprite = GetNode<AnimatedSprite2D>("Sprite");
 		_collision = GetNode<CollisionShape2D>("Collision");
 		_attackArea = GetNode<Area2D>("AttackArea");
+		_healthBar = GetNode<HealthBar>("HealthBar");
+		
 		_attackArea.BodyEntered += OnAttackBodyEntered;
 		_attackArea.BodyExited += OnAttackBodyExited;
+		
 		SetCollisionLayerValue(2, true);
+		SetCollisionLayerValue(1, false);
 		SetCollisionMaskValue(1, true);  
 		SetCollisionMaskValue(3, false);
 	}
@@ -176,47 +184,64 @@ public partial class Player : CharacterBody2D
 
 	public void TakeHit(int damage, Vector2 knockback)
 	{
+		if (_isInvincible || _health <= 0) return;
+
+		_health -= damage;
+		_healthBar.UpdateHealth(_health, MaxHealth);
+		_knockbackVelocity = knockback;
+		
+		if (IsOnFloor()) _knockbackVelocity.Y = -200;
+		Velocity = _knockbackVelocity;
+
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("hurt");
-		_health -= damage;
-		var label = GetNode<Label>("Health");
-		label.Text = "Health: " + _health;
-		_knockbackVelocity = knockback;
-		if (IsOnFloor()) _knockbackVelocity.Y = -200; //coba dulu, kalau ga bagus hapus
-		Velocity = _knockbackVelocity;
+
+		StartInvincibility(1.5f);
 		MoveAndSlide();
+		if (_health <= 0)
+		{
+			//Die();
+			return;
+		}
 	}
 
 	private void OnAttackBodyEntered(Node2D body)
 	{
-		if (body is Enemy enemy) _enemies.Add(enemy);
+		if (body is Enemies.Enemy enemy) _enemies.Add(enemy);
 	}
 
 	private void OnAttackBodyExited(Node2D body)
 	{
-		if (body is Enemy enemy) _enemies.Remove(enemy);
+		if (body is Enemies.Enemy enemy) _enemies.Remove(enemy);
 	}
 
 	private void Attack()
 	{
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("attack");
-		for (int i = _enemies.Count - 1; i >= 0; i--)
-		{
-			if (IsInstanceValid(_enemies[i]))
-			{
-				_enemies[i].TakeHit(Damage, GlobalPosition);
-			}
-			else
-			{
-				_enemies.RemoveAt(i);
-			}
-		}
+		foreach (var enemy in _enemies.Where(IsInstanceValid)) enemy.TakeHit(Damage, GlobalPosition);
 	}
 	
 	private void PlayAnimation(string name)
 	{
 		if (_sprite.Animation == name && _sprite.IsPlaying()) return;
 		_sprite.Play(name);
+	}
+
+	private void StartInvincibility(float duration)
+	{
+		_isInvincible = true;
+
+		Tween tween = CreateTween();
+		tween.SetLoops();
+		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f); 
+		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f); 
+		GetTree().CreateTimer(duration).Timeout += () =>
+		{
+			_isInvincible = false;
+
+			if (tween.IsValid()) tween.Kill();
+			_sprite.Modulate = Colors.White;
+		};
 	}
 }

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b71jfsh2umj4o"]
 
 [ext_resource type="Script" uid="uid://cfmh1ctasojcd" path="res://Scenes/Areas/Forest/Button.cs" id="1_bwnnn"]
-[ext_resource type="Texture2D" uid="uid://cg4xchkphk0ag" path="res://Assets/Sprites/Forest/3 Objects/Stones/1.png" id="2_vuwkk"]
+[ext_resource type="Texture2D" uid="uid://cg4xchkphk0ag" path="res://Assets/Sprites/Areas/Forest/Objects/Stones/1.png" id="2_vuwkk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbybw"]
 size = Vector2(25, 7)

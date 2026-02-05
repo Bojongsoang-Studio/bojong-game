@@ -1,68 +1,102 @@
+using BojongGame.Scenes.UI;
 using Godot;
-namespace BojongGame.Scenes.Areas.Forest;
-public partial class GreenRobot : CharacterBody2D
+
+namespace BojongGame.Scenes.Enemies.GreenRobot;
+
+public partial class GreenRobot : Enemy
 {
-	[Export] public float Speed = 50.0f;
-	[Export] public float Gravity = 980.0f;
-	[Export] public int DamageAmount = 1;
-	
+    [Export] public int MaxHealth = 5;
+    [Export] public float Speed = 50.0f;
+    [Export] public float Gravity = 980.0f;
+    [Export] public int DamageAmount = 1;
+    [Export] public float AnimationCooldown = 0.2f;
 
-	private AnimatedSprite2D _sprite;
-	private RayCast2D _ledgeDetector;
-	private Area2D _hitbox;
-	
-	// Direction: 1 is Right, -1 is Left
-	private int _direction = 1; 
+    private AnimatedSprite2D _sprite;
+    private RayCast2D _ledgeDetector;
+    private Area2D _hitbox;
+    private HealthBar _healthBar;
 
-	public override void _Ready()
-	{
-		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		_ledgeDetector = GetNode<RayCast2D>("LedgeDetector");
-		_hitbox = GetNode<Area2D>("Hitbox");
-		_hitbox.BodyEntered += OnHitboxBodyEntered;
-	}
+    private int _direction = 1;
+    private float _animationCooldown;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Vector2 velocity = Velocity;
+    public override void _Ready()
+    {
+        Health = MaxHealth;
 
-		if (!IsOnFloor())
-		{
-			velocity.Y += Gravity * (float)delta;
-		}
-		if (IsOnWall() || (IsOnFloor() && !_ledgeDetector.IsColliding()))
-		{
-			FlipDirection();
-		}
+        _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        _ledgeDetector = GetNode<RayCast2D>("LedgeDetector");
+        _hitbox = GetNode<Area2D>("Hitbox");
+        _healthBar = GetNode<HealthBar>("HealthBar");
 
-		velocity.X = Speed * _direction;
+        _hitbox.BodyEntered += OnHitboxBodyEntered;
+    }
 
-		Velocity = velocity;
-		MoveAndSlide();
-	}
+    public override void _PhysicsProcess(double delta)
+    {
+        var velocity = Velocity;
+        _animationCooldown -= (float)delta;
 
-	private void FlipDirection()
-	{
-		_direction *= -1; //-1 kiri, dan sebaliknya
-		
-		_sprite.FlipH = _direction == -1;
+        if (!IsOnFloor())
+        {
+            velocity.Y += Gravity * (float)delta;
+        }
 
-		Vector2 rayPos = _ledgeDetector.Position;
-		rayPos.X = Mathf.Abs(rayPos.X) * _direction;
-		_ledgeDetector.Position = rayPos;
-	}
+        if (IsOnWall() || (IsOnFloor() && !_ledgeDetector.IsColliding()))
+        {
+            FlipDirection();
+        }
 
-	private void OnHitboxBodyEntered(Node2D body)
-	{
-		if (body is Player.Player player)
-		{
-			GD.Print("HIT PLAYER!"); 
+        if (Health > 0 && _animationCooldown <= 0f)
+        {
+            velocity.X = Speed * _direction;
+            PlayAnimation(_direction == 0 ? "idle" : "walk");
+        }
+        else
+        {
+            velocity.X = 0;
+        }
 
-			Vector2 directionToPlayer = (player.GlobalPosition - GlobalPosition).Normalized();
+        Velocity = velocity;
+        MoveAndSlide();
+    }
 
-			Vector2 knockbackForce = directionToPlayer * 300f;
+    private void FlipDirection()
+    {
+        _direction *= -1;
 
-			player.TakeHit(DamageAmount,knockbackForce);
-		}
-	}
+        _sprite.FlipH = _direction == -1;
+
+        var rayPos = _ledgeDetector.Position;
+        rayPos.X = Mathf.Abs(rayPos.X) * _direction;
+        _ledgeDetector.Position = rayPos;
+    }
+
+    private void OnHitboxBodyEntered(Node2D body)
+    {
+        if (Health <= 0) return;
+        if (body is not Player.Player player) return;
+        var directionToPlayer = (player.GlobalPosition - GlobalPosition).Normalized();
+
+        var knockbackForce = directionToPlayer * 300f;
+
+        player.TakeHit(DamageAmount, knockbackForce);
+    }
+
+    public override void TakeHit(int dmg, Vector2 attackerWorldPos)
+    {
+        Health -= dmg;
+        _healthBar.UpdateHealth(Health, MaxHealth);
+        _animationCooldown = AnimationCooldown;
+        PlayAnimation("hurt");
+        var knockbackDirection = GlobalPosition.X - attackerWorldPos.X >= 0 ? 1f : -1f;
+        Velocity = new Vector2(knockbackDirection * 300f, -300f * 0.3f);
+        MoveAndSlide();
+        if (Health <= 0) PlayAnimation("death");
+    }
+
+    private void PlayAnimation(string name)
+    {
+        if (_sprite.Animation == name && _sprite.IsPlaying()) return;
+        _sprite.Play(name);
+    }
 }
