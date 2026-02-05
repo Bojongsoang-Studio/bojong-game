@@ -34,7 +34,7 @@ public partial class Player : CharacterBody2D
 
 	private bool _isInVerticalMovement;
 	private uint _originalCollisionMask;
-	private bool _isInvincible = false;
+	private bool _isInvincible;
 
 	private float _animationCooldown;
 	private Vector2 _knockbackVelocity = Vector2.Zero;
@@ -163,6 +163,8 @@ public partial class Player : CharacterBody2D
 
 	public void EnterVerticalMovement()
 	{
+		var guide = GetNode<Node2D>("VerticalMovementGuide");
+		guide.Visible = true;
 		_isInVerticalMovement = true;
 		_originalCollisionMask = CollisionMask;
 		SetCollisionMaskValue(1, false);
@@ -171,6 +173,8 @@ public partial class Player : CharacterBody2D
 
 	public void ExitVerticalMovement()
 	{
+		var guide = GetNode<Node2D>("VerticalMovementGuide");
+		guide.Visible = false;
 		_isInVerticalMovement = false;
 		CollisionMask = _originalCollisionMask;
 		_gravity = Gravity;
@@ -178,7 +182,7 @@ public partial class Player : CharacterBody2D
 
 	public void DisplayTransitionGuide(bool show)
 	{
-		var guide = GetNode<Label>("TransitionGuide");
+		var guide = GetNode<Node2D>("TransitionGuide");
 		guide.Visible = show;
 	}
 
@@ -201,7 +205,6 @@ public partial class Player : CharacterBody2D
 		if (_health <= 0)
 		{
 			//Die();
-			return;
 		}
 	}
 

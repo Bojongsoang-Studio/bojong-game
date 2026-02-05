@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c2jfqrfub1huu"]
 
 [ext_resource type="Texture2D" uid="uid://dqumildgv30uf" path="res://Assets/Sprites/Areas/Street/Citizens/Punk/Idle.png" id="1_ewuao"]
-[ext_resource type="Script" uid="uid://bg03jomsq4ohl" path="res://Scenes/Areas/Street/Citizens/Citizen.cs" id="1_o2d6h"]
-[ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="3_o2d6h"]
+[ext_resource type="PackedScene" uid="uid://bioofsscxe7ff" path="res://Scenes/UI/PopupDialog/popup_dialog_area.tscn" id="4_j8pp8"]
+[ext_resource type="PackedScene" uid="uid://dsqe6k0k1lu5w" path="res://Scenes/UI/PopupDialog/popup_dialog_label.tscn" id="5_0mly7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hpr37"]
 atlas = ExtResource("1_ewuao")
@@ -44,28 +44,20 @@ animations = [{
 size = Vector2(48, 48)
 
 [node name="Punk" type="Node2D" unique_id=1880373177]
-script = ExtResource("1_o2d6h")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=772548821]
 sprite_frames = SubResource("SpriteFrames_0mly7")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="Area" type="Area2D" parent="." unique_id=1790110908]
-collision_mask = 2
+[node name="PopupDialogArea" parent="." unique_id=1495214934 instance=ExtResource("4_j8pp8")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=73011436]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PopupDialogArea" unique_id=73011436]
 shape = SubResource("RectangleShape2D_ewuao")
 
-[node name="Dialog" type="Label" parent="." unique_id=816159127]
+[node name="PopupDialogLabel" parent="PopupDialogArea" unique_id=440913319 instance=ExtResource("5_0mly7")]
 offset_left = -96.0
 offset_top = -59.0
 offset_right = 96.0
 offset_bottom = -18.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("3_o2d6h")
-theme_override_font_sizes/font_size = 8
 text = "I heard the forest is full of killing machines—definitely not somewhere you want to wander."
-horizontal_alignment = 1
-autowrap_mode = 3

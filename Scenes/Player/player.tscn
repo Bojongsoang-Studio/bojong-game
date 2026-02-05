@@ -5,8 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://gie8abx5omo6" path="res://Assets/Sprites/Player/Hurt.png" id="2_htcer"]
 [ext_resource type="Texture2D" uid="uid://b0wif1a6lmeqw" path="res://Assets/Sprites/Player/Idle.png" id="2_xpcdj"]
 [ext_resource type="Texture2D" uid="uid://vqbcjahowhdh" path="res://Assets/Sprites/Player/Run.png" id="3_mtuoh"]
-[ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="4_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="6_0u5uq"]
+[ext_resource type="Texture2D" uid="uid://dnjdd0yhgpxm5" path="res://Assets/Sprites/UI/Keys/KeyboardLettersSymbols.png" id="7_gk6dx"]
+[ext_resource type="Texture2D" uid="uid://cxvvcj7pc3wg8" path="res://Assets/Sprites/UI/Keys/KeyboardExtras.png" id="7_jlvik"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ks1b7"]
 atlas = ExtResource("2_dd0ac")
@@ -173,6 +174,72 @@ size = Vector2(16, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_htcer"]
 radius = 15.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmb2s"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur3l4"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ahak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmb2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur3l4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ahak"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rukb4"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(16, 112, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4no11"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ahak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rukb4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr1w5"]
+atlas = ExtResource("7_jlvik")
+region = Rect2(96, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ythyg"]
+atlas = ExtResource("7_jlvik")
+region = Rect2(96, 80, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmb2s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qr1w5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ythyg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D" unique_id=699596196]
 collision_layer = 2
 collision_mask = 2147483649
@@ -198,19 +265,24 @@ shape = SubResource("CircleShape2D_htcer")
 [node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("6_0u5uq")]
 position = Vector2(0, -23)
 
-[node name="TransitionGuide" type="Label" parent="." unique_id=114348333]
+[node name="VerticalMovementGuide" type="Node2D" parent="." unique_id=1428364951]
 visible = false
-offset_left = -24.0
-offset_top = -35.0
-offset_right = 24.0
-offset_bottom = -16.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("4_mtuoh")
-theme_override_font_sizes/font_size = 8
-text = "Press Enter"
-horizontal_alignment = 1
-autowrap_mode = 3
+
+[node name="Up" type="AnimatedSprite2D" parent="VerticalMovementGuide" unique_id=828551628]
+position = Vector2(-8, -43)
+sprite_frames = SubResource("SpriteFrames_2ahak")
+autoplay = "default"
+
+[node name="Down" type="AnimatedSprite2D" parent="VerticalMovementGuide" unique_id=2104574571]
+position = Vector2(8, -43)
+sprite_frames = SubResource("SpriteFrames_4no11")
+autoplay = "default"
+
+[node name="TransitionGuide" type="AnimatedSprite2D" parent="." unique_id=1214306169]
+visible = false
+position = Vector2(0, -43)
+sprite_frames = SubResource("SpriteFrames_bmb2s")
+autoplay = "default"
 
 [node name="Camera" type="Camera2D" parent="." unique_id=886884360]
 position = Vector2(0, -16)
