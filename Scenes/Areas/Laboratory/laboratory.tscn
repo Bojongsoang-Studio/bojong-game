@@ -1141,7 +1141,6 @@ tile_map_data = PackedByteArray("AAAGAPD/AgAGAAAAAAAGAPH/AgAGAAEAAAAGAPL/AgAGAAI
 tile_set = SubResource("TileSet_a6s81")
 
 [node name="Enemy" type="Node2D" parent="." unique_id=1744095661]
-visible = false
 
 [node name="BlueRobot" parent="Enemy" unique_id=2050803497 instance=ExtResource("10_ppqie")]
 position = Vector2(-1034, -479)

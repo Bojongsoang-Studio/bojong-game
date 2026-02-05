@@ -68,7 +68,6 @@
 [ext_resource type="Texture2D" uid="uid://bhjv6x6b0l5b8" path="res://Assets/Sprites/Areas/Factory/Objects/Elevator_Button.png" id="60_jbfwt"]
 [ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="67_mf5pw"]
 [ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="68_mf5pw"]
-[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="69_q3no2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0lpwe"]
 texture = ExtResource("6_nph3d")
@@ -1229,13 +1228,13 @@ sources/35 = SubResource("TileSetAtlasSource_yyc3k")
 sources/38 = SubResource("TileSetAtlasSource_hb5r5")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0lpwe"]
-size = Vector2(8, 332)
+size = Vector2(8, 364)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqoxs"]
-size = Vector2(8, 167)
+size = Vector2(8, 204)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onyeo"]
-size = Vector2(6, 453)
+size = Vector2(6, 492)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbfwt"]
 size = Vector2(64, 32)
@@ -1281,19 +1280,20 @@ tile_map_data = PackedByteArray("AAD7/xMAAwAAAAAAAAD7/xQAAgAAAAAAAAD7/xUAAgAAAAA
 tile_set = SubResource("TileSet_kwvjs")
 
 [node name="Ladder" type="Area2D" parent="." unique_id=1509999809]
+collision_layer = 2147483649
 collision_mask = 2
 script = ExtResource("67_mf5pw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder" unique_id=1291551829]
-position = Vector2(-149, 762)
+position = Vector2(-149, 778)
 shape = SubResource("RectangleShape2D_0lpwe")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Ladder" unique_id=1144213498]
-position = Vector2(-596, 839.5)
+position = Vector2(-596, 858)
 shape = SubResource("RectangleShape2D_aqoxs")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Ladder" unique_id=1002011290]
-position = Vector2(276, 694.5)
+position = Vector2(276, 714)
 shape = SubResource("RectangleShape2D_onyeo")
 
 [node name="CameraAdjustmentArea" type="Area2D" parent="." unique_id=766431079 node_paths=PackedStringArray("Parent")]
@@ -1320,6 +1320,3 @@ collision_mask = 2147483649
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border" unique_id=1921141182]
 shape = SubResource("SegmentShape2D_mf5pw")
-
-[node name="Player" parent="." unique_id=699596196 instance=ExtResource("69_q3no2")]
-position = Vector2(-593, 737)

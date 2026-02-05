@@ -66,9 +66,8 @@ public partial class GreenRobot : Enemy
 
         _sprite.FlipH = _direction == -1;
 
-        var rayPos = _ledgeDetector.Position;
-        rayPos.X = Mathf.Abs(rayPos.X) * _direction;
-        _ledgeDetector.Position = rayPos;
+        if (_direction == 0) return;
+        _ledgeDetector.Scale = new Vector2(_direction, 1f);
     }
 
     private void OnHitboxBodyEntered(Node2D body)
