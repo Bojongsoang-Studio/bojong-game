@@ -1,11 +1,11 @@
-using BojongGame.Scenes.UI;
+﻿using BojongGame.Scenes.UI;
 using Godot;
 
-namespace BojongGame.Scenes.Enemies.Falcon;
+namespace BojongGame.Scenes.Enemies.Dog;
 
-public partial class Falcon : Enemy
+public partial class Dog : Enemy
 {
-	private enum State
+    private enum State
 	{
 		Patrol,
 		Chase,
@@ -14,37 +14,31 @@ public partial class Falcon : Enemy
 		Dead
 	}
 
-	[ExportCategory("Movement")]
-	[Export] public float PatrolSpeed = 70f;
-	[Export] public float ChaseSpeed = 135f;
-	[Export] public float Acceleration = 950f;
+	[ExportCategory("Movement")] [Export] public float PatrolSpeed = 65f;
+	[Export] public float ChaseSpeed = 120f;
+	[Export] public float Acceleration = 900f;
 	[Export] public float Gravity = 1200f;
 
-	[ExportCategory("Combat")]
-	[Export] public int MaxHealth = 5;
+	[ExportCategory("Combat")] [Export] public int MaxHealth = 5;
 	[Export] public int Damage = 1;
-	[Export] public float AttackCooldown = 0.85f;
-	[Export] public float AttackActiveTime = 0.14f;
-	[Export] public float AttackLockTime = 0.42f;
-	[Export] public float HurtTime = 0.22f;
-	[Export] public float KnockbackStrength = 320f;
-
-	[Export] public float StopDistance = 18f;
-	[Export] public float FacingDeadZone = 8f;
+	[Export] public float AttackCooldown = 0.9f;
+	[Export] public float AttackActiveTime = 0.12f;
+	[Export] public float AttackLockTime = 0.35f;
+	[Export] public float HurtDuration = 0.5f;
+	[Export] public float KnockbackStrength = 200f;
 
 	private int _direction = 1;
 
 	private State _state = State.Patrol;
-	private float _stateTimer;
+	private float _stateDuration;
 	private float _attackCooldown;
 
 	private AnimatedSprite2D _sprite;
 	private Node2D _facing;
 	private Area2D _detectionArea;
 	private Area2D _attackArea;
-	private RayCast2D _wallRay;
-	private RayCast2D _edgeRay;
-
+	private RayCast2D _wallRayCast;
+	private RayCast2D _edgeRayCast;
 	private HealthBar _healthBar;
 
 	private Player.Player _target;
@@ -53,29 +47,28 @@ public partial class Falcon : Enemy
 	{
 		Health = MaxHealth;
 
-		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		_sprite = GetNode<AnimatedSprite2D>("Sprite");
 		_facing = GetNode<Node2D>("Facing");
 		_detectionArea = GetNode<Area2D>("Facing/DetectionArea");
 		_attackArea = GetNode<Area2D>("Facing/AttackArea");
-		_wallRay = GetNode<RayCast2D>("Facing/WallRay");
-		_edgeRay = GetNode<RayCast2D>("Facing/EdgeRay");
-
+		_wallRayCast = GetNode<RayCast2D>("Facing/WallRayCast");
+		_edgeRayCast = GetNode<RayCast2D>("Facing/EdgeRayCast");
 		_healthBar = GetNode<HealthBar>("HealthBar");
-		_healthBar?.UpdateHealth(Health, MaxHealth);
 
-		_detectionArea.BodyEntered += OnDetectBodyEntered;
-		_detectionArea.BodyExited += OnDetectBodyExited;
+		_detectionArea.BodyEntered += OnDetectionBodyEntered;
+		_detectionArea.BodyExited += OnDetectionBodyExited;
 
 		_attackArea.BodyEntered += OnAttackBodyEntered;
+
 		_attackArea.Monitoring = false;
 
-		PlayAnimation("idle");
+		PlayAnimation("run");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		var dt = (float)delta;
-
+		
 		if (_state == State.Dead)
 		{
 			Velocity = new Vector2(0, Velocity.Y + Gravity * dt);
@@ -84,6 +77,7 @@ public partial class Falcon : Enemy
 		}
 
 		_attackCooldown = Mathf.Max(0f, _attackCooldown - dt);
+
 		Velocity = new Vector2(Velocity.X, Velocity.Y + Gravity * dt);
 
 		switch (_state)
@@ -107,16 +101,16 @@ public partial class Falcon : Enemy
 
 	private void TickPatrol(float delta)
 	{
-		if (_wallRay != null && _wallRay.IsColliding()) FlipDirection();
-		if (_edgeRay != null && !_edgeRay.IsColliding()) FlipDirection();
+		if (_wallRayCast.IsColliding()) FlipDirection();
+
+		if (!_edgeRayCast.IsColliding()) FlipDirection();
 
 		var vx = Mathf.MoveToward(Velocity.X, PatrolSpeed * _direction, Acceleration * delta);
 		Velocity = new Vector2(vx, Velocity.Y);
 
-		PlayAnimation("walk");
+		PlayAnimation("run");
 
-		if (IsTargetValid())
-			SetState(State.Chase);
+		if (IsTargetValid()) SetState(State.Chase);
 	}
 
 	private void TickChase(float delta)
@@ -128,41 +122,26 @@ public partial class Falcon : Enemy
 		}
 
 		var dx = _target.GlobalPosition.X - GlobalPosition.X;
-
-		if (Mathf.Abs(dx) > FacingDeadZone)
-		{
-			_direction = dx > 0 ? 1 : -1;
-			UpdateFacing();
-		}
-
-		if (Mathf.Abs(dx) <= StopDistance)
-		{
-			Velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0f, Acceleration * delta), Velocity.Y);
-			PlayAnimation("idle");
-
-			if (_attackCooldown <= 0f)
-				TriggerAttack();
-
-			return;
-		}
+		_direction = dx >= 0 ? 1 : -1;
+		UpdateFacing();
 
 		var vx = Mathf.MoveToward(Velocity.X, ChaseSpeed * _direction, Acceleration * delta);
 		Velocity = new Vector2(vx, Velocity.Y);
 
-		PlayAnimation("walk");
+		PlayAnimation("run");
+
+		if (_attackCooldown <= 0f && IsTargetValid()) TriggerAttack();
 	}
 
 	private void TickAttack(float delta)
 	{
-		_stateTimer -= delta;
+		_stateDuration -= delta;
 
 		Velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0f, Acceleration * delta), Velocity.Y);
 
-		if (_stateTimer <= AttackLockTime - AttackActiveTime)
-			_attackArea.Monitoring = false;
+		if (_stateDuration <= AttackLockTime - AttackActiveTime) _attackArea.Monitoring = false;
 
-		if (_stateTimer > 0f) return;
-
+		if (_stateDuration > 0f) return;
 		_attackCooldown = AttackCooldown;
 		_attackArea.Monitoring = false;
 		SetState(IsTargetValid() ? State.Chase : State.Patrol);
@@ -170,17 +149,17 @@ public partial class Falcon : Enemy
 
 	private void TickHurt(float delta)
 	{
-		_stateTimer -= delta;
-		if (_stateTimer <= 0f)
-			SetState(IsTargetValid() ? State.Chase : State.Patrol);
+		_stateDuration -= delta;
+		if (_stateDuration <= 0f) SetState(IsTargetValid() ? State.Chase : State.Patrol);
 	}
 
 	private void TriggerAttack()
 	{
 		_state = State.Attack;
-		_stateTimer = AttackLockTime;
+		_stateDuration = AttackLockTime;
 
 		PlayAnimation("attack");
+
 		_attackArea.Monitoring = true;
 	}
 
@@ -188,22 +167,19 @@ public partial class Falcon : Enemy
 	{
 		_state = state;
 
-		if (_state == State.Patrol) PlayAnimation("walk");
-		if (_state == State.Chase) PlayAnimation("walk");
+		if (_state == State.Patrol) PlayAnimation("run");
+		if (_state == State.Chase) PlayAnimation("run");
 		if (_state == State.Hurt) PlayAnimation("hurt");
 	}
 
-	private void OnDetectBodyEntered(Node body)
+	private void OnDetectionBodyEntered(Node2D body)
 	{
 		if (body is not Player.Player player) return;
-
 		_target = player;
-
-		if (_state != State.Attack && _state != State.Hurt)
-			SetState(State.Chase);
+		if (_state != State.Attack && _state != State.Hurt) SetState(State.Chase);
 	}
 
-	private void OnDetectBodyExited(Node body)
+	private void OnDetectionBodyExited(Node2D body)
 	{
 		if (body == _target) _target = null;
 	}
@@ -213,22 +189,23 @@ public partial class Falcon : Enemy
 		return _target != null && IsInstanceValid(_target);
 	}
 
-	private void OnAttackBodyEntered(Node body)
+	private void OnAttackBodyEntered(Node2D body)
 	{
 		if (_state != State.Attack) return;
 		if (body is not Player.Player player) return;
+		float pushDir = Mathf.Sign(player.GlobalPosition.X - GlobalPosition.X);
+		var knockback = new Vector2(pushDir * KnockbackStrength, -KnockbackStrength * 0.35f);
 
-		player.TakeHit(Damage, new Vector2(_direction * KnockbackStrength, -KnockbackStrength * 0.35f));
+		player.TakeHit(Damage, knockback);
 	}
 
-	public override void TakeHit(int dmg, Vector2 attackerWorldPos)
+	public override void TakeHit(int damage, Vector2 attackerPosition)
 	{
 		if (_state == State.Dead) return;
 
-		Health -= dmg;
-
-		_healthBar?.UpdateHealth(Health, MaxHealth);
-
+		Health -= damage;
+		_healthBar.UpdateHealth(Health, MaxHealth);
+		
 		if (Health <= 0)
 		{
 			Die();
@@ -236,13 +213,12 @@ public partial class Falcon : Enemy
 		}
 
 		_state = State.Hurt;
-		_stateTimer = HurtTime;
-		_attackArea.Monitoring = false;
+		_stateDuration = HurtDuration;
 
 		PlayAnimation("hurt");
-
-		var knockDir = (GlobalPosition.X - attackerWorldPos.X) >= 0 ? 1f : -1f;
-		Velocity = new Vector2(knockDir * KnockbackStrength, -KnockbackStrength * 0.3f);
+		
+		var knockbackDirection = GlobalPosition.X - attackerPosition.X >= 0 ? 1f : -1f;
+		Velocity = new Vector2(knockbackDirection * KnockbackStrength, -KnockbackStrength * 0.3f);
 	}
 
 	private void Die()
@@ -254,8 +230,6 @@ public partial class Falcon : Enemy
 
 		_detectionArea.Monitoring = false;
 		_attackArea.Monitoring = false;
-
-		if (_healthBar != null) _healthBar.Visible = false;
 	}
 
 	private void FlipDirection()
@@ -272,7 +246,6 @@ public partial class Falcon : Enemy
 
 	private void PlayAnimation(string name)
 	{
-		if (_state == State.Dead && name != "death") return;
 		if (_sprite.Animation == name && _sprite.IsPlaying()) return;
 		_sprite.Play(name);
 	}

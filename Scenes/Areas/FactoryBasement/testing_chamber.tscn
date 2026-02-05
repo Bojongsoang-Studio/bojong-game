@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://u2mj1h6aq48b" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/BackTileset.png" id="7_lqxn8"]
 [ext_resource type="Texture2D" uid="uid://cuiw7vfwo0ba6" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Tiles.png" id="8_msc2m"]
 [ext_resource type="Texture2D" uid="uid://dgfu3l7lw5ac" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Tileset.png" id="9_qvlhk"]
-[ext_resource type="PackedScene" uid="uid://cbmeqkraw02r3" path="res://Scenes/Enemies/Boss/boss.tscn" id="10_0lova"]
+[ext_resource type="PackedScene" uid="uid://cbmeqkraw02r3" path="res://Scenes/Enemies/Bosses/Swordman/swordman.tscn" id="10_0lova"]
 [ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="11_tykdm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mqkxs"]

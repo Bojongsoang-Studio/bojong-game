@@ -227,7 +227,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nevo0"]
-size = Vector2(35, 48)
+size = Vector2(16, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ymh6h"]
 radius = 128.0
@@ -245,12 +245,12 @@ ProjectileScene = ExtResource("2_tvo6w")
 ProjectileSpeed = 420.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1555158296]
-position = Vector2(8, -2)
 sprite_frames = SubResource("SpriteFrames_6wm2a")
-animation = &"walk"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=721671001]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_nevo0")
 
 [node name="Facing" type="Node2D" parent="." unique_id=1093182744]
@@ -259,25 +259,22 @@ shape = SubResource("RectangleShape2D_nevo0")
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/DetectionArea" unique_id=1700579024]
-position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ymh6h")
 
 [node name="AttackArea" type="Area2D" parent="Facing" unique_id=1818903728]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/AttackArea" unique_id=497201080]
-position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_cgmev")
 
 [node name="WallRay" type="RayCast2D" parent="Facing" unique_id=1169664029]
-position = Vector2(1, 0)
 target_position = Vector2(16, 0)
 
 [node name="EdgeRay" type="RayCast2D" parent="Facing" unique_id=2070791661]
-position = Vector2(1, 0)
 target_position = Vector2(16, 32)
 
 [node name="ProjectileSpawn" type="Marker2D" parent="Facing" unique_id=1045388945]
+position = Vector2(0, 4)
 
 [node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("8_t5jjh")]
-position = Vector2(0, -27)
+position = Vector2(0, -28)

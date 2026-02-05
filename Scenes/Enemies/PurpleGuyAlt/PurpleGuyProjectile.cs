@@ -39,16 +39,15 @@ public partial class PurpleGuyProjectile : Area2D
 
 	private void OnBodyEntered(Node body)
 	{
-		if (body is Player.Player player)
+		switch (body)
 		{
-			player.TakeHit(_damage, new Vector2(_dir * 260f, -120f));
-			QueueFree();
-			return;
-		}
-
-		if (body is StaticBody2D || body is TileMap)
-		{
-			QueueFree();
+			case Player.Player player:
+				player.TakeHit(_damage, new Vector2(_dir * 260f, -120f));
+				QueueFree();
+				return;
+			case StaticBody2D or TileMapLayer:
+				QueueFree();
+				break;
 		}
 	}
 }

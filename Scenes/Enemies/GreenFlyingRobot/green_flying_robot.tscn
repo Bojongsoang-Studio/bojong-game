@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://djpu2l00hs1kw"]
 
-[ext_resource type="Texture2D" uid="uid://dumphsn1bm1wf" path="res://Assets/Sprites/Forest/enemy/Free City Enemies Pixel Art/5/Walk.png" id="1_378n1"]
+[ext_resource type="Texture2D" uid="uid://dumphsn1bm1wf" path="res://Assets/Sprites/Enemies/GreenFlyingRobot/Walk.png" id="1_378n1"]
 [ext_resource type="Script" uid="uid://bb0fq58aowrgg" path="res://Scenes/Enemies/GreenFlyingRobot/GreenFlyingRobot.cs" id="1_m5aya"]
-[ext_resource type="Texture2D" uid="uid://bwjr5l1vq6hwe" path="res://Assets/Sprites/Forest/enemy/Free City Enemies Pixel Art/5/Attack.png" id="2_3quok"]
-[ext_resource type="Texture2D" uid="uid://buiou57kcu3j8" path="res://Assets/Sprites/Forest/enemy/Free City Enemies Pixel Art/5/Idle.png" id="4_dlr82"]
+[ext_resource type="Texture2D" uid="uid://bwjr5l1vq6hwe" path="res://Assets/Sprites/Enemies/GreenFlyingRobot/Attack.png" id="2_3quok"]
+[ext_resource type="Texture2D" uid="uid://buiou57kcu3j8" path="res://Assets/Sprites/Enemies/GreenFlyingRobot/Idle.png" id="4_dlr82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68mnl"]
-size = Vector2(32.5, 21.5)
+size = Vector2(32, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kub2q"]
 atlas = ExtResource("2_3quok")
@@ -73,7 +73,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -90,7 +90,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"fly",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -107,14 +107,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 8.0
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_32uag"]
-radius = 21.0
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5aya"]
-radius = 200.0
+radius = 192.0
 
 [node name="GreenFlyingRobot" type="CharacterBody2D" unique_id=210313969]
 collision_layer = 4
@@ -123,12 +123,11 @@ Speed = 60.0
 HoverHeight = 40.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=651087080]
-position = Vector2(-3.75, 0)
 shape = SubResource("RectangleShape2D_68mnl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1123621680]
 sprite_frames = SubResource("SpriteFrames_ydof2")
-animation = &"fly"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=350688701]
@@ -146,5 +145,5 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_m5aya")
 
 [node name="LaserRay" type="RayCast2D" parent="." unique_id=347980735]
-target_position = Vector2(0, 300)
+target_position = Vector2(0, 192)
 collision_mask = 3

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0wpnrbyykev1"]
 
-[ext_resource type="Script" uid="uid://gajl6wtxuwba" path="res://Scenes/Enemies/MeleeEnemy.cs" id="1_kcd4d"]
+[ext_resource type="Script" uid="uid://de270u6urwsyw" path="res://Scenes/Enemies/Gangstar/Gangstar.cs" id="1_iwmyp"]
 [ext_resource type="Texture2D" uid="uid://cv3ir563r4hiw" path="res://Assets/Sprites/Enemies/Gangstar/Death.png" id="1_ra76g"]
 [ext_resource type="Texture2D" uid="uid://8vd061v3ld4" path="res://Assets/Sprites/Enemies/Gangstar/Attack.png" id="2_23va6"]
 [ext_resource type="Texture2D" uid="uid://bkhryvy6bxlyk" path="res://Assets/Sprites/Enemies/Gangstar/Idle.png" id="2_wnlwc"]
@@ -216,7 +216,7 @@ radius = 16.0
 [node name="Gangstar" type="CharacterBody2D" unique_id=2049000164 groups=["enemy"]]
 collision_layer = 4
 collision_mask = 3221225473
-script = ExtResource("1_kcd4d")
+script = ExtResource("1_iwmyp")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2045525410]
 sprite_frames = SubResource("SpriteFrames_4r4x4")

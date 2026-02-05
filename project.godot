@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BojongGame"
-run/main_scene="uid://yx22ggwwr1a5"
+run/main_scene="uid://36f8vmqg6tw0"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
