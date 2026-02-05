@@ -104,6 +104,7 @@
 [ext_resource type="Texture2D" uid="uid://ch2b7dqb7rchk" path="res://Assets/Sprites/Areas/Forest/AnimatedObjects/Fountain.png" id="102_i65bx"]
 [ext_resource type="PackedScene" uid="uid://djpu2l00hs1kw" path="res://Scenes/Enemies/GreenFlyingRobot/green_flying_robot.tscn" id="103_sjuqn"]
 [ext_resource type="PackedScene" uid="uid://dmiyb3u6ltpun" path="res://Scenes/Enemies/GreenRobot/green_robot.tscn" id="104_gy54j"]
+[ext_resource type="PackedScene" uid="uid://somvdye68jdi" path="res://Scenes/Areas/Forest/breakable_box.tscn" id="105_a8uch"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lkpk5"]
 texture = ExtResource("3_yjrg5")
@@ -2860,4 +2861,7 @@ position = Vector2(-282, -82)
 [node name="Player" parent="." unique_id=699596196 instance=ExtResource("2_a8uch")]
 z_index = 2
 position = Vector2(0, 40)
-collision_layer = 1
+
+[node name="BreakableBox" parent="." unique_id=2092516811 instance=ExtResource("105_a8uch")]
+position = Vector2(-129, 51)
+collision_mask = 2

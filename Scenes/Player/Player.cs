@@ -223,9 +223,39 @@ public partial class Player : CharacterBody2D
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("attack");
 		foreach (var enemy in _enemies.Where(IsInstanceValid)) enemy.TakeHit(Damage, GlobalPosition);
-	}
-	
-	private void PlayAnimation(string name)
+        foreach (var body in _attackArea.GetOverlappingBodies())
+        {
+            if (body is BreakableBox box)
+            {
+                box.Smash();
+            }
+        }
+    }
+
+    public void Heal(int amount)
+    {
+        if (_health <= 0 || _health >= MaxHealth) return;
+
+        _health += amount;
+
+        if (_health > MaxHealth)
+        {
+            _health = MaxHealth;
+        }
+
+        _healthBar.UpdateHealth(_health, MaxHealth);
+
+        PlayHealEffect();
+    }
+
+    private void PlayHealEffect()
+    {
+        Tween tween = CreateTween();
+        tween.TweenProperty(_sprite, "modulate", Colors.Green, 0.1f);
+        tween.TweenProperty(_sprite, "modulate", Colors.White, 0.1f);
+    }
+
+    private void PlayAnimation(string name)
 	{
 		if (_sprite.Animation == name && _sprite.IsPlaying()) return;
 		_sprite.Play(name);
