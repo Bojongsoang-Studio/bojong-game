@@ -45,6 +45,9 @@ public partial class Player : CharacterBody2D
 	private CollisionShape2D _collision;
 	private Area2D _attackArea;
 	private HealthBar _healthBar;
+	
+	private AudioStreamPlayer _sfxHit;
+	private AudioStreamPlayer _sfxHurt;
 
 	public override void _Ready()
 	{
@@ -54,6 +57,9 @@ public partial class Player : CharacterBody2D
 		_attackArea = GetNode<Area2D>("AttackArea");
 		_healthBar = GetNode<HealthBar>("HealthBar");
 		
+		_sfxHit = GetNode<AudioStreamPlayer>("SfxHit");
+		_sfxHurt = GetNode<AudioStreamPlayer>("SfxHurt");
+
 		_attackArea.BodyEntered += OnAttackBodyEntered;
 		_attackArea.BodyExited += OnAttackBodyExited;
 		
@@ -187,6 +193,8 @@ public partial class Player : CharacterBody2D
 		if (_isInvincible || _health <= 0) return;
 
 		_health -= damage;
+		_sfxHurt?.Stop();
+		_sfxHurt?.Play();
 		_healthBar.UpdateHealth(_health, MaxHealth);
 		_knockbackVelocity = knockback;
 		
@@ -219,9 +227,21 @@ public partial class Player : CharacterBody2D
 	{
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("attack");
-		foreach (var enemy in _enemies.Where(IsInstanceValid)) enemy.TakeHit(Damage, GlobalPosition);
+
+		var hitSomeone = false;
+		foreach (var enemy in _enemies.Where(IsInstanceValid))
+		{
+			enemy.TakeHit(Damage, GlobalPosition);
+			hitSomeone = true;
+		}
+
+		if (hitSomeone)
+		{
+			_sfxHit?.Stop();
+			_sfxHit?.Play();
+		}
 	}
-	
+
 	private void PlayAnimation(string name)
 	{
 		if (_sprite.Animation == name && _sprite.IsPlaying()) return;

@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://vqbcjahowhdh" path="res://Assets/Sprites/Player/Run.png" id="3_mtuoh"]
 [ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="4_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="6_0u5uq"]
+[ext_resource type="AudioStream" uid="uid://c51gnebwpse77" path="res://Assets/Audio/SFX/Punch.wav" id="8_gk6dx"]
+[ext_resource type="AudioStream" uid="uid://cjkm8iuvkcse" path="res://Assets/Audio/SFX/Groans.wav" id="9_jhyir"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ks1b7"]
 atlas = ExtResource("2_dd0ac")
@@ -171,7 +173,7 @@ animations = [{
 size = Vector2(16, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_htcer"]
-radius = 15.0
+radius = 16.03122
 
 [node name="Player" type="CharacterBody2D" unique_id=699596196]
 collision_layer = 2
@@ -179,6 +181,7 @@ collision_mask = 2147483649
 script = ExtResource("1_a3d8c")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=831599076]
+position = Vector2(11, 0)
 sprite_frames = SubResource("SpriteFrames_tugb3")
 animation = &"attack"
 autoplay = "idle"
@@ -192,7 +195,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=430442333]
-position = Vector2(0, 9)
+position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_htcer")
 
 [node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("6_0u5uq")]
@@ -215,3 +218,9 @@ autowrap_mode = 3
 [node name="Camera" type="Camera2D" parent="." unique_id=886884360]
 position = Vector2(0, -16)
 zoom = Vector2(3, 3)
+
+[node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=271603696]
+stream = ExtResource("8_gk6dx")
+
+[node name="SfxHurt" type="AudioStreamPlayer" parent="." unique_id=944880331]
+stream = ExtResource("9_jhyir")

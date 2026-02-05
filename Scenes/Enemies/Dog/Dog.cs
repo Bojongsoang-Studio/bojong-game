@@ -1,11 +1,11 @@
-﻿using BojongGame.Scenes.UI;
+using BojongGame.Scenes.UI;
 using Godot;
 
 namespace BojongGame.Scenes.Enemies.Dog;
 
 public partial class Dog : Enemy
 {
-    private enum State
+	private enum State
 	{
 		Patrol,
 		Chase,
@@ -43,6 +43,11 @@ public partial class Dog : Enemy
 
 	private Player.Player _target;
 
+	// SFX
+	private AudioStreamPlayer _sfxHit;
+	private AudioStreamPlayer _sfxHurt;
+	private AudioStreamPlayer _sfxDeath;
+
 	public override void _Ready()
 	{
 		Health = MaxHealth;
@@ -54,6 +59,11 @@ public partial class Dog : Enemy
 		_wallRayCast = GetNode<RayCast2D>("Facing/WallRayCast");
 		_edgeRayCast = GetNode<RayCast2D>("Facing/EdgeRayCast");
 		_healthBar = GetNode<HealthBar>("HealthBar");
+
+		// SFX nodes (must exist in the scene)
+		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
+		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
+		_sfxDeath = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
 
 		_detectionArea.BodyEntered += OnDetectionBodyEntered;
 		_detectionArea.BodyExited += OnDetectionBodyExited;
@@ -68,7 +78,7 @@ public partial class Dog : Enemy
 	public override void _PhysicsProcess(double delta)
 	{
 		var dt = (float)delta;
-		
+
 		if (_state == State.Dead)
 		{
 			Velocity = new Vector2(0, Velocity.Y + Gravity * dt);
@@ -193,10 +203,14 @@ public partial class Dog : Enemy
 	{
 		if (_state != State.Attack) return;
 		if (body is not Player.Player player) return;
+
 		float pushDir = Mathf.Sign(player.GlobalPosition.X - GlobalPosition.X);
 		var knockback = new Vector2(pushDir * KnockbackStrength, -KnockbackStrength * 0.35f);
 
 		player.TakeHit(Damage, knockback);
+
+		_sfxHit?.Stop();
+		_sfxHit?.Play();
 	}
 
 	public override void TakeHit(int damage, Vector2 attackerPosition)
@@ -205,26 +219,34 @@ public partial class Dog : Enemy
 
 		Health -= damage;
 		_healthBar.UpdateHealth(Health, MaxHealth);
-		
+
 		if (Health <= 0)
 		{
 			Die();
 			return;
 		}
 
+		_sfxHurt?.Stop();
+		_sfxHurt?.Play();
+
 		_state = State.Hurt;
 		_stateDuration = HurtDuration;
 
 		PlayAnimation("hurt");
-		
+
 		var knockbackDirection = GlobalPosition.X - attackerPosition.X >= 0 ? 1f : -1f;
 		Velocity = new Vector2(knockbackDirection * KnockbackStrength, -KnockbackStrength * 0.3f);
 	}
 
 	private void Die()
 	{
+		if (_state == State.Dead) return;
+
 		_state = State.Dead;
 		Velocity = Vector2.Zero;
+
+		_sfxDeath?.Stop();
+		_sfxDeath?.Play();
 
 		PlayAnimation("death");
 

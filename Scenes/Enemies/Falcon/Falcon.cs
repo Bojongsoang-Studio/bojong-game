@@ -49,6 +49,11 @@ public partial class Falcon : Enemy
 
 	private Player.Player _target;
 
+	// SFX (ADDED)
+	private AudioStreamPlayer _sfxHit;
+	private AudioStreamPlayer _sfxHurt;
+	private AudioStreamPlayer _sfxDeath;
+
 	public override void _Ready()
 	{
 		Health = MaxHealth;
@@ -62,6 +67,11 @@ public partial class Falcon : Enemy
 
 		_healthBar = GetNode<HealthBar>("HealthBar");
 		_healthBar?.UpdateHealth(Health, MaxHealth);
+
+		// SFX nodes (ADDED)
+		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
+		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
+		_sfxDeath = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
 
 		_detectionArea.BodyEntered += OnDetectBodyEntered;
 		_detectionArea.BodyExited += OnDetectBodyExited;
@@ -219,6 +229,10 @@ public partial class Falcon : Enemy
 		if (body is not Player.Player player) return;
 
 		player.TakeHit(Damage, new Vector2(_direction * KnockbackStrength, -KnockbackStrength * 0.35f));
+
+		// SFX Hit (ADDED)
+		_sfxHit?.Stop();
+		_sfxHit?.Play();
 	}
 
 	public override void TakeHit(int dmg, Vector2 attackerWorldPos)
@@ -235,6 +249,10 @@ public partial class Falcon : Enemy
 			return;
 		}
 
+		// SFX Hurt (ADDED)
+		_sfxHurt?.Stop();
+		_sfxHurt?.Play();
+
 		_state = State.Hurt;
 		_stateTimer = HurtTime;
 		_attackArea.Monitoring = false;
@@ -249,6 +267,10 @@ public partial class Falcon : Enemy
 	{
 		_state = State.Dead;
 		Velocity = Vector2.Zero;
+
+		// SFX Death (ADDED)
+		_sfxDeath?.Stop();
+		_sfxDeath?.Play();
 
 		PlayAnimation("death");
 
