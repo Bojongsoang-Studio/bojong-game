@@ -1,138 +1,142 @@
+using BojongGame.Scenes.UI;
 using Godot;
-// Alias for your Player class
 using PlayerClass = BojongGame.Scenes.Player.Player;
 
 namespace BojongGame.Scenes.Enemies.GreenFlyingRobot;
 
-public partial class GreenFlyingRobot : CharacterBody2D
+public partial class GreenFlyingRobot : Enemy
 {
-	[Export] public float Speed = 80.0f; // Slower speed for hovering feels better
-	[Export] public int DamageAmount = 1;
-	[Export] public float KnockbackForce = 300.0f;
-	[Export] public float HoverHeight = 150.0f; // How high above the player to fly
+    [Export] public int MaxHealth = 5;
+    [Export] public float Speed = 80.0f;
+    [Export] public int DamageAmount = 1;
+    [Export] public float KnockbackForce = 300.0f;
+    [Export] public float HoverHeight = 150.0f;
 
-	private AnimatedSprite2D _sprite;
-	private RayCast2D _laserRay;
-	private Node2D _playerTarget;
+    private AnimatedSprite2D _sprite;
+    private RayCast2D _laserRay;
+    private Node2D _playerTarget;
+    private HealthBar _healthBar;
 
-	private bool _isAttacking = false;
-	private float _bobOffset = 0f;
+    private bool _isAttacking;
+    private float _bobOffset;
 
-	public override void _Ready()
-	{
-		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		_laserRay = GetNode<RayCast2D>("LaserRay"); // <--- GET THE RAYCAST
+    public override void _Ready()
+    {
+        Health = MaxHealth;
 
-		// Setup Hitbox (Contact Damage - if player jumps into drone)
-		var hitbox = GetNode<Area2D>("Hitbox");
-		hitbox.BodyEntered += OnHitboxBodyEntered;
+        _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        _laserRay = GetNode<RayCast2D>("LaserRay");
+        _healthBar = GetNode<HealthBar>("HealthBar");
 
-		// Setup Detection (Finding Player)
-		var detection = GetNode<Area2D>("DetectionArea");
-		detection.BodyEntered += (body) =>
-		{
-			if (body is PlayerClass p)
-			{
-				GD.Print("TARGET ACQUIRED");
-				_playerTarget = p;
-			}
-		};
-		detection.BodyExited += (body) => { if (body == _playerTarget) _playerTarget = null; };
+        var hitbox = GetNode<Area2D>("Hitbox");
+        hitbox.BodyEntered += OnHitboxBodyEntered;
 
-		// Connect animation signal
-		_sprite.AnimationFinished += OnAnimationFinished;
-		_sprite.Play("fly");
+        var detection = GetNode<Area2D>("DetectionArea");
+        detection.BodyEntered += body =>
+        {
+            if (body is not PlayerClass p) return;
+            _playerTarget = p;
+        };
+        detection.BodyExited += body =>
+        {
+            if (body == _playerTarget) _playerTarget = null;
+        };
 
-		// Safety: Ignore Player Body collisions
-		SetCollisionLayerValue(3, true);
-		SetCollisionMaskValue(1, true);
-		SetCollisionMaskValue(2, false);
-	}
+        _sprite.AnimationFinished += OnAnimationFinished;
+        _sprite.Play("fly");
 
-	public override void _PhysicsProcess(double delta)
-	{
-		// 1. IF ATTACKING, FREEZE!
-		if (_isAttacking)
-		{
-			Velocity = Velocity.MoveToward(Vector2.Zero, 100 * (float)delta);
-			MoveAndSlide();
-			return;
-		}
+        SetCollisionLayerValue(3, true);
+        SetCollisionMaskValue(1, true);
+        SetCollisionMaskValue(2, false);
+    }
 
-		Vector2 velocity = Vector2.Zero;
+    public override void _PhysicsProcess(double delta)
+    {
+        var velocity = Velocity;
+        
+        if (_isAttacking && Health > 0)
+        {
+            Velocity = Velocity.MoveToward(Vector2.Zero, 100 * (float)delta);
+            MoveAndSlide();
+            return;
+        }
 
-		if (_playerTarget != null)
-		{
+        if (Health <= 0)
+        {
+            velocity.X = 0;
+            velocity.Y += 1000 * (float)delta;
+        }
+        else if (_playerTarget != null)
+        {
+            var targetPos = _playerTarget.GlobalPosition;
+            targetPos.Y -= HoverHeight;
 
-			// 1. Calculate the "Hover Spot" (Directly above player)
-			Vector2 targetPos = _playerTarget.GlobalPosition;
-			targetPos.Y -= HoverHeight; // Aim for the sky above player
+            var direction = (targetPos - GlobalPosition).Normalized();
+            velocity = direction * Speed;
 
-			// 2. Move towards that hover spot
-			Vector2 direction = (targetPos - GlobalPosition).Normalized();
-			velocity = direction * Speed;
+            _sprite.FlipH = !(_playerTarget.GlobalPosition.X > GlobalPosition.X);
 
-			// 3. Face the player
-			if (_playerTarget.GlobalPosition.X > GlobalPosition.X)
-				_sprite.FlipH = false; // Face Right
-			else
-				_sprite.FlipH = true;  // Face Left
+            if (_laserRay.IsColliding())
+            {
+                var hitObject = _laserRay.GetCollider();
+                if (hitObject is PlayerClass playerToZap)
+                {
+                    FireLaser(playerToZap);
+                }
+            }
+        }
+        else
+        {
+            _bobOffset += (float)delta * 5.0f;
+            velocity = Velocity.MoveToward(Vector2.Zero, 200 * (float)delta);
+            _sprite.Offset = new Vector2(0, Mathf.Sin(_bobOffset) * 5);
+        }
 
-			// 4. CHECK LASER SIGHT
-			// If the raycast hits something AND that something is the player...
-			if (_laserRay.IsColliding())
-			{
-				var hitObject = _laserRay.GetCollider();
-				if (hitObject is PlayerClass playerToZap)
-				{
-					FireLaser(playerToZap);
-				}
-			}
-		}
-		else
-		{
-			// --- IDLE BOBBING ---
-			_bobOffset += (float)delta * 5.0f;
-			velocity = Velocity.MoveToward(Vector2.Zero, 200 * (float)delta);
-			_sprite.Offset = new Vector2(0, Mathf.Sin(_bobOffset) * 5);
-		}
+        Velocity = velocity;
+        MoveAndSlide();
+    }
 
-		Velocity = velocity;
-		MoveAndSlide();
-	}
+    private void FireLaser(PlayerClass player)
+    {
+        if (Health <= 0) return;
+        _isAttacking = true;
+        _sprite.Play("attack");
 
-	private void FireLaser(PlayerClass player)
-	{
-		GD.Print("ZAP!");
-		_isAttacking = true;
-		_sprite.Play("attack"); // Play the laser animation
+        var laserKnockback = Vector2.Down * KnockbackForce;
+        player.TakeHit(DamageAmount, laserKnockback);
+    }
 
-		// Deal Damage IMMEDIATELY (Zap!)
-		// Since the laser pushes DOWN, knockback should be DOWN
-		Vector2 laserKnockback = Vector2.Down * KnockbackForce;
-		player.TakeHit(DamageAmount, laserKnockback);
-	}
+    private void OnHitboxBodyEntered(Node2D body)
+    {
+        if (Health <= 0) return;
+        if (_isAttacking) return;
 
-	private void OnHitboxBodyEntered(Node2D body)
-	{
-		// Keep this for "Body Contact" damage (if player jumps into the drone)
-		if (_isAttacking) return;
+        if (body is not PlayerClass player) return;
+        var pushDir = (player.GlobalPosition - GlobalPosition).Normalized();
+        player.TakeHit(DamageAmount, pushDir * KnockbackForce);
+    }
 
-		if (body is PlayerClass player)
-		{
-			Vector2 pushDir = (player.GlobalPosition - GlobalPosition).Normalized();
-			player.TakeHit(DamageAmount, pushDir * KnockbackForce);
-		}
-	}
+    private void OnAnimationFinished()
+    {
+        if (_sprite.Animation != "attack" && _sprite.Animation != "hurt") return;
+        _isAttacking = false;
+        PlayAnimation("fly");
+    }
 
-	private void OnAnimationFinished()
-	{
-		// Go back to flying after zap is done
-		if (_sprite.Animation == "attack")
-		{
-			_isAttacking = false;
-			_sprite.Play("fly");
-		}
-	}
+    public override void TakeHit(int dmg, Vector2 attackerWorldPos)
+    {
+        Health -= dmg;
+        _healthBar.UpdateHealth(Health, MaxHealth);
+        PlayAnimation("hurt");
+        var knockbackDirection = GlobalPosition.X - attackerWorldPos.X >= 0 ? 1f : -1f;
+        Velocity = new Vector2(knockbackDirection * 300f, -300f * 0.3f);
+        MoveAndSlide();
+        if (Health <= 0) PlayAnimation("death");
+    }
+
+    private void PlayAnimation(string name)
+    {
+        if (_sprite.Animation == name && _sprite.IsPlaying()) return;
+        _sprite.Play(name);
+    }
 }
- 

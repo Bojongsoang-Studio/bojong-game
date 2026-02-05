@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ban64esdxmv4m" path="res://Assets/Sprites/Enemies/BlueRobot/Idle.png" id="7_kmh3a"]
 [ext_resource type="Texture2D" uid="uid://dyeo2h727ex5q" path="res://Assets/Sprites/Enemies/BlueRobot/Special.png" id="8_l315b"]
 [ext_resource type="Texture2D" uid="uid://b8aflhu5oeo41" path="res://Assets/Sprites/Enemies/BlueRobot/Walk.png" id="9_qmcj0"]
-[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/health_bar.tscn" id="10_qeqqy"]
+[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="10_qeqqy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2pq58"]
 atlas = ExtResource("3_4fosk")

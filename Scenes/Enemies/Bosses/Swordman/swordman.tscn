@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bn64ptyx5p3f4" path="res://Assets/Sprites/Enemies/Bosses/Swordsman/Idle.png" id="9_pado4"]
 [ext_resource type="Texture2D" uid="uid://bnnud4aosabc" path="res://Assets/Sprites/Enemies/Bosses/Swordsman/Pick_Up.png" id="10_wdf8e"]
 [ext_resource type="Texture2D" uid="uid://bcgthvkodsr25" path="res://Assets/Sprites/Enemies/Bosses/Swordsman/Shutdown.png" id="11_1ihd0"]
-[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/health_bar.tscn" id="12_xse5w"]
+[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="12_xse5w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7xxu5"]
 atlas = ExtResource("2_ec1t3")

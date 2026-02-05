@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://m88fmrm46viv" path="res://Assets/Sprites/Enemies/PurpleGuy/Hurt.png" id="5_c5k21"]
 [ext_resource type="Texture2D" uid="uid://c2tkgaokx1u27" path="res://Assets/Sprites/Enemies/PurpleGuy/Idle.png" id="6_nnhp7"]
 [ext_resource type="Texture2D" uid="uid://c3tqke3ipcj5q" path="res://Assets/Sprites/Enemies/PurpleGuy/Walk.png" id="7_iggvq"]
-[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/health_bar.tscn" id="8_t5jjh"]
+[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="8_t5jjh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m5u7k"]
 atlas = ExtResource("3_xfdaa")

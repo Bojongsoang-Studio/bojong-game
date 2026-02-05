@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ong6h715xsx4" path="res://Assets/Sprites/Enemies/Falcon/Hurt.png" id="4_mp78p"]
 [ext_resource type="Texture2D" uid="uid://dqpsavw8aooui" path="res://Assets/Sprites/Enemies/Falcon/Idle.png" id="5_lmtuu"]
 [ext_resource type="Texture2D" uid="uid://csq1gfribkflb" path="res://Assets/Sprites/Enemies/Falcon/Walk.png" id="6_ona0p"]
-[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/health_bar.tscn" id="7_wbjru"]
+[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="7_wbjru"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vunoq"]
 atlas = ExtResource("2_t8ahp")

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bkhryvy6bxlyk" path="res://Assets/Sprites/Enemies/Gangstar/Idle.png" id="2_wnlwc"]
 [ext_resource type="Texture2D" uid="uid://dt20aqgwjdtqp" path="res://Assets/Sprites/Enemies/Gangstar/Hurt.png" id="3_4sost"]
 [ext_resource type="Texture2D" uid="uid://cpdsg0mksm2bw" path="res://Assets/Sprites/Enemies/Gangstar/Run.png" id="5_23va6"]
-[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/health_bar.tscn" id="6_4sost"]
+[ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="6_4sost"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iad1o"]
 atlas = ExtResource("2_23va6")
