@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dsqe6k0k1lu5w"]
+
+[ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="1_j7qev"]
+
+[node name="PopupDialogLabel" type="Label" unique_id=440913319]
+offset_right = 192.0
+offset_bottom = 12.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_j7qev")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+autowrap_mode = 3

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bioofsscxe7ff"]
+
+[ext_resource type="Script" uid="uid://bni6wlbuce78l" path="res://Scenes/UI/PopupDialog/PopupDialogArea.cs" id="1_sub7i"]
+
+[node name="PopupDialogArea" type="Area2D" unique_id=1495214934]
+collision_mask = 2
+script = ExtResource("1_sub7i")
