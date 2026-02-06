@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace BojongGame.Scenes.MainMenu;
 
 public partial class MainMenu : Control
 {
@@ -20,8 +21,8 @@ public partial class MainMenu : Control
 		exitButton.MouseEntered += () => AnimateButton(exitButton, true);
 		exitButton.MouseExited += () => AnimateButton(exitButton, false);
 
-		CenterPivot(startButton);
-		CenterPivot(exitButton);
+        CenterPivot(startButton);
+        CenterPivot(exitButton);
 
 		startButton.Resized += () => CenterPivot(startButton);
 		exitButton.Resized += () => CenterPivot(exitButton);
@@ -47,20 +48,20 @@ public partial class MainMenu : Control
 
 	private void AnimateButton(Control button, bool isHovered)
 	{
-		Tween tween = CreateTween();
+		var tween = CreateTween();
 		if (isHovered)
 		{
 			tween.TweenProperty(button, "scale", new Vector2(1.2f, 1.2f), 0.1f)
-				 .SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+				.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
 		}
 		else
 		{
 			tween.TweenProperty(button, "scale", Vector2.One, 0.1f)
-				 .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+				.SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 		}
 	}
 
-	private void CenterPivot(Control button)
+	private static void CenterPivot(Control button)
 	{
 		button.PivotOffset = button.Size / 2;
 	}
