@@ -46,6 +46,34 @@ public partial class Swordman : Enemy
 	[Export] public float KnockbackStrength = 320f;
 	[Export] public int DamageStreakLimit = 6;
 	[Export] public float EscapeJumpVelocity = -520f;
+	
+	[ExportCategory("New: Leap / Escape")]
+	[Export] public bool LeapToPlayerWhenAirborne = true;
+	[Export] public float LeapCooldown = 1.0f;
+	[Export] public float LeapJumpVelocity = -520f;
+	[Export] public float LeapHorizontalBoost = 520f;
+	[Export] public float LeapMaxDistanceX = 520f;	
+	
+	[Export] public float LeapMinHeightDelta = 20f;   
+	[Export] public float LeapMaxHeightDelta = 300f;  
+	[Export] public float LeapMinDistanceX = 0f;
+	
+	[ExportCategory("Drop")]
+	[Export] public bool DropToPlayerWhenBelow = true;
+	[Export] public float DropCooldown = 1.0f;
+	[Export] public float DropVelocity = 150f;
+	[Export] public float DropHorizontalBoost = 320f;
+	[Export] public float DropMaxDistanceX = 320f;	
+	
+	[Export] public float DropMinHeightDelta = 60f;   
+	[Export] public float DropMaxHeightDelta = 300f;  
+	[Export] public float DropMinDistanceX = 0f;     
+
+
+	[Export] public int ConsecutiveHitsToEscape = 3; 
+	[Export] public float ConsecutiveHitWindow = 1.2f; 
+	[Export] public float EscapeHorizontalBoost = 520f;
+
 
 	[ExportCategory("Phase 2: Combo")]
 	[Export] public bool Phase2EnableCombo = true;
@@ -84,6 +112,14 @@ public partial class Swordman : Enemy
 	private float _attackCooldown;
 	private float _projectileCooldown;
 	private float _projectileCheckTimer;
+	
+	private float _leapCooldown;
+	private float _dropCooldown;
+	private int _consecutiveHits;
+	private float _consecutiveHitTimer;
+	private bool _isPhasing = false;
+	private float _phaseTimer = 0f;
+
 
 	private int _damageStreak;
 	private bool _inAttackRange;
@@ -100,11 +136,6 @@ public partial class Swordman : Enemy
 	private Area2D _hitbox;
 	private Node2D _healthBar;
 	private Node2D _projectileSpawn;
-
-	private AudioStreamPlayer _sfxAttack;
-	private AudioStreamPlayer _sfxHit;
-	private AudioStreamPlayer _sfxHurt;
-	private AudioStreamPlayer _sfxDeath;
 
 	private readonly RandomNumberGenerator _rng = new();
 
@@ -125,12 +156,6 @@ public partial class Swordman : Enemy
 			_projectileSpawn = GetNodeOrNull<Node2D>(ProjectileSpawnPath);
 
 		_projectileSpawn ??= this;
-
-		// SFX nodes (must exist in the scene)
-		_sfxAttack = GetNodeOrNull<AudioStreamPlayer>("SfxAttack");
-		_sfxHit    = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
-		_sfxHurt   = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
-		_sfxDeath  = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
 
 		_detector.BodyEntered += OnPlayerDetected;
 		_detector.BodyExited += OnPlayerLost;
@@ -154,6 +179,23 @@ public partial class Swordman : Enemy
 		_projectileCooldown = Mathf.Max(0, _projectileCooldown - dt);
 		_projectileCheckTimer = Mathf.Max(0, _projectileCheckTimer - dt);
 
+		_leapCooldown = Mathf.Max(0, _leapCooldown - dt);
+		_dropCooldown = Mathf.Max(0, _dropCooldown - dt);
+		
+		if (_isPhasing)
+		{
+			_phaseTimer -= (float)delta;
+			if (_phaseTimer <= 0)
+			{
+				_isPhasing = false;
+				SetCollisionMaskValue(5, true); // Turn it back on after clearing the floor
+			}
+		}
+
+		_consecutiveHitTimer = Mathf.Max(0, _consecutiveHitTimer - dt);
+		if (_consecutiveHitTimer <= 0f)
+			_consecutiveHits = 0;
+		
 		if (_state != State.Blitz)
 			Velocity += new Vector2(0, Gravity * dt);
 
@@ -202,6 +244,9 @@ public partial class Swordman : Enemy
 		_direction = dx >= 0 ? 1 : -1;
 		_sprite.FlipH = _direction < 0;
 		if (_direction != 0) _hitbox.Scale = new Vector2(_direction, 1f);
+		
+		if (LeapToPlayerWhenAirborne) TryLeapToPlayer(dx);
+		if (DropToPlayerWhenBelow) TryDropToPlayer(dx);
 
 		var speed = GetSpeed();
 		var vx = Mathf.MoveToward(Velocity.X, speed * _direction, Accel * delta);
@@ -227,7 +272,57 @@ public partial class Swordman : Enemy
 				break;
 		}
 	}
-
+	
+	private void TryLeapToPlayer(float dx)
+	{
+		if (_player == null) return;
+		if (_transitioning || _invincible) return;
+		if (_state != State.Chase) return;
+		if (_leapCooldown > 0f) return;
+	
+		if (!IsOnFloor()) return;
+	
+		var absDx = Mathf.Abs(dx);
+		if (absDx < LeapMinDistanceX) return;
+		if (absDx > LeapMaxDistanceX) return;
+	
+		var dy = GlobalPosition.Y - _player.GlobalPosition.Y; 
+		if (dy < LeapMinHeightDelta) return;                
+		if (dy > LeapMaxHeightDelta) return;                 
+	
+		var dir = dx >= 0 ? 1 : -1;
+	
+		Velocity = new Vector2(dir * LeapHorizontalBoost, LeapJumpVelocity);
+		_leapCooldown = LeapCooldown;
+	}
+	
+	private void TryDropToPlayer(float dx)
+	{
+		if (_player == null) return;
+		if (_transitioning || _invincible) return;
+		if (_state != State.Chase) return;
+		if (_dropCooldown > 0f) return;
+	
+		if (!IsOnFloor()) return;
+	
+		var absDx = Mathf.Abs(dx);
+		if (absDx < DropMinDistanceX) return;
+		if (absDx > DropMaxDistanceX) return;
+	
+		var dy = _player.GlobalPosition.Y - GlobalPosition.Y; 
+		if (dy < DropMinHeightDelta) return;                
+		if (dy > DropMaxHeightDelta) return;                 
+	
+		var dir = dx >= 0 ? 1 : -1;
+		
+		_isPhasing = true;
+		_phaseTimer = 0.2f;
+		SetCollisionMaskValue(5, false);
+		Velocity = new Vector2(dir * DropHorizontalBoost, DropVelocity);
+		_dropCooldown = DropCooldown;
+	}
+	
+	
 	private void TriggerSingleAttack()
 	{
 		if (_transitioning || _invincible) return;
@@ -237,9 +332,6 @@ public partial class Swordman : Enemy
 
 		var idx = _rng.RandiRange(1, 4);
 		_sprite.Play($"attack{idx}");
-
-		_sfxAttack?.Stop();
-		_sfxAttack?.Play();
 
 		EnableHitbox();
 	}
@@ -255,9 +347,6 @@ public partial class Swordman : Enemy
 		var a2 = Mathf.Clamp(ComboSecondAttack, 1, 4);
 
 		_sprite.Play($"attack{a1}");
-		_sfxAttack?.Stop();
-		_sfxAttack?.Play();
-
 		EnableHitbox();
 		await ToSignal(GetTree().CreateTimer(AttackActiveTime), "timeout");
 		DisableHitbox();
@@ -267,9 +356,6 @@ public partial class Swordman : Enemy
 		if (_state == State.Dead || _transitioning) return;
 
 		_sprite.Play($"attack{a2}");
-		_sfxAttack?.Stop();
-		_sfxAttack?.Play();
-
 		EnableHitbox();
 		await ToSignal(GetTree().CreateTimer(AttackActiveTime), "timeout");
 		DisableHitbox();
@@ -293,9 +379,6 @@ public partial class Swordman : Enemy
 
 		DisableHitbox();
 		_sprite.Play("attack4");
-
-		_sfxAttack?.Stop();
-		_sfxAttack?.Play();
 
 		await ToSignal(GetTree().CreateTimer(BlitzTelegraph), "timeout");
 
@@ -366,11 +449,10 @@ public partial class Swordman : Enemy
 		if (body is not Player.Player player) return;
 
 		player.TakeHit(GetDamage(), new Vector2(_direction * KnockbackStrength, -200));
-
-		_sfxHit?.Stop();
-		_sfxHit?.Play();
-
 		DisableHitbox();
+		
+		_consecutiveHits = 0;
+		_consecutiveHitTimer = 0f;
 	}
 
 	public override void TakeHit(int dmg, Vector2 attackerWorldPos)
@@ -380,12 +462,6 @@ public partial class Swordman : Enemy
 		if (_transitioning) return;
 
 		Health -= dmg;
-
-		if (Health > 0)
-		{
-			_sfxHurt?.Stop();
-			_sfxHurt?.Play();
-		}
 
 		switch (Health)
 		{
@@ -407,8 +483,18 @@ public partial class Swordman : Enemy
 		}
 
 		_damageStreak++;
+		_consecutiveHits++;
+		_consecutiveHitTimer = ConsecutiveHitWindow;
 
-		if (_damageStreak >= DamageStreakLimit && IsOnFloor())
+
+		if (_consecutiveHits >= ConsecutiveHitsToEscape && IsOnFloor())
+		{
+			_consecutiveHits = 0;
+			_damageStreak = 0;
+		
+			Velocity = new Vector2(-_direction * EscapeHorizontalBoost, EscapeJumpVelocity);
+		}
+		else if (_damageStreak >= DamageStreakLimit && IsOnFloor())
 		{
 			_damageStreak = 0;
 			Velocity = new Vector2(-_direction * 420, EscapeJumpVelocity);
@@ -419,7 +505,7 @@ public partial class Swordman : Enemy
 			_stateTimer = HurtTime;
 			_sprite.Play("hurt");
 		}
-
+		
 		CheckPhaseAndTransition();
 	}
 
@@ -507,12 +593,11 @@ public partial class Swordman : Enemy
 
 		_projectileCooldown = ProjectileCooldown;
 	}
+	
+	
 
 	private void Die()
 	{
-		_sfxDeath?.Stop();
-		_sfxDeath?.Play();
-
 		_state = State.Dead;
 		_transitioning = true;
 		_invincible = true;
