@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bws31ge6ft23"]
 
 [ext_resource type="Script" uid="uid://b2w5v2wcjy30q" path="res://Scenes/MainMenu/MainMenu.cs" id="1_v763k"]
-[ext_resource type="PackedScene" uid="uid://ubcchmcyuf2v" path="res://Scenes/Game/game.tscn" id="2_0l8wx"]
+[ext_resource type="PackedScene" uid="uid://blifkksp85iy6" path="res://Scenes/Cutscenes/prologue.tscn" id="2_0l8wx"]
 [ext_resource type="Texture2D" uid="uid://b51ad8hkik533" path="res://Assets/MainMenu/LandingPageGame.png" id="2_adu2g"]
 [ext_resource type="Texture2D" uid="uid://bla072la4fp72" path="res://Assets/MainMenu/Retcon_logo.png" id="2_qgdf6"]
 [ext_resource type="Texture2D" uid="uid://bc070s8ymnj4h" path="res://Assets/MainMenu/Startbutton.png" id="4_0l8wx"]
