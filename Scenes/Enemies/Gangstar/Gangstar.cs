@@ -58,6 +58,7 @@ public partial class Gangstar : Enemy
 		_wallRayCast = GetNode<RayCast2D>("Facing/WallRayCast");
 		_edgeRayCast = GetNode<RayCast2D>("Facing/EdgeRayCast");
 		_healthBar = GetNode<HealthBar>("HealthBar");
+		
 		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
 		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
 		_sfxDeath = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
@@ -218,10 +219,9 @@ public partial class Gangstar : Enemy
 		if (Health <= 0)
 		{
 			Die();
-			return;
 			_sfxHurt?.Stop();
 			_sfxHurt?.Play();
-
+			return;
 		}
 
 		_state = State.Hurt;

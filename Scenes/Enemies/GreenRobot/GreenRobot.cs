@@ -26,10 +26,10 @@ public partial class GreenRobot : Enemy
 	{
 		Health = MaxHealth;
 
-		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		_ledgeDetector = GetNode<RayCast2D>("LedgeDetector");
-		_hitbox = GetNode<Area2D>("Hitbox");
-		_healthBar = GetNode<HealthBar>("HealthBar");
+        _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        _ledgeDetector = GetNode<RayCast2D>("LedgeDetector");
+        _hitbox = GetNode<Area2D>("Hitbox");
+        _healthBar = GetNode<HealthBar>("HealthBar");
 
 		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
 		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
@@ -73,9 +73,8 @@ public partial class GreenRobot : Enemy
 
 		_sprite.FlipH = _direction == -1;
 
-		var rayPos = _ledgeDetector.Position;
-		rayPos.X = Mathf.Abs(rayPos.X) * _direction;
-		_ledgeDetector.Position = rayPos;
+		if (_direction == 0) return;
+		_ledgeDetector.Scale = new Vector2(_direction, 1f);
 	}
 
 	private void OnHitboxBodyEntered(Node2D body)
@@ -107,12 +106,11 @@ public partial class GreenRobot : Enemy
 		var knockbackDirection = GlobalPosition.X - attackerWorldPos.X >= 0 ? 1f : -1f;
 		Velocity = new Vector2(knockbackDirection * 300f, -300f * 0.3f);
 		MoveAndSlide();
-		if (Health <= 0)
-		{
-			_sfxDeath?.Stop();
-			_sfxDeath?.Play();
-			PlayAnimation("death");
-		}
+		
+		if (Health > 0) return;
+		_sfxDeath?.Stop();
+		_sfxDeath?.Play();
+		PlayAnimation("death");
 	}
 
 	private void PlayAnimation(string name)

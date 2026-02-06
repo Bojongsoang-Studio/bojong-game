@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using BojongGame.Scenes.Areas.Objects.BreakableBox;
 using BojongGame.Scenes.UI;
 using Godot;
 
@@ -10,6 +12,8 @@ public partial class Player : CharacterBody2D
 	[Export] public int MaxHealth = 10;
 	[Export] public float AnimationCooldown = 1f;
 	[Export] public int Damage = 1;
+
+	[Export] public Vector2 SpawnPoint;
 
 	[Export] public float WalkSpeed = 220.0f;
 	[Export] public float SprintSpeed = 360.0f;
@@ -23,6 +27,8 @@ public partial class Player : CharacterBody2D
 	[Export] public float DashDuration = 0.15f;
 	[Export] public float DashCooldown = 1f;
 
+	[Export] public float InvincibilityDuration = 1.5f;
+
 	private int _health;
 
 	private float _gravity;
@@ -34,7 +40,7 @@ public partial class Player : CharacterBody2D
 
 	private bool _isInVerticalMovement;
 	private uint _originalCollisionMask;
-	private bool _isInvincible = false;
+	private bool _isInvincible;
 
 	private float _animationCooldown;
 	private Vector2 _knockbackVelocity = Vector2.Zero;
@@ -45,7 +51,7 @@ public partial class Player : CharacterBody2D
 	private CollisionShape2D _collision;
 	private Area2D _attackArea;
 	private HealthBar _healthBar;
-	
+
 	private AudioStreamPlayer _sfxHit;
 	private AudioStreamPlayer _sfxHurt;
 
@@ -56,16 +62,16 @@ public partial class Player : CharacterBody2D
 		_collision = GetNode<CollisionShape2D>("Collision");
 		_attackArea = GetNode<Area2D>("AttackArea");
 		_healthBar = GetNode<HealthBar>("HealthBar");
-		
+
 		_sfxHit = GetNode<AudioStreamPlayer>("SfxHit");
 		_sfxHurt = GetNode<AudioStreamPlayer>("SfxHurt");
 
 		_attackArea.BodyEntered += OnAttackBodyEntered;
 		_attackArea.BodyExited += OnAttackBodyExited;
-		
+
 		SetCollisionLayerValue(2, true);
 		SetCollisionLayerValue(1, false);
-		SetCollisionMaskValue(1, true);  
+		SetCollisionMaskValue(1, true);
 		SetCollisionMaskValue(3, false);
 	}
 
@@ -137,6 +143,11 @@ public partial class Player : CharacterBody2D
 				_sprite.FlipH = false;
 			}
 
+			if (Input.IsActionPressed("move_down"))
+			{
+				DropThrough();
+			}
+
 			if (direction != 0) _dashDirection = direction;
 
 			var targetSpeed = WalkSpeed;
@@ -169,6 +180,8 @@ public partial class Player : CharacterBody2D
 
 	public void EnterVerticalMovement()
 	{
+		var guide = GetNode<Node2D>("VerticalMovementGuide");
+		guide.Visible = true;
 		_isInVerticalMovement = true;
 		_originalCollisionMask = CollisionMask;
 		SetCollisionMaskValue(1, false);
@@ -177,6 +190,8 @@ public partial class Player : CharacterBody2D
 
 	public void ExitVerticalMovement()
 	{
+		var guide = GetNode<Node2D>("VerticalMovementGuide");
+		guide.Visible = false;
 		_isInVerticalMovement = false;
 		CollisionMask = _originalCollisionMask;
 		_gravity = Gravity;
@@ -184,7 +199,7 @@ public partial class Player : CharacterBody2D
 
 	public void DisplayTransitionGuide(bool show)
 	{
-		var guide = GetNode<Label>("TransitionGuide");
+		var guide = GetNode<Node2D>("TransitionGuide");
 		guide.Visible = show;
 	}
 
@@ -197,20 +212,17 @@ public partial class Player : CharacterBody2D
 		_sfxHurt?.Play();
 		_healthBar.UpdateHealth(_health, MaxHealth);
 		_knockbackVelocity = knockback;
-		
+
 		if (IsOnFloor()) _knockbackVelocity.Y = -200;
 		Velocity = _knockbackVelocity;
 
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("hurt");
 
-		StartInvincibility(1.5f);
+		TriggerInvincibility(InvincibilityDuration);
 		MoveAndSlide();
-		if (_health <= 0)
-		{
-			//Die();
-			return;
-		}
+
+		if (_health <= 0) Die();
 	}
 
 	private void OnAttackBodyEntered(Node2D body)
@@ -240,6 +252,37 @@ public partial class Player : CharacterBody2D
 			_sfxHit?.Stop();
 			_sfxHit?.Play();
 		}
+
+		foreach (var body in _attackArea.GetOverlappingBodies())
+		{
+			if (body is BreakableBox box)
+			{
+				box.Smash();
+			}
+		}
+	}
+
+	public void Heal(int amount)
+	{
+		if (_health <= 0 || _health >= MaxHealth) return;
+
+		_health += amount;
+
+		if (_health > MaxHealth)
+		{
+			_health = MaxHealth;
+		}
+
+		_healthBar.UpdateHealth(_health, MaxHealth);
+
+		PlayHealEffect();
+	}
+
+	private void PlayHealEffect()
+	{
+		Tween tween = CreateTween();
+		tween.TweenProperty(_sprite, "modulate", Colors.Green, 0.1f);
+		tween.TweenProperty(_sprite, "modulate", Colors.White, 0.1f);
 	}
 
 	private void PlayAnimation(string name)
@@ -248,14 +291,14 @@ public partial class Player : CharacterBody2D
 		_sprite.Play(name);
 	}
 
-	private void StartInvincibility(float duration)
+	private void TriggerInvincibility(float duration)
 	{
 		_isInvincible = true;
 
-		Tween tween = CreateTween();
+		var tween = CreateTween();
 		tween.SetLoops();
-		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f); 
-		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f); 
+		tween.TweenProperty(_sprite, "modulate:a", 0.5f, 0.1f);
+		tween.TweenProperty(_sprite, "modulate:a", 1.0f, 0.1f);
 		GetTree().CreateTimer(duration).Timeout += () =>
 		{
 			_isInvincible = false;
@@ -263,5 +306,34 @@ public partial class Player : CharacterBody2D
 			if (tween.IsValid()) tween.Kill();
 			_sprite.Modulate = Colors.White;
 		};
+	}
+
+	private async void DropThrough()
+	{
+		try
+		{
+			SetCollisionMaskValue(5, false);
+			await ToSignal(GetTree().CreateTimer(0.2f), SceneTreeTimer.SignalName.Timeout);
+			SetCollisionMaskValue(5, true);
+		}
+		catch (Exception e)
+		{
+			GD.Print(e.Message);
+		}
+	}
+
+	public void SetSpawnPoint(Vector2 spawnPoint)
+	{
+		SpawnPoint = spawnPoint;
+	}
+
+	private void Die()
+	{
+		PlayAnimation("death");
+		_animationCooldown = AnimationCooldown;
+		_health = MaxHealth;
+		_healthBar.UpdateHealth(_health, MaxHealth);
+		GlobalPosition = SpawnPoint;
+		TriggerInvincibility(InvincibilityDuration);
 	}
 }

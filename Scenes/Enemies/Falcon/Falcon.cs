@@ -49,7 +49,6 @@ public partial class Falcon : Enemy
 
 	private Player.Player _target;
 
-	// SFX (ADDED)
 	private AudioStreamPlayer _sfxHit;
 	private AudioStreamPlayer _sfxHurt;
 	private AudioStreamPlayer _sfxDeath;
@@ -68,10 +67,9 @@ public partial class Falcon : Enemy
 		_healthBar = GetNode<HealthBar>("HealthBar");
 		_healthBar?.UpdateHealth(Health, MaxHealth);
 
-		// SFX nodes (ADDED)
-		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
-		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
-		_sfxDeath = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
+		_sfxHit = GetNode<AudioStreamPlayer>("SfxHit");
+		_sfxHurt = GetNode<AudioStreamPlayer>("SfxHurt");
+		_sfxDeath = GetNode<AudioStreamPlayer>("SfxDeath");
 
 		_detectionArea.BodyEntered += OnDetectBodyEntered;
 		_detectionArea.BodyExited += OnDetectBodyExited;

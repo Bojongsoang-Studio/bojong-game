@@ -53,7 +53,6 @@ public partial class PurpleGuy : Enemy
 	private HealthBar _healthBar;
 	private Player.Player _target;
 
-	// SFX (ADDED)
 	private AudioStreamPlayer _sfxHit;
 	private AudioStreamPlayer _sfxHurt;
 	private AudioStreamPlayer _sfxDeath;
@@ -72,7 +71,6 @@ public partial class PurpleGuy : Enemy
 		_healthBar = GetNodeOrNull<HealthBar>("HealthBar");
 		_healthBar?.UpdateHealth(Health, MaxHealth);
 
-		// SFX nodes (ADDED)
 		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
 		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
 		_sfxDeath = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
@@ -226,7 +224,6 @@ public partial class PurpleGuy : Enemy
 
 		if (proj is PurpleGuyProjectile projectile) projectile.Setup(_direction, ProjectileSpeed, ProjectileDamage);
 
-		// SFX shot (ADDED)
 		_sfxHit?.Stop();
 		_sfxHit?.Play();
 	}
@@ -262,7 +259,6 @@ public partial class PurpleGuy : Enemy
 		_state = State.Dead;
 		Velocity = Vector2.Zero;
 
-		// SFX death (ADDED)
 		_sfxDeath?.Stop();
 		_sfxDeath?.Play();
 

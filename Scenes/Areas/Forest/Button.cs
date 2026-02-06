@@ -3,7 +3,6 @@ using Godot;
 namespace BojongGame.Scenes.Areas.Forest;
 public partial class Button : Area2D
 {
-	// Drag the Door node (from the Scene tree) into this slot
 	[Export]
 	public Door TargetDoor;
 
