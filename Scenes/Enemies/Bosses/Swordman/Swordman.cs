@@ -596,7 +596,7 @@ public partial class Swordman : Enemy
 	
 	
 
-	private void Die()
+	private async void Die() // Add 'async' here
 	{
 		_state = State.Dead;
 		_transitioning = true;
@@ -606,7 +606,11 @@ public partial class Swordman : Enemy
 		Velocity = Vector2.Zero;
 
 		_sprite.Play("dead");
-	}
+
+		await ToSignal(GetTree().CreateTimer(3.0f), SceneTreeTimer.SignalName.Timeout);
+
+		GetTree().ChangeSceneToFile("res://Scenes/EndCredit/endCredit.tscn");
+}
 
 	private float GetSpeed()
 	{
