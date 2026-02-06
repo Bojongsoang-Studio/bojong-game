@@ -55,7 +55,7 @@ position = Vector2(2815, 1386)
 shape = SubResource("RectangleShape2D_i6g32")
 
 [node name="Laboratory" parent="." unique_id=653620413 instance=ExtResource("5_i6g32")]
-position = Vector2(1856, 3738)
+position = Vector2(1856, 3942)
 
 [node name="LaboratoryEntry" type="Area2D" parent="." unique_id=756906567 node_paths=PackedStringArray("TransitionNode")]
 collision_mask = 2

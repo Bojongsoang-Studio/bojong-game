@@ -60,7 +60,6 @@
 [ext_resource type="Texture2D" uid="uid://dvuwroeaonsyj" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Boxes/3.png" id="50_2w8vn"]
 [ext_resource type="Texture2D" uid="uid://coa4q0p6wj4q5" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Icons/12.png" id="51_t8oda"]
 [ext_resource type="Texture2D" uid="uid://dytjkftuy66oh" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Icons/2.png" id="52_wy8sx"]
-[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="57_t8oda"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu8hl"]
 texture = ExtResource("1_m776p")
@@ -1511,9 +1510,6 @@ tile_set = SubResource("TileSet_a6s81")
 [node name="InFrontDecor" type="TileMapLayer" parent="." unique_id=1775403006]
 tile_map_data = PackedByteArray("AADq/xUAAQAAAAAAAADe/wUAAgAAAAAAAAABAA0AAwAAAAAAAADZ//r/AQAAAAAAAADc//f/AgAAAAAAAAD4//L/AwAAAAAAAAAUAPv/BAAAAAAAAAA=")
 tile_set = SubResource("TileSet_wy8sx")
-
-[node name="Player" parent="." unique_id=699596196 instance=ExtResource("57_t8oda")]
-position = Vector2(498, -16)
 
 [node name="Enemy" type="Node2D" parent="." unique_id=1744095661]
 
