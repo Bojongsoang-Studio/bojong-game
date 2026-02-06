@@ -295,9 +295,9 @@ animations = [{
 collision_layer = 2
 collision_mask = 2147483665
 script = ExtResource("1_a3d8c")
-SpawnPoint = Vector2(608, 372)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=831599076]
+position = Vector2(9, 0)
 sprite_frames = SubResource("SpriteFrames_tugb3")
 animation = &"death"
 autoplay = "idle"
@@ -347,4 +347,3 @@ stream = ExtResource("12_7g0yx")
 
 [node name="Camera" type="Camera2D" parent="." unique_id=886884360]
 position = Vector2(0, -16)
-zoom = Vector2(3, 3)

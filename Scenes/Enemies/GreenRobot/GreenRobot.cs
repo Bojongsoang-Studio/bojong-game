@@ -26,10 +26,10 @@ public partial class GreenRobot : Enemy
 	{
 		Health = MaxHealth;
 
-        _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-        _ledgeDetector = GetNode<RayCast2D>("LedgeDetector");
-        _hitbox = GetNode<Area2D>("Hitbox");
-        _healthBar = GetNode<HealthBar>("HealthBar");
+		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		_ledgeDetector = GetNode<RayCast2D>("LedgeDetector");
+		_hitbox = GetNode<Area2D>("Hitbox");
+		_healthBar = GetNode<HealthBar>("HealthBar");
 
 		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
 		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
