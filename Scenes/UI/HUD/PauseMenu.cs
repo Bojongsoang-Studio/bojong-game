@@ -5,7 +5,6 @@ namespace BojongGame.Scenes.UI.HUD;
 public partial class PauseMenu : CenterContainer
 {
 	[Export] public Hud Hud;
-	[Export] public PackedScene MainMenuScene;
 	
 	public override void _Ready()
 	{
@@ -37,18 +36,7 @@ public partial class PauseMenu : CenterContainer
 
 	private void OnExitPressed()
 	{
-		GetTree().Paused = false; 
-
-		if (MainMenuScene != null)
-		{
-			GetTree().ChangeSceneToPacked(MainMenuScene);
-		}
-		else
-		{
-			GD.PrintErr("MainMenuScene is null despite being attached in Inspector!");
-		
-			GetTree().ChangeSceneToFile("res://Scenes/MainMenu/main_menu.tscn");
-		}
+		GetTree().Quit();
 	}
 	
 	private void AnimateButton(Control button, bool isHovered)

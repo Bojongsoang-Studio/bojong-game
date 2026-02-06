@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dmg8fwjn67ang" path="res://Scenes/Game/TransitionArea.cs" id="2_ciybh"]
 [ext_resource type="PackedScene" uid="uid://b8e8jdcpsfafi" path="res://Scenes/Areas/Factory/factory.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="4_3dryh"]
-[ext_resource type="PackedScene" uid="uid://64dpkwcpblia" path="res://Scenes/UI/HUD/hud.tscn" id="5_flgk0"]
 [ext_resource type="PackedScene" uid="uid://co34vpymbn1lw" path="res://Scenes/Areas/Laboratory/laboratory.tscn" id="5_i6g32"]
+[ext_resource type="PackedScene" uid="uid://64dpkwcpblia" path="res://Scenes/UI/HUD/hud.tscn" id="6_flgk0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
 size = Vector2(48, 32)
@@ -69,4 +69,4 @@ shape = SubResource("RectangleShape2D_1l0tm")
 [node name="Player" parent="." unique_id=699596196 instance=ExtResource("4_3dryh")]
 position = Vector2(595, 348)
 
-[node name="HUD" parent="." unique_id=1924911123 instance=ExtResource("5_flgk0")]
+[node name="HUD" parent="." unique_id=1924911123 instance=ExtResource("6_flgk0")]
