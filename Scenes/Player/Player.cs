@@ -81,6 +81,8 @@ public partial class Player : CharacterBody2D
 		_gravity = Gravity;
 		_animationCooldown -= (float)delta;
 
+		DisplayBoxSmashGuide(_attackArea.GetOverlappingBodies().Any(body => body is BreakableBox));
+
 		if (_knockbackVelocity.Length() > 10.0f)
 		{
 			_knockbackVelocity = _knockbackVelocity.MoveToward(Vector2.Zero, 800.0f * (float)delta);
@@ -202,6 +204,12 @@ public partial class Player : CharacterBody2D
 		var guide = GetNode<Node2D>("TransitionGuide");
 		guide.Visible = show;
 	}
+	
+	public void DisplayBoxSmashGuide(bool show)
+	{
+		var guide = GetNode<Node2D>("BoxSmashGuide");
+		guide.Visible = show;
+	}
 
 	public void TakeHit(int damage, Vector2 knockback)
 	{
@@ -240,26 +248,24 @@ public partial class Player : CharacterBody2D
 		_animationCooldown = AnimationCooldown;
 		PlayAnimation("attack");
 
-		var hitSomeone = false;
+		var hitSomething = false;
+		
 		foreach (var enemy in _enemies.Where(IsInstanceValid))
 		{
 			enemy.TakeHit(Damage, GlobalPosition);
-			hitSomeone = true;
-		}
-
-		if (hitSomeone)
-		{
-			_sfxHit?.Stop();
-			_sfxHit?.Play();
+			hitSomething = true;
 		}
 
 		foreach (var body in _attackArea.GetOverlappingBodies())
 		{
-			if (body is BreakableBox box)
-			{
-				box.Smash();
-			}
+			if (body is not BreakableBox box) continue;
+			box.Smash();
+			hitSomething = true;
 		}
+
+		if (!hitSomething) return;
+		_sfxHit?.Stop();
+		_sfxHit?.Play();
 	}
 
 	public void Heal(int amount)
@@ -280,7 +286,7 @@ public partial class Player : CharacterBody2D
 
 	private void PlayHealEffect()
 	{
-		Tween tween = CreateTween();
+		var tween = CreateTween();
 		tween.TweenProperty(_sprite, "modulate", Colors.Green, 0.1f);
 		tween.TweenProperty(_sprite, "modulate", Colors.White, 0.1f);
 	}

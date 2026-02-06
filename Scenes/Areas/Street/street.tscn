@@ -256,6 +256,9 @@ radius = 64.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omlqb"]
 size = Vector2(64, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yth67"]
+size = Vector2(64, 32)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tc6nq"]
 radius = 64.0
 
@@ -474,6 +477,10 @@ Parent = NodePath("../..")
 [node name="ZebraCross" type="CollisionShape2D" parent="Subarea2/CameraAdjustmentArea" unique_id=2018232652]
 position = Vector2(192, 128)
 shape = SubResource("RectangleShape2D_omlqb")
+
+[node name="Forest" type="CollisionShape2D" parent="Subarea2/CameraAdjustmentArea" unique_id=1014004653]
+position = Vector2(896, 144)
+shape = SubResource("RectangleShape2D_yth67")
 
 [node name="Punk" parent="Subarea2" unique_id=1880373177 instance=ExtResource("43_cftkh")]
 position = Vector2(664, 104)
