@@ -1,0 +1,293 @@
+[gd_scene format=3 uid="uid://blifkksp85iy6"]
+
+[ext_resource type="Texture2D" uid="uid://vqbcjahowhdh" path="res://Assets/Sprites/Player/Run.png" id="1_1oijc"]
+[ext_resource type="Texture2D" uid="uid://bgkhm620qoeab" path="res://Assets/MainMenu/Cutscene.png" id="1_lcdjp"]
+[ext_resource type="Script" uid="uid://b3wcny2pltoxm" path="res://Scenes/Cutscenes/Prologue.cs" id="1_x3d8o"]
+[ext_resource type="PackedScene" uid="uid://ubcchmcyuf2v" path="res://Scenes/Game/game.tscn" id="2_ch0r6"]
+[ext_resource type="Texture2D" uid="uid://b0wif1a6lmeqw" path="res://Assets/Sprites/Player/Idle.png" id="3_rb08m"]
+[ext_resource type="PackedScene" uid="uid://dsqe6k0k1lu5w" path="res://Scenes/UI/PopupDialog/popup_dialog_label.tscn" id="4_x3d8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcdjp"]
+atlas = ExtResource("1_1oijc")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ef1iy"]
+atlas = ExtResource("1_1oijc")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb08m"]
+atlas = ExtResource("1_1oijc")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3d8o"]
+atlas = ExtResource("1_1oijc")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch0r6"]
+atlas = ExtResource("1_1oijc")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y13nv"]
+atlas = ExtResource("1_1oijc")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyb8l"]
+atlas = ExtResource("3_rb08m")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2cv0"]
+atlas = ExtResource("3_rb08m")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvwaq"]
+atlas = ExtResource("3_rb08m")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80qe2"]
+atlas = ExtResource("3_rb08m")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fyb8l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcdjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ef1iy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rb08m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3d8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch0r6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y13nv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fyb8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2cv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvwaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80qe2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_k2cv0"]
+resource_name = "cutscene"
+length = 7.0
+markers = [{
+"color": Color(1, 1, 1, 1),
+"name": &"new_marker",
+"time": -1.1333333
+}]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 4.5666666, 6.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(54, 287), Vector2(226.5, 287), Vector2(226, 287), Vector2(330, 287)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(6.1, 6.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(0.1, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(6.1, 6.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CanvasLayer/ColorRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(6.133333, 6.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.003921569), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PopupDialogLabel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.5, 4.5666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.5, 4.5666666, 6.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [&"default", &"idle", &"default", &"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_1oijc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(54, 287)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CanvasLayer/ColorRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PopupDialogLabel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pvwaq"]
+_data = {
+&"Cutscene": SubResource("Animation_k2cv0"),
+&"RESET": SubResource("Animation_1oijc")
+}
+
+[node name="Prologue" type="Node2D" unique_id=548619816]
+script = ExtResource("1_x3d8o")
+Level1Scene = ExtResource("2_ch0r6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=567689377]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1504642678]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1731067163]
+position = Vector2(320, 180.5)
+scale = Vector2(1.6614584, 1.6318182)
+texture = ExtResource("1_lcdjp")
+
+[node name="StuntDouble" type="AnimatedSprite2D" parent="." unique_id=219139857]
+position = Vector2(54, 287)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_fyb8l")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.44719476
+
+[node name="PopupDialogLabel" parent="StuntDouble" unique_id=440913319 instance=ExtResource("4_x3d8o")]
+visible = false
+offset_left = -101.90666
+offset_top = -35.333336
+offset_right = 90.09334
+offset_bottom = -16.333336
+text = "I Need to Go Back to Save the World.."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2021065481]
+root_node = NodePath("../StuntDouble")
+libraries/ = SubResource("AnimationLibrary_pvwaq")
+autoplay = &"Cutscene"
