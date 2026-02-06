@@ -104,7 +104,7 @@ shape = SubResource("RectangleShape2D_i6g32")
 [node name="ForestEntry3" type="Area2D" parent="Forest" unique_id=166100677 node_paths=PackedStringArray("TransitionNode")]
 collision_mask = 2
 script = ExtResource("2_ciybh")
-TransitionNode = NodePath("../../FactoryBasement/FactoryBasementEntry2/CollisionShape2D")
+TransitionNode = NodePath("../../Laboratory/LaboratoryEntry3/CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Forest/ForestEntry3" unique_id=149053181]
 position = Vector2(7610, 4802)
@@ -133,6 +133,15 @@ TransitionNode = NodePath("../../FactoryBasement/FactoryBasementEntry/CollisionS
 position = Vector2(3072, 4214)
 shape = SubResource("RectangleShape2D_1l0tm")
 
+[node name="LaboratoryEntry3" type="Area2D" parent="Laboratory" unique_id=1259538972 node_paths=PackedStringArray("TransitionNode")]
+collision_mask = 2
+script = ExtResource("2_ciybh")
+TransitionNode = NodePath("../../Forest/ForestEntry3/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laboratory/LaboratoryEntry3" unique_id=181176662]
+position = Vector2(448, 4598)
+shape = SubResource("RectangleShape2D_1l0tm")
+
 [node name="FactoryBasement" type="Node2D" parent="." unique_id=66255528]
 
 [node name="FactoryBasement" parent="FactoryBasement" unique_id=667423887 instance=ExtResource("8_xfil1")]
@@ -143,13 +152,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryBasement/FactoryBasementEntry" unique_id=1787515361]
 position = Vector2(256, 5014)
-shape = SubResource("RectangleShape2D_1l0tm")
-
-[node name="FactoryBasementEntry2" type="Area2D" parent="FactoryBasement" unique_id=2113810551]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryBasement/FactoryBasementEntry2" unique_id=1517123347]
-position = Vector2(129, 5302)
 shape = SubResource("RectangleShape2D_1l0tm")
 
 [node name="Player" parent="." unique_id=699596196 instance=ExtResource("4_3dryh")]

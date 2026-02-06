@@ -88,13 +88,25 @@ _data = {
 atlas = ExtResource("3_rsxdw")
 region = Rect2(16, 80, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_shhdl"]
+atlas = ExtResource("3_rsxdw")
+region = Rect2(32, 48, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_44tkn"]
 atlas = ExtResource("3_rsxdw")
 region = Rect2(32, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gwbq"]
+atlas = ExtResource("3_rsxdw")
+region = Rect2(0, 32, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nyx02"]
 atlas = ExtResource("3_rsxdw")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyil3"]
+atlas = ExtResource("3_rsxdw")
+region = Rect2(48, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsxdw"]
 atlas = ExtResource("2_mnkwb")
@@ -186,6 +198,13 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_l1mtp")
 stretch_mode = 4
 
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Attack" unique_id=2096919887]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_shhdl")
+stretch_mode = 4
+
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Attack" unique_id=1507915634]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -209,10 +228,24 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_44tkn")
 stretch_mode = 4
 
+[node name="Left2" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Move/HBoxContainer" unique_id=381767205]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_1gwbq")
+stretch_mode = 4
+
 [node name="Right" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Move/HBoxContainer" unique_id=1867126017]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = SubResource("AtlasTexture_nyx02")
+stretch_mode = 4
+
+[node name="Right2" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Move/HBoxContainer" unique_id=366196420]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_lyil3")
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Move" unique_id=177135068]
