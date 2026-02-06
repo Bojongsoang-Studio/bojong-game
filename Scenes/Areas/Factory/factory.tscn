@@ -1251,6 +1251,9 @@ size = Vector2(64, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mf5pw"]
 size = Vector2(64, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85fnw"]
+size = Vector2(64, 32)
+
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_mf5pw"]
 a = Vector2(1056, 960)
 b = Vector2(-1024, 960)
@@ -1321,6 +1324,10 @@ shape = SubResource("RectangleShape2D_jbfwt")
 [node name="Laboratory" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1264954336]
 position = Vector2(976, -144)
 shape = SubResource("RectangleShape2D_mf5pw")
+
+[node name="Forest" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1135136764]
+position = Vector2(1024, 944)
+shape = SubResource("RectangleShape2D_85fnw")
 
 [node name="Border" type="StaticBody2D" parent="." unique_id=429156905]
 collision_layer = 2147483649

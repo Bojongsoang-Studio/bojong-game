@@ -339,9 +339,6 @@ sources/106 = SubResource("TileSetAtlasSource_a6s81")
 sources/107 = SubResource("TileSetAtlasSource_hnint")
 sources/108 = SubResource("TileSetAtlasSource_al3wx")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_21mj6"]
-size = Vector2(64, 32)
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8k2fv"]
 texture = ExtResource("11_ym62w")
 texture_region_size = Vector2i(32, 32)
@@ -1444,6 +1441,9 @@ sources/2 = SubResource("TileSetAtlasSource_t8oda")
 sources/3 = SubResource("TileSetAtlasSource_m31dq")
 sources/4 = SubResource("TileSetAtlasSource_frdt4")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21mj6"]
+size = Vector2(64, 32)
+
 [node name="Laboratory" type="Node2D" unique_id=653620413]
 
 [node name="GroundLayer" type="TileMapLayer" parent="." unique_id=1318837553]
@@ -1484,19 +1484,6 @@ position = Vector2(0, -96)
 scale = Vector2(6, 6)
 texture = ExtResource("9_8woj7")
 
-[node name="CameraAdjustmentArea" type="Area2D" parent="." unique_id=1478923463 node_paths=PackedStringArray("Parent")]
-collision_mask = 2
-script = ExtResource("11_qddiu")
-CameraLimitLeft = -1856
-CameraLimitRight = 1952
-CameraLimitTop = -810
-CameraLimitBottom = 810
-Parent = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=47184570]
-position = Vector2(-1312, -112)
-shape = SubResource("RectangleShape2D_21mj6")
-
 [node name="BehindDecor" type="TileMapLayer" parent="." unique_id=1608163611]
 z_index = -2
 tile_map_data = PackedByteArray("AADU/xQAAgAAAAAAAADY/xQAAgAAAAAAAADV/xQAAgAAAAAAAADX/xQAAgAAAAAAAADw/xMAAgAAAAAAAADx/xMAAgAAAAAAAADm//T/BgAHAAAAAFDm//X/BgAFAAAAAFDm//b/BgAEAAAAAFDm//f/BgAGAAAAAFDm//j/BgAFAAAAAFDt//r/BgAGAAAAAADu//r/BgAGAAAAAADv//r/BgAFAAAAAADw//r/BgAEAAAAAADx//r/BgAHAAAAAADy//r/BgAGAAAAAADz//r/BgAFAAAAAAD0//r/BgAEAAAAAAD1//r/BgAFAAAAAAD2//r/BgAHAAAAAAD3//r/BgAEAAAAAAD4//r/BgAFAAAAAAD5//r/BgAGAAAAAAD6//r/BgAGAAAAAAD7//r/BgAFAAAAAAD8//r/BgAEAAAAAAD9//r/BgAFAAAAAAD+//r/BgAHAAAAAAD///r/BgAGAAAAAAAAAPr/BgAEAAAAAAAAAP//BgAFAAAAAAD/////BgAGAAAAAAD+////BgAHAAAAAAD9////BgAHAAAAAAD8////BgAFAAAAAAD7////BgAEAAAAAADe/+b/BgACAAAAAFDe/+f/BgAAAAAAAFDe/+j/BgABAAAAAFDe/+n/BgABAAAAAFDe/+r/BgAAAAAAAFDe/+v/BgACAAAAAFDe/+z/BgACAAAAAFDe/+3/BgABAAAAAFDe/+7/BgACAAAAAFDe/+//BgABAAAAAFDe//D/BgACAAAAAFDe//H/BgAAAAAAAFDw/+b/BgACAAAAAFDw/+f/BgAAAAAAAFDw/+j/BgACAAAAAFDw/+n/BgABAAAAAFDw/+r/BgABAAAAAFDw/+v/BgABAAAAAFDw/+z/BgACAAAAAFDw/+3/BgACAAAAAFDw/+7/BgAAAAAAAFDw/+//BgAAAAAAAFDw//D/BgABAAAAAFDw//H/BgACAAAAAFAHAOb/BgACAAAAAFAHAOf/BgABAAAAAFAHAOj/BgAAAAAAAFAHAOn/BgABAAAAAFAHAOr/BgABAAAAAFAHAOv/BgAAAAAAAFAHAOz/BgACAAAAAFAHAO3/BgACAAAAAFAHAO7/BgACAAAAAFAHAO//BgABAAAAAFAHAPD/BgABAAAAAFAHAPH/BgAAAAAAAFAHAPL/BgACAAAAAFAHAPP/BgACAAAAAFAHAPT/BgACAAAAAFAHAPX/BgABAAAAAFAUAOb/BgACAAAAAFAUAOf/BgABAAAAAFAUAOj/BgABAAAAAFAUAOn/BgAAAAAAAFAUAOr/BgACAAAAAFAUAOv/BgACAAAAAFAUAOz/BgABAAAAAFAUAO3/BgAAAAAAAFAUAO7/BgADAAAAAFAUAO//BgACAAAAAFAUAPD/BgABAAAAAFAUAPH/BgABAAAAAFAUAPL/BgACAAAAAFAUAPP/BgAAAAAAAFAUAPT/BgACAAAAAFAUAPX/BgADAAAAAFAiAOb/BgACAAAAAFAiAOf/BgABAAAAAFAiAOj/BgAAAAAAAFAiAOn/BgABAAAAAFAiAOr/BgACAAAAAFAiAOv/BgACAAAAAFAiAOz/BgABAAAAAFAiAO3/BgAAAAAAAFAiAO7/BgADAAAAAFAiAO//BgADAAAAAFAiAPD/BgAAAAAAAFAiAPH/BgACAAAAAFAiAPL/BgABAAAAAFAiAPP/BgAAAAAAAFAiAPT/BgACAAAAAFAiAPX/BgACAAAAAFA=")
@@ -1510,6 +1497,23 @@ tile_set = SubResource("TileSet_a6s81")
 [node name="InFrontDecor" type="TileMapLayer" parent="." unique_id=1775403006]
 tile_map_data = PackedByteArray("AADq/xUAAQAAAAAAAADe/wUAAgAAAAAAAAABAA0AAwAAAAAAAADZ//r/AQAAAAAAAADc//f/AgAAAAAAAAD4//L/AwAAAAAAAAAUAPv/BAAAAAAAAAA=")
 tile_set = SubResource("TileSet_wy8sx")
+
+[node name="CameraAdjustmentArea" type="Area2D" parent="." unique_id=1478923463 node_paths=PackedStringArray("Parent")]
+collision_mask = 2
+script = ExtResource("11_qddiu")
+CameraLimitLeft = -1856
+CameraLimitRight = 1952
+CameraLimitTop = -810
+CameraLimitBottom = 810
+Parent = NodePath("..")
+
+[node name="Factory" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=47184570]
+position = Vector2(-1312, -112)
+shape = SubResource("RectangleShape2D_21mj6")
+
+[node name="FactoryBasement" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=23753644]
+position = Vector2(1216, 272)
+shape = SubResource("RectangleShape2D_21mj6")
 
 [node name="Enemy" type="Node2D" parent="." unique_id=1744095661]
 

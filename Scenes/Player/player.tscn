@@ -269,15 +269,37 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qr1w5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aanf"]
 atlas = ExtResource("7_jlvik")
 region = Rect2(96, 16, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ythyg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6ahd"]
 atlas = ExtResource("7_jlvik")
 region = Rect2(96, 80, 32, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bmb2s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2aanf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6ahd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr1w5"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ythyg"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(16, 192, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ogmfp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -334,6 +356,12 @@ autoplay = "default"
 visible = false
 position = Vector2(0, -43)
 sprite_frames = SubResource("SpriteFrames_bmb2s")
+autoplay = "default"
+
+[node name="BoxSmashGuide" type="AnimatedSprite2D" parent="." unique_id=1540218761]
+visible = false
+position = Vector2(0, -43)
+sprite_frames = SubResource("SpriteFrames_ogmfp")
 autoplay = "default"
 
 [node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=1817195248]
