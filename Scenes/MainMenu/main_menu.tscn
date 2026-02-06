@@ -30,37 +30,22 @@ GameScene = ExtResource("2_0l8wx")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1250993088]
 layout_mode = 0
-offset_right = 1154.0
-offset_bottom = 653.0
+offset_right = 640.0
+offset_bottom = 360.0
 mouse_filter = 2
 texture = ExtResource("2_adu2g")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1196160585]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2066840028]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 1102.0
-offset_bottom = 598.0
+offset_right = 640.0
+offset_bottom = 360.0
 mouse_filter = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1536983224]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_qgdf6")
@@ -68,23 +53,23 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Control" type="Control" parent="VBoxContainer" unique_id=1004020185]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
 [node name="StartButton" type="TextureButton" parent="VBoxContainer" unique_id=1580983059]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 texture_normal = ExtResource("4_0l8wx")
 stretch_mode = 5
 
 [node name="ExitButton" type="TextureButton" parent="VBoxContainer" unique_id=627277928]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 texture_normal = ExtResource("5_n5jej")
 stretch_mode = 5
 
 [node name="Rain" type="CPUParticles2D" parent="." unique_id=1344109104]
-position = Vector2(434, -115)
+position = Vector2(480, 0)
 amount = 200
 texture = SubResource("GradientTexture2D_n5jej")
 lifetime = 2.0

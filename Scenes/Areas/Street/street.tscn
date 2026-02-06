@@ -254,13 +254,13 @@ size = Vector2(64, 32)
 radius = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omlqb"]
-size = Vector2(32, 16)
+size = Vector2(96, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tc6nq"]
 radius = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hw208"]
-size = Vector2(8, 136)
+size = Vector2(8, 164)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_yth67"]
 a = Vector2(672, -388)
@@ -285,6 +285,10 @@ b = Vector2(837, 96)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_tc6nq"]
 a = Vector2(960, -388)
 b = Vector2(960, 96)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_atwt7"]
+a = Vector2(128, 160)
+b = Vector2(928, 160)
 
 [node name="Street" type="Node2D" unique_id=398176415]
 
@@ -382,6 +386,7 @@ tile_set = SubResource("TileSet_375y2")
 [node name="CameraAdjustmentArea" type="Area2D" parent="Subarea1" unique_id=826512825 node_paths=PackedStringArray("Parent")]
 collision_mask = 2
 script = ExtResource("34_omlqb")
+CameraZoom = 1.5
 CameraLimitLeft = 0
 CameraLimitRight = 960
 CameraLimitTop = -388
@@ -424,12 +429,12 @@ text = "The factory is off-limits. Leave."
 position = Vector2(-320, 0)
 
 [node name="PassiveSidewalk" type="TileMapLayer" parent="Subarea2" unique_id=1382023611]
-tile_map_data = PackedByteArray("AAAPAAMAAAAAAAAAACAQAAMAAAABAAAAACARAAMAAAABAAAAACASAAMAAAABAAAAACATAAMAAAABAAAAACAUAAMAAAABAAAAACAVAAMAAAABAAAAACAWAAMAAAABAAAAACAXAAMAAAABAAAAACAYAAMAAAABAAAAACAZAAMAAAABAAAAACAaAAMAAAABAAAAACAbAAMAAAABAAAAACAcAAMAAAABAAAAACAdAAMAAAABAAAAACAeAAMAAAABAAAAACAfAAMAAAABAAAAACAgAAMAAAABAAAAACAhAAMAAAABAAAAACAiAAMAAAABAAAAACAjAAMAAAABAAAAACAkAAMAAAABAAAAACAlAAMAAAABAAAAACAmAAMAAAACAAAAACA=")
+tile_map_data = PackedByteArray("AAAPAAMAAAABAAAAACAQAAMAAAABAAAAACARAAMAAAABAAAAACASAAMAAAABAAAAACATAAMAAAABAAAAACAUAAMAAAABAAAAACAVAAMAAAABAAAAACAWAAMAAAABAAAAACAXAAMAAAABAAAAACAYAAMAAAABAAAAACAZAAMAAAABAAAAACAaAAMAAAABAAAAACAbAAMAAAABAAAAACAcAAMAAAABAAAAACAdAAMAAAABAAAAACAeAAMAAAABAAAAACAfAAMAAAABAAAAACAgAAMAAAABAAAAACAhAAMAAAABAAAAACAiAAMAAAABAAAAACAjAAMAAAABAAAAACAkAAMAAAABAAAAACAlAAMAAAABAAAAACAmAAMAAAACAAAAACAOAAMAAAAAAAAAACA=")
 tile_set = SubResource("TileSet_bt0sg")
 collision_enabled = false
 
 [node name="Sidewalk" type="TileMapLayer" parent="Subarea2" unique_id=1268740585]
-tile_map_data = PackedByteArray("AAAPAAQAAAAAAAAAAAAQAAQAAAABAAAAAAARAAQAAAABAAAAAAASAAQAAAABAAAAAAATAAQAAAABAAAAAAAUAAQAAAABAAAAAAAVAAQAAAABAAAAAAAWAAQAAAABAAAAAAAXAAQAAAABAAAAAAAYAAQAAAABAAAAAAAaAAQAAAABAAAAAAAZAAQAAAABAAAAAAAbAAQAAAABAAAAAAAcAAQAAAABAAAAAAAdAAQAAAABAAAAAAAeAAQAAAABAAAAAAAfAAQAAAABAAAAAAAgAAQAAAABAAAAAAAhAAQAAAABAAAAAAAiAAQAAAABAAAAAAAjAAQAAAABAAAAAAAkAAQAAAABAAAAAAAlAAQAAAABAAAAAAAmAAQAAAACAAAAAAA=")
+tile_map_data = PackedByteArray("AAAPAAQAAAABAAAAAAAQAAQAAAABAAAAAAARAAQAAAABAAAAAAASAAQAAAABAAAAAAATAAQAAAABAAAAAAAUAAQAAAABAAAAAAAVAAQAAAABAAAAAAAWAAQAAAABAAAAAAAXAAQAAAABAAAAAAAYAAQAAAABAAAAAAAaAAQAAAABAAAAAAAZAAQAAAABAAAAAAAbAAQAAAABAAAAAAAcAAQAAAABAAAAAAAdAAQAAAABAAAAAAAeAAQAAAABAAAAAAAfAAQAAAABAAAAAAAgAAQAAAABAAAAAAAhAAQAAAABAAAAAAAiAAQAAAABAAAAAAAjAAQAAAABAAAAAAAkAAQAAAABAAAAAAAlAAQAAAABAAAAAAAmAAQAAAACAAAAAAAOAAQAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_jd05f")
 
 [node name="Road" type="TileMapLayer" parent="Subarea2" unique_id=434581129]
@@ -459,14 +464,15 @@ tile_set = SubResource("TileSet_375y2")
 position = Vector2(320, 0)
 collision_mask = 2
 script = ExtResource("34_omlqb")
-CameraLimitLeft = 160
+CameraZoom = 1.5
+CameraLimitLeft = 128
 CameraLimitRight = 928
 CameraLimitTop = -388
 CameraLimitBottom = 160
 Parent = NodePath("../..")
 
 [node name="ZebraCross" type="CollisionShape2D" parent="Subarea2/CameraAdjustmentArea" unique_id=2018232652]
-position = Vector2(176, 104)
+position = Vector2(176, 128)
 shape = SubResource("RectangleShape2D_omlqb")
 
 [node name="Punk" parent="Subarea2" unique_id=1880373177 instance=ExtResource("43_cftkh")]
@@ -493,7 +499,7 @@ collision_mask = 2
 script = ExtResource("39_cftkh")
 
 [node name="ZebraCross1" type="CollisionShape2D" parent="ZebraCross" unique_id=1537373823]
-position = Vector2(172, 48)
+position = Vector2(172, 62)
 shape = SubResource("RectangleShape2D_hw208")
 
 [node name="EnemyBorder" type="StaticBody2D" parent="." unique_id=900682221]
@@ -511,10 +517,11 @@ collision_mask = 3221225472
 shape = SubResource("SegmentShape2D_v31r7")
 
 [node name="Left2" type="CollisionShape2D" parent="Border" unique_id=766765377]
-position = Vector2(160, 5)
+position = Vector2(128, 5)
 shape = SubResource("SegmentShape2D_76brt")
 
 [node name="Right1" type="CollisionShape2D" parent="Border" unique_id=1795892991]
+position = Vector2(32, 0)
 shape = SubResource("SegmentShape2D_omlqb")
 
 [node name="Right2" type="CollisionShape2D" parent="Border" unique_id=1328926738]
@@ -523,6 +530,10 @@ shape = SubResource("SegmentShape2D_cftkh")
 
 [node name="Right3" type="CollisionShape2D" parent="Border" unique_id=77819503]
 shape = SubResource("SegmentShape2D_tc6nq")
+
+[node name="Bottom1" type="CollisionShape2D" parent="Border" unique_id=262649152]
+position = Vector2(0, -16)
+shape = SubResource("SegmentShape2D_atwt7")
 
 [node name="Cat" parent="." unique_id=52111981 instance=ExtResource("41_76brt")]
 position = Vector2(24, -24)

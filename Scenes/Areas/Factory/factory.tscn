@@ -1300,7 +1300,6 @@ shape = SubResource("RectangleShape2D_onyeo")
 [node name="CameraAdjustmentArea" type="Area2D" parent="." unique_id=766431079 node_paths=PackedStringArray("Parent")]
 collision_mask = 2
 script = ExtResource("68_mf5pw")
-CameraZoom = 2.0
 CameraLimitLeft = -1120
 CameraLimitRight = 1120
 CameraLimitTop = -352

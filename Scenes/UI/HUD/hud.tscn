@@ -5,13 +5,13 @@
 [ext_resource type="FontFile" uid="uid://cg4tynv3d5i67" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="3_6ra6r"]
 [ext_resource type="Texture2D" uid="uid://dnjdd0yhgpxm5" path="res://Assets/Sprites/UI/Keys/KeyboardLettersSymbols.png" id="3_rsxdw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ra6r"]
-atlas = ExtResource("2_mnkwb")
-region = Rect2(0, 0, 32, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_fteeo"]
 atlas = ExtResource("2_mnkwb")
 region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ra6r"]
+atlas = ExtResource("2_mnkwb")
+region = Rect2(0, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l1mtp"]
 atlas = ExtResource("3_rsxdw")
@@ -35,171 +35,142 @@ region = Rect2(0, 16, 32, 16)
 
 [node name="HUD" type="CanvasLayer" unique_id=1924911123]
 
-[node name="PhoneHUD" type="Control" parent="." unique_id=539947876]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1511355245]
+offset_right = 640.0
+offset_bottom = 360.0
 
-[node name="PhoneSmall" type="TextureRect" parent="PhoneHUD" unique_id=2077090459]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 488.0
-offset_right = 112.0
-offset_bottom = 584.0
-texture = ExtResource("1_81i5t")
-stretch_mode = 4
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1650159729]
+custom_minimum_size = Vector2(624, 344)
+layout_mode = 2
 
-[node name="Keymap" type="TextureRect" parent="PhoneHUD" unique_id=1764473076]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 600.0
-offset_right = 96.0
-offset_bottom = 632.0
-texture = SubResource("AtlasTexture_6ra6r")
-stretch_mode = 4
+[node name="Pause" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1808320841]
+layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="KeymapHUD" type="Control" parent="." unique_id=747686633]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Pause" type="Control" parent="KeymapHUD" unique_id=1508484892]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="KeymapHUD/Pause" unique_id=859642949]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 80.0
-offset_bottom = 48.0
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/Pause" unique_id=859642949]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
 texture = SubResource("AtlasTexture_fteeo")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="KeymapHUD/Pause" unique_id=200500458]
-layout_mode = 0
-offset_left = 88.0
-offset_top = 24.0
-offset_right = 180.0
-offset_bottom = 40.0
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Pause" unique_id=200500458]
+layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_6ra6r")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 8
 text = "Pause"
 
-[node name="Attack" type="Control" parent="KeymapHUD" unique_id=685207349]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Control" type="Control" parent="CenterContainer/VBoxContainer" unique_id=119025681]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="KeymapHUD/Attack" unique_id=812532208]
-layout_mode = 0
-offset_left = 548.0
-offset_top = 600.0
-offset_right = 580.0
-offset_bottom = 632.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1550978605]
+layout_mode = 2
+
+[node name="PhoneHUD" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=133594385]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PhoneSmall" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/PhoneHUD" unique_id=2077090459]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_81i5t")
+stretch_mode = 4
+
+[node name="Keymap" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/PhoneHUD" unique_id=1764473076]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_6ra6r")
+stretch_mode = 4
+
+[node name="Control" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1245973207]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="KeymapHUD" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1207497123]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Attack" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD" unique_id=19800201]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Attack" unique_id=812532208]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
 texture = SubResource("AtlasTexture_l1mtp")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="KeymapHUD/Attack" unique_id=1507915634]
-layout_mode = 0
-offset_left = 588.0
-offset_top = 608.0
-offset_right = 680.0
-offset_bottom = 624.0
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Attack" unique_id=1507915634]
+layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_6ra6r")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 8
 text = "Attack"
 
-[node name="Move" type="Control" parent="KeymapHUD" unique_id=1377719438]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Move" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD" unique_id=1713745850]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 4
 
-[node name="Left" type="TextureRect" parent="KeymapHUD/Move" unique_id=356494871]
-layout_mode = 0
-offset_left = 696.0
-offset_top = 600.0
-offset_right = 728.0
-offset_bottom = 632.0
+[node name="Left" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Move" unique_id=356494871]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
 texture = SubResource("AtlasTexture_44tkn")
 stretch_mode = 4
 
-[node name="Right" type="TextureRect" parent="KeymapHUD/Move" unique_id=1867126017]
-layout_mode = 0
-offset_left = 726.0
-offset_top = 600.0
-offset_right = 758.0
-offset_bottom = 632.0
+[node name="Right" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Move" unique_id=1867126017]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
 texture = SubResource("AtlasTexture_nyx02")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="KeymapHUD/Move" unique_id=177135068]
-layout_mode = 0
-offset_left = 766.0
-offset_top = 608.0
-offset_right = 832.0
-offset_bottom = 624.0
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Move" unique_id=177135068]
+layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_6ra6r")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 8
 text = "Move"
 
-[node name="Jump" type="Control" parent="KeymapHUD" unique_id=1192701148]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Jump" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD" unique_id=1305680453]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 4
 
-[node name="TextureRect" type="TextureRect" parent="KeymapHUD/Jump" unique_id=486011590]
-layout_mode = 0
-offset_left = 846.0
-offset_top = 600.0
-offset_right = 910.0
-offset_bottom = 632.0
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Jump" unique_id=486011590]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
 texture = SubResource("AtlasTexture_rsxdw")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="KeymapHUD/Jump" unique_id=1630611630]
-layout_mode = 0
-offset_left = 918.0
-offset_top = 608.0
-offset_right = 984.0
-offset_bottom = 624.0
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Jump" unique_id=1630611630]
+layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_6ra6r")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 8
 text = "Jump"
 
-[node name="Dash" type="Control" parent="KeymapHUD" unique_id=958224307]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Dash" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD" unique_id=1168860833]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 4
 
-[node name="TextureRect" type="TextureRect" parent="KeymapHUD/Dash" unique_id=1049434040]
-layout_mode = 0
-offset_left = 1000.0
-offset_top = 600.0
-offset_right = 1064.0
-offset_bottom = 632.0
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Dash" unique_id=1049434040]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
 texture = SubResource("AtlasTexture_h8i3p")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="KeymapHUD/Dash" unique_id=385537008]
-layout_mode = 0
-offset_left = 1072.0
-offset_top = 608.0
-offset_right = 1136.0
-offset_bottom = 624.0
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/KeymapHUD/Dash" unique_id=385537008]
+layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_6ra6r")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 8
 text = "Dash"
