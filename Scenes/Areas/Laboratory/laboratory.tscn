@@ -62,7 +62,6 @@
 [ext_resource type="Texture2D" uid="uid://dvuwroeaonsyj" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Boxes/3.png" id="50_2w8vn"]
 [ext_resource type="Texture2D" uid="uid://coa4q0p6wj4q5" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Icons/12.png" id="51_t8oda"]
 [ext_resource type="Texture2D" uid="uid://dytjkftuy66oh" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Icons/2.png" id="52_wy8sx"]
-[ext_resource type="PackedScene" uid="uid://somvdye68jdi" path="res://Scenes/Areas/Objects/BreakableBox/breakable_box.tscn" id="57_t8oda"]
 [ext_resource type="Script" uid="uid://kvj6iqhdlpuv" path="res://Scenes/Areas/NoteTriggerArea.cs" id="57_t8oda"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu8hl"]
@@ -1543,28 +1542,6 @@ shape = SubResource("RectangleShape2D_21mj6")
 position = Vector2(1201, 272)
 shape = SubResource("RectangleShape2D_21mj6")
 
-[node name="BreakableBox" type="Node2D" parent="." unique_id=1953955974]
-
-[node name="BreakableBox" parent="BreakableBox" unique_id=2092516811 instance=ExtResource("57_t8oda")]
-position = Vector2(-1415, -460)
-
-[node name="BreakableBox2" parent="BreakableBox" unique_id=1345674820 instance=ExtResource("57_t8oda")]
-position = Vector2(1254, -332)
-
-[node name="BreakableBox3" parent="BreakableBox" unique_id=2095199643 instance=ExtResource("57_t8oda")]
-position = Vector2(-1383, -460)
-
-[node name="BreakableBox4" parent="BreakableBox" unique_id=72767453 instance=ExtResource("57_t8oda")]
-position = Vector2(1027, -204)
-
-[node name="BreakableBox5" parent="BreakableBox" unique_id=1400373994 instance=ExtResource("57_t8oda")]
-position = Vector2(-438, 340)
-
-[node name="BreakableBox6" parent="BreakableBox" unique_id=338609 instance=ExtResource("57_t8oda")]
-position = Vector2(-380, 628)
-
-[node name="BreakableBox7" parent="BreakableBox" unique_id=1068623043 instance=ExtResource("57_t8oda")]
-position = Vector2(-1288, 340)
 [node name="Forest" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1187795072]
 position = Vector2(-1408, 656)
 shape = SubResource("RectangleShape2D_21mj6")

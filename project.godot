@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="BojongGame"
-run/main_scene="uid://6xp0ar48bpb5"
+config/name="Retcon"
+run/main_scene="uid://bws31ge6ft23"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
