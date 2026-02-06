@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://vxm7kkhavrua" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe20.png" id="21_3fv3y"]
 [ext_resource type="Texture2D" uid="uid://cie2gw5tdyxcm" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe23.png" id="21_arg67"]
 [ext_resource type="Texture2D" uid="uid://b06jm1gur5vy8" path="res://Assets/Sprites/Areas/Factory/AnimatedObjects/Transporter1.png" id="22_n5wkc"]
+[ext_resource type="Texture2D" uid="uid://c08drnacpyyay" path="res://Assets/Sprites/Areas/Factory/Objects/Door (1).png" id="23_fnrhd"]
 [ext_resource type="Texture2D" uid="uid://bs2widh88ewwi" path="res://Assets/Sprites/Areas/Factory/Objects/Board3.png" id="30_vvngf"]
 [ext_resource type="Texture2D" uid="uid://bqjoa4jopnt5j" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Barrel/1.png" id="32_3fv3y"]
 [ext_resource type="Texture2D" uid="uid://bu6q46imqtnmx" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Barrel/2.png" id="33_bh3qw"]
@@ -771,6 +772,11 @@ texture_region_size = Vector2i(32, 32)
 texture = ExtResource("22_n5wkc")
 texture_region_size = Vector2i(32, 32)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3sdpx"]
+texture = ExtResource("23_fnrhd")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpbs2"]
 texture = ExtResource("15_sshw1")
 texture_region_size = Vector2i(32, 32)
@@ -841,6 +847,7 @@ sources/19 = SubResource("TileSetAtlasSource_jp8r1")
 sources/20 = SubResource("TileSetAtlasSource_q0jou")
 sources/21 = SubResource("TileSetAtlasSource_wxfbj")
 sources/22 = SubResource("TileSetAtlasSource_frjgr")
+sources/23 = SubResource("TileSetAtlasSource_3sdpx")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_un1w5"]
 texture = ExtResource("8_wtwyv")
@@ -1339,13 +1346,13 @@ shape = SubResource("SegmentShape2D_mf5pw")
 [node name="Enemies" type="Node2D" parent="." unique_id=767675251]
 
 [node name="PurpleGuy" parent="Enemies" unique_id=2050803497 instance=ExtResource("69_d4np1")]
-position = Vector2(-720, 936)
+position = Vector2(-972, 490)
 
 [node name="GreenRobot" parent="Enemies" unique_id=2099126175 instance=ExtResource("70_wgofl")]
 position = Vector2(-380, 643)
 
 [node name="Gangstar" parent="Enemies" unique_id=2049000164 instance=ExtResource("71_dwuun")]
-position = Vector2(-927, 490)
+position = Vector2(-771, 928)
 
 [node name="PurpleGuy2" parent="Enemies" unique_id=1723935592 instance=ExtResource("69_d4np1")]
 position = Vector2(-124, 295)
@@ -1404,7 +1411,7 @@ position = Vector2(524, -178)
 [node name="BreakableBox" type="Node2D" parent="." unique_id=1366330877]
 
 [node name="BreakableBox2" parent="BreakableBox" unique_id=2092516811 instance=ExtResource("76_4f3hw")]
-position = Vector2(80, 375)
+position = Vector2(82, 468)
 
 [node name="BreakableBox" parent="BreakableBox" unique_id=1789613530 instance=ExtResource("76_4f3hw")]
 position = Vector2(-336, 947)
@@ -1428,3 +1435,8 @@ position = Vector2(-15, -141)
 stream = ExtResource("69_q3no2")
 volume_db = -17.333
 autoplay = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=922122583]
+position = Vector2(1025, 936)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("23_fnrhd")
