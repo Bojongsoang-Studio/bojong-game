@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://yx22ggwwr1a5"]
 
 [ext_resource type="Texture2D" uid="uid://d1w5b5turemry" path="res://Assets/Sprites/Areas/Forest/ForestBackground/Background layers/Background.png" id="1_wj3mu"]
-[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="2_a8uch"]
 [ext_resource type="Texture2D" uid="uid://bvh0xhcun58g4" path="res://Assets/Sprites/Areas/Forest/ForestTileset/Tileset/Ground/Ground tile set 00.png" id="3_yjrg5"]
 [ext_resource type="Texture2D" uid="uid://2m5nkvpgxyoc" path="res://Assets/Sprites/Areas/Forest/ForestTileset/Tileset/Leaves, branches, bushes, etc/01.png" id="4_wj3mu"]
 [ext_resource type="Texture2D" uid="uid://dexpwmwxifun8" path="res://Assets/Sprites/Areas/Forest/ForestTileset/Tileset/Trunks/Trunk 02.png" id="5_fvrkx"]
@@ -111,6 +110,7 @@
 [ext_resource type="PackedScene" uid="uid://djpu2l00hs1kw" path="res://Scenes/Enemies/GreenFlyingRobot/green_flying_robot.tscn" id="103_sjuqn"]
 [ext_resource type="PackedScene" uid="uid://dmiyb3u6ltpun" path="res://Scenes/Enemies/GreenRobot/green_robot.tscn" id="104_gy54j"]
 [ext_resource type="PackedScene" uid="uid://somvdye68jdi" path="res://Scenes/Areas/Objects/BreakableBox/breakable_box.tscn" id="105_a8uch"]
+[ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="111_id525"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_id525"]
 texture = ExtResource("14_h3g7y")
@@ -3500,6 +3500,23 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_sa20d"]
+a = Vector2(-704, 64)
+b = Vector2(-704, -4339)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6favp"]
+a = Vector2(2784, -1728)
+b = Vector2(2784, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdcvy"]
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_id525"]
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xar5r"]
+size = Vector2(64, 32)
+
 [node name="Forest" type="Node2D" unique_id=979857636]
 
 [node name="SkyParallax2D" type="Parallax2D" parent="." unique_id=1630757775]
@@ -3752,11 +3769,6 @@ position = Vector2(142, -8)
 [node name="GreenRobot" parent="Enemy" unique_id=2099126175 instance=ExtResource("104_gy54j")]
 position = Vector2(-282, -82)
 
-[node name="Player" parent="." unique_id=699596196 instance=ExtResource("2_a8uch")]
-z_index = 2
-position = Vector2(40, 37)
-SpawnPoint = Vector2(0, 0)
-
 [node name="BreakableBox" parent="." unique_id=2092516811 instance=ExtResource("105_a8uch")]
 position = Vector2(-129, 51)
 collision_mask = 2
@@ -3766,3 +3778,30 @@ position = Vector2(946, -814)
 
 [node name="Border" type="StaticBody2D" parent="." unique_id=1501251953]
 collision_layer = 2147483649
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border" unique_id=1121180448]
+shape = SubResource("SegmentShape2D_sa20d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Border" unique_id=1508175567]
+shape = SubResource("SegmentShape2D_6favp")
+
+[node name="CameraAdjustmentArea" type="Area2D" parent="." unique_id=2116490044 node_paths=PackedStringArray("Parent")]
+collision_mask = 2
+script = ExtResource("111_id525")
+CameraLimitLeft = -704
+CameraLimitRight = 2784
+CameraLimitTop = -4338
+CameraLimitBottom = 1312
+Parent = NodePath("..")
+
+[node name="Street" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=530650348]
+position = Vector2(-672, 48)
+shape = SubResource("RectangleShape2D_jdcvy")
+
+[node name="Factory" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1939541310]
+position = Vector2(2752, -1648)
+shape = SubResource("RectangleShape2D_id525")
+
+[node name="FactoryBasement" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1348385918]
+position = Vector2(2752, 464)
+shape = SubResource("RectangleShape2D_xar5r")

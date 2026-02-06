@@ -17,8 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://cj1lotgmfncx6" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Monitors/3.png" id="15_5j30l"]
 [ext_resource type="Texture2D" uid="uid://cb80w2txg08pv" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Monitors/8.png" id="16_mchlq"]
 [ext_resource type="Texture2D" uid="uid://ds2w7pwjjyd13" path="res://Assets/Sprites/Areas/FactoryBasement/Tiles/Pipes/Pipe1.png" id="17_4pll3"]
-[ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="18_7aahx"]
 [ext_resource type="PackedScene" uid="uid://cbmeqkraw02r3" path="res://Scenes/Enemies/Bosses/Swordman/swordman.tscn" id="19_yfcl5"]
+[ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="20_6w3gm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_txuko"]
 texture = ExtResource("1_125l0")
@@ -838,6 +838,12 @@ sources/12 = SubResource("TileSetAtlasSource_f421e")
 sources/13 = SubResource("TileSetAtlasSource_ie0nw")
 sources/14 = SubResource("TileSetAtlasSource_ts8qb")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hf5sm"]
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0f4y"]
+size = Vector2(64, 32)
+
 [node name="FactoryBasement" type="Node2D" unique_id=667423887]
 
 [node name="Wall" type="TileMapLayer" parent="." unique_id=1451624866]
@@ -852,8 +858,22 @@ tile_set = SubResource("TileSet_5jkq8")
 tile_map_data = PackedByteArray("AAD0//3/AgAAAAAAAAAFAAMAAwAAAAAAAAD2//r/BwAAAAAAAAAFAPr/BwAAAAAAAAAIAPr/CQAAAAAAAAAIAPv/CgAAAAAAAAAIAPz/CwAAAAAAAAAIAAEACwAAAAAAAAAIAP3/CgAAAAAAAAAIAP7/CgAAAAAAAAAIAP//CgAAAAAAAAAIAAAACgAAAAAAAAAIAAIACgAAAAAAAAAIAAMADAAAAAAAAAAIAAQACgAAAAAAAAAIAAUACgAAAAAAAAAIAAYACgAAAAAAAADx////CQAAAAAAAFDx/wAACgAAAAAAAADx/wEACgAAAAAAAADx/wIADAAAAAAAAADx/wMACwAAAAAAAADx/wQACgAAAAAAAADx/wUACgAAAAAAAADx/wYACgAAAAAAAAA=")
 tile_set = SubResource("TileSet_n13jm")
 
-[node name="Player" parent="." unique_id=699596196 instance=ExtResource("18_7aahx")]
-position = Vector2(-302, 199)
-
 [node name="Swordman" parent="." unique_id=1840467514 instance=ExtResource("19_yfcl5")]
 position = Vector2(-173, 166)
+
+[node name="CameraAdjustmentArea" type="Area2D" parent="." unique_id=1871173238 node_paths=PackedStringArray("Parent")]
+collision_mask = 2
+script = ExtResource("20_6w3gm")
+CameraLimitLeft = -576
+CameraLimitRight = 384
+CameraLimitTop = -288
+CameraLimitBottom = 320
+Parent = NodePath("..")
+
+[node name="Laboratory" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=530938129]
+position = Vector2(-320, -80)
+shape = SubResource("RectangleShape2D_hf5sm")
+
+[node name="Forest" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1426760258]
+position = Vector2(-447, 208)
+shape = SubResource("RectangleShape2D_d0f4y")

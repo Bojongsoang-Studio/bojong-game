@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dp1rwc1vivpvy" path="res://Scenes/Player/player.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://co34vpymbn1lw" path="res://Scenes/Areas/Laboratory/laboratory.tscn" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://64dpkwcpblia" path="res://Scenes/UI/HUD/hud.tscn" id="6_flgk0"]
+[ext_resource type="PackedScene" uid="uid://yx22ggwwr1a5" path="res://Scenes/Areas/Forest/forest.tscn" id="7_vifcx"]
+[ext_resource type="PackedScene" uid="uid://low8oikd8m25" path="res://Scenes/Areas/FactoryBasement/factory_basement.tscn" id="8_xfil1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
 size = Vector2(48, 32)
@@ -21,49 +23,137 @@ size = Vector2(64, 32)
 
 [node name="Game" type="Node2D" unique_id=188869460]
 
-[node name="Street" parent="." unique_id=398176415 instance=ExtResource("1_ebmjs")]
+[node name="Street" type="Node2D" parent="." unique_id=1631199504]
+
+[node name="Street" parent="Street" unique_id=398176415 instance=ExtResource("1_ebmjs")]
 position = Vector2(576, 388)
 
-[node name="StreetEntry" type="Area2D" parent="." unique_id=1494961415 node_paths=PackedStringArray("TransitionNode")]
+[node name="StreetEntry" type="Area2D" parent="Street" unique_id=1494961415 node_paths=PackedStringArray("TransitionNode")]
 collision_mask = 2
 script = ExtResource("2_ciybh")
-TransitionNode = NodePath("../FactoryEntry/CollisionShape2D")
+TransitionNode = NodePath("../../Factory/FactoryEntry/CollisionShape2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StreetEntry" unique_id=1511825908]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Street/StreetEntry" unique_id=1511825908]
 position = Vector2(1512, 372)
 shape = SubResource("RectangleShape2D_3dryh")
 
-[node name="Factory" parent="." unique_id=1798911909 instance=ExtResource("2_qxrlw")]
-position = Vector2(1839, 1530)
-
-[node name="FactoryEntry" type="Area2D" parent="." unique_id=1056837412 node_paths=PackedStringArray("TransitionNode")]
+[node name="StreetEntry2" type="Area2D" parent="Street" unique_id=1017445428 node_paths=PackedStringArray("TransitionNode")]
 collision_mask = 2
 script = ExtResource("2_ciybh")
-TransitionNode = NodePath("../StreetEntry/CollisionShape2D")
+TransitionNode = NodePath("../../Forest/ForestEntry/CollisionShape2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryEntry" unique_id=1008217939]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Street/StreetEntry2" unique_id=1831673472]
+position = Vector2(1480, 532)
+shape = SubResource("RectangleShape2D_3dryh")
+
+[node name="Factory" type="Node2D" parent="." unique_id=1050879459]
+
+[node name="Factory" parent="Factory" unique_id=1798911909 instance=ExtResource("2_qxrlw")]
+position = Vector2(1839, 1530)
+
+[node name="FactoryEntry" type="Area2D" parent="Factory" unique_id=1056837412 node_paths=PackedStringArray("TransitionNode")]
+collision_mask = 2
+script = ExtResource("2_ciybh")
+TransitionNode = NodePath("../../Street/StreetEntry/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Factory/FactoryEntry" unique_id=1008217939]
 position = Vector2(847, 2474)
 shape = SubResource("RectangleShape2D_wrm1d")
 
-[node name="FactoryEntry2" type="Area2D" parent="." unique_id=417742033 node_paths=PackedStringArray("TransitionNode")]
+[node name="FactoryEntry2" type="Area2D" parent="Factory" unique_id=417742033 node_paths=PackedStringArray("TransitionNode")]
 collision_mask = 2
 script = ExtResource("2_ciybh")
-TransitionNode = NodePath("../LaboratoryEntry/CollisionShape2D")
+TransitionNode = NodePath("../../Laboratory/LaboratoryEntry/CollisionShape2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryEntry2" unique_id=1138068610]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Factory/FactoryEntry2" unique_id=1138068610]
 position = Vector2(2815, 1386)
 shape = SubResource("RectangleShape2D_i6g32")
 
-[node name="Laboratory" parent="." unique_id=653620413 instance=ExtResource("5_i6g32")]
-position = Vector2(1856, 3942)
-
-[node name="LaboratoryEntry" type="Area2D" parent="." unique_id=756906567 node_paths=PackedStringArray("TransitionNode")]
+[node name="FactoryEntry3" type="Area2D" parent="Factory" unique_id=1063350441 node_paths=PackedStringArray("TransitionNode")]
 collision_mask = 2
 script = ExtResource("2_ciybh")
-TransitionNode = NodePath("../FactoryEntry2/CollisionShape2D")
+TransitionNode = NodePath("../../Forest/ForestEntry2/CollisionShape2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LaboratoryEntry" unique_id=1376996311]
-position = Vector2(544, 3626)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Factory/FactoryEntry3" unique_id=1546614643]
+position = Vector2(2863, 2474)
+shape = SubResource("RectangleShape2D_i6g32")
+
+[node name="Forest" type="Node2D" parent="." unique_id=2033655505]
+
+[node name="Forest" parent="Forest" unique_id=979857636 instance=ExtResource("7_vifcx")]
+position = Vector2(4858, 4338)
+
+[node name="ForestEntry" type="Area2D" parent="Forest" unique_id=668446464 node_paths=PackedStringArray("TransitionNode")]
+collision_mask = 2
+script = ExtResource("2_ciybh")
+TransitionNode = NodePath("../../Street/StreetEntry2/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Forest/ForestEntry" unique_id=1113579276]
+position = Vector2(4186, 4386)
+shape = SubResource("RectangleShape2D_i6g32")
+
+[node name="ForestEntry2" type="Area2D" parent="Forest" unique_id=1643639821 node_paths=PackedStringArray("TransitionNode")]
+collision_mask = 2
+script = ExtResource("2_ciybh")
+TransitionNode = NodePath("../../Factory/FactoryEntry3/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Forest/ForestEntry2" unique_id=177045148]
+position = Vector2(7610, 2690)
+shape = SubResource("RectangleShape2D_i6g32")
+
+[node name="ForestEntry3" type="Area2D" parent="Forest" unique_id=166100677 node_paths=PackedStringArray("TransitionNode")]
+collision_mask = 2
+script = ExtResource("2_ciybh")
+TransitionNode = NodePath("../../FactoryBasement/FactoryBasementEntry2/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Forest/ForestEntry3" unique_id=149053181]
+position = Vector2(7610, 4802)
+shape = SubResource("RectangleShape2D_i6g32")
+
+[node name="Laboratory" type="Node2D" parent="." unique_id=701108621]
+
+[node name="Laboratory" parent="Laboratory" unique_id=653620413 instance=ExtResource("5_i6g32")]
+position = Vector2(1856, 3942)
+
+[node name="LaboratoryEntry" type="Area2D" parent="Laboratory" unique_id=756906567 node_paths=PackedStringArray("TransitionNode")]
+collision_mask = 2
+script = ExtResource("2_ciybh")
+TransitionNode = NodePath("../../Factory/FactoryEntry2/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laboratory/LaboratoryEntry" unique_id=1376996311]
+position = Vector2(544, 3830)
+shape = SubResource("RectangleShape2D_1l0tm")
+
+[node name="LaboratoryEntry2" type="Area2D" parent="Laboratory" unique_id=1685406982 node_paths=PackedStringArray("TransitionNode")]
+collision_mask = 2
+script = ExtResource("2_ciybh")
+TransitionNode = NodePath("../../FactoryBasement/FactoryBasementEntry/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laboratory/LaboratoryEntry2" unique_id=1138347555]
+position = Vector2(3072, 4214)
+shape = SubResource("RectangleShape2D_1l0tm")
+
+[node name="FactoryBasement" type="Node2D" parent="." unique_id=66255528]
+
+[node name="FactoryBasement" parent="FactoryBasement" unique_id=667423887 instance=ExtResource("8_xfil1")]
+position = Vector2(576, 5094)
+
+[node name="FactoryBasementEntry" type="Area2D" parent="FactoryBasement" unique_id=1179812946 node_paths=PackedStringArray("TransitionNode")]
+collision_mask = 2
+script = ExtResource("2_ciybh")
+TransitionNode = NodePath("../../Laboratory/LaboratoryEntry2/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryBasement/FactoryBasementEntry" unique_id=1787515361]
+position = Vector2(256, 5014)
+shape = SubResource("RectangleShape2D_1l0tm")
+
+[node name="FactoryBasementEntry2" type="Area2D" parent="FactoryBasement" unique_id=2113810551 node_paths=PackedStringArray("TransitionNode")]
+collision_mask = 2
+script = ExtResource("2_ciybh")
+TransitionNode = NodePath("../../Forest/ForestEntry3/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FactoryBasement/FactoryBasementEntry2" unique_id=1517123347]
+position = Vector2(129, 5302)
 shape = SubResource("RectangleShape2D_1l0tm")
 
 [node name="Player" parent="." unique_id=699596196 instance=ExtResource("4_3dryh")]
