@@ -68,7 +68,15 @@
 [ext_resource type="Texture2D" uid="uid://bhjv6x6b0l5b8" path="res://Assets/Sprites/Areas/Factory/Objects/Elevator_Button.png" id="60_jbfwt"]
 [ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="67_mf5pw"]
 [ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="68_mf5pw"]
+[ext_resource type="PackedScene" uid="uid://dowt6oy022cpr" path="res://Scenes/Enemies/PurpleGuy/purple_guy.tscn" id="69_d4np1"]
 [ext_resource type="AudioStream" uid="uid://dsj033l85xt6s" path="res://Assets/Audio/Music/Factory.mp3" id="69_q3no2"]
+[ext_resource type="PackedScene" uid="uid://dmiyb3u6ltpun" path="res://Scenes/Enemies/GreenRobot/green_robot.tscn" id="70_wgofl"]
+[ext_resource type="PackedScene" uid="uid://d0wpnrbyykev1" path="res://Scenes/Enemies/Gangstar/gangstar.tscn" id="71_dwuun"]
+[ext_resource type="PackedScene" uid="uid://bwr3v4d0ifsnh" path="res://Scenes/Enemies/Falcon/Falcon.tscn" id="72_m8311"]
+[ext_resource type="PackedScene" uid="uid://c21fmhrmb6mvr" path="res://Scenes/Enemies/BlueRobot/blue_robot.tscn" id="73_85fnw"]
+[ext_resource type="PackedScene" uid="uid://ckacpfi6lrvhb" path="res://Scenes/Enemies/Dog/dog.tscn" id="74_fnrhd"]
+[ext_resource type="PackedScene" uid="uid://djpu2l00hs1kw" path="res://Scenes/Enemies/GreenFlyingRobot/green_flying_robot.tscn" id="75_e54g7"]
+[ext_resource type="PackedScene" uid="uid://somvdye68jdi" path="res://Scenes/Areas/Objects/BreakableBox/breakable_box.tscn" id="76_4f3hw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0lpwe"]
 texture = ExtResource("6_nph3d")
@@ -1320,6 +1328,94 @@ collision_mask = 2147483649
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border" unique_id=1921141182]
 shape = SubResource("SegmentShape2D_mf5pw")
+
+[node name="Enemies" type="Node2D" parent="." unique_id=767675251]
+
+[node name="PurpleGuy" parent="Enemies" unique_id=2050803497 instance=ExtResource("69_d4np1")]
+position = Vector2(-720, 936)
+
+[node name="GreenRobot" parent="Enemies" unique_id=2099126175 instance=ExtResource("70_wgofl")]
+position = Vector2(-380, 643)
+
+[node name="Gangstar" parent="Enemies" unique_id=2049000164 instance=ExtResource("71_dwuun")]
+position = Vector2(-927, 490)
+
+[node name="PurpleGuy2" parent="Enemies" unique_id=1723935592 instance=ExtResource("69_d4np1")]
+position = Vector2(-124, 295)
+
+[node name="Falcon" parent="Enemies" unique_id=695672071 instance=ExtResource("72_m8311")]
+position = Vector2(-300, 268)
+
+[node name="Gangstar2" parent="Enemies" unique_id=179688241 instance=ExtResource("71_dwuun")]
+position = Vector2(-619, 287)
+
+[node name="BlueRobot" parent="Enemies" unique_id=242199683 instance=ExtResource("73_85fnw")]
+position = Vector2(507, 719)
+
+[node name="PurpleGuy3" parent="Enemies" unique_id=1791161129 instance=ExtResource("69_d4np1")]
+position = Vector2(665, 935)
+
+[node name="Gangstar3" parent="Enemies" unique_id=2046257636 instance=ExtResource("71_dwuun")]
+position = Vector2(400, 928)
+
+[node name="PurpleGuy4" parent="Enemies" unique_id=1204854745 instance=ExtResource("69_d4np1")]
+position = Vector2(762, 280)
+
+[node name="Dog" parent="Enemies" unique_id=499305611 instance=ExtResource("74_fnrhd")]
+position = Vector2(479, 72)
+
+[node name="PurpleGuy5" parent="Enemies" unique_id=1680402123 instance=ExtResource("69_d4np1")]
+position = Vector2(315, 59)
+
+[node name="Dog2" parent="Enemies" unique_id=1457879390 instance=ExtResource("74_fnrhd")]
+position = Vector2(-24, 59)
+
+[node name="Falcon2" parent="Enemies" unique_id=2029561704 instance=ExtResource("72_m8311")]
+position = Vector2(-217, 33)
+
+[node name="BlueRobot2" parent="Enemies" unique_id=1133349778 instance=ExtResource("73_85fnw")]
+position = Vector2(-770, 46)
+
+[node name="Dog3" parent="Enemies" unique_id=2031537499 instance=ExtResource("74_fnrhd")]
+position = Vector2(-278, 934)
+
+[node name="GreenFlyingRobot" parent="Enemies" unique_id=210313969 instance=ExtResource("75_e54g7")]
+position = Vector2(-662, -201)
+
+[node name="PurpleGuy6" parent="Enemies" unique_id=1531911335 instance=ExtResource("69_d4np1")]
+position = Vector2(-396, -152)
+
+[node name="Dog4" parent="Enemies" unique_id=1167858562 instance=ExtResource("74_fnrhd")]
+position = Vector2(-85, -151)
+
+[node name="PurpleGuy7" parent="Enemies" unique_id=1385040620 instance=ExtResource("69_d4np1")]
+position = Vector2(99, -153)
+
+[node name="BlueRobot3" parent="Enemies" unique_id=1329178159 instance=ExtResource("73_85fnw")]
+position = Vector2(524, -178)
+
+[node name="BreakableBox" type="Node2D" parent="." unique_id=1366330877]
+
+[node name="BreakableBox2" parent="BreakableBox" unique_id=2092516811 instance=ExtResource("76_4f3hw")]
+position = Vector2(80, 375)
+
+[node name="BreakableBox" parent="BreakableBox" unique_id=1789613530 instance=ExtResource("76_4f3hw")]
+position = Vector2(-336, 947)
+
+[node name="BreakableBox3" parent="BreakableBox" unique_id=1919472037 instance=ExtResource("76_4f3hw")]
+position = Vector2(112, 948)
+
+[node name="BreakableBox4" parent="BreakableBox" unique_id=506560015 instance=ExtResource("76_4f3hw")]
+position = Vector2(497, 308)
+
+[node name="BreakableBox5" parent="BreakableBox" unique_id=467176472 instance=ExtResource("76_4f3hw")]
+position = Vector2(177, 83)
+
+[node name="BreakableBox6" parent="BreakableBox" unique_id=1211170402 instance=ExtResource("76_4f3hw")]
+position = Vector2(-495, 84)
+
+[node name="BreakableBox7" parent="BreakableBox" unique_id=1213325414 instance=ExtResource("76_4f3hw")]
+position = Vector2(-15, -141)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1308057609]
 stream = ExtResource("69_q3no2")
