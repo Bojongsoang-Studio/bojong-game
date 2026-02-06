@@ -1,18 +1,18 @@
 using Godot;
 
-namespace BojongGame.Scenes.MainMenu;
+namespace BojongGame.Scenes.UI.HUD;
 
-public partial class MainMenu : Control
+public partial class PauseMenu : CenterContainer
 {
-	[Export]
-	public PackedScene GameScene;
-
+	[Export] public Hud Hud;
+	[Export] public PackedScene MainMenuScene;
+	
 	public override void _Ready()
 	{
-		var startButton = GetNode<TextureButton>("VBoxContainer/StartButton");
+		var startButton = GetNode<TextureButton>("VBoxContainer/ResumeButton");
 		var exitButton = GetNode<TextureButton>("VBoxContainer/ExitButton");
 
-		startButton.Pressed += OnStartPressed;
+		startButton.Pressed += OnResumePressed;
 		exitButton.Pressed += OnExitPressed;
 
 		startButton.MouseEntered += () => AnimateButton(startButton, true);
@@ -21,31 +21,36 @@ public partial class MainMenu : Control
 		exitButton.MouseEntered += () => AnimateButton(exitButton, true);
 		exitButton.MouseExited += () => AnimateButton(exitButton, false);
 
-        CenterPivot(startButton);
-        CenterPivot(exitButton);
+		CenterPivot(startButton);
+		CenterPivot(exitButton);
 
 		startButton.Resized += () => CenterPivot(startButton);
 		exitButton.Resized += () => CenterPivot(exitButton);
 	}
-
-
-	private void OnStartPressed()
+	
+	private void OnResumePressed()
 	{
-		GD.Print("Start Button Clicked!");
-		if (GameScene == null)
-		{
-			GD.PrintErr("MainMenu: No GameScene assigned in the Inspector!");
-			return;
-		}
-		GetTree().ChangeSceneToPacked(GameScene);
+		Hud.DisplayScrim(false);
+		Visible = false;
+		GetTree().Paused = false;
 	}
 
 	private void OnExitPressed()
 	{
-		GD.Print("Exit Button Pressed");
-		GetTree().Quit();
-	}
+		GetTree().Paused = false; 
 
+		if (MainMenuScene != null)
+		{
+			GetTree().ChangeSceneToPacked(MainMenuScene);
+		}
+		else
+		{
+			GD.PrintErr("MainMenuScene is null despite being attached in Inspector!");
+		
+			GetTree().ChangeSceneToFile("res://Scenes/MainMenu/main_menu.tscn");
+		}
+	}
+	
 	private void AnimateButton(Control button, bool isHovered)
 	{
 		var tween = CreateTween();

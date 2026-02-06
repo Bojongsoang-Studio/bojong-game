@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://cxvvcj7pc3wg8" path="res://Assets/Sprites/UI/Keys/KeyboardExtras.png" id="2_mnkwb"]
 [ext_resource type="FontFile" uid="uid://cg4tynv3d5i67" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="3_6ra6r"]
 [ext_resource type="Texture2D" uid="uid://dnjdd0yhgpxm5" path="res://Assets/Sprites/UI/Keys/KeyboardLettersSymbols.png" id="3_rsxdw"]
-[ext_resource type="Texture2D" uid="uid://b37si0jbp5k2v" path="res://Assets/Sprites/UI/Phone/Phone.png" id="6_ij32q"]
-[ext_resource type="Script" uid="uid://d87ecbvilvs4" path="res://Scenes/UI/HUD/Phone.cs" id="6_uwk01"]
-[ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="7_1gwbq"]
+[ext_resource type="PackedScene" uid="uid://cbsjjvs28x1ye" path="res://Scenes/UI/HUD/phone.tscn" id="6_ij32q"]
+[ext_resource type="PackedScene" uid="uid://c0jkoxv50a4df" path="res://Scenes/UI/HUD/pause_menu.tscn" id="7_1gwbq"]
+[ext_resource type="PackedScene" uid="uid://bws31ge6ft23" path="res://Scenes/MainMenu/main_menu.tscn" id="8_uwk01"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fteeo"]
 atlas = ExtResource("2_mnkwb")
@@ -36,18 +36,6 @@ region = Rect2(64, 32, 32, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8i3p"]
 atlas = ExtResource("2_mnkwb")
 region = Rect2(0, 16, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lyil3"]
-atlas = ExtResource("3_rsxdw")
-region = Rect2(32, 112, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1gwbq"]
-atlas = ExtResource("3_rsxdw")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwk01"]
-atlas = ExtResource("3_rsxdw")
-region = Rect2(48, 112, 16, 16)
 
 [node name="HUD" type="CanvasLayer" unique_id=1924911123]
 process_mode = 3
@@ -202,106 +190,10 @@ custom_minimum_size = Vector2(640, 360)
 layout_mode = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="Phone" type="VBoxContainer" parent="CenterContainer" unique_id=2116717856]
-layout_mode = 2
-theme_override_constants/separation = 16
-script = ExtResource("6_uwk01")
-DefaultContent = "Empty. For now."
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Phone" unique_id=178928547]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Left" type="CenterContainer" parent="CenterContainer/Phone/HBoxContainer" unique_id=2009674120]
+[node name="Phone" parent="CenterContainer" unique_id=845735198 instance=ExtResource("6_ij32q")]
 layout_mode = 2
 
-[node name="Disabled" type="TextureRect" parent="CenterContainer/Phone/HBoxContainer/Left" unique_id=1691180805]
-custom_minimum_size = Vector2(32, 32)
+[node name="PauseMenu" parent="CenterContainer" unique_id=381124997 node_paths=PackedStringArray("Hud") instance=ExtResource("7_1gwbq")]
 layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_lyil3")
-stretch_mode = 4
-
-[node name="Enabled" type="TextureRect" parent="CenterContainer/Phone/HBoxContainer/Left" unique_id=104699304]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_1gwbq")
-stretch_mode = 4
-
-[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/Phone/HBoxContainer" unique_id=1076950161]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/Phone/HBoxContainer/CenterContainer" unique_id=1359684183]
-custom_minimum_size = Vector2(144, 240)
-layout_mode = 2
-texture = ExtResource("6_ij32q")
-stretch_mode = 5
-
-[node name="Note" type="Control" parent="CenterContainer/Phone/HBoxContainer/CenterContainer" unique_id=1927311625]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="CenterContainer/Phone/HBoxContainer/CenterContainer/Note" unique_id=834978520]
-layout_mode = 0
-offset_left = -46.0
-offset_top = -88.0
-offset_right = -14.0
-offset_bottom = -80.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("3_6ra6r")
-theme_override_font_sizes/font_size = 8
-text = "NOTE"
-
-[node name="Year" type="Label" parent="CenterContainer/Phone/HBoxContainer/CenterContainer/Note" unique_id=1719635182]
-layout_mode = 0
-offset_left = 18.0
-offset_top = -88.0
-offset_right = 46.0
-offset_bottom = -80.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("7_1gwbq")
-theme_override_font_sizes/font_size = 8
-text = "2045"
-
-[node name="Content" type="RichTextLabel" parent="CenterContainer/Phone/HBoxContainer/CenterContainer/Note" unique_id=1903154620]
-custom_minimum_size = Vector2(96, 128)
-layout_mode = 0
-offset_left = -46.0
-offset_top = -72.0
-offset_right = 50.0
-offset_bottom = 76.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("7_1gwbq")
-theme_override_font_sizes/normal_font_size = 8
-text = "Empty. For now."
-
-[node name="Right" type="CenterContainer" parent="CenterContainer/Phone/HBoxContainer" unique_id=2068803282]
-layout_mode = 2
-
-[node name="Disabled" type="TextureRect" parent="CenterContainer/Phone/HBoxContainer/Right" unique_id=826862552]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_uwk01")
-stretch_mode = 4
-
-[node name="Enabled" type="TextureRect" parent="CenterContainer/Phone/HBoxContainer/Right" unique_id=1655712817]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_nyx02")
-stretch_mode = 4
-
-[node name="Tab" type="TextureRect" parent="CenterContainer/Phone" unique_id=653307795]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
-size_flags_horizontal = 4
-texture = SubResource("AtlasTexture_6ra6r")
-stretch_mode = 4
-
-[node name="PauseMenu" type="VBoxContainer" parent="CenterContainer" unique_id=2000589074]
-layout_mode = 2
+Hud = NodePath("../..")
+MainMenuScene = ExtResource("8_uwk01")
