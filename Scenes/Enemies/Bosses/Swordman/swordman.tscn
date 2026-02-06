@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bnnud4aosabc" path="res://Assets/Sprites/Enemies/Bosses/Swordsman/Pick_Up.png" id="10_wdf8e"]
 [ext_resource type="Texture2D" uid="uid://bcgthvkodsr25" path="res://Assets/Sprites/Enemies/Bosses/Swordsman/Shutdown.png" id="11_1ihd0"]
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="12_xse5w"]
+[ext_resource type="AudioStream" uid="uid://c51gnebwpse77" path="res://Assets/Audio/SFX/Player/Hit.wav" id="13_p0lqr"]
+[ext_resource type="AudioStream" uid="uid://cjkm8iuvkcse" path="res://Assets/Audio/SFX/Player/Hurt.wav" id="14_wv2ui"]
+[ext_resource type="AudioStream" uid="uid://okjdhkkpgiwc" path="res://Assets/Audio/SFX/Player/Death.wav" id="15_07u5p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7xxu5"]
 atlas = ExtResource("2_ec1t3")
@@ -363,6 +366,7 @@ size = Vector2(48, 72)
 
 [node name="Swordman" type="CharacterBody2D" unique_id=1840467514]
 collision_layer = 4
+collision_mask = 17
 script = ExtResource("1_6shv6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=964053878]
@@ -422,3 +426,17 @@ position = Vector2(0, -24)
 
 [node name="HealthBar3" parent="HealthBar" unique_id=1142996446 instance=ExtResource("12_xse5w")]
 position = Vector2(0, -15)
+
+[node name="SFX2" type="Node2D" parent="." unique_id=586618857]
+
+[node name="SfxHit" type="AudioStreamPlayer" parent="SFX2" unique_id=835848563]
+stream = ExtResource("13_p0lqr")
+
+[node name="SfxHurt" type="AudioStreamPlayer" parent="SFX2" unique_id=779097853]
+stream = ExtResource("14_wv2ui")
+
+[node name="SfxDeath" type="AudioStreamPlayer" parent="SFX2" unique_id=1671800315]
+stream = ExtResource("15_07u5p")
+
+[node name="SfxAttack" type="AudioStreamPlayer" parent="SFX2" unique_id=106820370]
+stream = ExtResource("15_07u5p")

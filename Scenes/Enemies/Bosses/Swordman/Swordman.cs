@@ -101,6 +101,11 @@ public partial class Swordman : Enemy
 	private Node2D _healthBar;
 	private Node2D _projectileSpawn;
 
+	private AudioStreamPlayer _sfxAttack;
+	private AudioStreamPlayer _sfxHit;
+	private AudioStreamPlayer _sfxHurt;
+	private AudioStreamPlayer _sfxDeath;
+
 	private readonly RandomNumberGenerator _rng = new();
 
 	public override void _Ready()
@@ -120,6 +125,12 @@ public partial class Swordman : Enemy
 			_projectileSpawn = GetNodeOrNull<Node2D>(ProjectileSpawnPath);
 
 		_projectileSpawn ??= this;
+
+		// SFX nodes (must exist in the scene)
+		_sfxAttack = GetNodeOrNull<AudioStreamPlayer>("SfxAttack");
+		_sfxHit    = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
+		_sfxHurt   = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
+		_sfxDeath  = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
 
 		_detector.BodyEntered += OnPlayerDetected;
 		_detector.BodyExited += OnPlayerLost;
@@ -227,6 +238,9 @@ public partial class Swordman : Enemy
 		var idx = _rng.RandiRange(1, 4);
 		_sprite.Play($"attack{idx}");
 
+		_sfxAttack?.Stop();
+		_sfxAttack?.Play();
+
 		EnableHitbox();
 	}
 
@@ -241,6 +255,9 @@ public partial class Swordman : Enemy
 		var a2 = Mathf.Clamp(ComboSecondAttack, 1, 4);
 
 		_sprite.Play($"attack{a1}");
+		_sfxAttack?.Stop();
+		_sfxAttack?.Play();
+
 		EnableHitbox();
 		await ToSignal(GetTree().CreateTimer(AttackActiveTime), "timeout");
 		DisableHitbox();
@@ -250,6 +267,9 @@ public partial class Swordman : Enemy
 		if (_state == State.Dead || _transitioning) return;
 
 		_sprite.Play($"attack{a2}");
+		_sfxAttack?.Stop();
+		_sfxAttack?.Play();
+
 		EnableHitbox();
 		await ToSignal(GetTree().CreateTimer(AttackActiveTime), "timeout");
 		DisableHitbox();
@@ -273,6 +293,9 @@ public partial class Swordman : Enemy
 
 		DisableHitbox();
 		_sprite.Play("attack4");
+
+		_sfxAttack?.Stop();
+		_sfxAttack?.Play();
 
 		await ToSignal(GetTree().CreateTimer(BlitzTelegraph), "timeout");
 
@@ -343,6 +366,10 @@ public partial class Swordman : Enemy
 		if (body is not Player.Player player) return;
 
 		player.TakeHit(GetDamage(), new Vector2(_direction * KnockbackStrength, -200));
+
+		_sfxHit?.Stop();
+		_sfxHit?.Play();
+
 		DisableHitbox();
 	}
 
@@ -353,6 +380,12 @@ public partial class Swordman : Enemy
 		if (_transitioning) return;
 
 		Health -= dmg;
+
+		if (Health > 0)
+		{
+			_sfxHurt?.Stop();
+			_sfxHurt?.Play();
+		}
 
 		switch (Health)
 		{
@@ -477,6 +510,9 @@ public partial class Swordman : Enemy
 
 	private void Die()
 	{
+		_sfxDeath?.Stop();
+		_sfxDeath?.Play();
+
 		_state = State.Dead;
 		_transitioning = true;
 		_invincible = true;
