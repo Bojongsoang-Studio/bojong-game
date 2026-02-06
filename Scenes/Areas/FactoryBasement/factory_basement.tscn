@@ -841,9 +841,6 @@ sources/14 = SubResource("TileSetAtlasSource_ts8qb")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hf5sm"]
 size = Vector2(64, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0f4y"]
-size = Vector2(64, 32)
-
 [node name="FactoryBasement" type="Node2D" unique_id=667423887]
 
 [node name="Wall" type="TileMapLayer" parent="." unique_id=1451624866]
@@ -873,7 +870,3 @@ Parent = NodePath("..")
 [node name="Laboratory" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=530938129]
 position = Vector2(-320, -80)
 shape = SubResource("RectangleShape2D_hf5sm")
-
-[node name="Forest" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1426760258]
-position = Vector2(-447, 208)
-shape = SubResource("RectangleShape2D_d0f4y")

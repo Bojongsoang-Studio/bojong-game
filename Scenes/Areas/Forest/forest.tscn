@@ -3829,7 +3829,7 @@ shape = SubResource("RectangleShape2D_jdcvy")
 position = Vector2(2752, -1648)
 shape = SubResource("RectangleShape2D_id525")
 
-[node name="FactoryBasement" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1348385918]
+[node name="Laboratory" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1348385918]
 position = Vector2(2752, 464)
 shape = SubResource("RectangleShape2D_xar5r")
 
@@ -3869,10 +3869,11 @@ position = Vector2(1695, 995)
 
 [node name="BreakableBox11" parent="Item" unique_id=38093771 instance=ExtResource("105_a8uch")]
 position = Vector2(1349, 1154)
+
 [node name="NoteTriggerArea" type="Area2D" parent="." unique_id=328463884]
 collision_mask = 2
 script = ExtResource("112_6favp")
-Content = "Kebun sawit Pak Prabowo."
+Content = "The forest.. they're already destroying nature for their corrupt plans."
 
 [node name="Street" type="CollisionShape2D" parent="NoteTriggerArea" unique_id=1159418502]
 position = Vector2(-672, 48)
