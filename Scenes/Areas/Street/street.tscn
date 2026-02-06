@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://c16ckf40ht6bu" path="res://Scenes/Areas/Street/Buildings/building_5.tscn" id="30_8tdn0"]
 [ext_resource type="PackedScene" uid="uid://cpgq1w5urwhqc" path="res://Scenes/Areas/Street/Buildings/building_6.tscn" id="31_3u7tk"]
 [ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="34_omlqb"]
+[ext_resource type="Script" uid="uid://kvj6iqhdlpuv" path="res://Scenes/Areas/NoteTriggerArea.cs" id="35_atwt7"]
 [ext_resource type="PackedScene" uid="uid://d0wpnrbyykev1" path="res://Scenes/Enemies/Gangstar/gangstar.tscn" id="38_omlqb"]
 [ext_resource type="Script" uid="uid://b6nk7h8spcksd" path="res://Scenes/Areas/VerticalMovementArea.cs" id="39_cftkh"]
 [ext_resource type="PackedScene" uid="uid://ycxm4dkjpuvd" path="res://Scenes/Areas/Street/Citizens/biker.tscn" id="40_omlqb"]
@@ -405,6 +406,23 @@ position = Vector2(144, -80)
 shape = SubResource("RectangleShape2D_v31r7")
 
 [node name="Factory" type="CollisionShape2D" parent="Subarea1/CameraAdjustmentArea" unique_id=2039955620]
+position = Vector2(928, -16)
+shape = SubResource("RectangleShape2D_cftkh")
+
+[node name="NoteTriggerArea" type="Area2D" parent="Subarea1" unique_id=1350880464]
+collision_mask = 2
+script = ExtResource("35_atwt7")
+Content = "I’ve already seen what happens if I don’t stop it.The Great Killing Machine isn’t on the surface. It never was.It’s buried underground, past the maintenance lifts and the old warning signs. They’ll try to make it look abandoned. It isn’t.Destroy it before it finishes learning. After that, it’s too late.Don’t hesitate.You only get one chance."
+
+[node name="Start" type="CollisionShape2D" parent="Subarea1/NoteTriggerArea" unique_id=756239955]
+position = Vector2(32, -16)
+shape = SubResource("RectangleShape2D_76brt")
+
+[node name="ZebraCross" type="CollisionShape2D" parent="Subarea1/NoteTriggerArea" unique_id=1819428393]
+position = Vector2(144, -80)
+shape = SubResource("RectangleShape2D_v31r7")
+
+[node name="Factory" type="CollisionShape2D" parent="Subarea1/NoteTriggerArea" unique_id=2111051940]
 position = Vector2(928, -16)
 shape = SubResource("RectangleShape2D_cftkh")
 

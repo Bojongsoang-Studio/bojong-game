@@ -6,6 +6,10 @@ namespace BojongGame.Scenes.UI.HUD;
 public partial class Phone : VBoxContainer
 {
 	[Export] public string DefaultContent;
+	[Export] public AnimationPlayer PhoneHudNotificationAnimationPlayer;
+	[Export] public AnimationPlayer PhoneHudKeymapAnimationPlayer;
+
+	public static Phone Instance { get; private set; }
 
 	private readonly List<string> _notes = [];
 	private int _currentNoteIndex = -1;
@@ -17,6 +21,8 @@ public partial class Phone : VBoxContainer
 
 	public override void _Ready()
 	{
+		Instance = this;
+		
 		_content = GetNode<RichTextLabel>("HBoxContainer/CenterContainer/Note/Content");
 		_leftEnabled = GetNode<TextureRect>("HBoxContainer/Left/Enabled");
 		_leftDisabled = GetNode<TextureRect>("HBoxContainer/Left/Disabled");
@@ -39,16 +45,19 @@ public partial class Phone : VBoxContainer
 		UpdateContent();
 	}
 
-	private void AddNote(string note)
+	public void AddNote(string note)
 	{
+		PhoneHudNotificationAnimationPlayer.Play("default");
+		PhoneHudKeymapAnimationPlayer.Play("default");
 		_notes.Add(note);
 		_currentNoteIndex = _notes.Count - 1;
+		GD.Print(_notes[_currentNoteIndex]);
 		UpdateContent();
 	}
 
 	private void UpdateContent()
 	{
-		if (_currentNoteIndex < 0 || _currentNoteIndex >= _notes.Count)
+		if (_currentNoteIndex < 0)
 		{
 			_content.Text = DefaultContent;
 			_leftDisabled.Visible = true;
@@ -58,6 +67,7 @@ public partial class Phone : VBoxContainer
 		}
 		else
 		{
+			GD.Print(_currentNoteIndex);
 			_content.Text = _notes[_currentNoteIndex];
 			if (_currentNoteIndex > 0)
 			{
@@ -70,7 +80,7 @@ public partial class Phone : VBoxContainer
 				_leftEnabled.Visible = false;
 			}
 
-			if (_currentNoteIndex >= _notes.Count - 1)
+			if (_currentNoteIndex < _notes.Count - 1)
 			{
 				_rightDisabled.Visible = false;
 				_rightEnabled.Visible = true;

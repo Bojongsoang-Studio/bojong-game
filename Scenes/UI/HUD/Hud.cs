@@ -4,6 +4,9 @@ namespace BojongGame.Scenes.UI.HUD;
 
 public partial class Hud : CanvasLayer
 {
+	[Export] public AnimationPlayer PhoneHudNotificationAnimationPlayer;
+	[Export] public AnimationPlayer PhoneHudKeymapAnimationPlayer;
+
 	private ColorRect _scrim;
 	private VBoxContainer _phone;
 	private PauseMenu _pauseMenu;
@@ -25,7 +28,7 @@ public partial class Hud : CanvasLayer
 		{
 			GetTree().Paused = !GetTree().Paused;
 			_scrim.Visible = !_scrim.Visible;
-			
+
 			if (!_phone.Visible)
 			{
 				_pauseMenu.Visible = !_pauseMenu.Visible;
@@ -36,12 +39,14 @@ public partial class Hud : CanvasLayer
 			}
 		}
 
-		if (Input.IsActionJustPressed("phone") && !_pauseMenu.Visible)
-		{
-			GetTree().Paused = !GetTree().Paused;
-			_scrim.Visible = !_scrim.Visible;
-			_phone.Visible = !_phone.Visible;
-		}
+		if (!Input.IsActionJustPressed("phone") || _pauseMenu.Visible) return;
+		GetTree().Paused = !GetTree().Paused;
+		_scrim.Visible = !_scrim.Visible;
+		_phone.Visible = !_phone.Visible;
+		PhoneHudNotificationAnimationPlayer.Stop();
+		PhoneHudNotificationAnimationPlayer.Seek(0, true);
+		PhoneHudKeymapAnimationPlayer.Stop();
+		PhoneHudKeymapAnimationPlayer.Seek(0, true);
 	}
 
 	public void DisplayScrim(bool show)

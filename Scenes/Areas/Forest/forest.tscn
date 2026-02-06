@@ -111,6 +111,7 @@
 [ext_resource type="PackedScene" uid="uid://dmiyb3u6ltpun" path="res://Scenes/Enemies/GreenRobot/green_robot.tscn" id="104_gy54j"]
 [ext_resource type="PackedScene" uid="uid://somvdye68jdi" path="res://Scenes/Areas/Objects/BreakableBox/breakable_box.tscn" id="105_a8uch"]
 [ext_resource type="Script" uid="uid://b4upo4nlilni" path="res://Scenes/Areas/CameraAdjustmentArea.cs" id="111_id525"]
+[ext_resource type="Script" uid="uid://kvj6iqhdlpuv" path="res://Scenes/Areas/NoteTriggerArea.cs" id="112_6favp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_id525"]
 texture = ExtResource("14_h3g7y")
@@ -3868,3 +3869,19 @@ position = Vector2(1695, 995)
 
 [node name="BreakableBox11" parent="Item" unique_id=38093771 instance=ExtResource("105_a8uch")]
 position = Vector2(1349, 1154)
+[node name="NoteTriggerArea" type="Area2D" parent="." unique_id=328463884]
+collision_mask = 2
+script = ExtResource("112_6favp")
+Content = "Kebun sawit Pak Prabowo."
+
+[node name="Street" type="CollisionShape2D" parent="NoteTriggerArea" unique_id=1159418502]
+position = Vector2(-672, 48)
+shape = SubResource("RectangleShape2D_jdcvy")
+
+[node name="Factory" type="CollisionShape2D" parent="NoteTriggerArea" unique_id=365424545]
+position = Vector2(2752, -1648)
+shape = SubResource("RectangleShape2D_id525")
+
+[node name="FactoryBasement" type="CollisionShape2D" parent="NoteTriggerArea" unique_id=1439443197]
+position = Vector2(2752, 464)
+shape = SubResource("RectangleShape2D_xar5r")
