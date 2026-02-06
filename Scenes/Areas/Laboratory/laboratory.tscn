@@ -1561,7 +1561,3 @@ position = Vector2(714, 576)
 
 [node name="PurpleGuy2" parent="Enemy" unique_id=1951356972 instance=ExtResource("15_eaup3")]
 position = Vector2(-1094, -124)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2049391234]
-stream = ExtResource("31_pdb8n")
-autoplay = true
