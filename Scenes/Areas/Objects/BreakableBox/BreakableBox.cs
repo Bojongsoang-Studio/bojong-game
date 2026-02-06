@@ -25,7 +25,7 @@ public partial class BreakableBox : StaticBody2D
 
 		pickup.GlobalPosition = GlobalPosition;
 
-		GetParent().CallDeferred("add_child", pickup);
+		GetTree().CurrentScene.CallDeferred("add_child", pickup);
 
 		QueueFree();
 	}

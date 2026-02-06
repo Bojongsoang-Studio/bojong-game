@@ -302,3 +302,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 texture = SubResource("AtlasTexture_6ra6r")
 stretch_mode = 4
+
+[node name="PauseMenu" type="VBoxContainer" parent="CenterContainer" unique_id=2000589074]
+layout_mode = 2
