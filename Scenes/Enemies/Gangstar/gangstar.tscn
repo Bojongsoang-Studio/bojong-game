@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dt20aqgwjdtqp" path="res://Assets/Sprites/Enemies/Gangstar/Hurt.png" id="3_4sost"]
 [ext_resource type="Texture2D" uid="uid://cpdsg0mksm2bw" path="res://Assets/Sprites/Enemies/Gangstar/Run.png" id="5_23va6"]
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="6_4sost"]
+[ext_resource type="AudioStream" uid="uid://dxuvrodwb8ig5" path="res://Assets/Audio/SFX/Enemies/Gangstar/Hit.wav" id="8_vaj8i"]
+[ext_resource type="AudioStream" uid="uid://ca0d10ulnqfrt" path="res://Assets/Audio/SFX/Enemies/Hurt.wav" id="9_m10gr"]
+[ext_resource type="AudioStream" uid="uid://531gdui3l6gx" path="res://Assets/Audio/SFX/Enemies/Death.wav" id="10_ndbte"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iad1o"]
 atlas = ExtResource("2_23va6")
@@ -219,6 +222,7 @@ collision_mask = 3221225473
 script = ExtResource("1_iwmyp")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2045525410]
+position = Vector2(11, 0)
 sprite_frames = SubResource("SpriteFrames_4r4x4")
 animation = &"death"
 autoplay = "idle"
@@ -233,7 +237,7 @@ shape = SubResource("RectangleShape2D_kcd4d")
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/DetectionArea" unique_id=2039344985]
-position = Vector2(0, 8)
+position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_kcd4d")
 
 [node name="AttackArea" type="Area2D" parent="Facing" unique_id=206301796]
@@ -255,3 +259,12 @@ collision_mask = 2147483649
 
 [node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("6_4sost")]
 position = Vector2(0, -20)
+
+[node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=1500957657]
+stream = ExtResource("8_vaj8i")
+
+[node name="SfxHurt" type="AudioStreamPlayer" parent="." unique_id=2007893944]
+stream = ExtResource("9_m10gr")
+
+[node name="SfxDeath" type="AudioStreamPlayer" parent="." unique_id=1144752715]
+stream = ExtResource("10_ndbte")

@@ -4,7 +4,7 @@ namespace BojongGame.Scenes.Areas;
 
 public partial class CameraAdjustmentArea : Area2D
 {
-    [Export] public float CameraZoom = 3.0f;
+    [Export] public float CameraZoom = 1.0f;
     [Export] public int CameraLimitLeft = -1000;
     [Export] public int CameraLimitRight = 1000;
     [Export] public int CameraLimitTop = -1000;

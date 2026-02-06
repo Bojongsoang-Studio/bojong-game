@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://buiou57kcu3j8" path="res://Assets/Sprites/Enemies/GreenFlyingRobot/Idle.png" id="4_dlr82"]
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="5_dlr82"]
 [ext_resource type="Texture2D" uid="uid://d3erpnbkeoxr1" path="res://Assets/Sprites/Enemies/GreenFlyingRobot/Hurt.png" id="5_jf7n0"]
+[ext_resource type="AudioStream" uid="uid://cgpsuh6nqndnv" path="res://Assets/Audio/SFX/Enemies/GreenFlyingRobot/Hit.wav" id="8_dj1kn"]
+[ext_resource type="AudioStream" uid="uid://ca0d10ulnqfrt" path="res://Assets/Audio/SFX/Enemies/Hurt.wav" id="9_u4fal"]
+[ext_resource type="AudioStream" uid="uid://531gdui3l6gx" path="res://Assets/Audio/SFX/Enemies/Death.wav" id="10_rs5in"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68mnl"]
 size = Vector2(48, 48)
@@ -205,3 +208,12 @@ collision_mask = 3
 
 [node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("5_dlr82")]
 position = Vector2(0, -22)
+
+[node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=399867005]
+stream = ExtResource("8_dj1kn")
+
+[node name="SfxHurt" type="AudioStreamPlayer" parent="." unique_id=678629634]
+stream = ExtResource("9_u4fal")
+
+[node name="SfxDeath" type="AudioStreamPlayer" parent="." unique_id=296181834]
+stream = ExtResource("10_rs5in")

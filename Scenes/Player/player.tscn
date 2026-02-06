@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="6_0u5uq"]
 [ext_resource type="Texture2D" uid="uid://dnjdd0yhgpxm5" path="res://Assets/Sprites/UI/Keys/KeyboardLettersSymbols.png" id="7_gk6dx"]
 [ext_resource type="Texture2D" uid="uid://cxvvcj7pc3wg8" path="res://Assets/Sprites/UI/Keys/KeyboardExtras.png" id="7_jlvik"]
+[ext_resource type="AudioStream" uid="uid://c51gnebwpse77" path="res://Assets/Audio/SFX/Player/Hit.wav" id="10_oikmp"]
+[ext_resource type="AudioStream" uid="uid://cjkm8iuvkcse" path="res://Assets/Audio/SFX/Player/Hurt.wav" id="11_06tpx"]
+[ext_resource type="AudioStream" uid="uid://okjdhkkpgiwc" path="res://Assets/Audio/SFX/Player/Death.wav" id="12_7g0yx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ks1b7"]
 atlas = ExtResource("2_dd0ac")
@@ -292,9 +295,9 @@ animations = [{
 collision_layer = 2
 collision_mask = 2147483665
 script = ExtResource("1_a3d8c")
-SpawnPoint = Vector2(608, 372)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=831599076]
+position = Vector2(9, 0)
 sprite_frames = SubResource("SpriteFrames_tugb3")
 animation = &"death"
 autoplay = "idle"
@@ -333,6 +336,14 @@ position = Vector2(0, -43)
 sprite_frames = SubResource("SpriteFrames_bmb2s")
 autoplay = "default"
 
+[node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=1817195248]
+stream = ExtResource("10_oikmp")
+
+[node name="SfxHurt" type="AudioStreamPlayer" parent="." unique_id=818547218]
+stream = ExtResource("11_06tpx")
+
+[node name="SfxDeath" type="AudioStreamPlayer" parent="." unique_id=922286420]
+stream = ExtResource("12_7g0yx")
+
 [node name="Camera" type="Camera2D" parent="." unique_id=886884360]
 position = Vector2(0, -16)
-zoom = Vector2(3, 3)

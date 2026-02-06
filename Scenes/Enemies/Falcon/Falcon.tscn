@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dqpsavw8aooui" path="res://Assets/Sprites/Enemies/Falcon/Idle.png" id="5_lmtuu"]
 [ext_resource type="Texture2D" uid="uid://csq1gfribkflb" path="res://Assets/Sprites/Enemies/Falcon/Walk.png" id="6_ona0p"]
 [ext_resource type="PackedScene" uid="uid://ccqyuavon512o" path="res://Scenes/UI/HealthBar/health_bar.tscn" id="7_wbjru"]
+[ext_resource type="AudioStream" uid="uid://cpsqjvcfr03la" path="res://Assets/Audio/SFX/Enemies/Falcon/Hit.wav" id="8_1fn03"]
+[ext_resource type="AudioStream" uid="uid://ca0d10ulnqfrt" path="res://Assets/Audio/SFX/Enemies/Hurt.wav" id="9_tewag"]
+[ext_resource type="AudioStream" uid="uid://531gdui3l6gx" path="res://Assets/Audio/SFX/Enemies/Death.wav" id="10_wnr7v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vunoq"]
 atlas = ExtResource("2_t8ahp")
@@ -218,9 +221,12 @@ collision_layer = 4
 script = ExtResource("1_7o1jy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1555158296]
+position = Vector2(22, 0)
 sprite_frames = SubResource("SpriteFrames_6wm2a")
 animation = &"attack"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=721671001]
 position = Vector2(0, 24)
@@ -232,6 +238,7 @@ shape = SubResource("RectangleShape2D_nevo0")
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facing/DetectionArea" unique_id=1700579024]
+position = Vector2(0, 24)
 shape = SubResource("CircleShape2D_ymh6h")
 
 [node name="AttackArea" type="Area2D" parent="Facing" unique_id=1818903728]
@@ -243,7 +250,7 @@ shape = SubResource("CircleShape2D_cgmev")
 
 [node name="WallRay" type="RayCast2D" parent="Facing" unique_id=1169664029]
 position = Vector2(0, 24)
-target_position = Vector2(16, 0)
+target_position = Vector2(50, 0)
 
 [node name="EdgeRay" type="RayCast2D" parent="Facing" unique_id=2070791661]
 position = Vector2(0, 24)
@@ -251,3 +258,12 @@ target_position = Vector2(16, 32)
 
 [node name="HealthBar" parent="." unique_id=1141052545 instance=ExtResource("7_wbjru")]
 position = Vector2(0, -5)
+
+[node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=800479635]
+stream = ExtResource("8_1fn03")
+
+[node name="SfxHurt" type="AudioStreamPlayer" parent="." unique_id=1169550202]
+stream = ExtResource("9_tewag")
+
+[node name="SfxDeath" type="AudioStreamPlayer" parent="." unique_id=2002859790]
+stream = ExtResource("10_wnr7v")
