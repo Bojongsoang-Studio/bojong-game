@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://6xp0ar48bpb5"]
+
+[ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="1_54m72"]
+[ext_resource type="Script" uid="uid://ddxxbsk3sf2st" path="res://Scenes/EndCredit/EndCredit.cs" id="1_frvql"]
+[ext_resource type="FontFile" uid="uid://cg4tynv3d5i67" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="2_frvql"]
+[ext_resource type="AudioStream" uid="uid://dsj033l85xt6s" path="res://Assets/Audio/Music/Factory.mp3" id="4_c7o06"]
+
+[node name="Credits" type="Control" unique_id=943385698]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_frvql")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=785914469]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1096548098]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1086.0
+grow_horizontal = 2
+focus_mode = 0
+theme_override_fonts/normal_font = ExtResource("1_54m72")
+theme_override_fonts/bold_font = ExtResource("2_frvql")
+bbcode_enabled = true
+text = "
+
+
+
+
+
+
+
+[center]
+[font_size=60][b]RETCON[/b][/font_size]
+
+[font_size=30]A Game by [b]Bojongsoang Studio[/b][/font_size]
+
+---
+
+
+
+
+
+[font_size=40][b]DEVELOPMENT[/b][/font_size]
+
+[b]Lead Developer[/b]
+Muhammad Ma'ruf Firdaus
+
+[b]Programmer #1[/b]
+Arnoldus Bryan Hendry
+
+[b]Programmer #2[/b]
+Vito Farsya Awfa
+
+[b]Programmer #3[/b]
+Marcelino Adrian Siring
+
+---
+
+[font_size=40][b]ART & DESIGN[/b][/font_size]
+
+[b]Artist #1[/b]
+Nailah Aulia Syawie
+
+[b]Artist #2[/b]
+Widya Herry Mulyani
+
+[b]UI/UX Design[/b]
+Muhammad Ma'ruf Firdaus
+
+---
+
+[font_size=40][b]SPECIAL THANKS[/b][/font_size]
+
+Arkavidia For The Opportunity
+
+[font_size=24]
+Created with Godot Engine 4.6 (Mono)
+[/font_size]
+[/center]"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=150321847]
+stream = ExtResource("4_c7o06")
+autoplay = true
