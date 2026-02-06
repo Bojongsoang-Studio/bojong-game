@@ -1,11 +1,11 @@
-﻿using BojongGame.Scenes.UI;
+using BojongGame.Scenes.UI;
 using Godot;
 
 namespace BojongGame.Scenes.Enemies.Gangstar;
 
 public partial class Gangstar : Enemy
 {
-    private enum State
+	private enum State
 	{
 		Patrol,
 		Chase,
@@ -40,6 +40,10 @@ public partial class Gangstar : Enemy
 	private RayCast2D _wallRayCast;
 	private RayCast2D _edgeRayCast;
 	private HealthBar _healthBar;
+	
+	private AudioStreamPlayer _sfxHit;
+	private AudioStreamPlayer _sfxHurt;
+	private AudioStreamPlayer _sfxDeath;
 
 	private Player.Player _target;
 
@@ -54,6 +58,10 @@ public partial class Gangstar : Enemy
 		_wallRayCast = GetNode<RayCast2D>("Facing/WallRayCast");
 		_edgeRayCast = GetNode<RayCast2D>("Facing/EdgeRayCast");
 		_healthBar = GetNode<HealthBar>("HealthBar");
+		
+		_sfxHit = GetNodeOrNull<AudioStreamPlayer>("SfxHit");
+		_sfxHurt = GetNodeOrNull<AudioStreamPlayer>("SfxHurt");
+		_sfxDeath = GetNodeOrNull<AudioStreamPlayer>("SfxDeath");
 
 		_detectionArea.BodyEntered += OnDetectionBodyEntered;
 		_detectionArea.BodyExited += OnDetectionBodyExited;
@@ -197,6 +205,8 @@ public partial class Gangstar : Enemy
 		var knockback = new Vector2(pushDir * KnockbackStrength, -KnockbackStrength * 0.35f);
 
 		player.TakeHit(Damage, knockback);
+		_sfxHit?.Stop();
+		_sfxHit?.Play();
 	}
 
 	public override void TakeHit(int damage, Vector2 attackerPosition)
@@ -209,6 +219,8 @@ public partial class Gangstar : Enemy
 		if (Health <= 0)
 		{
 			Die();
+			_sfxHurt?.Stop();
+			_sfxHurt?.Play();
 			return;
 		}
 
@@ -225,6 +237,9 @@ public partial class Gangstar : Enemy
 	{
 		_state = State.Dead;
 		Velocity = Vector2.Zero;
+		
+		_sfxDeath?.Stop();
+		_sfxDeath?.Play();
 
 		PlayAnimation("death");
 

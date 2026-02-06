@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://cbsjjvs28x1ye"]
+
+[ext_resource type="Script" uid="uid://d87ecbvilvs4" path="res://Scenes/UI/HUD/Phone.cs" id="1_jbwki"]
+[ext_resource type="Texture2D" uid="uid://dnjdd0yhgpxm5" path="res://Assets/Sprites/UI/Keys/KeyboardLettersSymbols.png" id="2_2f7ej"]
+[ext_resource type="Texture2D" uid="uid://b37si0jbp5k2v" path="res://Assets/Sprites/UI/Phone/Phone.png" id="3_bjhb8"]
+[ext_resource type="FontFile" uid="uid://cg4tynv3d5i67" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="4_1mye4"]
+[ext_resource type="FontFile" uid="uid://b0ilmmsljpa2l" path="res://Assets/Fonts/PixelOperator8.ttf" id="5_gp0q1"]
+[ext_resource type="Texture2D" uid="uid://cxvvcj7pc3wg8" path="res://Assets/Sprites/UI/Keys/KeyboardExtras.png" id="6_lng8n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyil3"]
+atlas = ExtResource("2_2f7ej")
+region = Rect2(32, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gwbq"]
+atlas = ExtResource("2_2f7ej")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwk01"]
+atlas = ExtResource("2_2f7ej")
+region = Rect2(48, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyx02"]
+atlas = ExtResource("2_2f7ej")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ra6r"]
+atlas = ExtResource("6_lng8n")
+region = Rect2(0, 0, 32, 16)
+
+[node name="Phone" type="VBoxContainer" unique_id=845735198]
+theme_override_constants/separation = 16
+script = ExtResource("1_jbwki")
+DefaultContent = "Empty. For now."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=53123191]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Left" type="CenterContainer" parent="HBoxContainer" unique_id=1686817725]
+layout_mode = 2
+
+[node name="Disabled" type="TextureRect" parent="HBoxContainer/Left" unique_id=1079211524]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_lyil3")
+stretch_mode = 4
+
+[node name="Enabled" type="TextureRect" parent="HBoxContainer/Left" unique_id=1906705294]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_1gwbq")
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer" unique_id=1753451662]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer" unique_id=239170390]
+custom_minimum_size = Vector2(144, 240)
+layout_mode = 2
+texture = ExtResource("3_bjhb8")
+stretch_mode = 5
+
+[node name="Note" type="Control" parent="HBoxContainer/CenterContainer" unique_id=1675464232]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer/CenterContainer/Note" unique_id=494241695]
+layout_mode = 0
+offset_left = -46.0
+offset_top = -88.0
+offset_right = -14.0
+offset_bottom = -80.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_1mye4")
+theme_override_font_sizes/font_size = 8
+text = "NOTE"
+
+[node name="Year" type="Label" parent="HBoxContainer/CenterContainer/Note" unique_id=1330696111]
+layout_mode = 0
+offset_left = 18.0
+offset_top = -88.0
+offset_right = 46.0
+offset_bottom = -80.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_gp0q1")
+theme_override_font_sizes/font_size = 8
+text = "2045"
+
+[node name="Content" type="RichTextLabel" parent="HBoxContainer/CenterContainer/Note" unique_id=1212726817]
+custom_minimum_size = Vector2(96, 128)
+layout_mode = 0
+offset_left = -46.0
+offset_top = -72.0
+offset_right = 50.0
+offset_bottom = 76.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_gp0q1")
+theme_override_font_sizes/normal_font_size = 8
+text = "Empty. For now."
+
+[node name="Right" type="CenterContainer" parent="HBoxContainer" unique_id=849933269]
+layout_mode = 2
+
+[node name="Disabled" type="TextureRect" parent="HBoxContainer/Right" unique_id=786677635]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_uwk01")
+stretch_mode = 4
+
+[node name="Enabled" type="TextureRect" parent="HBoxContainer/Right" unique_id=1037097821]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_nyx02")
+stretch_mode = 4
+
+[node name="Tab" type="TextureRect" parent="." unique_id=1454173545]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_6ra6r")
+stretch_mode = 4
