@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfmh1ctasojcd" path="res://Scenes/Areas/Forest/Button.cs" id="1_bwnnn"]
 [ext_resource type="Texture2D" uid="uid://cg4xchkphk0ag" path="res://Assets/Sprites/Areas/Forest/Objects/Stones/1.png" id="2_vuwkk"]
+[ext_resource type="PackedScene" uid="uid://dsqe6k0k1lu5w" path="res://Scenes/UI/PopupDialog/popup_dialog_label.tscn" id="3_vuwkk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbybw"]
 size = Vector2(25, 7)
@@ -15,3 +16,22 @@ shape = SubResource("RectangleShape2D_nbybw")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=542776120]
 scale = Vector2(2.6500108, 1.125014)
 texture = ExtResource("2_vuwkk")
+
+[node name="PopupDialogLabel" parent="." unique_id=440913319 instance=ExtResource("3_vuwkk")]
+visible = false
+z_index = 1
+offset_left = -66.0
+offset_top = -20.0
+offset_right = 67.0
+offset_bottom = -12.0
+text = "You press the button."
+autowrap_mode = 0
+
+[node name="PopupDialogLabel2" parent="." unique_id=302303865 instance=ExtResource("3_vuwkk")]
+visible = false
+z_index = 1
+offset_left = -96.0
+offset_top = -31.0
+offset_right = 96.0
+offset_bottom = -12.0
+text = "The button won’t move — it’s already pressed."

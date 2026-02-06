@@ -225,6 +225,14 @@ size = Vector2(16, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_htcer"]
 radius = 15.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogmfp"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(96, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixrbb"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(96, 176, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_bmb2s"]
 atlas = ExtResource("7_gk6dx")
 region = Rect2(0, 112, 16, 16)
@@ -237,6 +245,17 @@ region = Rect2(0, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ogmfp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixrbb")
+}],
+"loop": true,
+"name": &"alt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bmb2s")
 }, {
 "duration": 1.0,
@@ -246,6 +265,14 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei2r2"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6uq4"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(32, 176, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ahak"]
 atlas = ExtResource("7_gk6dx")
@@ -259,6 +286,17 @@ region = Rect2(16, 112, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ei2r2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6uq4")
+}],
+"loop": true,
+"name": &"alt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_2ahak")
 }, {
 "duration": 1.0,
@@ -269,16 +307,57 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qr1w5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aanf"]
 atlas = ExtResource("7_jlvik")
 region = Rect2(96, 16, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ythyg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6ahd"]
 atlas = ExtResource("7_jlvik")
 region = Rect2(96, 80, 32, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bmb2s"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2aanf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6ahd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5u0x"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po18e"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(32, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr1w5"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ythyg"]
+atlas = ExtResource("7_gk6dx")
+region = Rect2(16, 192, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ogmfp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5u0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po18e")
+}],
+"loop": true,
+"name": &"alt",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qr1w5")
@@ -323,17 +402,26 @@ visible = false
 [node name="Up" type="AnimatedSprite2D" parent="VerticalMovementGuide" unique_id=828551628]
 position = Vector2(-8, -43)
 sprite_frames = SubResource("SpriteFrames_2ahak")
+animation = &"alt"
 autoplay = "default"
 
 [node name="Down" type="AnimatedSprite2D" parent="VerticalMovementGuide" unique_id=2104574571]
 position = Vector2(8, -43)
 sprite_frames = SubResource("SpriteFrames_4no11")
+animation = &"alt"
 autoplay = "default"
 
 [node name="TransitionGuide" type="AnimatedSprite2D" parent="." unique_id=1214306169]
 visible = false
 position = Vector2(0, -43)
 sprite_frames = SubResource("SpriteFrames_bmb2s")
+autoplay = "default"
+
+[node name="BoxSmashGuide" type="AnimatedSprite2D" parent="." unique_id=1540218761]
+visible = false
+position = Vector2(0, -43)
+sprite_frames = SubResource("SpriteFrames_ogmfp")
+animation = &"alt"
 autoplay = "default"
 
 [node name="SfxHit" type="AudioStreamPlayer" parent="." unique_id=1817195248]

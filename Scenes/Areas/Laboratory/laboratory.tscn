@@ -63,6 +63,7 @@
 [ext_resource type="Texture2D" uid="uid://coa4q0p6wj4q5" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Icons/12.png" id="51_t8oda"]
 [ext_resource type="Texture2D" uid="uid://dytjkftuy66oh" path="res://Assets/Sprites/Areas/FactoryBasement/Objects/Icons/2.png" id="52_wy8sx"]
 [ext_resource type="PackedScene" uid="uid://somvdye68jdi" path="res://Scenes/Areas/Objects/BreakableBox/breakable_box.tscn" id="57_t8oda"]
+[ext_resource type="Script" uid="uid://kvj6iqhdlpuv" path="res://Scenes/Areas/NoteTriggerArea.cs" id="57_t8oda"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bu8hl"]
 texture = ExtResource("1_m776p")
@@ -1564,6 +1565,26 @@ position = Vector2(-380, 628)
 
 [node name="BreakableBox7" parent="BreakableBox" unique_id=1068623043 instance=ExtResource("57_t8oda")]
 position = Vector2(-1288, 340)
+[node name="Forest" type="CollisionShape2D" parent="CameraAdjustmentArea" unique_id=1187795072]
+position = Vector2(-1408, 656)
+shape = SubResource("RectangleShape2D_21mj6")
+
+[node name="NoteTriggerArea" type="Area2D" parent="." unique_id=1744515895]
+collision_mask = 2
+script = ExtResource("57_t8oda")
+Content = "This is where the robots are experimented on.."
+
+[node name="Factory" type="CollisionShape2D" parent="NoteTriggerArea" unique_id=1467375282]
+position = Vector2(-1312, -112)
+shape = SubResource("RectangleShape2D_21mj6")
+
+[node name="FactoryBasement" type="CollisionShape2D" parent="NoteTriggerArea" unique_id=1657337312]
+position = Vector2(1216, 272)
+shape = SubResource("RectangleShape2D_21mj6")
+
+[node name="Forest" type="CollisionShape2D" parent="NoteTriggerArea" unique_id=449335586]
+position = Vector2(-1408, 656)
+shape = SubResource("RectangleShape2D_21mj6")
 
 [node name="Enemy" type="Node2D" parent="." unique_id=1744095661]
 

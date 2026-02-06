@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://1vcom06074uw" path="res://Scenes/Areas/Forest/Door.cs" id="1_ta5m5"]
 [ext_resource type="Texture2D" uid="uid://cwj0muyf3hk1d" path="res://Assets/Sprites/Areas/Forest/Objects/Fence/3.png" id="2_ta5m5"]
 [ext_resource type="Texture2D" uid="uid://dfluwwfbj5l3s" path="res://Assets/Sprites/Areas/Forest/Objects/Fence/1.png" id="3_mwsr4"]
+[ext_resource type="PackedScene" uid="uid://dsqe6k0k1lu5w" path="res://Scenes/UI/PopupDialog/popup_dialog_label.tscn" id="4_8v1xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hep68"]
 size = Vector2(33, 66)
 
-[node name="door" type="StaticBody2D" unique_id=1112887365]
+[sub_resource type="CircleShape2D" id="CircleShape2D_8v1xs"]
+radius = 32.0
+
+[node name="Door" type="StaticBody2D" unique_id=1112887365]
 script = ExtResource("1_ta5m5")
 OpenTexture = ExtResource("2_ta5m5")
 
@@ -17,3 +21,17 @@ texture = ExtResource("3_mwsr4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1299568671]
 shape = SubResource("RectangleShape2D_hep68")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1500694423]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1625547276]
+shape = SubResource("CircleShape2D_8v1xs")
+
+[node name="PopupDialogLabel" parent="." unique_id=440913319 instance=ExtResource("4_8v1xs")]
+visible = false
+offset_left = -96.0
+offset_top = -59.0
+offset_right = 96.0
+offset_bottom = -40.0
+text = "Locked. There must be a button nearby."
