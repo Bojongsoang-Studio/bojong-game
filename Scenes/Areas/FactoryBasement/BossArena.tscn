@@ -857,3 +857,4 @@ position = Vector2(-302, 199)
 
 [node name="Swordman" parent="." unique_id=1840467514 instance=ExtResource("4_k528q")]
 position = Vector2(-173, 166)
+collision_mask = 17
