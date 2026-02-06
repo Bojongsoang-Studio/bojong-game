@@ -111,7 +111,6 @@
 [ext_resource type="PackedScene" uid="uid://djpu2l00hs1kw" path="res://Scenes/Enemies/GreenFlyingRobot/green_flying_robot.tscn" id="103_sjuqn"]
 [ext_resource type="PackedScene" uid="uid://dmiyb3u6ltpun" path="res://Scenes/Enemies/GreenRobot/green_robot.tscn" id="104_gy54j"]
 [ext_resource type="PackedScene" uid="uid://somvdye68jdi" path="res://Scenes/Areas/Objects/BreakableBox/breakable_box.tscn" id="105_a8uch"]
-[ext_resource type="AudioStream" uid="uid://cft6mcgydlje7" path="res://Assets/Audio/Music/Forest.mp3" id="112_6favp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_id525"]
 texture = ExtResource("14_h3g7y")
@@ -3765,6 +3764,5 @@ collision_mask = 2
 [node name="BreakableBox2" parent="." unique_id=1438512124 instance=ExtResource("105_a8uch")]
 position = Vector2(946, -814)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1897307551]
-stream = ExtResource("112_6favp")
-autoplay = true
+[node name="Border" type="StaticBody2D" parent="." unique_id=1501251953]
+collision_layer = 2147483649
